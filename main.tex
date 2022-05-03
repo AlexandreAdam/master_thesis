@@ -1,0 +1,126 @@
+\documentclass[
+  normalmargins,
+  11pt,
+  openany,
+  onehalfspacing,
+]{ut-thesis}
+% packages
+\usepackage{natbib}
+\bibliographystyle{abbrvnat}
+%\setcitestyle{authoryear,open={((},close={))}} %Citation-related command
+\usepackage[colorlinks,
+    linkcolor={black},
+    citecolor={black},
+    urlcolor={black}]{hyperref} % for links
+\usepackage{graphicx} % for embedding graphics
+\usepackage{booktabs} % for pretty tables
+\usepackage[nottoc]{tocbibind} % adds lot and lof to toc
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{float}
+\usepackage{amsmath, bm, bbm}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{enumitem}
+\newcommand{\subscript}[2]{$#1 _ #2$}
+\DeclareRobustCommand{\bbone}{\text{\usefont{U}{bbold}{m}{n}1}}
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+
+\def\frenchlistfigurename{Liste des figures}
+\def\frenchlisttablename{Liste des tableaux}
+
+
+% Acronyms
+%\usepackage[printonlyused,withpage]{acronym}
+%\usepackage{acro}
+%\DeclareAcronym{usa}{
+        %short=USA,
+        %long=United States of America,
+%}
+\usepackage[nogroupskip,nonumberlist,acronym,toc]{glossaries} 
+\newglossary[slg]{symbolslist}{syi}{syg}{Liste des symboles}
+%\newglossary[slg]{acronyms}{syi}{syg}{Liste des acronymes}
+\makeglossaries  
+
+%\renewcommand*{\glossarypostamble}{\clearpage}
+%\renewcommand*{\glossarypostamble}{\vspace*{1cm}}
+
+
+\newglossaryentry{rim}{
+name=RIM,
+description={Machine à Inférence Récurrentielle},
+sort=symbpi,
+type=acronym
+}
+
+\newglossaryentry{Id}{
+name=$\bbone_n$,
+description={Matrice identité de taille $n\times n$},
+sort=symbpi, type=symbolslist
+}
+
+\newglossaryentry{Pi}{
+name=$\pi$,
+description={...},
+sort=symbpi, type=symbolslist
+}
+
+%\usepackage[toc,section=section]{gloss
+%\newacronym{rim}{RIm}{Recurrent Inference Machine}
+
+
+% author data
+\author{Alexandre Adam}
+\title{Reconstruction agnostique de lentilles gravitationnelles de type galaxie-galaxie}
+\degree{Maître ès sciences (M.Sc.)}
+\department{physique}
+\gradyear{2022}
+\begin{document}
+  \frontmatter
+    \maketitle
+
+    \begin{resume}
+    \end{resume}
+    \begin{abstract}
+    \end{abstract}
+
+    \tableofcontents
+    \listoftables
+    \listoffigures
+    %\printglossary[type=abbrev]
+    \printglossaries
+
+        \clearpage
+    \begin{dedication}
+      À Maman et Julia
+    \end{dedication}
+    \begin{acknowledgements}
+            %Je tiens à remercier ma superviseure, Laurence, 
+
+            %Je tiens aussi à remercier les collègues que j'ai côtoyer 
+            %durant ma maîtrise.
+           
+            %Ronan, merci pour toutes nos discussions techniques, semi-sérieuses
+            %et pas-du-tout sérieuses entretenu virtuellement ou autrement ces 
+            %deux dernières années.
+
+            %Charles, merci pour tes encouragements et ton support moral.
+
+            %Ève, merci 
+
+            
+    \end{acknowledgements}
+  \mainmatter
+    \input{intro}
+    This is my \gls{rim} and I can use it again. This is a symbol \gls{Id}.
+
+    %\input{ch-methods}
+    %\input{ch-results}
+
+  \appendix
+    %\input{ap-code}
+  \backmatter
+  %\printbibliography[heading=bibintoc]
+\end{document}
+
