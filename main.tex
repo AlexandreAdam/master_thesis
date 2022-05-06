@@ -15,14 +15,16 @@
 \usepackage{graphicx} % for embedding graphics
 \usepackage{booktabs} % for pretty tables
 \usepackage[nottoc]{tocbibind} % adds lot and lof to toc
-\usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{float}
 \usepackage{amsmath, bm, bbm}
 \usepackage{amssymb}
 \usepackage{physics}
 \usepackage{tikz}
 \usepackage{enumitem}
+\usepackage{lipsum}
 \newcommand{\subscript}[2]{$#1 _ #2$}
 \DeclareRobustCommand{\bbone}{\text{\usefont{U}{bbold}{m}{n}1}}
 \DeclareMathOperator{\EX}{\mathbb{E}}% expected value
@@ -46,13 +48,7 @@
 %\renewcommand*{\glossarypostamble}{\clearpage}
 %\renewcommand*{\glossarypostamble}{\vspace*{1cm}}
 
-
-\newglossaryentry{rim}{
-name=RIM,
-description={Machine à Inférence Récurrentielle},
-sort=symbpi,
-type=acronym
-}
+\newacronym{rim}{RIM}{Machine à inférence récurrentielles}
 
 \newglossaryentry{Id}{
 name=$\bbone_n$,
@@ -74,7 +70,7 @@ sort=symbpi, type=symbolslist
 \author{Alexandre Adam}
 \title{Reconstruction agnostique de lentilles gravitationnelles de type galaxie-galaxie}
 \degree{Maître ès sciences (M.Sc.)}
-\department{physique}
+\department{Département de physique}
 \gradyear{2022}
 \begin{document}
   \frontmatter
@@ -113,8 +109,11 @@ sort=symbpi, type=symbolslist
     \end{acknowledgements}
   \mainmatter
     \input{intro}
-    This is my \gls{rim} and I can use it again. This is a symbol \gls{Id}.
 
+    %This is my \acrshort{rim} and I can use it again. 
+    This is a symbol \gls{Id}.
+
+\lipsum[5-10]
     %\input{ch-methods}
     %\input{ch-results}
 

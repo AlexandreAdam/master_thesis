@@ -103,6 +103,8 @@
 \RequirePackage{atbegshi} % for draft mode
 \RequirePackage{geometry} % for margins etc.
 \RequirePackage{setspace} % for line spacing
+\RequirePackage[utf8]{inputenc}
+
 \renewcommand*{\author}  [1]{\gdef\@author{#1}}
 \renewcommand*{\title}   [1]{\gdef\@title{#1}}
 \newcommand*{\degree}    [1]{\gdef\@degree{#1}}
@@ -132,8 +134,8 @@
       \vfill
 	  Mémoire présenté en vue de l’obtention du grade de\\
       {\@degree}\\[1ex]
-      en{\@department}\\
-      à l'Université de Montréal\\
+      {\@department}\\
+Université de Montréal\\
       \vfill
       {\copyright} {\@gradyear}, {\@author}
    \end{center}
@@ -195,10 +197,10 @@
 \if@twoside
 \renewcommand*{\ps@headings}%
   {\let\@mkboth\markboth
-   \let\@oddfoot\@empty
-   \let\@evenfoot\@empty
-   \def\@oddhead{\headerstyle{\rightmark\hfil\thepage}}%
-   \def\@evenhead{\headerstyle{\thepage\hfil\leftmark}}%
+   \def\@oddfoot{\headerstyle{\hfil\thepage\hfil}}%
+   \def\@evenfoot{\headerstyle{\hfil\thepage\hfil}}%
+   \let\@oddhead\@empty%{\headerstyle{\hfil\rightmark}}%
+   \let\@evenhead\@empty%{\headerstyle{\leftmark\hfil}}%
    \def\chaptermark##1{\markboth{%
      \if@mainmatter\headerstyle{\@chapapp\ \thechapter.\ ##1}\fi}{}}
    \def\sectionmark##1{\markright{%
