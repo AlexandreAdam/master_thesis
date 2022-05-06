@@ -5,10 +5,33 @@
                 Donc matière noire, questions sur sa nature, rôle des 
                 lentilles gravitationnelles pour révéler cette masse par la distortion
         \item Mentionner la motivation générale de notre recherche
-        
 \end{itemize}
 
-\section{Lentilles gravitationnelles}
+La recherche présentée dans ce mémoire approche le problème de cartographier la 
+masse gravitationnelle de galaxies-lentilles de façon agnostique. C'est-à-dire que 
+l'on ne suppose pas de modèle analytique simple pour résoudre le problème 
+de reconstruction non-linéaire et mal posé. Plutôt, cette recherche exploite 
+le cadre des machines à inférence récurrentielles (RIM) pour encoder des biais 
+inductifs dans un réseaux de neurones qui vont rendre l'inférence de 
+paramètres dans un espace à très haute dimension efficace et précise.
+
+Avant de décrire ce travail, je vais introduire les concepts 
+et les motivations nécessairent pour contextualiser ma recherche.
+En premier lieu, je vais décrire le concept de lentille 
+gravitationnelle à la section \ref{sec:lentilles gravitationnelles}. Ensuite, 
+je vais décrire quelque concepts lié à l'extraction de profiles de masses 
+provenant de large simulation magnétohydrodynamiques à la section 
+\ref{sec:simulation magnetohydrodynamique}. 
+Cette section sera suivit d'une introduction rapide à quelques concepts liés 
+à l'apprentissage machine utiles pour ma recherche
+à la section \ref{sec:apprentissage machine}. 
+Je vais décrire le formalisme bayesien pour les problème inverse 
+qui sous-tend ma recherche à la section \ref{sec:formalisme probleme inverse}.
+Finalement, je vais décrire le cadre plus large des motivations scientifiques 
+dans lequel cette recherche se situe à la section \ref{sec:motivations}.
+
+
+\section{Lentilles gravitationnelles}\label{sec:lentilles gravitationnelles}
 \subsection{Les angles de déflection}
 \subsection{L'équation de la lentille}
 \begin{itemize}
@@ -16,7 +39,7 @@
                 lentille
 \end{itemize}
 
-\section{Simulation magnétohydrodynamiques}
+\section{Simulation magnétohydrodynamiques}\label{sec:simulation magnetohydrodynamique}
 \begin{itemize}
         \item Devrait être courte, mais établir le ground work pour 
                 SPL
@@ -31,7 +54,7 @@
 \subsection{Densité de masse projeté avec lissage adaptif}
 
 
-\section{Apprentissage profond}
+\section{Apprentissage machine}\label{sec:apprentissage machine}
 
 \subsection{Réseaux de neuronnes convolutionnels}
 
@@ -45,7 +68,7 @@
 
 %\acrshort{rim}
 
-\section{Formalisme des problèmes inverses}
+\section{Formalisme des problèmes inverses}\label{sec:formalisme probleme inverse}
 
 \subsection{Approche bayesienne}
 
@@ -54,7 +77,7 @@
 \subsection{}
 
 
-\section{Motivation pour cette thèse}
+\section{Motivation scientifiques}\label{sec:motivations}
 
 
 
