@@ -5,9 +5,10 @@
   onehalfspacing,
 ]{ut-thesis}
 % packages
-\usepackage{natbib}
+\usepackage[square,numbers]{natbib}
 \bibliographystyle{abbrvnat}
-%\setcitestyle{authoryear,open={((},close={))}} %Citation-related command
+
+
 \usepackage[colorlinks,
     linkcolor={black},
     citecolor={black},
@@ -117,13 +118,14 @@ sort=symbpi, type=symbolslist
     %This is my \acrshort{rim} and I can use it again. 
     This is a symbol \gls{Id}.
 
-\lipsum[5-10]
     %\input{ch-methods}
     %\input{ch-results}
 
   \appendix
     %\input{ap-code}
   \backmatter
+
+  \bibliography{bibliography}
   %\printbibliography[heading=bibintoc]
 \end{document}
 

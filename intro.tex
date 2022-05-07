@@ -7,6 +7,7 @@
         \item Mentionner la motivation générale de notre recherche
 \end{itemize}
 
+% Possibly rework this to get a more complete picture
 La recherche présentée dans ce mémoire approche le problème de cartographier la 
 masse gravitationnelle de galaxies-lentilles de façon agnostique. C'est-à-dire que 
 l'on ne suppose pas de modèle analytique simple pour résoudre le problème 
@@ -27,11 +28,24 @@ Cette section sera suivit d'une introduction rapide à quelques concepts liés
 à la section \ref{sec:apprentissage machine}. 
 Je vais décrire le formalisme bayesien pour les problème inverse 
 qui sous-tend ma recherche à la section \ref{sec:formalisme probleme inverse}.
-Finalement, je vais décrire le cadre plus large des motivations scientifiques 
-dans lequel cette recherche se situe à la section \ref{sec:motivations}.
-
+Finalement, je vais décrire le 
+le contexte historique et scientifique qui motive ma recherche 
+à la section \ref{sec:contexte}.
+%cadre plus large des motivations scientifiques 
+%dans lequel cette recherche se situe à la section \ref{sec:motivations}.
+\citep{Morningstar2019}
 
 \section{Lentilles gravitationnelles}\label{sec:lentilles gravitationnelles}
+%En terme simple, l'angle de déflection est l'intégrale sur toute la trajectoire du 
+%photon de la force qui dévie la trajectoire du photon. Le reste suit. La première 
+%équation devrait donc être
+
+General intro. Mentionner que le régime étudier est faible, dans le sens où 
+on peut utilsier certaines approximations introduites ci-dessous. Aussi, introduire 
+spécifiquement l'objet d'étude on contraposée avec d'autres système comme cluster, 
+quasar lenses etc.
+
+
 Selon le principe de Fermat, les photons suivent des trajectoires qui extrémisent 
 la durée de la trajectoire. Ce principe est formalisé dans le language du calcul 
 des variations
@@ -53,15 +67,78 @@ par une équation de Poisson
 \begin{equation}\label{eq:Poisson}
        \grad^{2}\Phi = 4\pi G \rho 
 \end{equation} 
-Dans la limite où ce potentiel est faible $\displaystyle \frac{2\Phi}{c^{2}} \ll 1$
-%\subsection{Les angles de déflection}
-%\subsection{L'équation de la lentille}
+Dans la limite où ce potentiel est faible $\displaystyle \frac{2\Phi}{c^{2}} \ll 1$, la 
+métrique est décrite par une expansion au premier ordre autour de la 
+métrique de Minkowsky pour un espace plat, de sortes que
+\begin{equation}\label{eq:newton}
+        ds^2 = \left( 1 + \frac{2\Phi}{c^{2}} \right)c^{2}dt^{2} - \left( 1 - \frac{2\Phi}{c^{2}} \right)(dx^{2} + dy^{2} + dz^{2})
+\end{equation} 
+
+Un photon suit une géodésique de l'espace temps $ds^{2} = 0$. Ainsi, on trouve 
+l'équation
+\begin{equation}\label{eq:refraction index}
+        c' = \frac{|d\vec{x}|}{dt} \approx \left( 1 + \frac{2\Phi}{c^{2}} \right)c
+\end{equation} 
+*Peut-être un mot de plus sur comment on obtient le vecteur tangent et mentionner 
+Meneghetti*
+
+On peut alors résoudre les équations d'Euler-Lagrange qui satisfait \eqref{Fermat} 
+pour déterminer que le vecteur tangent à la trajectoire des photons est 
+\begin{equation}\label{eq:vecteur tangent}
+        \vec{e} = -\frac{2}{c^{2}} \grad_\perp \Phi
+\end{equation} 
+où $\grad_\perp$ est le gradient perpendiculaire à la trajectoire du photon.
+L'angle de déflection est alors l'integral sur la trajectoire du photon:
+\begin{equation}\label{eq:deflection true}
+        \vec{\alpha} = \frac{2}{c^{2}}\int_{\lambda_A}^{\lambda_B} \grad_\perp \Phi d\lambda
+\end{equation} 
+
+Cette intégrale est difficile à résoudre en grande partie parce que la trajectoire est courbe. 
+On utilise l'approximation de Born, c'est-à-dire qu'on approxime la trajectoire 
+du photon comme une ligne droite sur l'axe-$z$ avec un paramètre d'impact $b$. Cette approximation est justfiée 
+dans le contexte des lentilles gravitationnelles, puisque les angles de déflection sont généralement de 
+l'ordre de l'arcsecondes ou plus petit. Ainsi, en assumant que le potentiel est celui d'une masse M
+ponctuelle avec $\displaystyle \Phi = -\frac{GM}{r}$,
+on obtient
+
+\begin{equation}\label{eq:deflection approx}
+        \vec{\alpha}(\vec{b}) = \frac{2GM}{c^{2}} \vec{b} \int_{-\infty }^{\infty } \frac{dz}{(b^{2} + z^{2})^{3/2}} 
+        = \frac{4GM}{c^{2}b} \hat{b}
+\end{equation} 
+
+Le paramètre d'impact peut être écrit en terme de la distance à la lentille et de l'angle 
+observé du centre de la lentille $b = \theta D_{\ell}$. Pour une lentille mince, 
+la position original d'une source de photon $\vec{\beta}$ se calcul géométriquement 
+par la différence entre l'angle observé $\theta$ et l'angle de déflection $\alpha$:
+\begin{equation}\label{eq:equation lentille}
+       \beta = \theta - \alpha 
+\end{equation} 
+
+Finalement, on peut généraliser pour des potentiels gravitationnels générés 
+par un enesemble continu de masse $dm = \Sigma d^{2}\xi'$ où $\Sigma = \int \rho dz$ et 
+$d^{2} \xi'$ est la taille physique de l'élément de masse $dm$ à la position $\xi'$. 
+L'angle de déflection total mesuré à un point $\xi$ est alors une convolution 
+sur tout le plan de la lentille (mince) puisque l'angle de déflection dépend 
+linairement de la masse $M$ (superposition des angles de déflection):
+\begin{equation}\label{eq:}
+        \vec{\alpha}(\vec{\xi}) = \frac{4 G}{c^{2}} \int_{\mathbb{R}^{2}} \Sigma (\xi') \frac{\xi - \xi'}{|\xi - \xi'|}d^{2}\xi'
+\end{equation} 
+% Show a sketch a la Schneider & Bertelmann 2001.
+% Cite Meneghetti & Carrol & Morningstar?
 \begin{itemize}
         \item Mentionner la dégénerscence entre la morphologie de la source et la 
                 lentille
 \end{itemize}
 
 \section{Simulation magnétohydrodynamiques}\label{sec:simulation magnetohydrodynamique}
+Les détails de ces simulations tombent en dehors du cadre de cette thèse, 
+toutefois on peut noter que plusieurs simulations de haute qualité sont maintenant 
+capable de reproduire plusieurs observables de l'Univers d'aujourd'hui ($z=0$). 
+Ainsi, on peut utiliser ces simulations pour créer des profils de masses 
+autrement inaccessible par des observations qui sont basées uniquement 
+sur le champ électromagnétique de l'Univers.
+
+Introduire SPL, main equation.
 \begin{itemize}
         \item Devrait être courte, mais établir le ground work pour 
                 SPL
@@ -69,37 +146,44 @@ Dans la limite où ce potentiel est faible $\displaystyle \frac{2\Phi}{c^{2}} \l
                 comment en général ce genre de simulations sont pertinentes 
                 pour notre travail -> realistic mass models.
 \end{itemize}
-\subsection{Description lissée des particules}
+%\subsection{Description lissée des particules}
 
-\subsection{Arbres kd}
+%\subsection{Arbres kd}
 
 \subsection{Densité de masse projeté avec lissage adaptif}
+Introduire les concepts nécessaires pour justifié notre utilisation de 
+lissage adaptif pour réduire les erreurs sur les angles de déflections.
 
 
 \section{Apprentissage machine}\label{sec:apprentissage machine}
 
 \subsection{Réseaux de neuronnes convolutionnels}
+Mentionner les travaux de Courville et les avancées récentes.
 
 \subsection{Réseaux de neuronnes récurrents}
+Mentionner les résultats importants concernant Turing machines. 
+Mentionner les détails d'un GRU convolutifs.
 
-\subsection{Machine à inférence récurrentielles}
+%\subsection{Machine à inférence récurrentielles}
+
 
 \subsection{Auto-encodeur variationnel}
+Inclure ici l'appendice de l'article en plus ou moins de détail.
 
 \subsection{Transfert de l'apprentissage}
-
-%\acrshort{rim}
+Introduction générale.
+Inclure ici l'appendice de l'article?
 
 \section{Formalisme des problèmes inverses}\label{sec:formalisme probleme inverse}
 
-\subsection{Approche bayesienne}
+%\subsection{Approche bayesienne}
 
-\subsection{Biais inductifs}
+%\subsection{Biais inductifs}
 
-\subsection{}
+%\subsection{}
 
 
-\section{Motivation scientifiques}\label{sec:motivations}
+\section{Contexte scientifique}\label{sec:contexte}
 
 
 
