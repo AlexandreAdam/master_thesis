@@ -32,8 +32,30 @@ dans lequel cette recherche se situe à la section \ref{sec:motivations}.
 
 
 \section{Lentilles gravitationnelles}\label{sec:lentilles gravitationnelles}
-\subsection{Les angles de déflection}
-\subsection{L'équation de la lentille}
+Selon le principe de Fermat, les photons suivent des trajectoires qui extrémisent 
+la durée de la trajectoire. Ce principe est formalisé dans le language du calcul 
+des variations
+\begin{equation}\label{eq:Fermat}
+        \delta \int_{\lambda_A}^{\lambda_B} n(\mathbf{x}(\lambda))d\lambda = 0 
+\end{equation} 
+où $n$ est un indice de réfraction et $\lambda$ paramétrise la trajectoire du photon.
+
+Pour déterminer l'indice de réfraction, on utilise le formalisme de la relativité 
+générale. Un élément de distance $ds^2$ est calculé à partir d'une métrique $g_{\mu \nu}$ 
+\begin{equation}\label{eq:ds}
+        ds^2 = g_{\mu \nu}dx^{\mu}dx^{\nu}
+\end{equation} 
+Un espace plat est décrit par la métrique de Minkowsky. Pour décrire le champ 
+gravitationnel d'une galaxie, on fait l'approximation que le potentiel gravitationnel 
+est celui d'un fluide parfait. Opérationnellement, on entend par la que ce fluide est décrit entièrement 
+par sa pression et sa densité. Le potentiel gravitationnel est ainsi déterminé 
+par une équation de Poisson 
+\begin{equation}\label{eq:Poisson}
+       \grad^{2}\Phi = 4\pi G \rho 
+\end{equation} 
+Dans la limite où ce potentiel est faible $\displaystyle \frac{2\Phi}{c^{2}} \ll 1$
+%\subsection{Les angles de déflection}
+%\subsection{L'équation de la lentille}
 \begin{itemize}
         \item Mentionner la dégénerscence entre la morphologie de la source et la 
                 lentille
