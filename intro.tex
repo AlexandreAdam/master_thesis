@@ -42,16 +42,51 @@ le contexte historique et scientifique qui motive ma recherche
 
 \section{Lentilles gravitationnelles}\label{sec:lentilles gravitationnelles}
 
-L'expédition organisée par sir Arthur Eddington 
-avait pour but d'observer 
-l'éclipse totale du 29 mai 1919 à partir de l'île de Prìncipe 
-dans le golfe de Guinée et de Sobral au nord du Brésil 
-\citep{Eddington1919}. Les photographes de l'éclipses prisent , bien qu'imprécises, 
-ont permis de valider la prédiction d'Einstein faite 
-en 1911 que la position observée d'une étoile serait déplacée de 
-$\delta \theta \approx 1.75'' \frac{R}{R_\odot}$ 
-durant une eclipse \citep{Dyson1920}, soit 2 fois plus 
-que ce qui est prédit par la théorie newtonienne.
+% Plan pour cette section: Dériver eq de la lentille et alpha
+% Intro général: deflection de la lumière
+%% Approcha a l'intro -> contexte historique à notre pensée sur la déflection de la lumière
+%%% Réfraction 
+%%%% Ptolémé (Optic, Grèce Antique)
+%%%% Ibn Sahl (c. 940 - 1000)
+%%%% Snell (1621)-Descartes(1637)
+%%%% Principe de Fermat pour expliquer ce phénomène (lettre en 1657, mémoire en 1662)
+%%%% Euler (1744) - Lagrange (1760) -> Principe de moindre action et sa solution
+%%%% Équations de Maxwell (1861)
+
+%%% Déflection de la lumière par la gravité
+%%%% Soldner, J. G. v. (1801–1804). "On the deflection of a light ray from its rectilinear motion, by the attraction of a celestial body at which it nearly passes by". Berliner Astronomisches Jahrbuch: 161–172.
+%%%% Einstein 1911
+%%%% Einstein 1915 (GR)
+%%%% Eddington takes photograph of eclipse 1919
+%%%% 1936 letter from Einstein at the request of 
+%%%% Fritz Zwicky is first to postulate grav lensing idea in 1937i Zwicky, F. (1937) Nebulae as gravitational lenses. Physical Review, 51 (4). p. 290. ISSN 0031-899X
+%%%% 1964 Refsdal (H0 and possibility to measure mass)
+%%%%%% (Shapiro time delay (1964))
+%%%% Fisrt gravitational lens discovered 1979 (double imaged quasar) https://www.nature.com/articles/279381a0
+%%%% Then explosions of studies durings the 2000s on how to model things.
+
+%%% Dark matter
+%%%% Zwicky 1933
+
+%Le principe de Fermat énonce que la trajectoire de la lumière, ou d'un 
+%photon, doit suivre une trajectoire qui extrémise la durée de la trajectoire. 
+%Ce principe mathématique, qui est un exemple du principe plus général de moindre action 
+%développé par Lagrange en 1756, permet de décrire la trajectoire de la lumière 
+%par l'entremise d'un simple indice $n$ (indice de réfraction) dans 
+%lequel se cache toute la physique microscopique (ou macroscopique) 
+%d'où émerge le phénomène qui nous intéresse. 
+
+
+%L'expédition organisée par sir Arthur Eddington
+%avait pour but d'observer 
+%l'éclipse totale du 29 mai 1919 à partir de l'île de Prìncipe 
+%dans le golfe de Guinée et de Sobral au nord du Brésil 
+%\citep{Eddington1919}. Les photographes de l'éclipses prisent , bien qu'imprécises, 
+%ont permis de valider la prédiction d'Einstein faite 
+%en 1911 que la position observée d'une étoile serait déplacée de 
+%$\delta \theta \approx 1.75'' \frac{R}{R_\odot}$ 
+%durant une eclipse \citep{Dyson1920}, soit 2 fois plus 
+%que ce qui est prédit par la théorie newtonienne.
 
 % Je dois demander un cpoyright authorisation pour utiliser ces images
 %\begin{figure}[H]
@@ -67,16 +102,20 @@ que ce qui est prédit par la théorie newtonienne.
 %\end{figure}
 
 
-
-Selon le principe de Fermat, les photons suivent des trajectoires qui extrémisent 
-la durée de la trajectoire. Ce principe est formalisé dans le language du calcul 
+Selon le principe de Fermat, la lumière suit une trajectoires qui extrémise
+la durée de la trajectoire entre deux points. En fait, c'est un exemple du principe 
+plus général de moindre action développé par Lagrange en 1756. 
+Le principe de Fermat est formalisé dans le language du calcul 
 des variations
 \begin{equation}\label{eq:Fermat}
         \delta \int_{\lambda_A}^{\lambda_B} n(\mathbf{x}(\lambda))d\lambda = 0 
 \end{equation} 
-où $n$ est un indice de réfraction et $\lambda$ paramétrise la trajectoire du photon.
+où $n$ est un indice de réfraction et $\lambda$ paramétrise la trajectoire d'un photon. 
+%Selon l'enoncé de Fermat, ce paramètre serait le temps $\lambda = t$, 
+%mais le principle plus géneŕal de moindre action de nécessite pas 
+%de préciser la nature de ce paramètre.
 
-Pour déterminer l'indice de réfraction, on utilise le formalisme de la relativité 
+Pour déterminer l'indice $n$, on utilise le formalisme de la relativité 
 générale. Un élément de distance $ds^2$ est calculé à partir d'une métrique $g_{\mu \nu}$ 
 \begin{equation}\label{eq:ds}
         ds^2 = g_{\mu \nu}dx^{\mu}dx^{\nu}
