@@ -8,6 +8,14 @@
 \usepackage[square,numbers]{natbib}
 \bibliographystyle{abbrvnat}
 
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.6\textwidth}
+\setlength{\epigraphrule}{0pt}
+%%%*********************************************
+\newcommand{\myopeningquote}{\smash{\raisebox{-0.5\height}{\llap{\scalebox{3}
+          {\textcolor{Silver}{``}}\,}}}}
+\newcommand{\myclosingquote}{\raisebox{-0.66\height}{\scalebox{3}{\textcolor{Silver}{”}}}}
+
 
 \usepackage[colorlinks,
     linkcolor={black},
@@ -15,6 +23,8 @@
     urlcolor={black}]{hyperref} % for links
 \usepackage{graphicx} % for embedding graphics
 \usepackage{booktabs} % for pretty tables
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage[nottoc]{tocbibind} % adds lot and lof to toc
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
