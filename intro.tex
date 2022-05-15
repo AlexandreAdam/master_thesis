@@ -109,29 +109,46 @@ le contexte historique et scientifique qui motive ma recherche
         %\end{subfigure}
 %\end{figure}
 
-L'idée de lentille gravitationnelle est attribuée a Fritz \citet{Zwicky1937} %(1937) 
+L'idée des lentilles gravitationnelles est attribuée a Fritz \citet{Zwicky1937} %(1937) 
 qui, suivant les calculs publié par \citet{Einstein1936} l'année précédente, %\citep{Einstein1936},
 est le premier à postuler correctement que l'anneau d'Einstein produit par la déflection 
 de la lumière d'une source en arrière plan par le champ gravitationnel d'une galaxie 
 (appellée nébuleuse extra-galactique à l'époque) 
-pourrait en effet être observé. Une idée qu'Einstein lui-même considérait improbable à l'époque. 
+pourrait être observé. Une idée qu'Einstein lui-même considérait improbable. 
 Dans le même article, il articule précisément les idées qui nous motivent encore aujourd'hui 
-à étudier ces objets, c'est-à-dire que les lentilles gravitationnelles permettent
+(presque 100 ans plus tard) à étudier ces objets, 
+c'est-à-dire que les lentilles gravitationnelles permettent
 \begin{itemize}
         \item d'imager des galaxies trop lointaine pour que l'on puisse les résoudre avec 
-                nos téléscopes (ce qui reste vrai encore aujourd'hui presque 100 ans plus tard);
+                nos téléscopes;
         \item de mesurer directement la masse gravitationnelle de ces galaxies.
 \end{itemize}
-
-Dans l'intérêt de rendre ce manuscrit complet, je vais dériver à partir de principe 
+Pour comprendre ces deux points, 
+et dans l'intérêt de rendre ce manuscrit complet, je vais dériver à partir de principes 
 premier les équations 
-centrales qui nous permettent d'étudier ces objets. Des traitements similaires 
+centrales qui nous permettent d'étudier les lentilles gravitationnelles décrites par 
+Zwicky.
+Des traitements similaires 
 peuvent être trouvé dans les manuels de références de \citet{Meneghetti2013} et 
 \citet{Carroll2003}.
 
 
+On s'intéresse spécifiquement à l'angle 
+de déflection, ç.-à-d. la déviation angulaire apparente d'un point 
+lumineux par rapport à sa position originelle si 
+le chemin du photon n'était pas dévié. Pour rendre les dérivations simples, 
+on sépare les coordonnées en une partie parallèle à l'axe de visée de l'observateur ($\mathbf{e}_\parallel$) 
+et une partie perpendiculaire ($\mathbf{e}_\perp$). L'angle de déflection se calcule entièrement 
+dans la partie perpendiculaire. Sans assumer la nature de cette déflection, 
+on peut écrire de façon générale
+\begin{equation}\label{eq:alpha}
+       \boldsymbol{ \alpha} = - \int_{\lambda_A}^{\lambda_B} \frac{\partial^{2}}{\partial \lambda^{2}}\mathbf{x}(\lambda) \times \mathbf{e}_{\parallel}(\lambda) d\lambda
+\end{equation}
+où $\lambda$ paramétrise la trajectoire du photon, et $\mathbf{x}$ est un vecteur de 
+position. Le signe moins nous indique qu'on prend la perspective de l'observateur. 
+
 Le principe de Fermat stipule la lumière suit une trajectoires qui extrémise
-la durée de ladite trajectoire entre deux points. 
+la durée de son parcours entre deux points. 
 En fait, c'est un exemple du principe 
 plus général de moindre action développé par Lagrange en 1756. 
 Le principe de Fermat est formalisé dans le language du calcul 
@@ -139,21 +156,10 @@ des variations, où la variation de la durée $T$ s'écrit
 \begin{equation}\label{eq:Fermat}
        \delta T =  \delta \int_{\lambda_A}^{\lambda_B} n(\mathbf{x}(\lambda))d\lambda = 0 
 \end{equation} 
-$n$ est un indice de réfraction et $\lambda$ paramétrise la trajectoire d'un photon 
-(comme le temps).
+$n$ est un indice de réfraction.
+%et $\lambda$ paramétrise la trajectoire d'un photon 
+%(comme le temps).
 
-Pour étudier les lentilles gravitationnelles, on s'intéresse plus spécifiquement à l'angle 
-de déflection, ç.-à-d. la déviation angulaire apparente d'un point 
-lumineux par rapport à sa position originel si 
-le chemin du photon n'était pas dévié. Pour rendre les dérivations simples, 
-on sépare les coordonnées en une partie parallèle à l'axe de visée de l'observateur ($\parallel$) 
-et une partie perpendiculaire ($\perp$). L'angle de déflection se calcule entièrement 
-dans la partie perpendiculaire. Sans assumer la nature de cette déflection autre 
-qu'elle est causé par un potentiel $\Phi$, on 
-peut écrire
-\begin{equation}\label{eq:alpha}
-       \boldsymbol{ \alpha} = - \int_{\lambda_A}^{\lambda_B} \grad_{\perp}\Phi d\lambda
-\end{equation} 
 
 \begin{equation}\label{eq:deflection true}
 \end{equation} 
