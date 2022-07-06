@@ -221,4 +221,3 @@ Université de Montréal\\
 \endinput
 %%
 %% End of file `ut-thesis.cls'.
-

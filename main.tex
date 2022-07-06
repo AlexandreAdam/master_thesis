@@ -6,6 +6,7 @@
 ]{ut-thesis}
 % packages
 %\usepackage[square,numbers]{natbib}
+\usepackage{aasmacros}
 \usepackage[authoryear,round]{natbib}
 \bibliographystyle{abbrvnat}
 
@@ -30,14 +31,18 @@
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{pdfpages}
 \usepackage{float}
 \usepackage{amsmath, bm, bbm}
 \usepackage{amssymb}
 \usepackage{physics}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 \usepackage{enumitem}
 \usepackage{lipsum}
 \newcommand{\subscript}[2]{$#1 _ #2$}
+
+\newcommand{\KL}{\mathrel{\Vert}}
 \DeclareRobustCommand{\bbone}{\text{\usefont{U}{bbold}{m}{n}1}}
 \DeclareMathOperator{\EX}{\mathbb{E}}% expected value
 
@@ -60,27 +65,25 @@
 %\renewcommand*{\glossarypostamble}{\clearpage}
 %\renewcommand*{\glossarypostamble}{\vspace*{1cm}}
 
-\newacronym{rim}{RIM}{Machine à inférence récurrentielles}
+\newacronym{rim}{RIM}{Recurrent Inference Machine --- Machine à inférence récurrentielles}
+\newacronym{vae}{VAE}{Variational AutoEncoder --- Auto-encodeur variationnel de Bayes}
 
 \newglossaryentry{Id}{
-name=$\bbone_n$,
-description={Matrice identité de taille $n\times n$},
+name=$\bbone$,
+description={Matrice identité},
 sort=symbpi, type=symbolslist
 }
 
-\newglossaryentry{Pi}{
-name=$\pi$,
-description={...},
+\newglossaryentry{HP}{
+name=$\kappa$,
+description={Convergence --- densité surfacique de masse projeté sur l'axe de visée.},
 sort=symbpi, type=symbolslist
 }
-
-%\usepackage[toc,section=section]{gloss
-%\newacronym{rim}{RIm}{Recurrent Inference Machine}
-
 
 % author data
 \author{Alexandre Adam}
-\title{Reconstruction agnostique de lentilles gravitationnelles de type galaxie-galaxie}
+%\title{Reconstruction agnostique de lentilles gravitationnelles de type galaxie-galaxie}
+\title{Reconstruction d'image avec les machines à inférences récurentielles}
 \degree{Maître ès sciences (M.Sc.)}
 \department{Département de physique}
 \gradyear{2022}
@@ -120,24 +123,20 @@ sort=symbpi, type=symbolslist
             % écouter mes idées folles. 
 
             %Ève, merci 
-
-            
     \end{acknowledgements}
   \mainmatter
-    \input{intro}
+    \input{chapters/intro}
 
-    %This is my \acrshort{rim} and I can use it again. 
-    This is a symbol \gls{Id}.
+  \input{chapters/censai}
 
-    %\input{ch-methods}
-    %\input{ch-results}
-
-
-  \bibliography{bibliography}
+{\footnotesize
+  \bibliography{intro_bib,censai_bib}
+}
 
   \appendix
-   \input{annexe_angles_deflection}
-   \input{annexe_distance_diametre_angulaire}
+   %\input{chapters/annexe_angles_deflection}
+   %\input{chapters/annexe_distance_diametre_angulaire}
+  \input{chapters/censai_appendices}
 
   %\printbibliography[heading=bibintoc]
 \end{document}

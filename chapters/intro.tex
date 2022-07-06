@@ -1,0 +1,741 @@
+% Plan
+
+% General intro into our motivations
+% Lentilles gravitationelles
+ %Brief history (Zwicky)
+ %Modern motivation, data and other studies
+ %Derivation of the main equations
+% Interférométrie par masque non-régulier
+ %Brief History
+ %Moderne motivation, data and other studies
+ %Derivation of main equations
+% Inverse problem and Recurrent Inference Machine
+ %General equation and motivation
+ %Bayesian framework
+ %RIM, what it solves -> implicit prior.
+
+
+% Try doing without. Importantly, reader should not have to consult appendices to understand main text.
+ %%Appendix for extended derivation of lens equation
+ %%Appendix for angular diameter distance?
+ %%Appendix for derivatives of likelihood for interferometry.
+ %%Appendix on VAE
+ 
+\chapter{Introduction}
+\thispagestyle{empty}
+
+% 1 ouverture -> les problèmes inverses, l'importance des images en astrophysique -> e.g. image des trou noirs de EHT.
+% 2 sujet amené -> la reconstruction d'image dans le contexte de problèmes inverses
+% 3 sujet posé -> La reconstruction d'image en astrophysique, deux cas d'études, les lentilles gravitationnelles et l'interférométrie par masque troué
+
+%La recherche présentée dans ce mémoire s'intéresse au problème de reconstruction 
+%d'image à partir de mesures incomplètes
+%La recherche présentée dans ce mémoire approche le problème de cartographier la 
+%masse gravitationnelle de galaxies-lentilles de façon agnostique. C'est-à-dire que 
+%l'on ne suppose pas de modèle analytique simple pour résoudre le problème 
+%de reconstruction non-linéaire et mal posé. Plutôt, cette recherche exploite 
+%le cadre des machines à inférence récurrentielles (RIM) pour encoder des biais 
+%inductifs dans un réseaux de neurones qui vont rendre l'inférence de 
+%paramètres dans un espace à très haute dimension efficace et précise.
+
+%Avant de décrire ce travail, je vais introduire les concepts 
+%et les motivations nécessairent pour contextualiser ma recherche.
+%En premier lieu, je vais décrire le concept de lentille 
+%gravitationnelle à la section \ref{sec:lentilles gravitationnelles}. Ensuite, 
+%je vais décrire quelque concepts lié à l'extraction de profiles de masses 
+%provenant de large simulation magnétohydrodynamiques à la section 
+%\ref{sec:simulation magnetohydrodynamique}. 
+%Cette section sera suivit d'une introduction rapide à quelques concepts liés 
+%à l'apprentissage machine utiles pour ma recherche
+%à la section \ref{sec:apprentissage machine}. 
+%Je vais décrire le formalisme bayesien pour les problème inverse 
+%qui sous-tend ma recherche à la section \ref{sec:formalisme probleme inverse}.
+%Finalement, je vais décrire 
+%le contexte historique et scientifique qui motive ma recherche 
+%à la section \ref{sec:contexte}.
+%cadre plus large des motivations scientifiques 
+%dans lequel cette recherche se situe à la section \ref{sec:motivations}.
+%\citep{Morningstar2019
+
+%A gravitational lens is composed of 
+%massive objects ---or \textit{deflectors}--- in the line of sight that 
+%magnify and distort luminous
+%background objects like early-type star-forming galaxies \citep{Viera2013,Marrone2018,Rizzo2020,Sun2021},
+%otherwise too faint to study with our 
+%current ground and orbital telescope facilities. 
+%This distortion is a very good tracer of mass, 
+%independent of the electromagnetic 
+%signature of the foreground deflector. As such, it 
+%is one of the rare ways to study the 
+%properties of dark matter 
+%halos via its spatial distribution at the very small scales 
+%\citep{Dala2002,Treu2004,Hezaveh2016,Gilman2020,Gilman2021}. 
+%Gravitational lenses also act as cosmological rulers against which we can measure the 
+%expansion rate of the universe by monitoring the flickering light of multiply imaged quasars 
+%\citep[and reference therein]{Treu2016td,Millon2020} 
+%or the dimming of multiply imaged supernovae \citep{Refsdal1964,Treu2016refsdal,Grillo2018}. 
+%A central component of such cosmographic analysis is the 
+%careful mass modelling of the lensing galaxy \citep{Chen2019,Wong2020} or 
+%lensing galaxy clusters \citep{Kneib2011,Hoekstra2013,Natarajan2017,Bergamini2018,Jauzac2021}. 
+
+
+%A common practice in galaxy mass modelling is to assume that the mass distribution of the 
+%main deflector follows a power law $\rho \propto r^{-\gamma'}$ \citep{Keeton2001}.
+%Following spectroscopic measurement 
+%of the velocity dispersion of early-type galaxies, 
+%a singular isothermal profile $\gamma' = 2$ can provide a good starting point for analysis
+%\citep{Koopman2006,Barnabe2009,Auger2010}. For cosmographic measurments, 
+%this assumption is relaxed by leaving the slope of the profile as 
+%a free parameter in the mass modelling stage 
+%since the isothermal approximation will induce a bias in the measurement 
+%of the Hubble constant \citep{Treu2004,Birrer2020}. 
+%Composite models can also be constructed as in \citet{Millon2020}, who 
+%uses a Navarro-Frenk-White profile 
+%\citep{Navarro1997} to model the dark matter halo that host the lensing galaxy 
+%and a Sérsic profile \citep{Sersic1963} 
+%to model the baryonic component of the galaxy. Even though these models 
+%could produce a large range of profiles, best fit models often 
+%have an average slope akin to an isothermal profile. This 
+%observation is dubbed the \textit{bulge-halo conspiracy} \citep{Dutton2014}.
+
+%Detailed modelling of high resolution images with high 
+%signal-to-noise ratio (SNR) will additionally require external perturbations 
+%to the main lensing galaxy coming from its local environment 
+%\citep{Sluse2017,Wong2017,Birrer2019,Rusu2019} and 
+%from the line of sight \citep{Rusu2017,Li2021} in order to fully capture the signal. 
+%But, this approach becomes unwieldy as the quality of images increases. 
+%More and more perturbations need to be added in order 
+%to account for fine details in the data that are only revealed 
+%in the high SNR regime. Famously,
+%the Hubble Space Telescope (HST) Wide Field Camera 3 (WFC3) images of 
+%the Cosmic Horseshoe (J1148+1930) --- initially discovered by \citet{Belokurov2007} --- 
+%has many fine features that are hard to reproduce 
+%\citep[e.g.][]{Bellagamba2016,Cheng2019,Schuldt2019}.
+
+
+
+% rephrase
+%Free-form methods --- also misleadingly called nonparametric ---
+%attempt to relax the
+%assumptions about the smoothness and symmetries of the mass distribution by 
+%changing its parametric support. This includes regular (or adaptive)
+%grid representations and meshfree representations
+%\citep{Saha1997,Abdelsalam1998,Abdelsalam1998b,Diego2005,Birrer2015,Merten2016}. 
+%These methods are more expressive and make better use of the information 
+%contained in the arcs of the observed image in 
+%order to constrain the mass distribution of the lens. 
+%However, the widened range of distributions that can be represented 
+%include non-physical solutions that must be penalized via regularization.
+%% This is 
+%% to say that strong inductive biases must be included during optimisation to 
+%% exclude non-physical solutions from the parameter search. 
+
+%% rephrase
+%An important example is semi-linear inversion, originally 
+%introduced by \citet{Warren2003} for grid-based source brightness reconstruction. 
+%It was later improved to include 
+%linear perturbation to the lensing potential \citep{Koopmans2005}. 
+%The regularization procedure was also formalized into a Bayesian framework \citep{Suyu2006,Suyu2006b,Vegetti2009}, 
+%such that it enabled detection of subhalos from distorted 
+%Einstein rings or giant arcs \citep{Vegetti2010,Vegetti2012} 
+%and constrain the subhalo mass function \citep{Vegetti2014,Li2016}. 
+%This approach is generally limited to small perturbations from 
+%the analytical profile used in a preliminary step to approximate the solution.
+%As such, it is difficult to extend and automate this framework to reconstruct 
+%lenses from hydrodynamical simulations.
+
+%\citet{Morningstar2019} observed that the regularization employed in semi-linear inversion 
+%only constrain a two-point prior, often resulting in noise leakage in the source 
+%brightness distribution 
+%due to the lack of knowledge on high order statistics. They showed that using a
+%Recurrent Inference Machine \citep[RIM,][]{Putzky2017}, the neural network
+%would implicitly incorporate a more complex prior from a dataset of galaxy images which 
+%resulted in better performance overall for the background source reconstruction. 
+
+%To learn such a machine, we turn to an optimisation problem 
+%that is made feasible through the inductive biases
+%introduced by
+%\begin{enumerate}[label=(\subscript{\mathcal{H}}{{\arabic*}})]
+	%\item \label{prior:architecture} The architecture of $G_{\varphi}$;
+	%\item \label{prior:loss function} The loss function 
+		%$\mathcal{L}: \mathcal{X}\times \mathcal{X} \rightarrow \mathbb{R}$.
+%\end{enumerate}
+%The feasibility of the optimisation problem is determined almost entirely 
+%by the strength of these inductive biases. This follows from 
+%the no-free lunch theorem for machine learning 
+%\citep{Wolpert1995,Baxter2000}. The reader 
+%might also refer to a modern discussion on inductive bias for machine learning 
+%by \citep{Goyal2020} for review and insights. In the context of this work, 
+%inductive biases can be defined as anything that might influence the 
+%trajectory of the optimizer in $\varphi$-space during learning. 
+%We attempt 
+%to list them only in so far as they give a structure to our methods and 
+%might give insights into our results.
+
+%The no-free lunch theorem for machine learning \citep{Wolpert1995,Baxter2000} states 
+%that strong inductive biases are the precondition to finding a solution 
+%to an optimisation problem. This is particularly true for our case, 
+%for which we know a general function $F^{-1}$ does not exist in the general sense. 
+%However, we suspect that it is possible to find an inverse function when 
+%the hypothesis space $\mathcal{H} \in \mathbb{H}$ is restricted enough 
+%to exclude non-physical solutions.
+
+%We describe the dataset in section \ref{sec:data}. 
+%The model 
+%architecture represents a family of functions with properties 
+%that already encode some knowledge 
+%about the model domain. For example, translational equivariance is built in 
+%a convolutional neural network \citep[CNN, ][]{lecun1995}. This 
+%manifests itself in the weight sharing and overall 
+%reduced weight connectivity of CNN compared to fully connected network.
+%Practitioners also 
+%assume a certain locality to pixel covariance by using small convolution 
+%kernels. These induction 
+%biases makes CNN efficient
+%and is one of the main reasons for their success in image recognition tasks
+%\citep{Krizhevsky2012}.
+%This was also clearly illustrated by \citet{Ulyanov2017}, who showed that a randomly initialized CNN in a U-net architecture \citep{Ronneberger2015}
+%can learn the structure of natural images without the need for a training dataset. 
+%In other words, the architecture can be thought of 
+%as a form of implicit regularisation for certain problems. 
+
+
+\section{Lentilles gravitationnelles de type Galaxie-Galaxie}\label{sec:lentilles gravitationnelles}
+% Plan pour cette section: Dériver eq de la lentille et alpha
+% Intro général: deflection de la lumière
+%% Approcha a l'intro -> contexte historique à notre pensée sur la déviation de la lumière
+%%% Réfraction 
+%%%% Ptolémé (Optic, Grèce Antique)
+%%%% Ibn Sahl (c. 940 - 1000)
+%%%% Snell (1621)-Descartes(1637)
+%%%% Principe de Fermat pour expliquer ce phénomène (lettre en 1657, mémoire en 1662)
+%%%% Euler (1744) - Lagrange (1760) -> Principe de moindre action et sa solution
+%%%% Équations de Maxwell (1861)
+
+%%% déviation de la lumière par la gravité
+%%%% Soldner, J. G. v. (1801–1804). "On the deflection of a light ray from its rectilinear motion, by the attraction of a celestial body at which it nearly passes by". Berliner Astronomisches Jahrbuch: 161–172.
+%%%% Einstein 1911
+%%%% Einstein 1915 (GR)
+%%%% Eddington takes photograph of eclipse 1919
+%%%% 1936 letter from Einstein at the request of 
+%%%% Fritz Zwicky is first to postulate grav lensing idea in 1937i Zwicky, F. (1937) Nebulae as gravitational lenses. Physical Review, 51 (4). p. 290. ISSN 0031-899X
+%%%% 1964 Refsdal (H0 and possibility to measure mass)
+%%%%%% (Shapiro time delay (1964))
+%%%% Fisrt gravitational lens discovered 1979 (double imaged quasar) https://www.nature.com/articles/279381a0
+%%%% Then explosions of studies durings the 2000s on how to model things.
+
+%%% Dark matter 
+%%%% Zwicky 1933
+%%%% Lambda CDM?
+%%%% 
+
+% Copied from https://royalsocietypublishing.org/doi/10.1098/rsta.2009.0209
+%Henry Cavendish in 1784 is credited with the first (unpublished) calculation of the deflection angle 
+%δ of a corpuscular light ray following a hyperbolic trajectory and the origin of the 
+%(Newtonian) equation δ=2GM/Rc2. Subsequently, von Soldner (1804) published a similar calculation 
+%deriving a deflection of 0.84 arcsec for stars viewed close to the limb of the Sun.
+
+%Le principe de Fermat énonce que la trajectoire de la lumière, ou d'un 
+%photon, doit suivre une trajectoire qui extrémise la durée de la trajectoire. 
+%Ce principe mathématique, qui est un exemple du principe plus général de moindre action 
+%développé par Lagrange en 1756, permet de décrire la trajectoire de la lumière 
+%par l'entremise d'un simple indice $n$ (indice de réfraction) dans 
+%lequel se cache toute la physique microscopique (ou macroscopique) 
+%d'où émerge le phénomène qui nous intéresse. 
+
+
+%L'expédition organisée par sir Arthur Eddington
+%avait pour but d'observer 
+%l'éclipse totale du 29 mai 1919 à partir de l'île de Prìncipe 
+%dans le golfe de Guinée et de Sobral au nord du Brésil 
+%\citep{Eddington1919}. Les photographes de l'éclipses prisent , bien qu'imprécises, 
+%ont permis de valider la prédiction d'Einstein faite 
+%en 1911 que la position observée d'une étoile serait déplacée de 
+%$\delta \theta \approx 1.75'' \frac{R}{R_\odot}$ 
+%durant une eclipse \citep{Dyson1920}, soit 2 fois plus 
+%que ce qui est prédit par la théorie newtonienne.
+\subsection{Contexte historique}
+
+L'idée des lentilles gravitationnelles est attribuée a Fritz \citet{Zwicky1937} 
+qui, suivant les calculs publié par \citet{Einstein1936}, 
+est le premier à postuler correctement que l'anneau d'Einstein, produit par la déflection 
+de la lumière d'une source lointaine par le champ gravitationnel d'une galaxie 
+(appelée nébuleuse extragalactique à l'époque) en avant-plan de cette source selon 
+le point de vue d'un observateur sur Terre, 
+pourrait être observé. 
+Dans le même article, Zwicky articule précisément les idées qui nous motivent encore aujourd'hui 
+(presque 100 ans plus tard) à étudier ces objets, 
+c'est-à-dire que les lentilles gravitationnelles permettraient
+\begin{enumerate}
+        \item d'imager des galaxies trop lointaine pour que l'on puisse les résoudre avec 
+                nos télescopes;
+        \item de mesurer directement la masse gravitationnelle de ces galaxies.
+\end{enumerate}
+Il est a noté qu'Einstein considérait la possibilité d'observer ce phénomène extrêmement improbable. 
+La résolution des télescopes optiques durant la majorité du XX\textsuperscript{e} siècle étaient 
+limités à environ $ 0.5$ arcsecondes par la turbulence de 
+l'air. Avec une telle résolution, un anneau d'Einstein d'une taille caractéristique de 1 arcseconde 
+apparaîtrait comme un point lumineux étalé, et ne serait donc pas distinguable d'une étoile. 
+
+% Style of paragraphes needed here (only 3 paragraphe)
+% 1 ouverture (le précédent est bien)
+% 2 sujet amené (en 1 paragraphe, amener l'idée à ce qui nous intéresse aujourd'hui (max 2 paragraphes)
+% 3 sujet posé -> galaxy-galaxy lensing
+
+%Ce qu'il n'avait pas pris en compte c'est la possibilité de distinguer le spectre de l'objet 
+%lentille à l'objet-lentille. En effet, comme ces objets se situent à deux redshift différent (pour un 
+%système lentille observé en dehors du plan galactique de la Voie Lactée), alors il est possible en pratique 
+%de détecter une lentille gravitationnelle simplement en analysant la raie spectrale du système. C'est de cette 
+%façon que la première lentille gravitationelle fut découverte par \citet{Walsh1979} avec le téléscope radio Jodrell Bank MkIA. 
+%Deux spectres identifiables à un rayonnement quasi-stellaire (quasar) presque identique, séparés de $5.7$ arcsecondes, 
+%est la marque de la double image d'un seul quasar en arrière plan d'une galaxie. Dans ce cas particulier, le spectre de la 
+%galaxie contamine légèrement le spectre de la contre-image du quasar, vu l'alignement imparfait. Il fallu quelques années 
+%pour accepter ce résultat.
+
+%Toutefois, cette première preuve expérimentale lanca le champ de recherche dans une nouvelle aire. L'étude du phénomène 
+%s'est largement séparé en trois régime distinct: le régime micrométrique, le régime faible et le régime fort. Dans cette 
+%étude, on s'intéresse principalement au régime fort, qui se distingue principalement des autres régime par le fait 
+%que les déviations sont généralement de l'ordre de l'arcesecondes, de sortes qu'on peut observer les effet, et qu'on 
+%distingue généralement plus d'une image de la source.
+
+%Un autre direction de recherche, initiée par \citet{Refsdal1964}, est d'étudier l'évolution temporelle de supernovae lentillées 
+%pour déterminer directement la constante de Hubble $H_0$, ou encore d'étudier, à une cadence de quelques jours entre chaque exposition, 
+%un quasar lentillé plus d'une fois pour déterminer encore une fois la différence temporelle entre chaque image pour déterminer $H_0$.
+
+%L'étude des effets de lentilles par les groups de galaxies est une discipline encore plus difficile que celle mentionnée jusqu'à maintenant, 
+%dû à la complexité des profils de masses qui doivent être supposé et généralement dû à la difficulté de poser des contraintes qui requiert la mesure 
+%de redshift de chaque images dans le champ de vue, et la présence de plusieurs sources différentes. On ne se concentre par sur cette étude, toutefois 
+%on note que la recherche vers des algorithmes agnostiques sur le profil de marche est une avenue de recherche active dans cette discipline vu 
+%la nécessité et aussi le genre de contraintes disponibles.
+
+% Discovery of quasars in 1960
+% First discovery of a grvaitational lens in 1979
+% Explosion of their study -> models for the lens -> 2000s source reconstruction + H_0 motivations + cluster + others
+% Saha 1997 first to try a full free-form reconstruction of galaxy-galaxy lens, his method has many limitations, requires strong regularisation and enormous hands-on fine-tuning 
+% which makes the method hard to reuse / understand / caracterize its uncertainties
+% Some free-form methods appear trying to correct error in the lensing potential of classical models for H_0. Then Birrer has his paper. 
+% Explosion of machine learning in 2014. CNN are very efficient visual information processing tools. Laurence Yashar 2017
+% Research in meta-learning lead to RIM (Putzky&Welling 2017), a general inverse problem solver that mimic traditional 
+% gradient descent solver, but the prior is implicite, i.e. encoded as inductive biases in the neural network.
+% Morningstar 2018/2019 use the method in the context of source reconstruction and interferometry reconstruction
+% Our work.
+% Context of our work
+% Bulge-halo conspiracy, High SNR observation w/ JWST, Mass-sheet degeneracy?, Question is how to integrate information and use it properly
+% Plan pour cette section: Dériver eq de la lentille et alpha
+% Intro général: deflection de la lumière
+%% Approcha a l'intro -> contexte historique à notre pensée sur la déviation de la lumière
+%%% Réfraction 
+%%%% Ptolémé (Optic, Grèce Antique)
+%%%% Ibn Sahl (c. 940 - 1000)
+%%%% Snell (1621)-Descartes(1637)
+%%%% Principe de Fermat pour expliquer ce phénomène (lettre en 1657, mémoire en 1662)
+%%%% Euler (1744) - Lagrange (1760) -> Principe de moindre action et sa solution
+%%%% Équations de Maxwell (1861)
+
+%%% déviation de la lumière par la gravité
+%%%% Soldner, J. G. v. (1801–1804). "On the deflection of a light ray from its rectilinear motion, by the attraction of a celestial body at which it nearly passes by". Berliner Astronomisches Jahrbuch: 161–172.
+%%%% Einstein 1911
+%%%% Einstein 1915 (GR)
+%%%% Eddington takes photograph of eclipse 1919
+%%%% 1936 letter from Einstein at the request of 
+%%%% Fritz Zwicky is first to postulate grav lensing idea in 1937i Zwicky, F. (1937) Nebulae as gravitational lenses. Physical Review, 51 (4). p. 290. ISSN 0031-899X
+%%%% 1964 Refsdal (H0 and possibility to measure mass)
+%%%%%% (Shapiro time delay (1964))
+%%%% Fisrt gravitational lens discovered 1979 (double imaged quasar) https://www.nature.com/articles/279381a0
+%%%% Then explosions of studies durings the 2000s on how to model things.
+
+%%% Dark matter 
+%%%% Zwicky 1933
+%%%% Lambda CDM?
+%%%% 
+
+% Copied from https://royalsocietypublishing.org/doi/10.1098/rsta.2009.0209
+%Henry Cavendish in 1784 is credited with the first (unpublished) calculation of the deflection angle 
+%δ of a corpuscular light ray following a hyperbolic trajectory and the origin of the 
+%(Newtonian) equation δ=2GM/Rc2. Subsequently, von Soldner (1804) published a similar calculation 
+%deriving a deflection of 0.84 arcsec for stars viewed close to the limb of the Sun.
+
+%Le principe de Fermat énonce que la trajectoire de la lumière, ou d'un 
+%photon, doit suivre une trajectoire qui extrémise la durée de la trajectoire. 
+%Ce principe mathématique, qui est un exemple du principe plus général de moindre action 
+%développé par Lagrange en 1756, permet de décrire la trajectoire de la lumière 
+%par l'entremise d'un simple indice $n$ (indice de réfraction) dans 
+%lequel se cache toute la physique microscopique (ou macroscopique) 
+%d'où émerge le phénomène qui nous intéresse. 
+
+
+%L'expédition organisée par sir Arthur Eddington
+%avait pour but d'observer 
+%l'éclipse totale du 29 mai 1919 à partir de l'île de Prìncipe 
+%dans le golfe de Guinée et de Sobral au nord du Brésil 
+%\citep{Eddington1919}. Les photographes de l'éclipses prisent , bien qu'imprécises, 
+%ont permis de valider la prédiction d'Einstein faite 
+%en 1911 que la position observée d'une étoile serait déplacée de 
+%$\delta \theta \approx 1.75'' \frac{R}{R_\odot}$ 
+%durant une eclipse \citep{Dyson1920}, soit 2 fois plus 
+%que ce qui est prédit par la théorie newtonienne.
+
+%Dans l'intérêt de rendre ce manuscrit complet, je dérive à partir de principes 
+%premier les deux équations centrales qui nous permettent 
+%d'étudier les lentilles gravitationnelles.
+
+\subsection{Les angles de déflections}
+Dans les paragraphes qui suivent, je dérive les équations centrales qui nous permettent 
+d'étudier les lentilles gravitationnelles de type galaxie-galaxie.
+Des traitements similaires 
+peuvent être trouvé dans les manuels de références de \citet{Meneghetti2013} et 
+\citet{Carroll2003}.
+
+Supposons qu'un photon est sur une trajectoire parallèle à l'axe de 
+visée $\mathbf{e}_{\parallel}$ d'un observateur sur Terre. 
+Supposons de plus que la source d'un champ gravitationnel $\Phi$ est situé sur l'axe de visée, 
+ce qui a pour effet de courber la 
+trajectoire de ce photon entre son point d'origine $A$ et son point d'arrivé $B$.
+On définit l'angle de déviation comme la déviation totale de cette trajectoire 
+dans la direction perpendiculaire à l'axe de visée de l'observateur. 
+De façon générale, cette déviation s'écrit
+\begin{equation}\label{eq:intro alpha}
+        \boldsymbol{ \alpha} = - \int_{\lambda_A}^{\lambda_B} \ddot{\mathbf{x}} \times \mathbf{e}_{\parallel} d\lambda\, ,
+\end{equation}
+où $\lambda$ paramétrise la trajectoire du photon $\mathbf{x}(\lambda)$. 
+Le signe négatif nous indique qu'on prend la perspective de l'observateur. 
+
+
+%Pour résoudre l'intégrale \eqref{eq:intro alpha}, on doit déterminer la forme de 
+%la trajectoire des photons dans un champ gravitationnel. Pour se faire, on faire usage du  
+La trajectoire d'un photon est sujette au 
+principe de Fermat, qui stipule que la lumière suit une trajectoire qui extrémise
+la durée du parcours entre deux points. 
+Dans le language du calcul 
+des variations, la variation de la durée s'écrit
+\begin{equation}\label{eq:Fermat}
+        \delta T =  \delta \int_{A}^{B} n(\mathbf{x}(\ell)) \frac{d\ell}{c}= 0\, ,
+\end{equation}
+où $\ell$ est un élément de longueur sur la trajectoire et $n$ est un indice de réfraction.
+Pour déterminer l'indice de réfraction du champ gravitationnel d'une galaxie, 
+on doit utiliser le formalisme de la relativité générale. Selon le principe 
+d'équivalence (fort), 
+l'effet d'un champ gravitationnel est localement 
+indistinguable d'une accélération causée par la courbure 
+d'un espace-temps décrit par 
+une métrique $g_{\mu \nu}$. 
+La trajectoire d'un photon se trouve alors en cherchant 
+les géodésiques de cet espace-temps. 
+On fait l'approximation 
+que le potentiel $\Phi$ d'une galaxie est celui d'un gas parfait, c'est-à-dire 
+qu'il satisfait une équation de Poisson
+\begin{equation}\label{eq:Poisson}
+       \grad^{2}\Phi = 4\pi G \rho .
+\end{equation} 
+Dans la limite où ce potentiel est faible $\displaystyle \frac{2\Phi}{c^{2}} \ll 1$, la 
+métrique $g_{\mu \nu}$ est décrite par une expansion au premier ordre autour de la 
+métrique de Minkowsky %$\eta_{\mu\nu}$
+\begin{equation}\label{eq:metrique}
+        ds^2 = g_{\mu\nu}dx^{\mu}dx^{\nu} \approx \left( 1 + \frac{2\Phi}{c^{2}} \right)c^{2}dt^{2} - \left( 1 - \frac{2\Phi}{c^{2}} \right)d\mathbf{x}^{2}.
+\end{equation} 
+%Ici, j'ai choisit arbitrairement la signature $(+,-,-,-)$ pour la métrique.
+Puisqu'un photon suit une géodésique de l'espace-temps $ds^{2} = 0$, on peut déterminer 
+l'indice de réfraction en réarrangeant l'équation \eqref{eq:metrique}
+\begin{equation}\label{eq:n}
+        n \equiv c \left( \frac{\lVert d \mathbf{x} \rVert}{dt}  \right)^{-1} \approx  1 - \frac{2\Phi}{c^{2}}.
+\end{equation} 
+En réécrivant l'élément de longueur $d\ell$ en terme du 
+paramètre de la trajectoire
+$
+        d\ell = \left\lVert\frac{d  \mathbf{x} }{d\lambda} \right\rVert d\lambda,
+$
+on peut réécrire l'équation \eqref{eq:Fermat} sous la forme
+\begin{equation}\label{eq:Fermat2}
+        \delta \int_{\lambda_A}^{\lambda_B} n(\mathbf{x}) \lVert \mathbf{\dot{x}} \rVert d\lambda = 0.
+\end{equation} 
+Par correspondance avec la fonctionnelle de l'action 
+$J(x) = \int_{\lambda_0}^{\lambda_1} \mathcal{L}(\lambda,\, x,\,\dot{x}) d\lambda$ 
+on trouve que 
+le lagrangien de la trajectoire s'écrit 
+$
+        \mathcal{L} = n(\mathbf{x})  \sqrt{\dot{x}^{2}}.
+$
+La trajectoire qui satisfait \eqref{eq:Fermat} 
+est une solution des équations d'Euler-Lagrange
+\begin{equation}\label{eq:EulerLagrange}
+        \frac{d }{d \lambda} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{x}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{x}} = 0.
+\end{equation} 
+On a donc
+\begin{equation}\label{eq:EulerLagrange2}
+        \frac{d }{d \lambda} n \frac{\dot{\mathbf{x}}}{\lVert \dot{\mathbf{x}} \rVert}- \lVert \dot{\mathbf{x}} \rVert \grad n = 0 ,
+\end{equation} 
+Puisque le choix du paramètres $\lambda$ est libre, on peut le choisir tel 
+que $\lVert \dot{\mathbf{x}} \rVert = 1$ en tout point de la trajectoire. Ainsi,
+\begin{equation}\label{eq:EulerLagrange3}
+\begin{aligned}
+        \frac{d }{d \lambda} n \dot{\mathbf{x}} -  \grad n &= 0 \\
+        \implies n \ddot{\mathbf{x}} + (\grad n \cdot \dot{\mathbf{x}}) \dot{\mathbf{x}} - \grad n &= 0
+\end{aligned}
+\end{equation} 
+
+À ce point de la dérivation, on utilise l'approximation de Born. 
+C'est-à-dire qu'on approxime la trajectoire 
+du photon comme une ligne droite sur l'axe de visée $\mathbf{e}_{\parallel}$. 
+Cette approximation est justfiée 
+dans le contexte des lentilles gravitationnelles de type galaxie-galaxie, 
+puisque les angles de déviation sont généralement de 
+l'ordre de l'arcseconde ou plus petit. 
+Comme, le vecteur $\dot{\mathbf{x}}$ est tangent à la trajectoire du photon, 
+on obtient
+\begin{equation}\label{eq:sol}
+        \ddot{\mathbf{x}} \times \mathbf{e}_{\parallel} = \frac{1}{n} \grad_\perp n = \grad_\perp \log n
+        \approx -\frac{2}{c^{2}}\grad_{\perp} \Phi\,,
+\end{equation} 
+où $\grad_\perp$ est un gradient selon les coordonnées perpendiculaires à $\mathbf{e}_\parallel$.
+On note que le facteur 2 qui apparaît dans l'équation \eqref{eq:sol} est un 
+effet qui vient de la relativité générale. Ce facteur corrige la solution 
+que l'on aurait obtenu avec une dérivation classique (newtonienne).
+
+
+On est maintenant en mesure de calculer l'angle de déviation. 
+J'introduit le paramètre d'impact $\boldsymbol{\xi}$ qui est la distance perpendiculaire entre 
+la position d'origine du photon sur le plan de la lentille  
+et l'axe de visé (voir Figure \ref{fig:cartoon}).
+Dans le cas où le potentiel est généré par une masse $M$ ponctuelle, ç.-à-d.\ qu'on 
+suppose $\rho = M\delta^{3}(\mathbf{x})$, où $\delta $ est la fonction delta de Dirac, 
+alors le potentiel qui satisfait l'équation de Poisson \eqref{eq:Poisson} est 
+la fonction de Green 
+$\displaystyle \Phi = -\frac{GM}{\sqrt{ \xi^{2} + z^{2}}}$, où $z$ est la coordonné 
+sur l'axe de visée. L'équation \eqref{eq:intro alpha} se réécrit finalement comme 
+\begin{align}
+\nonumber
+        \boldsymbol{ \alpha}(\boldsymbol{ \xi} ) &= -\frac{2GM}{c^{2}} \int_{-\infty }^{\infty }  \frac{\partial}{\partial \boldsymbol{\xi} }\frac{1}{(\xi^{2} + z^{2})^{1/2}}dz \\
+%\nonumber
+        %&= \frac{2GM}{c^{2}} \boldsymbol{ \xi}  \int_{-\infty }^{\infty } \frac{1}{(\xi^{2} + z^{2})^{3/2}}dz  \\
+\label{eq:deflection approx}
+        \implies \boldsymbol{ \alpha}(\boldsymbol{ \xi})  &= \frac{4GM}{c^{2}  \xi^{2} } \boldsymbol{ \xi}
+\end{align} 
+Cette solution se généralise naturellement à un profil de masse quelconque en assumant 
+qu'il s'exprime comme une somme d'élément de masses $dm = \Sigma d^{2}\boldsymbol{ \xi}'$, 
+où $\Sigma = \int \rho dz$ est un densité surfacique de masse. 
+L'angle de déviation total mesuré à un point $\boldsymbol{\xi} $ est alors une convolution 
+sur tout le plan de la lentille (mince) puisque l'équation \eqref{eq:deflection approx} dépend 
+linairement de la masse $M$:
+\begin{equation}\label{eq:alpha physique}
+        \boldsymbol{ \alpha} (\boldsymbol{ \xi} ) = \frac{4 G}{c^{2}} 
+        \int_{\mathbb{R}^{2}} \Sigma (\boldsymbol{ \xi} ')
+        \frac{\boldsymbol{ \xi}  - \boldsymbol{ \xi} '}{\lVert \boldsymbol{ \xi}  - \boldsymbol{ \xi} ' \rVert^{2}}d^{2}\boldsymbol{ \xi} '
+\end{equation} 
+
+L'angle de déviation est une quantité cruciale pour résoudre une lentille gravitationnelle 
+puisqu'il décrit une transformation des coordonnées angulaires du plan de la lentille ($\boldsymbol{ \theta} $) 
+vers les coordonnées angulaires du plan de la source ($\boldsymbol{ \beta} $). 
+On assume que les distances entre l'observateur et la lentille $D_{\ell}$, entre l'observateur et la source $D_s$ et entre la lentille et la source $D_{\ell s}$, 
+sont beaucoup plus grandes que les distances perpendiculaires à l'axe de visée $\boldsymbol{ \xi} $ ou $\boldsymbol{ \eta}$ 
+(voir figure \ref{fig:cartoon}). 
+Cette approximation est justifiée pour les objets qui nous intéresse,
+pour lesquels les distances parallèles à l'axe de visée sont généralement 
+de l'ordre du Gpc, alors que les distances perpendiculaire sont généralement 
+de l'ordre du kpc; soit 6 ordres de grandeurs de différences.
+Ainsi, on peut faire un argument géométrique (euclidien) 
+\begin{align}
+\nonumber
+       D_{s} \boldsymbol{ \theta} &= \boldsymbol{ \eta}' \\   
+\nonumber
+       D_{s} \boldsymbol{ \beta} &= \boldsymbol{ \eta} \\   
+\nonumber
+       D_{\ell s} \boldsymbol{ \alpha} &= \boldsymbol{ \eta}' - \boldsymbol{ \eta}  \\   
+\label{eq:lens equation}
+       \implies D_s \boldsymbol{ \beta} &= D_s \boldsymbol{ \theta} - D_{\ell s} \boldsymbol{ \alpha}   
+\end{align} 
+La dernière relation est l'équation maîtresse qui nous permet de tracer les rayons lumineux d'une source 
+vers un détecteur fictif dans nos simulations. On notera que cette relation reste valide pour un univers courbe et/ou en expansion 
+(ç.-à-d.\ décrit par une géométrie non-euclidienne), 
+à condition qu'on utilise une notion de distance qui satisfait, par définition, la relation trigonométrique euclidienne
+\begin{equation}\label{eq:diameter angular distance}
+       D \equiv \frac{\xi}{\theta}
+\end{equation} 
+%TODO finish this with a quick cosmological expression in an FRW universe. cite Dodelson and another manual for it
+
+Il est généralement pratique de travailler avec la forme adimensionnelle de l'équation \eqref{eq:lens equation}. 
+On introduit la densité critique 
+\begin{equation}\label{eq:densite critique}
+        \Sigma_c = \frac{c^2}{4 \pi G}\frac{D_{s}}{D_{\ell s} D_\ell}\, ,
+\end{equation} 
+qui nous permet de définir la quantité qu'on nomme convergence $\displaystyle \kappa(\boldsymbol{ \theta} ) \equiv \frac{\Sigma(\boldsymbol{ \theta})}{\Sigma_c}$. 
+On définit ainsi l'angle réduit 
+\begin{equation}\label{eq:alpha adim}
+        \hat{\boldsymbol{ \alpha}} (\boldsymbol{ \theta}) = \frac{1}{\pi}\int_{\mathbb{R}^{2}} \kappa(\boldsymbol{ \theta} )
+        \frac{\boldsymbol{ \theta} - \boldsymbol{ \theta}'  }{\lVert \boldsymbol{ \theta} - \boldsymbol{ \theta}' \rVert  } d^{2}\boldsymbol{ \theta}'\, ,
+\end{equation} 
+qui satisfait l'équation de la lentille adimensionnelle 
+\begin{equation}\label{eq:lens equation adim}
+        \boldsymbol{ \beta} = \boldsymbol{ \theta} - \hat{\boldsymbol{ \alpha}}(\boldsymbol{ \theta})\, . 
+\end{equation}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/lensing_cartoon}
+        \caption{Schéma d'une lentille gravitationnelle.}
+        \label{fig:cartoon}
+\end{figure}
+
+
+\subsection{Contexte scientifique moderne}
+
+\section{Interférométrie par masque non-régulier}
+
+\subsection{Contexte historique}
+
+\subsection{Les angles de fermeture}
+
+\subsection{Contexte scientifique moderne}
+
+
+\section{Auto-encodeur variationnel}
+
+\subsection{Description du modèle}
+
+Les auto-encodeurs variationnels (VAE) ont été introduits par \citet{Kingma2013} comme une approche 
+pour inférer approximativement les variables latentes (ou cachées) qui modélisent une distribution 
+a posteriori définie implicitement via un échantillon de données. Dans cette section, j'introduis 
+les concepts principaux relié à ce type de modélisation. 
+Le lecteur peut aussi se référer au livre blanc de \citet{Kingma2019}.
+
+On définit $\mathbf{z} \sim q(\mathbf{z})$ comme une variable latente et $\mathbf{x}$ comme un example d'un échantillon de donnée $\mathcal{D} = \{\mathbf{x}^{(i)}\}_{i=1}^{N}$. 
+Notre objectif est de modéliser la distribution $p(\mathbf{x})$, implicitement décrite par notre échantillon. 
+On suppose, sans perte de généralité, que la distribution de $\mathbf{x}$ fait partie d'une famille de distribution , caractérisé par $\theta$,  
+conditionnelle à la variable cachée: $p_\theta(\mathbf{x \mid \mathbf{z}})$. 
+Déterminer $p_\theta$ est généralement difficile, voir intraitable, si la dimensionalité de $\mathbf{x}$ est grande, ce qui est le cas 
+pour des images pour lesquelles on trouve facilement $\mathrm{dim}(\mathbf{x}) > 10^{4}$. Pour résoudre cette difficulté, 
+on introduit un modèle paramétrique d'inférence $q_\phi(\mathbf{z} \mid \mathbf{x})$ dont le rôle est de 
+modéliser la distribution a posteriori de la variable latente pour la distribution qui nous intéresse
+\begin{equation}\label{eq:vae 1}
+        q_\phi (\mathbf{z} \mid \mathbf{x}) \approx p_\theta (\mathbf{z} \mid \mathbf{x})\, .
+\end{equation} 
+La notion de distance entre ces deux distributions est mesurée par la divergence de Kullback-Leibler $D_{\mathrm{KL}}(\cdot \KL \cdot) \geq 0$: 
+\begin{align}
+        \nonumber
+       D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x}) \KL  p_\theta (\mathbf{z} \mid \mathbf{x})) 
+       &= \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi(\mathbf{z} \mid \mathbf{x}) - \log p_\theta (\mathbf{z} \mid \mathbf{x}) \bigg]  \\
+       \nonumber
+       &= \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi (\mathbf{z} \mid \mathbf{x}) -\log \frac{p_\theta(\mathbf{z}, \mathbf{x})}{p_\theta(\mathbf{x})} \bigg]  \\
+       \label{eq:KL}
+       &= \log p_\theta (\mathbf{x}) - \underbrace{\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta(\mathbf{z}, \mathbf{x}) - \log q_\phi (\mathbf{z} \mid \mathbf{x}) \bigg]}_{\equiv \mathcal{L}_{\phi,\theta}(\mathbf{x})} \, .
+\end{align} 
+
+On remarque par cette manipulation que la distance $D_{\mathrm{KL}}$, en plus de mesurer la distance entre 
+les deux distributions a posteriori (par définition), mesure aussi la différence entre le terme 
+$\mathcal{L}_{\phi,\theta}(\mathbf{x})$, qu'on nomme limite inférieure sur l'évidence (de l'anglais 
+\textit{evidence lower bound}: ELBO), et la distribution qui nous intéresse $p_\theta(\mathbf{x})$. 
+L'objectif d'un modèle VAE est de minimiser la distance $D_{\mathrm{KL}}$. En observant l'équation \eqref{eq:KL}, on réalise que 
+ceci peut être accomplit en maximisant la ELBO en relation aux paramètres $\phi$ et $\theta$, ce qui accomplit 
+deux objectifs simultanément:
+\begin{enumerate}
+        \item Améliorer le processus génératif $p_\theta(\mathbf{x})$ puisque $\log p_\theta(\mathbf{x}) \geq \mathcal{L}_{\phi,\theta}(\mathbf{x})$;
+        \item Améliorer le processus d'inférence puisque 
+        $D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x}) \KL  p_\theta (\mathbf{z} \mid \mathbf{x})) = \log p_\theta(\mathbf{x}) - \mathcal{L}_{\phi,\theta}(\mathbf{x})$ est simultanément minimisé.
+\end{enumerate}
+
+\begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+                \node[circle, draw=black, minimum size=1cm] (z) at (0, 3) {$\mathbf{z}$};
+                \node[circle, draw=black, minimum size=1cm] (x) at (0, 0) {$\mathbf{x}$};
+                \draw[-{Latex[scale=2]}] (z) to (x);
+                \draw[-{Latex[scale=2]}, in=225, out=135, dashed] (x) to (z);
+                \node (phi) at (-2.5, 2.5) {$\phi$};
+                \node (theta) at (2.5, 2.5) {$\theta$};
+                \draw[rounded corners=0.5cm] (-1.5, -0.7) rectangle (1.5, 3.7);
+                \draw[-{Latex[scale=2]}] (theta) to node[sloped, midway, below=5pt, fill=white, rectangle, draw=white, opacity=.8, text opacity=1] {$p_\theta(\mathbf{\mathbf{x} \mid \mathbf{z}})$} (x);
+                \draw[-{Latex[scale=2]}] (theta) to node[sloped, midway, above=5pt, fill=white, rectangle, draw=white, opacity=.8, text opacity=1] {$p_\theta(\mathbf{z})$} (z);
+                \draw[-{Latex[scale=2]}, dashed] (phi) to node[sloped, midway, above=5pt, fill=white, rectangle, draw=white, opacity=.8, text opacity=1] {$q_\phi(\mathbf{z} \mid \mathbf{x})$} (z); 
+                \node at (1, -0.5) {$N$};
+        \end{tikzpicture}
+        \caption{Modèle graphique d'un VAE. Les flèches pleines indiquent le processus génératif, alors que les flèches pointillées indiquent le processus d'inférence.}
+        \label{fig:vae encoder}
+\end{figure}
+
+\subsection{Le truc de reparamétrisation}
+Le gradient de la ELBO par rapport aux paramètres variationnels, $\grad_{\phi,\theta}\mathcal{L}_{\phi,\theta}(\mathbf{x})$, 
+est une quantité que l'on aimerait calculer pour faire usage d'algorithmes comme la grimpe de gradient stochastique 
+pour maximiser la ELBO en terme de $\phi$ et $\theta$. 
+Or, la liste de paramètres $\phi$ apparait dans la distribution de prélevement pour calculer 
+l'espérance mathématique $\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})}$ dans la ELBO \eqref{eq:KL}.
+Cette opération n'a pas de dérivée formelle en terme de $\phi$. 
+
+Pour résoudre ce problème, on utilise le truc de reparamétrisation \citep{Kingma2013}, 
+qui consiste à restreindre la forme fonctionnelle de $q_\phi(\mathbf{z} \mid \mathbf{x})$ à une famille paramétrique 
+qui s'exprime comme la transformation différentiable d'une variable aléatoire auxiliaire $\boldsymbol{ \epsilon}$. 
+On considère le cas où $q_\phi(\mathbf{z} \mid \mathbf{x})$ et $p(\boldsymbol{ \epsilon})$ 
+font partie de la famille gaussienne isotropique:
+\begin{align}
+        \label{eq:p epsilon}
+        p(\boldsymbol{\epsilon}) &\equiv \mathcal{N}(0, \bbone)\, ;\\
+        \label{eq:q phi}
+        q_\phi(\mathbf{z} \mid \mathbf{x}) &= \mathcal{N}(\boldsymbol{ \mu}_\phi (\mathbf{x}),\, \bbone e^{\log \boldsymbol{\sigma}_\phi^{2}(\mathbf{x})})\, ;\\
+        \label{eq:reparametrisation}
+        \mathbf{z} &= \boldsymbol{\mu}_\phi + \boldsymbol{ \sigma}_\phi \odot \boldsymbol{ \epsilon}\, .
+\end{align} 
+$\odot$ symbolise le produit d'Hadamard, ou encore le produit élément-par-élément de vecteurs.
+Ce choix fait en sortes que les paramètres variationnelles ne participent plus au procsessus de prélevement, 
+maintenant pris en charge par la variable aléatoire $\boldsymbol{ \epsilon} $. Cette propriété est cruciale 
+dans le but de prendre le gradient de la ELBO \eqref{eq:KL}. 
+En effet, on peut maintenant échanger les opérateurs $\grad_{\phi,\theta}$ et $\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} = \mathbb{E}_{p(\boldsymbol{ \epsilon}) }$,
+ce qui nous permet d'appliquer le gradient à l'intérieur de l'espérance mathématique.
+De plus, $\phi$ décrit maintenant une fonction générique dont le rôle est d'inférer les 
+paramètres d'une distribution gaussienne isotropique \eqref{eq:q phi}, ${f_\phi(\mathbf{x}) = (\boldsymbol{\mu}, \log \boldsymbol{\sigma}^{2})}$, 
+étant donné la valeure d'un échantillon $\mathbf{x}$. En pratique, on peut construire une approximation de 
+cette fonction avec un réseau de neuronnes convolutionnelles. 
+
+Pour déterminer la forme fonctionnelle de la ELBO, on stipule a priori que la distribution marginale des variables latentes 
+devrait satisfaire
+\begin{equation}\label{eq:latent distribution}
+        p_{\theta}(\mathbf{z}) = \mathcal{N}(0, \bbone)
+\end{equation}
+On est libre de faire ce choix sans pour autant limiter les formes possibles de la distribution qui nous intéresse $p_\theta(\mathbf{x})$.
+On peut alors exprimer la ELBO comme
+\begin{align}
+        \mathcal{L}_{\phi,\theta}(\mathbf{x}) &= \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[ \log p_\theta(\mathbf{z}, \mathbf{x}) - \log q_\phi (\mathbf{z} \mid \mathbf{x}) \bigg]\, ; \\
+        \label{eq:final elbo}
+         \implies \mathcal{L}_{\phi,\theta}(\mathbf{x})  &= 
+         \underbrace{\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[ \log p_\theta(\mathbf{x} \mid \mathbf{z})\bigg]}_{\text{terme de reconstruction}}
+         + \underbrace{
+                \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_{\theta}(\mathbf{z}) - \log q_\phi (\mathbf{z} \mid \mathbf{x}) \bigg]
+        }_{\equiv -D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z}))}\, .
+\end{align} 
+La divergence de KL obtenue au second terme du membre droit de l'équation \eqref{eq:final elbo} 
+admet une solution fermée étant donné les familles paramétriques stipulées 
+pour $p_\theta(\mathbf{z})$ \eqref{eq:latent distribution} et $q_\phi(\mathbf{z} \mid \mathbf{x})$ \eqref{eq:q phi}
+\begin{equation}\label{eq:}
+        -D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z})) =
+        \frac{1}{2}\sum_{j=1}^{\mathrm{dim}(\mathbf{z})} (1 + [\log \boldsymbol{ \sigma}_\phi^{2} ]_j - [\boldsymbol{ \mu}_\phi ]_j - [\boldsymbol{ \sigma}_\phi^{2} ]_j)
+\end{equation} 
+Une dérivation de ce terme est donnée dans l'appendice B de \citet{Kingma2013}. 
+%Cette solution se dérive directement par rapport à $\phi$. 
+Le premier terme du membre droit de l'équation \eqref{eq:final elbo} 
+est nommé \textit{terme de reconstruction} puisqu'il connecte avec l'objectif des fonctions 
+de type auto-encodeurs d'apprendre une représentation latente d'un échantillon de données.
+La fondation théorique de ce type d'analyse repose sur le principe du goulot d'information \citep{Tishby1999}, 
+un sujet qui n'est pas abordé dans cette thèse. Le lecteur est invité à se référer à la revue sur le 
+sujet par \citet{Goldfield2020}.
+La reconstruction s'accomplit en utilisant d'abord le modèle d'inférence $\mathbf{z}^{(1:L)} \overset{\mathrm{i.i.d}}{\sim} q_\phi(\mathbf{z} \mid \mathbf{x})$\footnote{
+$\mathrm{i.i.d}$: identiquement et indépendamment distribué.}
+pour obtenir un échantillon de représentations latentes à partir des équations \eqref{eq:p epsilon} à \eqref{eq:reparametrisation}, 
+puis en utilisant le modèle génératif $\hat{\mathbf{x}}^{(i)} \sim p_\theta(\mathbf{x} \mid \mathbf{z}^{(i)})$ pour obtenir 
+un échantillon de reconstructions $\mathbf{\hat{x}}^{(1:L)}$ similaire à l'exemple originel $\mathbf{\mathbf{x}}$. 
+Comme on a déjà une variable auxiliaire $\boldsymbol{ \epsilon} $ 
+qui se charge de l'aspect génératif du modèle, on peut construire une approximation du 
+modèle génératif avec une fonction générique des variables latentes 
+$g_\theta(\mathbf{z})$. Encore une fois, un réseau de neuronnes convolutionnelles est un choix pratique pour modéliser cette fonction 
+dans le cas où $\mathbf{x}$ est une image. En général, on choisit une erreur quadratique moyenne pour modéliser le terme de reconstruction, 
+de sorte que
+\begin{equation}\label{eq:reconstruction}
+        \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[
+                \log p_\theta(\mathbf{x} \mid \mathbf{z})
+        \bigg] 
+        \simeq -\frac{1}{L}\sum_{i=1}^{L} \lVert \mathbf{x} - (\hat{\mathbf{x}}^{(i)})^{2} \rVert_2^{2}
+\end{equation} 
+
+\section{Machines à inférence récurrentielles}
+
+\subsection{Formalisme des problèmes inverses}
+% Talk about prior, inductive biases here
+\subsection{La relation de récurrence}
+% Talk about GRU here
+

@@ -546,9 +546,9 @@
 
 \node[xscale=0.4, yscale=0.4, rotate=-90] at (9.4, 0.8) { $128 \times 128 \times 2$};
 
-\node (plus) at (10, 0) {$\boldsymbol{\oplus}$};
-\draw[-latex, color=darkgray] (9.05, 0) -- (9.8, 0);
-\draw[-latex, color=darkgray] (10.2, 0) -- (10.6, 0);
+\node[rectangle, rounded corners, draw=black, fill=black!20, scale=0.6] (plus) at (10, 0) {Add};
+\draw[-latex, color=darkgray] (9.05, 0) -- (9.7, 0);
+\draw[-latex, color=darkgray] (10.3, 0) -- (10.6, 0);
 
   \begin{scope}[canvas is zy plane at x=11,transform shape]
           \node (source) at (0, 0) {\includegraphics[width=2cm,height=2cm]{source_t2}};
@@ -576,25 +576,25 @@
   \end{scope}
         \node[scale=0.6, rotate=40] at (13.6, 1.4) {$\mathbf{y}$};
 
-\node[rectangle, rounded corners, draw=black, fill=black!20, xscale=0.4, yscale=0.4, 
+\node[rectangle, rounded corners, draw=black, fill=black!20, scale=0.6, 
         minimum height=1cm, minimum width=2cm] at (11, -2.2) {Forward Model};
 
 \draw[decorate,decoration={brace,amplitude=4pt,mirror},xshift=0pt,yshift=0pt,thick,color=darkgray] (10.6, -1.35) -- (11.7, -1.35);
-\draw[-latex, color=darkgray] (11.15, -1.47) -- (11, -2);
+\draw[-latex, color=darkgray] (11.15, -1.47) -- (11, -1.9);
 
 \begin{scope}[canvas is zy plane at x=11,transform shape]
   \node (source) at (0, -4) {\includegraphics[width=1.5cm,height=1.5cm]{lens_t2}};
 \end{scope}
-\draw[-latex, color=darkgray] (11, -2.4) -- (11, -2.8);
+\draw[-latex, color=darkgray] (11, -2.5) -- (11, -2.8);
 \node[scale=0.6] at (11, -3) {$\mathbf{\hat{y}}^{(t+1)}$};
 
 
-\node[rectangle, rounded corners, draw=black, fill=black!20, xscale=0.4, yscale=0.4, 
+\node[rectangle, rounded corners, draw=black, fill=black!20, scale=0.6, 
         minimum height=1cm, minimum width=2cm] (likelihood) at (12.75, -4) {Likelihood};
 %\node[scale=0.6] (grads) at (12.2, -3.1) {$\grad_{\mathbf{y} \mid \mathbf{\hat{s}}^{(t+1)}}$};
 %\node[scale=0.6]  (gradk) at (13.2, -3.1) {$\grad_{\mathbf{y} \mid \boldsymbol{ \hat{\kappa}}^{(t+1)}}$};
         
-\node[rectangle, rounded corners, draw=black, fill=black!20, xscale=0.4, yscale=0.4, 
+\node[rectangle, rounded corners, draw=black, fill=black!20, scale=0.6,
         minimum height=1cm, minimum width=2cm] (adam) at (12.75, -2.2) {Adam};
 \draw[-latex, color=darkgray] (likelihood) to (adam);
 %\draw[-latex, in=270, out=90, color=darkgray] (likelihood) to (grads);
@@ -605,7 +605,7 @@
 \draw[decorate,decoration={brace,amplitude=4pt,mirror},xshift=0pt,yshift=0pt, thick, color=darkgray] (11.8, -1.35) -- (12.9, -1.35);
 \draw[-latex,color=darkgray] (adam) to (12.34, -1.47);
 
-\draw[-latex, color=darkgray] (11., -4) -- (12.33, -4);
+\draw[-latex, color=darkgray] (11., -4) -- (12.1, -4);
 
 
 
