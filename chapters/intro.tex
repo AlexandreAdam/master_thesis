@@ -623,9 +623,10 @@ On remarque par cette manipulation que la distance $D_{\mathrm{KL}}$, en plus de
 les deux distributions a posteriori (par définition), mesure aussi la différence entre le terme 
 $\mathcal{L}_{\phi,\theta}(\mathbf{x})$, qu'on nomme limite inférieure sur l'évidence (de l'anglais 
 \textit{evidence lower bound}: ELBO), et la distribution qui nous intéresse $p_\theta(\mathbf{x})$. 
-L'objectif d'un modèle VAE est de minimiser la distance $D_{\mathrm{KL}}$. En observant l'équation \eqref{eq:KL}, on réalise que 
-ceci peut être accomplit en maximisant la ELBO en relation aux paramètres $\phi$ et $\theta$, ce qui accomplit 
-deux objectifs simultanément:
+L'objectif d'un modèle VAE est de maximiser la ELBO, $\mathcal{L_{\phi,\theta}}$. 
+En observant l'équation \eqref{eq:KL}, on réalise que 
+que ceci accomplit deux objectifs simultanément qui suivent du fait que la divergence KL est 
+une quantité positive:
 \begin{enumerate}
         \item Améliorer le processus génératif $p_\theta(\mathbf{x})$ puisque $\log p_\theta(\mathbf{x}) \geq \mathcal{L}_{\phi,\theta}(\mathbf{x})$;
         \item Améliorer le processus d'inférence puisque 
@@ -673,10 +674,10 @@ font partie de la famille gaussienne isotropique:
         \mathbf{z} &= \boldsymbol{\mu}_\phi + \boldsymbol{ \sigma}_\phi \odot \boldsymbol{ \epsilon}\, .
 \end{align} 
 $\odot$ symbolise le produit d'Hadamard, ou encore le produit élément-par-élément de vecteurs.
-Ce choix fait en sortes que les paramètres variationnelles ne participent plus au procsessus de prélevement, 
-maintenant pris en charge par la variable aléatoire $\boldsymbol{ \epsilon} $. Cette propriété est cruciale 
+La reparamétrisation fait en sortes que les paramètres variationnelles ne participent plus au procsessus de prélevement, 
+maintenant pris en charge par $\boldsymbol{ \epsilon} $. Cette propriété est cruciale 
 dans le but de prendre le gradient de la ELBO \eqref{eq:KL}. 
-En effet, on peut maintenant échanger les opérateurs $\grad_{\phi,\theta}$ et $\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} = \mathbb{E}_{p(\boldsymbol{ \epsilon}) }$,
+En effet, on peut maintenant échanger les opérateurs $\grad_{\phi,\theta}$ et ${\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} = \mathbb{E}_{p(\boldsymbol{ \epsilon})}}$,
 ce qui nous permet d'appliquer le gradient à l'intérieur de l'espérance mathématique.
 De plus, $\phi$ décrit maintenant une fonction générique dont le rôle est d'inférer les 
 paramètres d'une distribution gaussienne isotropique \eqref{eq:q phi}, ${f_\phi(\mathbf{x}) = (\boldsymbol{\mu}, \log \boldsymbol{\sigma}^{2})}$, 
@@ -711,9 +712,6 @@ Une dérivation de ce terme est donnée dans l'appendice B de \citet{Kingma2013}
 Le premier terme du membre droit de l'équation \eqref{eq:final elbo} 
 est nommé \textit{terme de reconstruction} puisqu'il connecte avec l'objectif des fonctions 
 de type auto-encodeurs d'apprendre une représentation latente d'un échantillon de données.
-La fondation théorique de ce type d'analyse repose sur le principe du goulot d'information \citep{Tishby1999}, 
-un sujet qui n'est pas abordé dans cette thèse. Le lecteur est invité à se référer à la revue sur le 
-sujet par \citet{Goldfield2020}.
 La reconstruction s'accomplit en utilisant d'abord le modèle d'inférence $\mathbf{z}^{(1:L)} \overset{\mathrm{i.i.d}}{\sim} q_\phi(\mathbf{z} \mid \mathbf{x})$\footnote{
 $\mathrm{i.i.d}$: identiquement et indépendamment distribué.}
 pour obtenir un échantillon de représentations latentes à partir des équations \eqref{eq:p epsilon} à \eqref{eq:reparametrisation}, 
@@ -722,7 +720,7 @@ un échantillon de reconstructions $\mathbf{\hat{x}}^{(1:L)}$ similaire à l'exe
 Comme on a déjà une variable auxiliaire $\boldsymbol{ \epsilon} $ 
 qui se charge de l'aspect génératif du modèle, on peut construire une approximation du 
 modèle génératif avec une fonction générique des variables latentes 
-$g_\theta(\mathbf{z})$. Encore une fois, un réseau de neuronnes convolutionnelles est un choix pratique pour modéliser cette fonction 
+$g_\theta(\mathbf{z}^{(i)}) = \hat{\mathbf{x}}^{(i)}$. Encore une fois, un réseau de neuronnes convolutionnelles est un choix pratique pour modéliser cette fonction 
 dans le cas où $\mathbf{x}$ est une image. En général, on choisit une erreur quadratique moyenne pour modéliser le terme de reconstruction, 
 de sorte que
 \begin{equation}\label{eq:reconstruction}
@@ -732,10 +730,53 @@ de sorte que
         \simeq -\frac{1}{L}\sum_{i=1}^{L} \lVert \mathbf{x} - (\hat{\mathbf{x}}^{(i)})^{2} \rVert_2^{2}
 \end{equation} 
 
+Je note que la fondation théorique des auto-encodeurs variationnels repose sur le principe plus général 
+du goulot d'information \citep{Tishby1999}; un sujet qui n'est pas abordé dans ce travail, mais qui motive 
+l'utilisation de la version $\beta$VAE du modèle esquissé dans cette section et utilisé dans le chapitre \ref{chap:censai}, 
+où un multiplicateur de Lagrange vient multiplier la distance KL dans la ELBO.
+Le lecteur est invité à se référer à la revue sur le sujet par \citet{Goldfield2020}.
+
 \section{Machines à inférence récurrentielles}
+\subsection{Formalisme bayésien des problèmes inverses}
 
-\subsection{Formalisme des problèmes inverses}
-% Talk about prior, inductive biases here
+Les machines à inférence récurentielles ont été introduites par \citet{Putzky2017} pour résoudre des problèmes 
+inverses pour lesquelles le terme de régularisation est nécessaire mais inconnue a priori et/ou difficile à 
+construire voir même calculer. Dans cette section, j'introduis le formalisme bayésien des problèmes inverses sur lequel 
+ce modèle repose. 
+
+\begin{equation}\label{eq:inverse problem lineaire}
+       \mathbf{y} = F(\mathbf{x}) + \boldsymbol{\eta}  
+\end{equation} 
+$F: \mathbb{R}^{d} \rightarrow \mathbb{R}^{m}$. Dans le cas où $m \ll d$, le problème est typiquement mal-posé dans 
+le sens de Hadamard (cite hadamard 1902 Sur les problèmes aux dérivées partielles et leur signification physique)
+\begin{equation}\label{eq:MAP}
+        \hat{\mathbf{x}}_{\mathrm{MAP}} = \underset{\mathbf{x} \in \mathcal{X}}{\mathrm{argmax}}\, \log p(\mathbf{y} \mid \mathbf{x}) + \log p_\theta(\mathbf{x}) 
+\end{equation} 
+
+\begin{equation}\label{eq:likelihood intro}
+        \mathbf{y} - F(\mathbf{x}) \sim p(\boldsymbol{ \eta}) = p(\mathbf{y} \mid \mathbf{x})
+\end{equation} 
 \subsection{La relation de récurrence}
-% Talk about GRU here
 
+\begin{equation}\label{eq:map recurrence}
+        \hat{\mathbf{x}}^{(t+1)} = \hat{\mathbf{x}}^{(t)} + \gamma_t\grad_{\hat{\mathbf{x}}^{(t)}}
+        \bigg( \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}) 
+        + \lambda \log p_\theta(\hat{\mathbf{x}}^{(t)})\bigg)
+\end{equation} 
+\begin{equation}\label{eq:rim intro}
+\hat{\mathbf{x}}^{(t+1)} = \hat{\mathbf{x}} + g_\varphi\big(\hat{\mathbf{x}}^{(t)},\, \grad_{\hat{\mathbf{x}}^{(t)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)})\big)
+\end{equation} 
+
+\begin{equation}\label{eq:conv gru}
+\begin{aligned}
+        h(...) = ...
+\end{aligned}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/gru2}
+        \caption{Graphe d'opération d'une GRU.}
+        \label{fig:gru}
+\end{figure}
+
+\end{equation} 
