@@ -732,8 +732,18 @@ de sorte que
 
 Je note que la fondation théorique des auto-encodeurs variationnels repose sur le principe plus général 
 du goulot d'information \citep{Tishby1999}; un sujet qui n'est pas abordé dans ce travail, mais qui motive 
-l'utilisation de la version $\beta$VAE du modèle esquissé dans cette section et utilisé dans le chapitre \ref{chap:censai}, 
-où un multiplicateur de Lagrange vient multiplier la distance KL dans la ELBO.
+l'utilisation de la version $\beta$-VAE du modèle esquissé dans cette section. Sans rentrer dans les détails, on note 
+qu'il est possible de dériver l'objectif de notre auto-encodeur via la théorie de l'information de \citet{Shannon1948} en interprétant 
+l'auto-encodeur comme un système de transmission d'information par compression, avec perte. 
+Une approche naïve pour modéliser ce système serait de maximiser le taux d'information transmise par le système, 
+ç.-à-d. que le nombre de bit moyen encodé dans une variable latente aléatoire $Z$, mesuré par l'information 
+mutuelle entre le message $X$ et le code $Z$ utilisé pour représenter le message $I(X; Z)$, devrait se rapprocher 
+d'un maximum qu'on nomme la capacité du système $C = \underset{X\sim P(X)}{\mathrm{max}} I(X;\,Z)$. 
+Toutefois, cet objectif ne mentionne rien sur la qualité ou la pertinence de cette information. Pour obtenir un message pertinent, 
+on contraint la complexité de Kolmogorov du message, ç.-à-d. qu'on force le message à utiliser le moins de bit possible. C'est 
+le principe de base de la théorie du taux de distortion \citep{Cover2006}.  
+%\citet{Tishby2000} observe que cet objectif ne contraint pas la qualité ou la pertinence de cette information. La théorème , mais plutôt 
+%où un multiplicateur de Lagrange vient multiplier la distance KL dans la ELBO.
 Le lecteur est invité à se référer à la revue sur le sujet par \citet{Goldfield2020}.
 
 \section{Machines à inférence récurrentielles}
@@ -749,7 +759,7 @@ ce modèle repose.
 \end{equation} 
 $F: \mathbb{R}^{d} \rightarrow \mathbb{R}^{m}$. Dans le cas où $m \ll d$, le problème est typiquement mal-posé dans 
 le sens de Hadamard (cite hadamard 1902 Sur les problèmes aux dérivées partielles et leur signification physique)
-\begin{equation}\label{eq:MAP}
+\begin{equation}\label{eq:MAP intro}
         \hat{\mathbf{x}}_{\mathrm{MAP}} = \underset{\mathbf{x} \in \mathcal{X}}{\mathrm{argmax}}\, \log p(\mathbf{y} \mid \mathbf{x}) + \log p_\theta(\mathbf{x}) 
 \end{equation} 
 
@@ -771,6 +781,7 @@ le sens de Hadamard (cite hadamard 1902 Sur les problèmes aux dérivées partie
 \begin{aligned}
         h(...) = ...
 \end{aligned}
+\end{equation} 
 
 \begin{figure}[H]
         \centering
@@ -778,5 +789,3 @@ le sens de Hadamard (cite hadamard 1902 Sur les problèmes aux dérivées partie
         \caption{Graphe d'opération d'une GRU.}
         \label{fig:gru}
 \end{figure}
-
-\end{equation} 
