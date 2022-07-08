@@ -738,10 +738,18 @@ l'auto-encodeur comme un système de transmission d'information par compression,
 Une approche naïve pour modéliser ce système serait de maximiser le taux d'information transmise par le système, 
 ç.-à-d. que le nombre de bit moyen encodé dans une variable latente aléatoire $Z$, mesuré par l'information 
 mutuelle entre le message $X$ et le code $Z$ utilisé pour représenter le message $I(X; Z)$, devrait se rapprocher 
-d'un maximum qu'on nomme la capacité du système $C = \underset{X\sim P(X)}{\mathrm{max}} I(X;\,Z)$. 
+d'un maximum qu'on nomme la capacité du système $C = \underset{P(X)}{\mathrm{max}}\, I(X;\,Z)$. 
 Toutefois, cet objectif ne mentionne rien sur la qualité ou la pertinence de cette information. Pour obtenir un message pertinent, 
-on contraint la complexité de Kolmogorov du message, ç.-à-d. qu'on force le message à utiliser le moins de bit possible. C'est 
-le principe de base de la théorie du taux de distortion \citep{Cover2006}.  
+on veut contraindre la complexité de Kolmogorov du message, ce qui peut être accomplit en contraingnant le code $Z$
+à utiliser le moins de bit possible pour encoder le message. 
+C'est le principe de base de la théorie du taux de distortion \citep{Cover2006}. 
+\citet{Tishby1999} observe que la mesure du taux de distortion suivante 
+\begin{equation}\label{eq:bottleneck principle}
+        \mathcal{L}\left[ p(\hat{\mathbf{x}} \mid \mathbf{x}) \right]  = I(\hat{X}; X) - \beta I(\hat{X};Z)
+\end{equation}
+%permet d'atteindre un compromis entre les deux objectifs qui nous interesse, soit des reconstruction de haute qualité 
+%et une compression informative (ç.-à-d. minimale).
+Le paramètre $\beta$ est un multiplicateur de Lagrange qui contrôle le niveau de compression désiré
 %\citet{Tishby2000} observe que cet objectif ne contraint pas la qualité ou la pertinence de cette information. La théorème , mais plutôt 
 %où un multiplicateur de Lagrange vient multiplier la distance KL dans la ELBO.
 Le lecteur est invité à se référer à la revue sur le sujet par \citet{Goldfield2020}.
