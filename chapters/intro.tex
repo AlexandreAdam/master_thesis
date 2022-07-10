@@ -254,14 +254,13 @@
 %$\delta \theta \approx 1.75'' \frac{R}{R_\odot}$ 
 %durant une eclipse \citep{Dyson1920}, soit 2 fois plus 
 %que ce qui est prédit par la théorie newtonienne.
-\subsection{Contexte historique}
+%\subsection{Contexte historique}
 
 L'idée des lentilles gravitationnelles est attribuée a Fritz \citet{Zwicky1937} 
 qui, suivant les calculs publié par \citet{Einstein1936}, 
-est le premier à postuler correctement que l'anneau d'Einstein, produit par la déflection 
+est le premier à postuler correctement que l'anneau d'Einstein pourrait être observé, produit par la déflection 
 de la lumière d'une source lointaine par le champ gravitationnel d'une galaxie 
-(appelée nébuleuse extragalactique à l'époque) en avant-plan de cette source selon 
-le point de vue d'un observateur sur Terre, 
+en avant-plan de cette source selon le point de vue d'un observateur sur Terre, 
 pourrait être observé. 
 Dans le même article, Zwicky articule précisément les idées qui nous motivent encore aujourd'hui 
 (presque 100 ans plus tard) à étudier ces objets, 
@@ -576,15 +575,15 @@ qui satisfait l'équation de la lentille adimensionnelle
 \end{figure}
 
 
-\subsection{Contexte scientifique moderne}
+\subsection{Applications}
 
 \section{Interférométrie par masque non-régulier}
 
-\subsection{Contexte historique}
+%\subsection{Contexte historique}
 
 \subsection{Les angles de fermeture}
 
-\subsection{Contexte scientifique moderne}
+\subsection{Applications}
 
 
 \section{Auto-encodeur variationnel}
@@ -654,7 +653,7 @@ une quantité positive:
 
 \subsection{Le truc de reparamétrisation}
 Le gradient de la ELBO par rapport aux paramètres variationnels, $\grad_{\phi,\theta}\mathcal{L}_{\phi,\theta}(\mathbf{x})$, 
-est une quantité que l'on aimerait calculer pour faire usage d'algorithmes comme la grimpe de gradient stochastique 
+est une quantité qu'on doit calculer pour faire usage d'algorithmes comme la grimpe de gradient stochastique 
 pour maximiser la ELBO en terme de $\phi$ et $\theta$. 
 Or, la liste de paramètres $\phi$ apparait dans la distribution de prélevement pour calculer 
 l'espérance mathématique $\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})}$ dans la ELBO \eqref{eq:KL}.
@@ -664,7 +663,7 @@ Pour résoudre ce problème, on utilise le truc de reparamétrisation \citep{Kin
 qui consiste à restreindre la forme fonctionnelle de $q_\phi(\mathbf{z} \mid \mathbf{x})$ à une famille paramétrique 
 qui s'exprime comme la transformation différentiable d'une variable aléatoire auxiliaire $\boldsymbol{ \epsilon}$. 
 On considère le cas où $q_\phi(\mathbf{z} \mid \mathbf{x})$ et $p(\boldsymbol{ \epsilon})$ 
-font partie de la famille gaussienne isotropique:
+font partie de la famille gaussienne isotropique
 \begin{align}
         \label{eq:p epsilon}
         p(\boldsymbol{\epsilon}) &\equiv \mathcal{N}(0, \bbone)\, ;\\
@@ -685,7 +684,7 @@ paramètres d'une distribution gaussienne isotropique \eqref{eq:q phi}, ${f_\phi
 cette fonction avec un réseau de neuronnes convolutionnelles. 
 
 Pour déterminer la forme fonctionnelle de la ELBO, on stipule a priori que la distribution marginale des variables latentes 
-devrait satisfaire
+devrait correspondre à une distribution normale isotropique
 \begin{equation}\label{eq:latent distribution}
         p_{\theta}(\mathbf{z}) = \mathcal{N}(0, \bbone)
 \end{equation}
@@ -727,7 +726,7 @@ de sorte que
         \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[
                 \log p_\theta(\mathbf{x} \mid \mathbf{z})
         \bigg] 
-        \simeq -\frac{1}{L}\sum_{i=1}^{L} \lVert \mathbf{x} - (\hat{\mathbf{x}}^{(i)})^{2} \rVert_2^{2}
+        \simeq -\frac{1}{L}\sum_{i=1}^{L} \lVert \mathbf{x} - \hat{\mathbf{x}}^{(i)} \rVert_2^{2}
 \end{equation} 
 
 Je note que la fondation théorique des auto-encodeurs variationnels repose sur le principe plus général 
@@ -757,43 +756,220 @@ Le lecteur est invité à se référer à la revue sur le sujet par \citet{Goldf
 \section{Machines à inférence récurrentielles}
 \subsection{Formalisme bayésien des problèmes inverses}
 
-Les machines à inférence récurentielles ont été introduites par \citet{Putzky2017} pour résoudre des problèmes 
-inverses pour lesquelles le terme de régularisation est nécessaire mais inconnue a priori et/ou difficile à 
-construire voir même calculer. Dans cette section, j'introduis le formalisme bayésien des problèmes inverses sur lequel 
-ce modèle repose. 
+Les machines à inférence récurentielles (RIM) ont été introduites par \citet{Putzky2017} pour résoudre des problèmes 
+inverses pour lesquels le terme de régularisation est nécessaire mais inconnue a priori et/ou difficile à 
+construire, voir même calculer. Dans cette section, j'introduis le formalisme bayésien des problèmes inverses sur lequel 
+ce modèle repose, puis j'introduis l'algorithme d'inférence et les concepts d'apprentissage machine qui motivent 
+l'utilisation d'une RIM pour des problèmes inverses mal-posés et sous-déterminés.
 
+Les problèmes inverses en astrophysique prennent généralement la forme
 \begin{equation}\label{eq:inverse problem lineaire}
-       \mathbf{y} = F(\mathbf{x}) + \boldsymbol{\eta}  
+       \mathbf{y} = F(\mathbf{x}) + \boldsymbol{\eta}\, ,
 \end{equation} 
-$F: \mathbb{R}^{d} \rightarrow \mathbb{R}^{m}$. Dans le cas où $m \ll d$, le problème est typiquement mal-posé dans 
-le sens de Hadamard (cite hadamard 1902 Sur les problèmes aux dérivées partielles et leur signification physique)
-\begin{equation}\label{eq:MAP intro}
-        \hat{\mathbf{x}}_{\mathrm{MAP}} = \underset{\mathbf{x} \in \mathcal{X}}{\mathrm{argmax}}\, \log p(\mathbf{y} \mid \mathbf{x}) + \log p_\theta(\mathbf{x}) 
-\end{equation} 
-
+où $\mathbf{y}\in \mathcal{Y}$ est un vecteur d'observables (comme l'image capturé par les détecteurs CCD dans un téléscope), 
+$\mathbf{x}\in\mathcal{X}$ est un vecteur de paramètres qui gouverne le phénomène physique qui nous intéresse, 
+modélisé par le modèle physique$F:\mathcal{X} \rightarrow \mathcal{Y}$.
+Le vecteur $\boldsymbol{\eta}$ est une réalisation d'un bruit additif. 
+Dans plusieurs situations, on peut caractériser 
+la distribution de ce bruit, de sortes qu'on peut modéliser la fonction de vraisemblance de l'observable
 \begin{equation}\label{eq:likelihood intro}
-        \mathbf{y} - F(\mathbf{x}) \sim p(\boldsymbol{ \eta}) = p(\mathbf{y} \mid \mathbf{x})
+        \mathbf{y} - F(\mathbf{x}) \sim p(\boldsymbol{ \eta}) = p(\mathbf{y} \mid \mathbf{x})\, .
 \end{equation} 
+Le problème d'inférence est celui de déterminer les paramètres $\mathbf{x}$ qui reproduisent l'observation $\mathbf{y}$, 
+ç.-à-d. l'estimé des paramètres $\hat{\mathbf{x}}_{\mathrm{MLE}}$ 
+qui maximisent la fonction de vraisemblence (MLE de l'anglais \textit{maximum likelihood estimate}), 
+ou de façon équivalente ceux qui maximisent le log de la vraisemblence
+\begin{equation}\label{eq:likelihood max}
+        \hat{\mathbf{x}}_{\mathrm{MLE}} = \underset{\mathbf{x} \in \mathcal{X}}{\mathrm{argmax}}\, \log p(\mathbf{y} \mid \mathbf{x})\, .
+\end{equation} 
+Dans le cas général, ce problème est mal posé et n'a pas de solutions. En effet, 
+tel que l'observe \citet{Hadamard1902}, un problème aux dérivée partielles comme \eqref{eq:likelihood max} 
+ne possède une solution que si le problème est déterminé, ç.-à-d. que, dans le language de \citet{Hadamard1902}, 
+le problème doit correspondre en entier à une situation physique. Cette connection remarquable s'exprime en trois conditions qui déterminent 
+si un problème inverse est bien posé
+\begin{enumerate}[label=(\subscript{H}{{\arabic*}})]
+        \item \label{hadamard:1}Une solution existe;
+        \item \label{hadamard:2}Cette solution est unique;
+        \item \label{hadamard:3} La fonction $G_\varphi: \mathcal{Y} \rightarrow \mathcal{X}$ 
+                qui infère les paramètres $\mathbf{x}$ satisfait la condition de Lipshitz.
+\end{enumerate}
+Le troisième critère \ref{hadamard:3} requière que la fonction d'inférence soit stable, ç.-à-d. qu'un petit changement 
+dans le vecteur d'observations devrait correspondre à un petit changement de la solution, mesuré par la constante de Lipshitz
+$L \geq 0$
+\begin{equation}\label{eq:Lipshitz}
+        \lVert G_\varphi(\mathbf{y}_1) - G_\varphi(\mathbf{y}_2)\rVert_{\mathcal{X}} \leq L \lVert \mathbf{y}_1 - \mathbf{y}_2\rVert_{\mathcal{Y}}\, ,
+\end{equation}
+où $\lVert \cdot \rVert_{\mathcal{V}}$ est une métrique de distance définit pour l'espace vectoriel $\mathcal{V}$.
+
+%rephrase this
+%Il est intéressant de faire une pause ici, et de se poser la question sur ce que Hadamard sous-entend par 
+%un problème physique, ou tout simplement une situation physique. Sous la lumière des conditions 
+%énoncées plus haut, on comprend qu'un problème physique en est un qui admet une solution unique pour chaque 
+%observable, de sorte qu'une fonction, ainsi que son inverse, existe entre les espaces $\mathcal{X}$ et $\mathcal{Y}$. 
+%Qualifier une telle situation par le mot \textit{physique} implique qu'on adopte une philosophie sous-jacente  
+%déterministe sur le phénomène qu'on modélise. En d'autre mots, une situation physique satisfait entièrement le principe de raison 
+%suffisante, ç.-à-d. que chaque évènement (ou observation $\mathbf{y}$) suit nécessairement de sa cause unique ($\mathbf{x}$).
+%%Il est important de noté que cette philosophie ne dit rien sur notre habilité de distinguer entre plusieurs 
+%%hypothèses plausibles (physiques) pour une observation. Ce type de phénomène est nommé une dégénérescence de la fonction 
+%%de vraisemblance, et est un problème qui requiert généralement de changer l'observable $\mathbf{y}$ lui-même 
+%%pour éleminer les dégénerescence de la fonction de vraisemblence. 
+%Selon cette philosophie, un problème est mal posé simplement parce que l'espace des solutions n'est pas 
+%modélisé de façon approprié. 
+%%Dans ca cas, toute approche pour modéliser la distribution des solutions qui 
+%%C'est la philosophie qu'on adopte dans le cadre spécifique où 
+%%on tente de résoudre un problème inverse, ce, même dans le cas où ce problème est mal-posé. 
+
+Pour un problème mal-posé, ce qui est le cas pour le problème d'inférence des paramètres d'une lentille 
+gravitationnelles de type galaxie-galaxie ou la reconstruction d'image dans le contexte de l'interférométrie  
+par masque non-réguliers, on assume a priori que la première condition de Hadamard \ref{hadamard:1} est respectée. 
+Comme les problèmes qui nous intéressent sont sous-determinées, 
+ç.-à-d.\ que $\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) > \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$,
+la seconde condition de Hadamard \ref{hadamard:2} n'est pas respectée; il y a une infinité de solutions au problème \eqref{eq:likelihood max}.
+
+%% Fait attention avec cet argument. Il n'est pas complet et il est misleading
+%La stratégie la plus commune pour contourner ce problème est de choisir judicieusement l'espace de solution $\mathcal{X}$ 
+%tel que $\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) \leq \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$, de sortes 
+%que le problème devient balancé ou sur-déterminé. Toutefois, il est généralement difficile de construire l'espace $\mathcal{X}$ 
+%pour des situations complexes, où l'information contenue dans l'observation requiert un modèle capable, en principe, 
+%de reproduire ladite observation. 
+%Pour les problèmes inverse qui nous intéresse, 
+%la plupart des modèles analytique qu'on peut construire sont tel que 
+%$\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) \ll \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$.
+%%, ce qui limite sévèrement la quantité d'information qu'on peut tirer d'une observation.
+%Par exemple, pour modéliser la masse d'une lentille gravitationnelle, il est commun  
+%de choisir un modèle singulier isotherme ou une loi de puissance elliptique \citep[e.g.][]{Koopmans2006,Barnabe2009,Auger2010}, 
+%soit une fonction de type $f_{\mathbf{x}}: \mathbb{R}^{2} \rightarrow \mathbb{R}_+$ 
+%modélisée par quelques paramètres seulement 
+%$\dim_{\mathbb{R}}(\mathcal{X}) \sim 10$. Or, 
+%l'observation $\mathbf{y}$ est une image (l'image lentillée de la galaxie source), 
+%de sortes que $\dim_{\mathbb{R}}(\mathcal{Y}) \gtrsim 10^{4} \gg \mathrm{dim}_{\mathbb{R}}(\mathcal{X})$. 
+%Or, ces modèles échoues à modéliser les images de plus haute qualités
+%% say something here where this approch relies heavily on how smart the model needs to be
+%%Cette approche repose implicitement sur la data processing inequality
+
+%De plus, on ne peut pas comparer directement la vraisemblence de solutions obtenues par des modèles construits dans deux espaces 
+%différents, e.g.\ $\mathbf{x}_1 \in \mathcal{X}_1$ et $\mathbf{x}_2 \in \mathcal{X}_2$. Plutôt, 
+%on doit utiliser le facteur de Bayes ou encore l'évidence bayesienne pour faire la comparaison.  
+%En particulier, le facteur de Bayes compare la vraisemblance des modèles multipliée par le ratio des probabilités marginales de chaque modèles,
+%souvent mesuré par une approximation de la complexité de Kolmogorov de chaque modèles (rasoir d'Occam). 
+%%Bien que cette pratique est bien encrée dans la théorie de l'information de \citet{Shannon1948}, 
+%Finalement, ce cadre (construire des modèles analytiques simples) 
+%nous limite à seulement comparer les hypothèses construites par des humains 
+%ou par régression symbolique \citep[e.g.][]{Lemos2022}, et non l'ensemble des hypothèses possibles.
+
+ %This is actually false, GR has a very good Bayes factor compared to Newton
+%Toutefois, pour les cas qui nous intéressent, les approximations utilisées pour estimer la complexité des modèles (e.g. $\dim_{\mathbb{R}}\mathcal{X}_i$) 
+%limitent leur utilité en pratique. Il est intéressant de noté, par exemple, que la théorie de la gravité de Newton est de loin 
+%l'explication la plus favorable comparée à celle d'Einstein, selon le facteur de Bayes, pour expliquer l'orbite des planète dans le système 
+%solaire, ce même si elle échoue d'expliquer l'anomalie de la précession du périastre de Mercure, soit 43 secondes d'arc par siècles. 
+
+%ce qui rend l'exercice scientifique d'obtenir des connaissances objectives par l'accord intersubjectif beaucoup plus difficile 
+
+La condition d'unicité de la solution est résolue par la construction d'une
+mesure de probabilité a priori sur l'espace des paramètres d'intérêts 
+$p_\theta: \mathcal{X} \rightarrow \mathbb{R}, \,\, \mathrm{t.q.}\,\, \int_{\mathcal{X}} p_\theta(\mathbf{x}) d\mathbf{x} = 1$,
+tel que les solutions non-physiques sont exclues de la région de haute densité de cette distribution.
+On peut alors modifier le problème \eqref{eq:likelihood max} en introduisant cette distribution 
+a priori comme un terme de régularisation de la vraisemblance
+\begin{equation}\label{eq:MAP intro}
+        \hat{\mathbf{x}}_{\mathrm{MAP}} = \underset{\mathbf{x} \in \mathcal{X}}{\mathrm{argmax}}\, \log p(\mathbf{y} \mid \mathbf{x}) + \log p_\theta(\mathbf{x})\, .
+\end{equation} 
+La solution $\hat{\mathbf{x}}_{\mathrm{MAP}}$ maximise la distribution a posteriori $p_\theta(\mathbf{x} \mid \mathbf{y})$, 
+tel que définit par le théorème de Bayes
+\begin{equation}\label{eq:Bayes}
+        p_\theta(\mathbf{x} \mid \mathbf{y}) = \frac{p(\mathbf{y} \mid \mathbf{x}) p_\theta(\mathbf{x})}{\int_{\mathcal{X}} p(\mathbf{\mathbf{y}} \mid \mathbf{x}) p_\theta(\mathbf{x}) d\mathbf{x}}\, .
+\end{equation} 
+Le dénominateur est une constante qu'on nomme l'évidence bayesienne. 
+%Pour faire un lien avec la mécanique statistique, 
+%cette constante peut être interprété comme l'énergie de Helmholtz d'un système fermé 
+%de température $\beta=1$
+Pour les applications qui nous intéresse, cette constante n'est pas calculée 
+car elle n'est pas nécessaire (et souvent impossible à calculer) 
+pour la recherche d'un maximum de la distribution a posteriori ou 
+la comparaison de solutions par le ratio de la fonction de vraisemblence (ou de la distribution a posteriori).
+
+On note que la stratégie la plus commune pour résoudre les problèmes inverses qui nous intéresse est plutôt de 
+choisir judicieusement l'espace de solution $\mathcal{X}$ tel que $\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) \leq \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$. 
+Dans ce cas, le problème inverse est balancé ou sur-déterminé. 
+Par exemple, pour modéliser la masse d'une lentille gravitationnelle, il est commun  
+de choisir un modèle singulier isotherme ou une loi de puissance elliptique \citep[e.g.][]{Koopmans2006,Barnabe2009,Auger2010}, 
+soit une fonction de type $f_{\mathbf{x}}: \mathbb{R}^{2} \rightarrow \mathbb{R}_+$ 
+modélisée par quelques paramètres seulement 
+$\dim_{\mathbb{R}}(\mathcal{X}) \sim 10$, tandis que 
+l'observation $\mathbf{y}$ est une image avec $\dim_{\mathbb{R}}(\mathcal{Y}) \gtrsim 10^{4} \gg \mathrm{dim}_{\mathbb{R}}(\mathcal{X})$. 
+Cette approche est considérablement plus stable, particulièrement pour les observations de basses qualités. Toutefois, 
+les modèles analytiques deviennent rapidement complexes et difficiles à construire, voir justifier, lorsque l'observation des systèmes qui nous intéresse
+sont de haute qualité, ce qui révèle la complexité cachée de ces systèmes \citep[e.g.][]{Schuldt2019}. 
+De plus, ce cadre nous limite à seulement considérer les hypothèses construites par des humains 
+ou par régression symbolique \citep[e.g.][]{Lemos2022}, et non l'ensemble des hypothèses possibles.
+C'est cette observation qui nous motive à utiliser l'approche esquissée plus haut, 
+où l'espace $\mathcal{X}$ est construit de manière presque agnostique à la solution 
+physique recherchée (e.g. une grille de pixels pour modéliser une distribution de masse), 
+de manière à contenir toutes, ou au moins la plupart, des solutions physiques. Ce genre d'approche a 
+le potentiel de produire des résultats surprenant ou intéressant, puisque l'exploration de l'espace des solutions physiques 
+peut être ajustée via la distribution a priori, $p_\theta(\mathbf{x})$, selon la complexité de l'observation.
+
 \subsection{La relation de récurrence}
-
+Pour résoudre l'équation différentielle ordinaire sous-entendue par le problème \eqref{eq:MAP intro}, 
+on considère la méthode de discrétisation d'Euler 
 \begin{equation}\label{eq:map recurrence}
-        \hat{\mathbf{x}}^{(t+1)} = \hat{\mathbf{x}}^{(t)} + \gamma_t\grad_{\hat{\mathbf{x}}^{(t)}}
-        \bigg( \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}) 
-        + \lambda \log p_\theta(\hat{\mathbf{x}}^{(t)})\bigg)
+        \hat{\mathbf{x}}^{(t+1)} = \hat{\mathbf{x}}^{(t)} + \alpha \grad_{\hat{\mathbf{x}}^{(t)}} p_\theta(\hat{\mathbf{x}}^{(t)} \mid \mathbf{y})\, ,
+        %\bigg( \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}) 
+%+ \log p_\theta(\hat{\mathbf{x}}^{(t)})\bigg)\, ,
 \end{equation} 
-\begin{equation}\label{eq:rim intro}
-\hat{\mathbf{x}}^{(t+1)} = \hat{\mathbf{x}} + g_\varphi\big(\hat{\mathbf{x}}^{(t)},\, \grad_{\hat{\mathbf{x}}^{(t)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)})\big)
-\end{equation} 
+où $\alpha$ est le taux d'apprentissage dans la littérature sur 
+l'apprentissage machine.
+On est garantie d'obtenir une solution 
+au problème à valeur initiale $\hat{\mathbf{x}}^{(0)} = \mathbf{x}_0$ si l'algorithme, après $T$ itérations, 
+satisfait la condition de Lipschitz. Pour la relation de récurrence \eqref{eq:map recurrence}, ceci revient 
+à assumer que l'erreur locale de chaque itération est proportionnelle à $\alpha^{2}$, ce qui est 
+satisfait si le gradient $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x} \mid \mathbf{y})$ 
+satisfait la condition de Lipschitz dans la région de $\mathcal{X}$ explorée par l'algorithme \citep{Atkinson1989,Butcher2016}.
 
-\begin{equation}\label{eq:conv gru}
-\begin{aligned}
-        h(...) = ...
-\end{aligned}
-\end{equation} 
+\citet{Putzky2017} observent qu'on peut réécrire \eqref{eq:map recurrence} de la façon suivante
+\begin{align}
+        \hat{\mathbf{x}}^{(t+1)} &= 
+        \hat{\mathbf{x}}^{(t)} + \alpha \big( \grad_{\hat{\mathbf{x}}^{(t)}}\log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}) 
+        +  \grad_{\hat{\mathbf{x}}^{(t)}}\log p_\theta(\hat{\mathbf{x}}^{(t)})\big);\\
+        \label{eq:rim putzky}
+        \implies \hat{\mathbf{x}}^{(t+1)} &= \hat{\mathbf{x}} + g_{\varphi^{(t)}}\big(\hat{\mathbf{x}}^{(t)},\, \grad_{\hat{\mathbf{x}}^{(t)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)})\big)
+\end{align}
+où $g_{\varphi^{(t)}}: \mathcal{X}^{2} \rightarrow \mathcal{X}$ est le modèle du gradient de la distribution 
+a posteriori. 
+On remarque que la relation de récurrence \eqref{eq:map recurrence} est un cas spécial de la relation \eqref{eq:rim putzky}, 
+soit le cas où on a un modèle explicite pour la distribution a priori (ou son gradient) $\grad_{\mathbf{x}} \log p_\theta(\mathbf{x})$ 
+et la taux d'apprentissage $\alpha$. 
+Les paramètres $\alpha$ et $\theta$ sont absorbées dans les paramètres $\varphi^{(t)}$ dans la 
+relation de récurrence \eqref{eq:rim putzky}, qui nous donne 
+une plus grande liberté pour modéliser la distribution a priori. Selon ce nouveau point de vue, 
+le problème de modéliser la distribution a priori, ou plus directement le gradient de la distribution a priori, 
+est équivalent à construire un modèle pour le gradient de la distribution a posteriori dans une relation 
+de récurrence.
 
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\textwidth]{figures/gru2}
-        \caption{Graphe d'opération d'une GRU.}
-        \label{fig:gru}
-\end{figure}
+Pour le problème de reconstruction d'image, les modèles neuronaux convolutif avec une architecture de sablier ou 
+encore une architecture en forme de U \citep{Ronneberger2015} sont des choix naturels pour modéliser $g_{\varphi^{(t)}}$. 
+Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}(\cdot,\, \cdot)$ 
+satisfait la condition de Lipschitz, ce qui n'est pas trivialement respecté pour un réseau de neurones.
+Dans ce travail, cette condition n'est pas explicitement imposée au modèle. 
+On note toutefois que la question de la constante de Lipschitz pour les réseaux neuronnaux est un 
+sujet actif de recherche \citep[e.g.][]{}, particulièrement dans l'étude des attaques antagonistes de réseaux de neuronnes \citep[e.g.][]{}. 
+Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux futurs.
+
+Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance envers $t$. 
+
+%On définit le tenseur latent $\mathbf{h}^{(t)}$ de la cellule GRU, qui joue le rôle de mémoire. On définit de plus 
+%l'état de paramètres quelconques (comme l'activation interne d'une réseau de neuronnes) 
+%à l'itération $t$ de la relation de récurrence $\mathbf{x}^{(t)}$. La cellule met à jour l'état interne 
+%et le tenseur latent de la façon suivante
+%\begin{align}
+        %\tilde{\mathbf{x}} &= S\bigg( \mathbf{w}_o * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_o\bigg) &\{\text{Porte d'oubli}\} \\
+        %\mathbf{z} &= S\bigg( \mathbf{w}_z * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_{z}\bigg)&\{\text{Porte de mise à jour}\} \\
+        %\tilde{\mathbf{h}} &= \tanh\bigg( \mathbf{w}_h * \big((\mathbf{h}^{(t-1)}\odot \tilde{\mathbf{x}}) \oplus \mathbf{x}^{(t)})\big) + \mathbf{b}_{h}\bigg)&\{\text{État candidat}\} \\
+        %\mathbf{h}^{(t)} &=\mathbf{h}^{(t-1)} \odot \mathbf{z} + \tilde{\mathbf{h}} \odot (1 - \mathbf{z}) &\{\text{Nouvel état}\} 
+%\end{align}
+%où $S(x) = \frac{1}{1 + e^{-x}}$ est une fonction sigmoïde. Les noyaux de convolution $\mathbf{w}$ et les vecteurs de biais $\mathbf{b}$  
+%sont des paramètres libres appris par descente de gradient stochastique. $\oplus$ symbolise l'opération 
+%de concatenation.
+
+\subsection{Méta-apprentissage et transfert de l'apprentissage}
+

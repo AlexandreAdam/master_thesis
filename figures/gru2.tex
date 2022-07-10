@@ -1,7 +1,7 @@
 \documentclass[crop,tikz]{standalone}
 \usepackage{amsmath}
 \usetikzlibrary{positioning}
-\usetikzlibrary{calc,intersections}
+\usetikzlibrary{spath3,intersections}
 
 
 \begin{document}
@@ -17,7 +17,7 @@
         (reset gate) at (1, 2) {\LARGE $\sigma \left(\mathbf{W}_r \ast \mathbf{x}\right)$};
     \node[rectangle, rounded corners=0.1cm, dashed, draw=black, label={\LARGE Portail de mise à jour}, inner sep=15pt] 
         (update gate) at (1, -2) {\LARGE $\sigma \left(\mathbf{W}_z \ast \mathbf{x}\right)$};
-    \node[rectangle, rounded corners=0.1cm, dashed, draw=black, label={\LARGE $\mathbf{x}$}, inner sep=5pt] (concat) at (-4, 0) {\LARGE$\boldsymbol{\oplus}_3$};
+    \node[rectangle, rounded corners=0.1cm, dashed, draw=black, label={\LARGE $\mathbf{x}$}, inner sep=5pt] (concat) at (-4, 0) {\LARGE$\boldsymbol{\oplus}$};
     
     \draw[-latex, thick, in=180, out=0] (states) to (concat);
     \draw[-latex, thick, in=180, out=0] (x) to (concat);
@@ -28,10 +28,10 @@
         (candidate gate) at (14, -2) {\LARGE $\tanh \left(\mathbf{W}_a \ast \mathbf{\tilde{x}}\right)$};
         
     \node[inner sep=0pt] (multiply) at (6, 2) {\LARGE$\boldsymbol{\odot}$};
-    \node[rectangle, rounded corners=0.1cm, dashed, draw=black, label={\LARGE $\mathbf{\tilde{x}}$}, inner sep=5pt] (concat) at (9, -2) {\LARGE$\boldsymbol{\oplus}_3$};
+    \node[rectangle, rounded corners=0.1cm, dashed, draw=black, label={\LARGE $\mathbf{\tilde{x}}$}, inner sep=5pt] (concat) at (9, -2) {\LARGE$\boldsymbol{\oplus}$};
     
     \draw[-latex, thick] (reset gate) to (multiply);
-    \path[-latex, thick, in=145, out=45, name path=over] (states) to (multiply);
+    \draw[-latex, thick, in=145, out=45] (states) to (multiply);
     
     \draw[-latex, thick, in=205, out=-25] (x) to (concat);
     \draw[-latex, thick, out=0, in=180] (multiply) to (concat);
@@ -45,8 +45,7 @@
     \node%[rectangle, rounded corners=0.1cm, dashed, draw=black, inner sep=5pt] 
         (z) at (5, -1) {\LARGE $\mathbf{z}$};
     \draw[-, thick, out=0, in=225] (update gate) to (z);
-
-    \path[-latex, thick, out=45, in=180, name path=under] (z) to (new state);
+    \draw[-latex, thick, out=45, in=180] (z) to (new state);
     
     \node%[rectangle, rounded corners=0.1cm, dashed, draw=black, inner sep=5pt] 
         (htilde) at (14, 0) {\LARGE $\mathbf{\tilde{h}}$};
@@ -59,36 +58,5 @@
     \node (y) at (24, -2) {\LARGE $\mathbf{y}_{t}$};
     \draw[-latex, thick, in=180, out=0] (div) to (output state);
      \draw[-latex, thick, in=180, out=0] (div) to (y);
-
-	\path[spath/save=arc] (0,0) arc[radius=1cm, start angle=180, delta angle=-180];
-
-        % Find the intersection of the two paths.
-    \path [name intersections={of=under and over}];
-    \coordinate (S)  at (intersection-1);
-
-    % Define a circle around this intersection for the arc.
-    \path[name path=circle] (S) circle(2mm);
-
-    % Find the intersections of second line and circle.
-    \path [name intersections={of=circle and over}];
-    \coordinate (I1)  at (intersection-1);
-    \coordinate (I2)  at (intersection-2);
-
-    % Draw normal line segments, except for portion within circle.
-    \draw (multiply) -- (I2);
-    \draw[->] (I1)  -| ([xshift=2cm, yshift=0cm]6.east) |- (concat);
-
-    % Draw arc at intersection
-    \draw (I2) arc (180:0:2mm); 
-	 %\tikzset{
-  %spath/split at intersections with={over}{under},
-  %spath/insert gaps after components={over}{8pt},
-  %spath/join components with={over}{arc},
-  %spath/split at intersections with={under}{over},
-  %spath/insert gaps after components={under}{4pt},
-%}
-	%\draw[spath/use=under];
-	%\draw[spath/use=over];
-
 \end{tikzpicture}
 \end{document}

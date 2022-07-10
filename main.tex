@@ -50,35 +50,13 @@
 \def\frenchlisttablename{Liste des tableaux}
 
 
-% Acronyms
-%\usepackage[printonlyused,withpage]{acronym}
-%\usepackage{acro}
-%\DeclareAcronym{usa}{
-        %short=USA,
-        %long=United States of America,
-%}
-\usepackage[nogroupskip,nonumberlist,acronym,toc]{glossaries} 
+\usepackage[nogroupskip,nonumberlist,acronym,toc,sort=def]{glossaries} 
 \newglossary[slg]{symbolslist}{syi}{syg}{Liste des symboles}
 %\newglossary[slg]{acronyms}{syi}{syg}{Liste des acronymes}
-\makeglossaries  
 
-%\renewcommand*{\glossarypostamble}{\clearpage}
-%\renewcommand*{\glossarypostamble}{\vspace*{1cm}}
+\usepackage{glossary_entry}
+\makeglossaries 
 
-\newacronym{rim}{RIM}{Recurrent Inference Machine --- Machine à inférence récurrentielles}
-\newacronym{vae}{VAE}{Variational AutoEncoder --- Auto-encodeur variationnel de Bayes}
-
-\newglossaryentry{Id}{
-name=$\bbone$,
-description={Matrice identité},
-sort=symbpi, type=symbolslist
-}
-
-\newglossaryentry{HP}{
-name=$\kappa$,
-description={Convergence --- densité surfacique de masse projeté sur l'axe de visée.},
-sort=symbpi, type=symbolslist
-}
 
 % author data
 \author{Alexandre Adam}
@@ -88,6 +66,7 @@ sort=symbpi, type=symbolslist
 \department{Département de physique}
 \gradyear{2022}
 \begin{document}
+% Add items to glossary without displaying them
   \frontmatter
     \maketitle
 
@@ -125,9 +104,10 @@ sort=symbpi, type=symbolslist
             %Ève, merci 
     \end{acknowledgements}
   \mainmatter
+        \glsaddall
     \input{chapters/intro}
 
-  \input{chapters/censai}
+  %\input{chapters/censai}
 
 {\footnotesize
   \bibliography{intro_bib,censai_bib}
