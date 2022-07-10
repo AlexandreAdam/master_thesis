@@ -924,7 +924,8 @@ au problème à valeur initiale $\hat{\mathbf{x}}^{(0)} = \mathbf{x}_0$ si l'alg
 satisfait la condition de Lipschitz. Pour la relation de récurrence \eqref{eq:map recurrence}, ceci revient 
 à assumer que l'erreur locale de chaque itération est proportionnelle à $\alpha^{2}$, ce qui est 
 satisfait si le gradient $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x} \mid \mathbf{y})$ 
-satisfait la condition de Lipschitz dans la région de $\mathcal{X}$ explorée par l'algorithme \citep{Atkinson1989,Butcher2016}.
+satisfait la condition de Lipschitz dans la région de $\mathcal{X}$ explorée par l'algorithme \citep{Atkinson1989,Butcher2016}, 
+en encore si la norme de la dérivée seconde de $\log p_\theta(\mathbf{x} \mid \mathbf{y})$ est bornée dans cette région.
 
 \citet{Putzky2017} observent qu'on peut réécrire \eqref{eq:map recurrence} de la façon suivante
 \begin{align}
@@ -939,8 +940,7 @@ a posteriori.
 On remarque que la relation de récurrence \eqref{eq:map recurrence} est un cas spécial de la relation \eqref{eq:rim putzky}, 
 soit le cas où on a un modèle explicite pour la distribution a priori (ou son gradient) $\grad_{\mathbf{x}} \log p_\theta(\mathbf{x})$ 
 et la taux d'apprentissage $\alpha$. 
-Les paramètres $\alpha$ et $\theta$ sont absorbées dans les paramètres $\varphi^{(t)}$ dans la 
-relation de récurrence \eqref{eq:rim putzky}, qui nous donne 
+Les paramètres $\alpha$ et $\theta$ sont absorbés dans les paramètres d'inférence $\varphi^{(t)}$, ce qui nous donne 
 une plus grande liberté pour modéliser la distribution a priori. Selon ce nouveau point de vue, 
 le problème de modéliser la distribution a priori, ou plus directement le gradient de la distribution a priori, 
 est équivalent à construire un modèle pour le gradient de la distribution a posteriori dans une relation 
@@ -952,24 +952,37 @@ Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée se
 satisfait la condition de Lipschitz, ce qui n'est pas trivialement respecté pour un réseau de neurones.
 Dans ce travail, cette condition n'est pas explicitement imposée au modèle. 
 On note toutefois que la question de la constante de Lipschitz pour les réseaux neuronnaux est un 
-sujet actif de recherche \citep[e.g.][]{}, particulièrement dans l'étude des attaques antagonistes de réseaux de neuronnes \citep[e.g.][]{}. 
+sujet de recherche actif \citep[e.g.][]{}, particulièrement dans l'étude des attaques antagonistes de réseaux de neuronnes \citep[e.g.][]{}. 
 Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux futurs.
 
-Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance envers $t$. 
+Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance envers $t$. Cet aspect 
+est directement inspiré des succès récents d'algorithmes d'optimisations comme la méthode de Nesterov \citep{Nesterov1983}, 
+RPROP \citep{Riedmiller1993},
+AdaGrad \citep{Duchi2011}, RMSProp\footnote{L'algorithme apparaît dans le cours CSC321 à l'Université de Toronto, donné par Geoffrey Hinton en 2011.} \citep{Hinton2012} 
+et ADAM \citep{Kingma2014}
+qui utilisent explicitement l'information 
+des gradients d'itérations antérieurs à $t$ pour calculer la mise à jour dans la relation de récurrence \eqref{eq:rim putzky}.
+Ainsi, il est important de considérer une classe de modèle avec une certaine mémoire des itérations précédente. Pour ce 
+faire, on utilise des unités récurrentielles à porte \citep[de l'anglais \textit{gated recurrent units}:][]{Cho2014} 
+pour modéliser une fonction $g_{\varphi}$ augmentée d'un ensemble d'états latents $\{\mathbf{h}^{(t)}_i\}_{i=1}^{H}$ 
+qui agissent comme une mémoire des activations précédentes ($0 < t' < t$) du réseau de neuronnes.
+Pour un réseau convolutionnel, cette unité est représentée par les opérations suivante:
+\begin{align}
+        \tilde{\mathbf{x}} &= S\bigg( \mathbf{w}_o * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_o\bigg) &\{\text{Porte d'oubli}\} \\
+        \mathbf{z} &= S\bigg( \mathbf{w}_z * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_{z}\bigg)&\{\text{Porte de mise à jour}\} \\
+        \tilde{\mathbf{h}} &= \tanh\bigg( \mathbf{w}_h * \big((\mathbf{h}^{(t-1)}\odot \tilde{\mathbf{x}}) \oplus \mathbf{x}^{(t)})\big) + \mathbf{b}_{h}\bigg)&\{\text{État candidat}\} \\
+        \mathbf{h}^{(t)} &=\mathbf{h}^{(t-1)} \odot \mathbf{z} + \tilde{\mathbf{h}} \odot (1 - \mathbf{z}) &\{\text{Nouvel état}\} 
+\end{align}
+où $S(x) = \frac{1}{1 + e^{-x}}$ est une fonction sigmoïde et $\mathbf{x}$ est un état d'activation interne au réseau de neuronnes. 
+Les noyaux de convolution $\mathbf{w}$ et les vecteurs de biais $\mathbf{b}$  
+sont des paramètres libres appris par descente de gradient stochastique. $\oplus$ symbolise l'opération 
+de concatenation.
 
-%On définit le tenseur latent $\mathbf{h}^{(t)}$ de la cellule GRU, qui joue le rôle de mémoire. On définit de plus 
-%l'état de paramètres quelconques (comme l'activation interne d'une réseau de neuronnes) 
-%à l'itération $t$ de la relation de récurrence $\mathbf{x}^{(t)}$. La cellule met à jour l'état interne 
-%et le tenseur latent de la façon suivante
-%\begin{align}
-        %\tilde{\mathbf{x}} &= S\bigg( \mathbf{w}_o * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_o\bigg) &\{\text{Porte d'oubli}\} \\
-        %\mathbf{z} &= S\bigg( \mathbf{w}_z * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_{z}\bigg)&\{\text{Porte de mise à jour}\} \\
-        %\tilde{\mathbf{h}} &= \tanh\bigg( \mathbf{w}_h * \big((\mathbf{h}^{(t-1)}\odot \tilde{\mathbf{x}}) \oplus \mathbf{x}^{(t)})\big) + \mathbf{b}_{h}\bigg)&\{\text{État candidat}\} \\
-        %\mathbf{h}^{(t)} &=\mathbf{h}^{(t-1)} \odot \mathbf{z} + \tilde{\mathbf{h}} \odot (1 - \mathbf{z}) &\{\text{Nouvel état}\} 
-%\end{align}
-%où $S(x) = \frac{1}{1 + e^{-x}}$ est une fonction sigmoïde. Les noyaux de convolution $\mathbf{w}$ et les vecteurs de biais $\mathbf{b}$  
-%sont des paramètres libres appris par descente de gradient stochastique. $\oplus$ symbolise l'opération 
-%de concatenation.
+%Comme ADAM est considéré comme l'algorithme le plus performant parmis ceux énuméré précédemment, 
+%il est utilisé directement dans  
+%la RIM du chapitre \ref{chap:censai} pour prétraiter le gradient de la vraisemblance, 
+%de façon similaire aux travaux de \citet{Modi2021}.
+
 
 \subsection{Méta-apprentissage et transfert de l'apprentissage}
 
