@@ -951,7 +951,7 @@ encore une architecture en forme de U \citep{Ronneberger2015} sont des choix nat
 Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}$ 
 satisfait la condition de Lipschitz, ce qui n'est pas trivialement respecté pour un réseau de neurones.
 Dans ce travail, cette condition n'est pas explicitement imposée au modèle. 
-On note toutefois que la question de la constante de Lipschitz pour les réseaux neuronnaux est un 
+On note toutefois que l'analyse de la condition de Lipschitz pour les réseaux neuronnaux est un 
 sujet de recherche actif \citep[e.g.][]{}, particulièrement dans l'étude des attaques antagonistes de réseaux de neuronnes \citep[e.g.][]{}. 
 Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux futurs.
 
@@ -966,7 +966,7 @@ Ainsi, il est important de considérer une classe de modèle avec une certaine m
 faire, on utilise des unités récurrentielles à porte \citep[de l'anglais \textit{gated recurrent units}:][]{Cho2014} 
 pour modéliser une fonction $g_{\varphi}$ augmentée d'un ensemble d'états latents $\{\mathbf{h}^{(t)}_i\}_{i=1}^{H}$ 
 qui agissent comme une mémoire des activations précédentes du réseau de neuronnes. Les détails 
-de cette couche neuronale sont données dans l'annexe \ref{ap:gru}.
+de cette couche neuronale sont données dans l'annexe \ref{ap:gru}. 
 
 Comme ADAM est considéré comme l'algorithme le plus performant parmis ceux énuméré précédemment, 
 une machine à inférence récurentielle bénéficie énormément de son utilisation pour 
