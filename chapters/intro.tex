@@ -200,7 +200,7 @@
 %as a form of implicit regularisation for certain problems. 
 
 
-\section{Lentilles gravitationnelles de type Galaxie-Galaxie}\label{sec:lentilles gravitationnelles}
+\section{Lentilles gravitationnelles de type galaxie-galaxie}\label{sec:lentilles gravitationnelles}
 % Plan pour cette section: Dériver eq de la lentille et alpha
 % Intro général: deflection de la lumière
 %% Approcha a l'intro -> contexte historique à notre pensée sur la déviation de la lumière
@@ -940,7 +940,7 @@ a posteriori.
 On remarque que la relation de récurrence \eqref{eq:map recurrence} est un cas spécial de la relation \eqref{eq:rim putzky}, 
 soit le cas où on a un modèle explicite pour la distribution a priori (ou son gradient) $\grad_{\mathbf{x}} \log p_\theta(\mathbf{x})$ 
 et la taux d'apprentissage $\alpha$. 
-Les paramètres $\alpha$ et $\theta$ sont absorbés dans les paramètres d'inférence $\varphi^{(t)}$, ce qui nous donne 
+Dans la relation \eqref{eq:rim putzky}, les paramètres $\alpha$ et $\theta$ sont absorbés dans les paramètres d'inférence $\varphi^{(t)}$, ce qui nous donne 
 une plus grande liberté pour modéliser la distribution a priori. Selon ce nouveau point de vue, 
 le problème de modéliser la distribution a priori, ou plus directement le gradient de la distribution a priori, 
 est équivalent à construire un modèle pour le gradient de la distribution a posteriori dans une relation 
@@ -948,7 +948,7 @@ de récurrence.
 
 Pour le problème de reconstruction d'image, les modèles neuronaux convolutif avec une architecture de sablier ou 
 encore une architecture en forme de U \citep{Ronneberger2015} sont des choix naturels pour modéliser $g_{\varphi^{(t)}}$. 
-Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}(\cdot,\, \cdot)$ 
+Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}$ 
 satisfait la condition de Lipschitz, ce qui n'est pas trivialement respecté pour un réseau de neurones.
 Dans ce travail, cette condition n'est pas explicitement imposée au modèle. 
 On note toutefois que la question de la constante de Lipschitz pour les réseaux neuronnaux est un 
@@ -958,31 +958,27 @@ Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux f
 Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance envers $t$. Cet aspect 
 est directement inspiré des succès récents d'algorithmes d'optimisations comme la méthode de Nesterov \citep{Nesterov1983}, 
 RPROP \citep{Riedmiller1993},
-AdaGrad \citep{Duchi2011}, RMSProp\footnote{L'algorithme apparaît dans le cours CSC321 à l'Université de Toronto, donné par Geoffrey Hinton en 2011.} \citep{Hinton2012} 
+AdaGrad \citep{Duchi2011}, RMSProp\footnote{L'algorithme apparaît en premier dans le cours CSC321 à l'Université de Toronto, donné par Geoffrey Hinton en 2011.} \citep{Hinton2012} 
 et ADAM \citep{Kingma2014}
 qui utilisent explicitement l'information 
 des gradients d'itérations antérieurs à $t$ pour calculer la mise à jour dans la relation de récurrence \eqref{eq:rim putzky}.
-Ainsi, il est important de considérer une classe de modèle avec une certaine mémoire des itérations précédente. Pour ce 
+Ainsi, il est important de considérer une classe de modèle avec une certaine mémoire des itérations précédentes. Pour ce 
 faire, on utilise des unités récurrentielles à porte \citep[de l'anglais \textit{gated recurrent units}:][]{Cho2014} 
 pour modéliser une fonction $g_{\varphi}$ augmentée d'un ensemble d'états latents $\{\mathbf{h}^{(t)}_i\}_{i=1}^{H}$ 
-qui agissent comme une mémoire des activations précédentes ($0 < t' < t$) du réseau de neuronnes.
-Pour un réseau convolutionnel, cette unité est représentée par les opérations suivante:
-\begin{align}
-        \tilde{\mathbf{x}} &= S\bigg( \mathbf{w}_o * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_o\bigg) &\{\text{Porte d'oubli}\} \\
-        \mathbf{z} &= S\bigg( \mathbf{w}_z * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_{z}\bigg)&\{\text{Porte de mise à jour}\} \\
-        \tilde{\mathbf{h}} &= \tanh\bigg( \mathbf{w}_h * \big((\mathbf{h}^{(t-1)}\odot \tilde{\mathbf{x}}) \oplus \mathbf{x}^{(t)})\big) + \mathbf{b}_{h}\bigg)&\{\text{État candidat}\} \\
-        \mathbf{h}^{(t)} &=\mathbf{h}^{(t-1)} \odot \mathbf{z} + \tilde{\mathbf{h}} \odot (1 - \mathbf{z}) &\{\text{Nouvel état}\} 
-\end{align}
-où $S(x) = \frac{1}{1 + e^{-x}}$ est une fonction sigmoïde et $\mathbf{x}$ est un état d'activation interne au réseau de neuronnes. 
-Les noyaux de convolution $\mathbf{w}$ et les vecteurs de biais $\mathbf{b}$  
-sont des paramètres libres appris par descente de gradient stochastique. $\oplus$ symbolise l'opération 
-de concatenation.
+qui agissent comme une mémoire des activations précédentes du réseau de neuronnes. Les détails 
+de cette couche neuronale sont données dans l'annexe \ref{ap:gru}.
 
-%Comme ADAM est considéré comme l'algorithme le plus performant parmis ceux énuméré précédemment, 
-%il est utilisé directement dans  
-%la RIM du chapitre \ref{chap:censai} pour prétraiter le gradient de la vraisemblance, 
-%de façon similaire aux travaux de \citet{Modi2021}.
+Comme ADAM est considéré comme l'algorithme le plus performant parmis ceux énuméré précédemment, 
+une machine à inférence récurentielle bénéficie énormément de son utilisation pour 
+prétraiter le gradient de la vraisemblence $\grad_{\mathbf{x}}\log p(\mathbf{y} \mid \mathbf{x})$ 
+avant de le passer en entrée au réseau de neuronnes $g_{\varphi}$. 
+Cette idée à fait une première apparition dans les travaux de 
+\citet{Modi2021}, puis dans notre travail présenté au chapitre \ref{chap:censai}. 
+%L'algorithme est décrit 
+%dans l'annexe \ref{ap:adam}.
 
 
-\subsection{Méta-apprentissage et transfert de l'apprentissage}
+\subsection{Méta-apprentissage}
+
+
 

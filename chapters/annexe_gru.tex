@@ -1,0 +1,16 @@
+\chapter{GRU}\label{ap:gru}
+Une unité récurrente à porte convolutionnelles est décrite par les opérations
+\begin{align}
+		\tilde{\mathbf{x}} &= S\bigg( \mathbf{w}_o * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_o\bigg) &\{\text{Porte d'oubli}\} \\
+		\mathbf{z} &= S\bigg( \mathbf{w}_z * (\mathbf{h}^{(t-1)} \oplus \mathbf{x}^{(t)}) + \mathbf{b}_{z}\bigg)&\{\text{Porte de mise à jour}\} \\
+		\tilde{\mathbf{h}} &= \tanh\bigg( \mathbf{w}_h * \big((\mathbf{h}^{(t-1)}\odot \tilde{\mathbf{x}}) \oplus \mathbf{x}^{(t)})\big) + \mathbf{b}_{h}\bigg)&\{\text{État candidat}\} \\
+	\label{eq:nouvel etat}
+		\mathbf{h}^{(t)} &=\mathbf{h}^{(t-1)} \odot \mathbf{z} + \tilde{\mathbf{h}} \odot (1 - \mathbf{z}) &\{\text{Nouvel état}\} 
+\end{align}
+où $S(x) = \frac{1}{1 + e^{-x}}$ est une fonction sigmoïde et $\mathbf{x}^{(t)}$ est un tenseur à l'entrée de l'unité. 
+Les noyaux de convolution $\mathbf{w}$ et les vecteurs de biais $\mathbf{b}$  
+sont des paramètres libres appris par descente de gradient stochastique. $\oplus$ symbolise l'opération 
+de concatenation. Le tenseur de sortie de cette unité, soit le nouvel état latent $\mathbf{h}^{(t)}$, 
+est une combinaison de l'état latent précédent $\mathbf{h}^{(t-1)}$ et de l'état candidat 
+$\tilde{\mathbf{h}}$, pesée élément par élément par le vecteur à la sortie de la porte de mise à jour $\mathbf{z}$.
+
