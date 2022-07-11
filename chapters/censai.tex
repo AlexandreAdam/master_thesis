@@ -1,23 +1,25 @@
 \chapter{Pixelated Reconstruction of Gravitational Lenses using Recurrent Inference Machine}\label{chap:censai}
-\begin{resume}
-put traduction here 
-\end{resume}
-\begin{abstract}
+\thispagestyle{empty}
 
-Modeling strong gravitational lenses in order to 
-quantify the distortions in the images of background sources and 
-to reconstruct the mass density in the foreground lenses has 
-traditionally been a difficult computational challenge. 
-As the quality of gravitational lens images increases, the task of fully exploiting the information they contain 
-becomes computationally and algorithmically more difficult. 
-In this work, we use a neural network based on the Recurrent Inference Machine (RIM) to simultaneously reconstruct 
-an undistorted image of the background source and the lens mass density distribution as pixelated maps. 
-The method we present iteratively reconstructs the model parameters (the source and density map pixels) by learning 
-the process of optimization of their likelihood given the data using the physical model (a ray-tracing simulation), regularized
-by a prior implicitly learned by the neural network through its training data. When compared to more traditional parametric models, 
-the proposed method is significantly more expressive and can reconstruct complex mass distributions, 
-which we demonstrate by using realistic lensing galaxies taken from the cosmological hydrodynamic simulation IllustrisTNG. 
-\end{abstract}
+%\begin{resume}
+%put traduction here 
+%\end{resume}
+
+%\begin{abstract}
+%Modeling strong gravitational lenses in order to 
+%quantify the distortions in the images of background sources and 
+%to reconstruct the mass density in the foreground lenses has 
+%traditionally been a difficult computational challenge. 
+%As the quality of gravitational lens images increases, the task of fully exploiting the information they contain 
+%becomes computationally and algorithmically more difficult. 
+%In this work, we use a neural network based on the Recurrent Inference Machine (RIM) to simultaneously reconstruct 
+%an undistorted image of the background source and the lens mass density distribution as pixelated maps. 
+%The method we present iteratively reconstructs the model parameters (the source and density map pixels) by learning 
+%the process of optimization of their likelihood given the data using the physical model (a ray-tracing simulation), regularized
+%by a prior implicitly learned by the neural network through its training data. When compared to more traditional parametric models, 
+%the proposed method is significantly more expressive and can reconstruct complex mass distributions, 
+%which we demonstrate by using realistic lensing galaxies taken from the cosmological hydrodynamic simulation IllustrisTNG. 
+%\end{abstract}
 
 %\keywords{
         %Gravitational lensing (670) ---
@@ -1177,7 +1179,7 @@ https://doi.org/10.5281/zenodo.6555463}}. This research made use of \texttt{Tens
 \texttt{Matplotlib} \citep{matplotlib}, 
 \texttt{Scikit-image} \citep{scikit-image}, 
 \texttt{IPython} \citep{ipython}, 
-\texttt{Pandas} \citep{pandas1,pandas2}, 
+\texttt{Pandas} \citep{pandas1}, 
 \texttt{Scikit-learn} \citep{scikit-learn}, 
 \texttt{Astropy} \citep{astropy:2013,astropy:2018} 
 and \texttt{GalSim} \citep{galsim}.
