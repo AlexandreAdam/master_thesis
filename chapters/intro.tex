@@ -256,13 +256,13 @@
 %que ce qui est prédit par la théorie newtonienne.
 %\subsection{Contexte historique}
 
-L'idée des lentilles gravitationnelles est attribuée a Fritz \citet{Zwicky1937} 
-qui, suivant les calculs publié par \citet{Einstein1936}, 
-est le premier à postuler correctement que l'anneau d'Einstein pourrait être observé, produit par la déflection 
-de la lumière d'une source lointaine par le champ gravitationnel d'une galaxie 
-en avant-plan de cette source selon le point de vue d'un observateur sur Terre, 
-pourrait être observé. 
-Dans le même article, Zwicky articule précisément les idées qui nous motivent encore aujourd'hui 
+Fritz \citet{Zwicky1937}, suivant les calculs publié par \citet{Einstein1936}, 
+est le premier à observer correctement que l'anneau d'Einstein provenant d'une lentille gravitationnelle 
+est une observable particulièrement riche en information. Ce phénomène est 
+produit lorsque la lumière d'une source lointaine est déviée par le champ gravitationnel d'une galaxie 
+exceptionnellement bien aligné avec cette source selon le point de vue d'un observateur sur Terre.
+L'article de \citet{Zwicky1937}, publié 42 ans avant la première observation confirmée d'une lentille 
+gravitationnelle, articule précisément les idées qui nous motivent encore aujourd'hui 
 (presque 100 ans plus tard) à étudier ces objets, 
 c'est-à-dire que les lentilles gravitationnelles permettraient
 \begin{enumerate}
@@ -576,6 +576,77 @@ qui satisfait l'équation de la lentille adimensionnelle
 
 
 \subsection{Applications}
+% Cosmologie - Image of RXJ1131 (mine)
+% Mass mapping + substructure detection
+% Hierechecal studies
+
+
+
+%Strong gravitational lensing is a natural phenomenon through which multiple distorted images of luminous background objects, 
+%i.e. early-type star-forming galaxies, are formed by massive foreground objects along the line of sight 
+%\citep[e.g.,][]{Viera2013,Marrone2018,Rizzo2020,Sun2021}. 
+%These distortions are tracers of the distribution of mass in foreground objects, independent of the electromagnetic behaviour of these overdensities. 
+%As such, this phenomenon offers a powerful probe of the distribution of 
+%dark matter and its properties outside of the Milky Way \citep[e.g.,][]{Dala2002,Treu2004,Hezaveh2016,Gilman2020,Gilman2021}.
+
+%Lens modeling is the process of inferring the parameters describing both the mass distribution in the 
+%foreground lens and undistorted image of the background source.
+%This has traditionally been a time- and resource-consuming procedure. 
+%A common practice to model the mass of lensing galaxies is 
+%to assume that their density profiles 
+%follow simple parametric forms, e.g., a power law $\rho \propto r^{-\gamma'}$. 
+%These profiles generally provide a good fit to low-resolution data and are easy to work with due to their small number of parameters \citep[e.g.,][]{Koopmans2006,Barnabe2009,Auger2010}. 
+%However, as high-resolution and high signal-to-noise ratio (SNR) images become available, lens analysis with simple models requires the introduction of additional parameters representing the true complexity of the mass distribution in lensing galaxies and their immediate environments \citep[e.g.,][]{Sluse2017,Wong2017,Birrer2019,Rusu2019, Rusu2017,Li2021}. 
+%This approach becomes intractable as the quality of images increases. For example,
+%no simple parametric model of the Hubble Space Telescope (HST) Wide Field Camera 3 (WFC3) images of 
+%the Cosmic Horseshoe (J1148+1930) --- initially discovered by \citet{Belokurov2007} --- 
+%has been able to model the fine features of the extended arc 
+%\citep[e.g., ][]{Bellagamba2016,James2018,Cheng2019,Schuldt2019}.
+
+%Free-form methods --- also misleadingly called nonparametric methods ---
+%attempt to relax the assumptions about the smoothness and symmetries of these parametric profiles 
+%by changing their parametric support to more expressive families like regular (or adaptive)
+%grid representations and meshfree representations. 
+%But, this added flexibility comes at a price, which is (often) a high-dimensional inference problem that is under-constrained, meaning that imposing a prior on the reconstructed parameters becomes essential to penalize unphysical solutions and avoid overfitting the data. 
+%% \citep{Bartelmann1996,Saha1997,Seitz1998,Abdelsalam1998,Abdelsalam1998b,Diego2005,Diego2007,Liesenborgs2006,Liesenborgs2007,Coe2008,Merten2009,Birrer2015,Merten2016,Torres-Ballestros2022}. 
+% Kaiser And Squires Mass mapping weak lensing (leading up to Remy2022 - score based method reinforcing results from deep learning obtain 2 year prior by same group, and other method cited in this paper)
+% Bartelmann 1996 (cluster lensing free-form reconstruction, with a priori known 10^5 galaxy source as background -> reconstruct potential starting from smoothed prior)
+% Abdelsalam et al. (1998)
+% Saha & Williams (1997)
+% Seitz & Schneider (1998) Maximum entropy regularisation (cluster lensing, free-form inversion of the kappa map)
+% Cacciato, Bartelmann 2006 -> combine weak and strong lensing info in cluster to reconstruct 2d potential, focus on using arcs to constrain the location of critical curves (very similar to Bradac work, except this critical curve thing)
+% Jee et al 2007: Discovery of a ring-like dark matter structure in the cluster  Cl 0024+17 (pretty cool)
+% Deb, Goldberg 2008: Particle Based Lensing, used for cluster reconstruction, can include all information like weak lensing, strong lensing constraints (image positions, flux, known position of critical curves)
+% Liesenbourg (2006, -07, -09, -20): GRALE, genetic algorithm to infer kappa for cluster lensing by summing over basis function (Plummer profiles)
+% Gosh et al 2020: GRALE can reconstruct cluster with up to 1000 multiple images for ultra deep fields images of certain clusters (e.g. w/ JWST)
+% Diego et al 2005, 2007: WSLAP - probably the only method using pixel with no known arcs to constrain further the free-form mass model (mutliresolution grid parameter family)
+% Bradac 2005a,b and 2009: SWUnited: combine weak and strong lensing info to break the mass sheet degeneracy for cluster lensing
+% Coe et al 2008: LensPerfect - perfect reproduction of image position, flux and shear for cluster lenses. Explore thoroughly analytical priors for mass maps etc.
+% Mertens 2009, -11, -16 SaWLens, 2009 explore the introduction of regularisation into the Weak + Strong lensing constraints, 2011: application to real data, 2016: mesh-free reconstructions.
+%Free-form methods have a rich history in cluster-scale lensing \citep{Bartelmann1996,Seitz1998,Abdelsalam1998,Abdelsalam1998b,Bradac2005,Diego2005,Cacciato2006,Diego2007,Liesenborgs2006,Liesenborgs2007,Jee2007,Coe2008,Merten2009,Deb2012,Merten2016,Ghosh2020,Torres-Ballestros2022} and weak lensing \citep{Kaiser1993,Marshall2001,Massey2007,Deb2008,Simon2012,Leonard2012,Lanusse2016,Jeffrey2020,Starck2021,Remy2022}. They strive to make better use of the information contained in lensing features like resolved arc details, multiple image position, flux ratios, image deformation (i.e. weak lensing constraints) or even the null space of an image in order to place better constraints on the morphology of the mass density of the lens.
+%On the other hand, comparatively less work has been done in the context of galaxy-galaxy lensing system to tackle free-form mass modelling directly \citep{Saha1997,Saha2004,Birrer2015,Coles2014}. The main reason for this state of affairs is the difficulty of specifying an appropriate prior which regularizes the problem over its non-linear parameters while maintaining computational tractability and sufficient flexibility to model a large variety of systems. 
+
+% However, while these higher-dimensional parameter spaces add flexibility to the model, 
+% exploring this complex multimodal space with traditional non-linear optimizers becomes quickly computationally intractable. 
+% However, the price to pay for the flexibility of the free-form methods is (often) a high-dimensional inference problem that is under-constrained, meaning that imposing a prior on the reconstructed parameters becomes essential to penalize unphysical solutions and avoid overfitting the data. 
+
+%In view of this, the focus of the field has instead been on using free-form methods for the background source reconstruction only. 
+%A number of well-established procedures exists for linear inversion of pixellated-source models  in the context of traditional maximum likelihood modeling. These methods, originally developed by \citet{Warren2003,Suyu2006}, are based mainly on imposing a quadratic-log prior to the source pixels to regularize the optimisation. Subsequently, there have been multiple attempts at building a bridge toward free-form methods in order to correct simplistic assumptions on the mass density model by using linear corrections of the lensing potential \citep{Koopmans2005,Suyu2006b,Vegetti2009,Vegetti2012}, or iteratively specified priors for shapelets corrections \citep{Birrer2018,Nightingale2018}. But these extensions are generally limited by assumptions regarding the accuracy of the initial parametric models, and thus we are left wanting for a more flexible approach. 
+% Despite this, the problem of developing a fully fledged method for a free-form mass density reconstruction algorithm in the context of galaxy-galaxy lensing remains open. 
+% Many choices of priors are too constraining. overall this is a really hard problem, and it's so computationally expensive and degenerate that we can't test or characterize any of those models for systematics, let alone investigate ways correct for them.
+
+%Over the recent years, deep learning methods have proven extremely successful at modeling quickly and accurately strong lensing systems \citep{Hezaveh2017,PerreaultLevasseur2017,Morningstar2018,Coogan2020,Park2021,Legin2021,Wagner-Carena2021,Schuldt2022,Wagner-Carena2022,Karchev2022,AnauMontel2022,Mishra-Sharma2022}.
+%More specifically, \citet{Morningstar2019} demonstrated that recurrent convolutional neural networks can learn implicitly complex prior distributions from their training data to successfully reconstruct pixelated undistorted images of strongly lensed sources, circumventing the need to specify explicitly a prior distribution over those parameters. Motivated by this success, we propose a method that extends this framework to solve the full lensing problem and simultaneously reconstruct a pixelated lensing mass map and a pixelated undistorted background source.
+
+%In this work, we propose a method for pixelated 
+%strong gravitational lensing mass and source reconstruction, 
+%allowing it to reconstruct complex distributions. 
+%The method we propose here is based on the Recurrent Inference Machine (thereafter refered to as RIM), originally developed by \citet{Putzky2017}. 
+%In this framework, we aim to learn an iterative inference algorithm, moving away 
+%from hand-chosen inference algorithms and hand-crafted priors. 
+%Instead, the prior is learned implicitly through the dataset used to train 
+%the neural network that update the solution parameters at each iteration. 
+
 
 \section{Interférométrie par masque non-régulier}
 
@@ -941,7 +1012,8 @@ On remarque que la relation de récurrence \eqref{eq:map recurrence} est un cas 
 soit le cas où on a un modèle explicite pour la distribution a priori (ou son gradient) $\grad_{\mathbf{x}} \log p_\theta(\mathbf{x})$ 
 et la taux d'apprentissage $\alpha$. 
 Dans la relation \eqref{eq:rim putzky}, les paramètres $\alpha$ et $\theta$ sont absorbés dans les paramètres d'inférence $\varphi^{(t)}$, ce qui nous donne 
-une plus grande liberté pour modéliser la distribution a priori. Selon ce nouveau point de vue, 
+une plus grande liberté pour modéliser la distribution a priori en utilisant le théorème d'approximation universelle \citep{Cybenko1989,Hornik1991}. 
+Selon ce nouveau point de vue, 
 le problème de modéliser la distribution a priori, ou plus directement le gradient de la distribution a priori, 
 est équivalent à construire un modèle pour le gradient de la distribution a posteriori dans une relation 
 de récurrence.
@@ -956,13 +1028,15 @@ sujet de recherche actif \citep[e.g.][]{}, particulièrement dans l'étude des a
 Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux futurs.
 
 Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance envers $t$. Cet aspect 
-est directement inspiré des succès récents d'algorithmes d'optimisations comme la méthode de Nesterov \citep{Nesterov1983}, 
+est directement inspiré des succès récents d'algorithmes d'optimisations comme la méthode d'accélération de \citet{Nesterov1983}, 
 RPROP \citep{Riedmiller1993},
 AdaGrad \citep{Duchi2011}, RMSProp\footnote{L'algorithme apparaît en premier dans le cours CSC321 à l'Université de Toronto, donné par Geoffrey Hinton en 2011.} \citep{Hinton2012} 
-et ADAM \citep{Kingma2014}
+et ADAM \citep{Kingma2014},
 qui utilisent explicitement l'information 
 des gradients d'itérations antérieurs à $t$ pour calculer la mise à jour dans la relation de récurrence \eqref{eq:rim putzky}.
-Ainsi, il est important de considérer une classe de modèle avec une certaine mémoire des itérations précédentes. Pour ce 
+Cette propriété permet à ces algorithmes de collecter de l'information par rapport à la seconde dérivée de la fonction 
+objective, sans la calculer directement.
+Ainsi, il est important de considérer une classe de modèles avec une mémoire des itérations précédentes. Pour ce 
 faire, on utilise des unités récurrentielles à porte \citep[de l'anglais \textit{gated recurrent units}:][]{Cho2014} 
 pour modéliser une fonction $g_{\varphi}$ augmentée d'un ensemble d'états latents $\{\mathbf{h}^{(t)}_i\}_{i=1}^{H}$ 
 qui agissent comme une mémoire des activations précédentes du réseau de neuronnes. Les détails 
@@ -979,7 +1053,74 @@ Cette idée à fait une première apparition dans les travaux de
 
 
 \subsection{Méta-apprentissage}
-% andrychowics 2016, Schmidhuber 1991, loss, BPTT, generalisation, transfer learning, Younger 2001 and Hochreiter 2001, which Andrychowicz builds on
+Le méta-apprentissage est un sujet de recherche qui a une longue histoire dans le champ de recherche sur l'apprentissage machine, qu'on peut 
+tracer jusqu'aux travaux de Marvin Minsky, puis Schmidhuber 1991 (LSTM and thesis and meta algorithm) et Bengio 1990 \citep{}. 
+Le lecteur peut se référer à la revue de Hospedales pour une vue moderne sur le sujet \citep{}. L'approche qui nous intéresse est classée 
+dans la catégorie de méta-apprentissage par optimisation.
+
+La première apparition concrète de cette méthode est Younger 2001 et Hochreiter 2001, où le théorème de l'approximation universelle est utilisée pour 
+justifier l'utilisation de cellules à mémoire longues et courtes (LSTM, Schidhuber) pour découvrir un algorithme d'optimisation pour un classe 
+de fonctions (e.g. un modèle neuronnal). L'observation qui est faite est précisément que l'algorithme d'Euler est un cas particulier d'une 
+classe plus générale de relations de récurrences qui permettent de résoudre des problèmes de type \eqref{eq:mle}. Ainsi, un réseau de neuronnes 
+récurrent est une classe de fonctions qui peuvent représenter, en principe, une large portion de cette classe de fonctions. 
+Ce genre d'approche est motivé par le \textit{no free lunch theorem} pour l'optimisation, qui stipule qu'il 
+n'existe aucun algorithme général d'optimisation en mesure de résoudre toutes les classes de problèmes. Dans ca cas, la solution à ce problème est 
+d'introduire des biais inductifs ou des connaissances a priori pour contraindre l'espace des solutions recherchées à un espace où au moins une solution existe. 
+Le problème de méta-apprentissage est donc précisément d'apprendre ou encoder ces biais inductifs dans un modèle d'apprentissage, 
+de sortes que les problèmes d'optimisations subséquents, sur des taches d'essai, sont garanties d'avoir une solution.
+
+Le travail de \citet{Andrychowicz2016} utilise ces idées pour construire un algorithme d'optimisation, aussi basé sur les cellules LSTM, qui performe 
+beaucoup mieux que les algorithmes d'optimisations traditionnelles (e.g. ADAM) pour entraîner un second réseau de neuronnes pour les tâches spécifiques 
+sur lesquelles l'algorithme de méta apprentissage est entrainé (style transfer etc.). Le travail de Putzky et Welling est une généralisation de cette approche 
+aux problèmes inverses en général.
+
+Pour un problème de méta-apprentissage, l'ensemble de donné d'entrainement est légèrement différent d'une tâche d'interpolation ou de classification, 
+où $\mathcal{D} = \{\mathbf{x}_i,\,\mathbf{y}_i\}_{i=1}^{N}$ est construit à partir d'exemples dans le domaine $\mathcal{X}$ et l'image $\mathcal{Y}$ 
+connecté par la fonction qu'on essai d'approximer. Pour le méta-apprentissage, l'ensemble d'entraînement est constitué de tâche à performer. Dans 
+notre cas, la tâche à performer est l'optimisation d'une fonction de vraisemblence. On a donc
+\begin{equation}\label{eq:dmeta}
+\mathcal{D} = \{\mathbf{x}_i,\, \log p_i(\mathbf{y} \mid \mathbf{x}) \}_{i=1}^{N}
+\end{equation} 
+où $\mathbf{x}_i$ est la solution qu'on cherche et $\log p_i(\mathbf{y} \mid \mathbf{x})$ est la fonction de vraisemblence que 
+l'algorithme doit optimiser pour obtenir la solution. Les paramètres d'inférence $\varphi$ sont 
+optimisés sur toute l'ensemble de la trajectoire construire par la relation de récurrence 
+par une erreur quadratique moyenne
+\begin{equation}\label{eq:loss intro}
+        \mathcal{L}_{\varphi}(\mathbf{x}, \log p(\mathbf{y} \mid \mathbf{x})) = 
+        \sum_{t=1}^{T} w^{(t)}\lVert \mathbf{x} - \hat{\mathbf{x}}^{(t)} \rVert_{\mathcal{X}}^{2}
+\end{equation} 
+où $w^{(t)}$ est un poids qu'on associe à l'itération $t$ de la relation de récurrence. Dans la plupart des travaux, 
+$w^{(t)} = \frac{1}{T}$. Cet objectif est optimisé par la rétropropagation temporelle des gradients (BPTT, de l'anglais 
+\textit{backpropagation through time}). 
+Le problème de méta-apprentissage est donc un problème de minimisation du risque empirique observé de la 
+fonction objective
+\begin{equation}\label{eq:risk intro}
+        \varphi_{\mathcal{D}}^{\star} = \underset{\varphi}{\mathrm{argmin}}\, \mathbb{E}_{\mathcal{D}}\big[ \mathcal{L}_{\varphi} \big]
+\end{equation} 
+
+Il est important de discuter de la notion de généralisation dans le contexte de méta-apprentissage. Dans le contexte 
+où on cherche à construire une interpolation, la notion de généralisation réfère généralement au test où un point $\mathbf{x}$ 
+en dehors du support implicite définit par l'ensemble d'entraînement $\mathcal{D}$ est donné en entré à la fonction $f_{\varphi}$ 
+qu'on a construit. Un modèle est en mesure de généraliser si l'erreur quadratique moyenne sur la prédiction est similaire 
+au risque empirique observé sur l'ensemble d'entraînement. 
+
+Dans notre contexte, la généralisation réfère plutôt au concept de transfert d'apprentissage, c'est à dire transferrer les connaissances 
+apprises dans un certain contexte en transferrant la structure du problème pour vers des tâches d'essais. Ainsi, on comprend que la généralisation, 
+dans notre contexte, est équivalente à la notion de transfert de connaissance. Les paramètres d'inférences $\varphi$, plutôt que d'encoder les détails 
+d'une fonction, encode des biais inductifs, ou autrement des connaissances a priori sur la structure du problème qui sont transferrable d'une problème 
+à un autre. Cette réalisation est particuliè
+%  generalisation, transfer learning, 
 % Mention also the threads with MAML and Reptile -> could be interesting to mention that figuring out initialization is important, nice intro to our network.
+
+Finalement, on note que la notion d'initialisation dans la relation de récurrence $\mathbf{x}^{(0)} = \mathbf{x}_0$ est particulièrement 
+importante dans notre traitement. En effet, on assume que la fonction $g_\varphi$ se comporte bien dans une région 
+de $\mathcal{X}$ qui connecte $\mathbf{x}^{(0)}$ à $\mathbf{x}^{(T)}$. Or, un mauvais choix d'initialisation fait en sortes que 
+la troisième condition d'Hadamard est difficilement respectée. La notion d'apprendre une initialisation 
+qui accélère l'apprentissage de la descente de gradient est un sujet actif du champ de recherche de méta-apprentissage. 
+MAML et Reptile approchent se problème via une boucle double d'optimisation. Or, une approche beaucoup plus simple 
+peut être mise en place si on fait utilisation de l'observation dans notre problème d'inférence. Ici, on peut prendre le point 
+de vue qu'une fonction approximative inverse du modèle physique $\hat{F}_{\varphi'}^{-1}$ est un bon point de départ pour $\mathbf{x}_0$, 
+en particulier si l'image de cette fonction se situe dans la région de haute densité de distribution a prior empirique 
+déterminée par $\mathcal{D}$.
 
 
