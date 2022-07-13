@@ -256,25 +256,52 @@
 %que ce qui est prédit par la théorie newtonienne.
 %\subsection{Contexte historique}
 
-Fritz \citet{Zwicky1937}, suivant les calculs publié par \citet{Einstein1936}, 
+Fritz \citet{Zwicky1937}, suivant les calculs publiés par \citet{Einstein1936}, 
 est le premier à observer correctement que l'anneau d'Einstein provenant d'une lentille gravitationnelle 
 est une observable particulièrement riche en information. Ce phénomène est 
-produit lorsque la lumière d'une source lointaine est déviée par le champ gravitationnel d'une galaxie 
+produit lorsque la lumière d'une source lointaine est déviée par le champ gravitationnel d'une galaxie-lentille 
+(ou de tout autre objets massif comme un trou noir, une étoile, etc.) 
 exceptionnellement bien aligné avec cette source selon le point de vue d'un observateur sur Terre.
-L'article de \citet{Zwicky1937}, publié 42 ans avant la première observation confirmée d'une lentille 
-gravitationnelle, articule précisément les idées qui nous motivent encore aujourd'hui 
-(presque 100 ans plus tard) à étudier ces objets, 
-c'est-à-dire que les lentilles gravitationnelles permettraient
+L'article de \citet{Zwicky1937} articule précisément les idées qui nous motivent encore aujourd'hui 
+(plus de 85 ans plus tard) à étudier ces objets, soit
 \begin{enumerate}
         \item d'imager des galaxies trop lointaine pour que l'on puisse les résoudre avec 
                 nos télescopes;
         \item de mesurer directement la masse gravitationnelle de ces galaxies.
 \end{enumerate}
-Il est a noté qu'Einstein considérait la possibilité d'observer ce phénomène extrêmement improbable. 
-La résolution des télescopes optiques durant la majorité du XX\textsuperscript{e} siècle étaient 
-limités à environ $ 0.5$ arcsecondes par la turbulence de 
-l'air. Avec une telle résolution, un anneau d'Einstein d'une taille caractéristique de 1 arcseconde 
-apparaîtrait comme un point lumineux étalé, et ne serait donc pas distinguable d'une étoile. 
+La première lentille gravitationnelle est découverte par \citet{Walsh1979}, suivant l'identification 
+de deux spectres radios de quasars identiques, QSO 0957+561 A et B, séparés par seulement $5.7$ secondes d'arcs
+et capturés avec le téléscope Mark II à l'observatioire de Jodrell Bank. 
+Les spectres partagent la même magnitude, $m=17$, le même décalage vers le rouge, $z=1.405$, et possèdent des détails 
+chimiques suspicieusement semblables, ce qui suggère fortement que les spectres sont deux copies du même noyau 
+actif d'une galaxie en arrière plan produit par l'effet de lentille gravitationnelle d'une galaxie en avant plan, invisible dans le 
+domaine radio à une fréquence de $966\,\mathrm{Mhz}$. Cette hypothèse est rapidement confirmée par 
+l'observation optique de la galaxie-lentille ($z=0.39$) avec l'observatoire Palomar \citep{Young1980}, simulténament 
+observé et confirmé par le téléscope de $2.2\, m$ de l'Université d'Hawaii au mont Mauna Kea \citep{Stockton1980}, ainsi 
+que la modélisation de sa distribution de masse, de son environnement 
+et des angles de déflection qui causerait l'apparition d'une image double du quasar 
+par des modèles d'une complexité rapidement croissante suivant les observations subséquentes du 
+système \citep{Young1981}.
+\begin{figure}[htb!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/qso0957}
+        \caption{Le quasar double (QSO 0957+561 A et B) et la galaxie-lentille (G). Crédit: ESA/Hubble et NASA}
+        \label{fig:doubel quasar}
+\end{figure}
+
+%L'études des lentilles gravitationnelles permettent aujourd'hui 
+%L'études des lentilles gravitationnelles est aujourd'hui un sujet d'étude particulièrement actif en cosmologie.  
+%Une application importante est l'étude du taux d'expansion de l'Univers 
+%avec la cosmographie par délai temporelles \citep{Treu2016td} via l'observation de supernovaes \citep{Refsdal1964}
+%ou la surveillance décennale de quasars lentillés \citep[e.g.][]{Vanderriest1989}.
+
+
+%Il est intéressant de noter qu'\citet{Einstein1936} considérait la possibilité d'observer ce phénomène extrêmement improbable. En 
+%fait, les calculs sont publiés 
+%La résolution des télescopes optiques durant la majorité du XX\textsuperscript{e} siècle étaient 
+%limités à environ $ 0.5$ arcsecondes par la turbulence de 
+%l'air. Avec une telle résolution, un anneau d'Einstein d'une taille caractéristique de 1 arcseconde 
+%apparaîtrait comme un point lumineux étalé, et ne serait donc pas distinguable d'une étoile. 
 
 % Style of paragraphes needed here (only 3 paragraphe)
 % 1 ouverture (le précédent est bien)
@@ -576,9 +603,11 @@ qui satisfait l'équation de la lentille adimensionnelle
 
 
 \subsection{Applications}
-% Cosmologie - Image of RXJ1131 (mine)
-% Mass mapping + substructure detection
-% Hierechecal studies
+% Cosmologie - Image of RXJ1131 (mine) -> quasars
+% Mass mapping + substructure detection (side mention of cluster and weak lensing) (constraints on dark matter?_
+% Hierachecal studies (Ronan and previous paper Sonnenfeld etc)
+% 
+
 
 
 
@@ -891,10 +920,13 @@ où $\lVert \cdot \rVert_{\mathcal{V}}$ est une métrique de distance définit p
 
 Pour un problème mal-posé, ce qui est le cas pour le problème d'inférence des paramètres d'une lentille 
 gravitationnelles de type galaxie-galaxie ou la reconstruction d'image dans le contexte de l'interférométrie  
-par masque non-réguliers, on assume a priori que la première condition de Hadamard \ref{hadamard:1} est respectée. 
-Comme les problèmes qui nous intéressent sont sous-determinées, 
+par masque non-réguliers, 
+on assume a priori que la première condition de Hadamard \ref{hadamard:1} est respectée. C'est-à-dire qu'on assume 
+que les quantités observées ou mesurées sont causées par un phénomène unique (solution physique). 
+Toutefois, comme les problèmes qui nous intéressent sont sous-determinées, 
 ç.-à-d.\ que $\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) > \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$,
-la seconde condition de Hadamard \ref{hadamard:2} n'est pas respectée; il y a une infinité de solutions au problème \eqref{eq:likelihood max}.
+la seconde condition de Hadamard \ref{hadamard:2} n'est pas respectée; la fonction de vraisemblence 
+ne peut pas distingué la solution physique du nombre infini de solutions non-physiques au problème \eqref{eq:likelihood max}.
 
 %% Fait attention avec cet argument. Il n'est pas complet et il est misleading
 %La stratégie la plus commune pour contourner ce problème est de choisir judicieusement l'espace de solution $\mathcal{X}$ 
