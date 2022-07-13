@@ -256,44 +256,82 @@
 %que ce qui est prédit par la théorie newtonienne.
 %\subsection{Contexte historique}
 
-Fritz \citet{Zwicky1937}, suivant les calculs publiés par \citet{Einstein1936}, 
-est le premier à observer correctement que l'anneau d'Einstein provenant d'une lentille gravitationnelle 
-est une observable particulièrement riche en information. Ce phénomène est 
-produit lorsque la lumière d'une source lointaine est déviée par le champ gravitationnel d'une galaxie-lentille 
-(ou de tout autre objets massif comme un trou noir, une étoile, etc.) 
+Fritz \citet{Zwicky1937}, suivant les calculs publiés par \citet{Einstein1936}\footnote{Cacluls de Link} et la première observation 
+de l'effet de déviation gravitationnelle de la lumière par \citet{Eddington1919}, 
+est le premier à observer correctement qu'une lentille gravitationnelle 
+est un objet particulièrement riche en information\footnote{On note aussi les contributions de Chwoelsky 1924, et d'autres travaux spéculatifs d'avant}. 
+Ce phénomène se produit lorsque la lumière d'une source lointaine est fortement déviée par le champ gravitationnel d'un objet massif 
+(e.g. une galaxie, un trou noir, une étoile, etc.) 
 exceptionnellement bien aligné avec cette source selon le point de vue d'un observateur sur Terre.
-L'article de \citet{Zwicky1937} articule précisément les idées qui nous motivent encore aujourd'hui 
+L'article de \citet{Zwicky1937} articule précisément deux idées qui nous motivent encore aujourd'hui 
 (plus de 85 ans plus tard) à étudier ces objets, soit
 \begin{enumerate}
         \item d'imager des galaxies trop lointaine pour que l'on puisse les résoudre avec 
                 nos télescopes;
-        \item de mesurer directement la masse gravitationnelle de ces galaxies.
+        \item de mesurer directement la masse gravitationnelle de galaxies (appellées nébuleuse extra-galactique à l'époque) agissant 
+                comme lentilles.
 \end{enumerate}
-La première lentille gravitationnelle est découverte par \citet{Walsh1979}, suivant l'identification 
-de deux spectres radios de quasars identiques, QSO 0957+561 A et B, séparés par seulement $5.7$ secondes d'arcs
-et capturés avec le téléscope Mark II à l'observatioire de Jodrell Bank. 
+À l'époque, \citet{Einstein1936} considérait l'éventualité d'observer ces systèmes extrêmement 
+improbable en raison de la miniscule distance angulaire caractéristique $\theta_E$ entre deux images de la source
+\begin{equation}\label{eq:Taille Lentille}
+        \theta_E \simeq 3\left( \frac{M}{M_{\odot}} \right)^{1/2} \left( \frac{D}{1\, \mathrm{Gpc}} \right)^{-1/2}\, \mu\mathrm{as} \hspace{1cm} \left\{D \equiv \frac{D_{\ell} D_s}{D_{\ell s}}\right\}\, .
+\end{equation}
+%Bien sûr à cette époque, la masses des galaxies (voir Zwicky 1937-- october article) n'était bien caractériser (sans parler de D), 
+% Alors il était difficile d'imager la tailler de ces objets. Voir Link, maybe there is something there.
+
+Dû à cette difficulté pratique, 
+la première lentille gravitationnelle est découverte seulement $43$ ans après la prédiction de leur existence par \citet{Walsh1979}, 
+suivant l'identification de deux spectres radios de quasars identiques, QSO 0957+561 A et B, séparés par seulement $5.7$ secondes d'arcs
+et capturés avec le téléscope Mark II à l'observatioire Jodrell Bank. 
 Les spectres partagent la même magnitude, $m=17$, le même décalage vers le rouge, $z=1.405$, et possèdent des détails 
-chimiques suspicieusement semblables, ce qui suggère fortement que les spectres sont deux copies du même noyau 
-actif d'une galaxie en arrière plan produit par l'effet de lentille gravitationnelle d'une galaxie en avant plan, invisible dans le 
-domaine radio à une fréquence de $966\,\mathrm{Mhz}$. Cette hypothèse est rapidement confirmée par 
+chimiques suspicieusement semblables. Ces coïncidences suggèrent fortement que ces deux spectres sont deux copies provenant d'un même objet, soit un noyau 
+actif d'une galaxie en arrière plan, produites par l'effet de lentille gravitationnelle d'une galaxie en avant plan, invisible dans le 
+domaine radio à une fréquence de $966\,\mathrm{MHz}$. Cette hypothèse est rapidement confirmée par 
 l'observation optique de la galaxie-lentille ($z=0.39$) avec l'observatoire Palomar \citep{Young1980}, simulténament 
 observé et confirmé par le téléscope de $2.2\, m$ de l'Université d'Hawaii au mont Mauna Kea \citep{Stockton1980}, ainsi 
 que la modélisation de sa distribution de masse, de son environnement 
-et des angles de déflection qui causerait l'apparition d'une image double du quasar 
-par des modèles d'une complexité rapidement croissante suivant les observations subséquentes du 
-système \citep{Young1981}.
+et des angles de déflection qui causerait l'apparition d'une image double du quasar \citep{Young1981,Falc}
+%par des modèles d'une complexité rapidement croissante suivant les observations subséquentes du 
+%système \citep{Young1981}.
 \begin{figure}[htb!]
         \centering
-        \includegraphics[width=0.8\textwidth]{figures/qso0957}
-        \caption{Le quasar double (QSO 0957+561 A et B) et la galaxie-lentille (G). Crédit: ESA/Hubble et NASA}
+        \includegraphics[width=0.8\textwidth]{figures/zoomed_in_qso0957}
+        \caption{Le quasar double (QSO 0957+561 A et B) et la galaxie-lentille (G). Crédit: ESA/Hubble et NASA, enlargissement par AA.}
         \label{fig:doubel quasar}
 \end{figure}
 
-%L'études des lentilles gravitationnelles permettent aujourd'hui 
-%L'études des lentilles gravitationnelles est aujourd'hui un sujet d'étude particulièrement actif en cosmologie.  
-%Une application importante est l'étude du taux d'expansion de l'Univers 
-%avec la cosmographie par délai temporelles \citep{Treu2016td} via l'observation de supernovaes \citep{Refsdal1964}
-%ou la surveillance décennale de quasars lentillés \citep[e.g.][]{Vanderriest1989}.
+L'importance des lentilles gravitationnelles 
+pour la cosmologie est subséquemment reconnue très tôt \citep[voir la revue de][]{Blandford1992}. Leur application dans 
+ce domaine se divise principalement en 4 catégories:
+\begin{enumerate}
+        \item La cosmographie par délai temporelles \citep{Treu2016td,Suyu2017}. En particulier, le paramètre le mieux contraint est 
+                la constante de \citet{Hubble1929} $H_0$, mesurant le taux de l'expansion de l'Univers au temps présent. Les deux principales méthodes 
+                pour faire cette mesure sont la caractérisation de la courbe de lumière des supernovae \citet{Refsdal1964}, 
+                ç.-à-d. lentillé par une ou plusieurs galaxies \citep[e.g.][]{Kelly2015,Goobar2017}, et la surveillance décennale de quasars lentillés 
+                \citep[e.g.][]{Vanderriest1989,Wong2019};
+        \item Inférer la distribution de masse de la lentille pour une galaxie, ou un groupe de galaxie, et caractériser la distribution/présence 
+                de matière noire, voir même de trous noirs supermassif ou de planètes ou étoiles extragalactiques (tdcosmos);
+        \item De caractériser la structure de des protogalaxies dans l'Univers jeune, leur taux de formation d'étoiles et finalement 
+                imager directement le disque d'accrétion de trous noirs supermassifs, soit le noyau actif de galaxies dans l'Univers jeunes;
+        \item La recherche de plus de lentilles gravitationnelles et la caractérisation de leur propriétés de population pour l'inférence de 
+                de choses comme l'évolution des galaxies relié à leur contenu de matière noir, alpha, etc.
+        
+\end{enumerate}
+
+%Cette découverte remarquable marque l'origine d'une ét
+Le sujet de ce travail se concentre autour des lentilles gravitationnelles fortes de type galaxie-galaxie, e.g. QSO 0957+561. 
+De tels systèmes sont caractérisé minimalement par une distortion de l'image source suffisamment forte pour causer 
+l'apparition d'au moins deux images résolues de la source.
+Pour une discussion plus général du phénomène, le lecteur peut se référer aux manuels de références par \citet{Meneghetti2013,Congdon2018} 
+ou aux excellentes revues du sujet par \citet{Bartelmann2010,Treu2010}. 
+
+
+%Une application importante de ces systèmes est l'étude du taux d'expansion de l'Univers 
+
+%\subsection{Applications}
+% Cosmologie - Image of RXJ1131 (mine) -> quasars
+% Mass mapping + substructure detection (side mention of cluster and weak lensing) (constraints on dark matter?_
+% Hierachecal studies (Ronan and previous paper Sonnenfeld etc)
 
 
 %Il est intéressant de noter qu'\citet{Einstein1936} considérait la possibilité d'observer ce phénomène extrêmement improbable. En 
@@ -302,11 +340,6 @@ système \citep{Young1981}.
 %limités à environ $ 0.5$ arcsecondes par la turbulence de 
 %l'air. Avec une telle résolution, un anneau d'Einstein d'une taille caractéristique de 1 arcseconde 
 %apparaîtrait comme un point lumineux étalé, et ne serait donc pas distinguable d'une étoile. 
-
-% Style of paragraphes needed here (only 3 paragraphe)
-% 1 ouverture (le précédent est bien)
-% 2 sujet amené (en 1 paragraphe, amener l'idée à ce qui nous intéresse aujourd'hui (max 2 paragraphes)
-% 3 sujet posé -> galaxy-galaxy lensing
 
 %Ce qu'il n'avait pas pris en compte c'est la possibilité de distinguer le spectre de l'objet 
 %lentille à l'objet-lentille. En effet, comme ces objets se situent à deux redshift différent (pour un 
@@ -408,8 +441,8 @@ système \citep{Young1981}.
 \subsection{Les angles de déflections}
 Dans les paragraphes qui suivent, je dérive les équations centrales qui nous permettent 
 d'étudier les lentilles gravitationnelles de type galaxie-galaxie.
-Des traitements similaires 
-peuvent être trouvé dans les manuels de références de \citet{Meneghetti2013} et 
+Mon traitement est largement inspiré 
+des manuels de références de \citet{Meneghetti2013} et 
 \citet{Carroll2003}.
 
 Supposons qu'un photon est sur une trajectoire parallèle à l'axe de 
@@ -492,12 +525,12 @@ On a donc
 \end{equation} 
 Puisque le choix du paramètres $\lambda$ est libre, on peut le choisir tel 
 que $\lVert \dot{\mathbf{x}} \rVert = 1$ en tout point de la trajectoire. Ainsi,
-\begin{equation}\label{eq:EulerLagrange3}
-\begin{aligned}
+\begin{align}
+        \nonumber
         \frac{d }{d \lambda} n \dot{\mathbf{x}} -  \grad n &= 0 \\
+\label{eq:EulerLagrange3}
         \implies n \ddot{\mathbf{x}} + (\grad n \cdot \dot{\mathbf{x}}) \dot{\mathbf{x}} - \grad n &= 0
-\end{aligned}
-\end{equation} 
+\end{align} 
 
 À ce point de la dérivation, on utilise l'approximation de Born. 
 C'est-à-dire qu'on approxime la trajectoire 
@@ -506,8 +539,9 @@ Cette approximation est justfiée
 dans le contexte des lentilles gravitationnelles de type galaxie-galaxie, 
 puisque les angles de déviation sont généralement de 
 l'ordre de l'arcseconde ou plus petit. 
-Comme, le vecteur $\dot{\mathbf{x}}$ est tangent à la trajectoire du photon, 
-on obtient
+Comme le vecteur $\dot{\mathbf{x}}$ est tangent à la trajectoire du photon, le 
+terme $ \propto \dot{\mathbf{x}} \times \mathbf{e}_{\parallel} $ s'annule. 
+En subsitutuant l'indice de réfraction par \eqref{eq:n} dans $\mathbf{e}_{\parallel} \times \eqref{eq:EulerLagrange3}$, on obtient
 \begin{equation}\label{eq:sol}
         \ddot{\mathbf{x}} \times \mathbf{e}_{\parallel} = \frac{1}{n} \grad_\perp n = \grad_\perp \log n
         \approx -\frac{2}{c^{2}}\grad_{\perp} \Phi\,,
@@ -602,10 +636,6 @@ qui satisfait l'équation de la lentille adimensionnelle
 \end{figure}
 
 
-\subsection{Applications}
-% Cosmologie - Image of RXJ1131 (mine) -> quasars
-% Mass mapping + substructure detection (side mention of cluster and weak lensing) (constraints on dark matter?_
-% Hierachecal studies (Ronan and previous paper Sonnenfeld etc)
 % 
 
 
