@@ -265,7 +265,7 @@ est un phénomène particulièrement riche en information\footnote{
         offrent déjà une perspective riche et détaillées sur le phénomène des lentilles gravitationnelles au moment où \citet{Zwicky1937} publie 
         ses observation. 
         En particulier, \citet{Link1936} décrit la magnification d'une étoile lors du passage derrière un objet massif invisible et 
-        observe que les amas globulaires et les galaxies sont des candidats idéals pour une recherche systématique du 
+        observe que les amas globulaires et les galaxies sont des candidats idéaux pour une recherche systématique du 
         phénomène.
         }. 
 Ce phénomène se produit lorsque la lumière d'une source lointaine est fortement déviée par le champ gravitationnel d'un objet massif 
@@ -281,13 +281,13 @@ exceptionnellement bien aligné avec cette source selon le point de vue d'un obs
                 %comme lentilles.
 %\end{enumerate}
 \citet{Einstein1936} considérait l'éventualité d'observer ces systèmes extrêmement 
-improbable en raison de la miniscule taille angulaire caractéristique d'un 
+improbable en raison de la miniscule taille angulaire caractéristique du rayon d'un 
 anneau d'Einstein \citep{Chwolson1924,Einstein1936} 
 \begin{equation}\label{eq:Taille Lentille}
         \theta_E \simeq 3\left( \frac{M}{M_{\odot}} \right)^{\frac{1}{2}} \left( \frac{D}{1\, \mathrm{Gpc}} \right)^{-\frac{1}{2}}\, \mu\mathrm{as} \hspace{1cm} \left\{D \equiv \frac{D_{\ell} D_s}{D_{\ell s}}\right\}\, .
 \end{equation}
-Par exemple, une galaxie spirale comme la Voie Lactée, $M\sim 10^{12} M_{\odot}$, à une distance caractéristique $D= 2\, \mathrm{Gpc}$ produirait 
-$\theta_E \sim 2'' $.
+Par exemple, une galaxie spirale comme la Voie Lactée, $M\sim 10^{12} M_{\odot}$, à une distance caractéristique $D= 2\, \mathrm{Gpc}$ produirait des 
+images séparées par $2 \theta_E \sim 4''$. 
 %pour être résolue par les téléscopes optiques de l'époque, largement limité par les effets de turbulence de l'air.
 %À cette époque, la masses et la distances $D$ des nébuleuses extra-galactiques n'avaient pas de contraintes fiables\citep{Zwicky1937b}.
 %Toutefois, même avec les suppositions les plus optimistes, la distance caractéristique entre deux images est attendu à être de 
@@ -311,7 +311,8 @@ et des angles de déflection qui causerait l'apparition d'une image double du qu
 \begin{figure}[htb!]
         \centering
         \includegraphics[width=0.8\textwidth]{figures/zoomed_in_qso0957}
-        \caption{Le quasar double (QSO 0957+561 A et B) et la galaxie-lentille (G). Crédit: ESA/Hubble et NASA, enlargissement par AA.}
+        \caption{Le quasar double (QSO 0957+561 A et B) et la galaxie-lentille (G) imagé par le téléscope spatial Hubble. 
+        Crédit: ESA/Hubble et NASA, enlargissement par AA.}
         \label{fig:doubel quasar}
 \end{figure}
 
@@ -645,13 +646,55 @@ vers un détecteur fictif dans nos simulations. On notera que cette relation res
 \begin{equation}\label{eq:diameter angular distance}
        D \equiv \frac{\xi}{\theta}
 \end{equation} 
-où $\xi$ est la taille physique d'un objet placé à une certaine distance de l'observateur, et $\theta$ est l'angle sous-tendu 
-par cet objet. Pour un Univers plat décrit par la métrique de Friedmann-Robertson-Lemaître-Walker (FRLW),
-cette distance s'exprime directement en terme du décalage vers le rouge des photons émis par l'objet observé 
-%\begin{equation}\label{eq:diameter angular distance}
-        %D = \frac{1}{(1 + z)H_0} \int_{z_2}^{z_1}
+où $\xi$ est la taille physique d'un objet placé à une certaine distance de l'observateur, et $\theta$ est l'angle solide sous-tendu 
+par cet objet. Pour un Univers décrit par la métrique de Friedmann-Lemaître-Robertson-Walker,
+la notion de distance qui respecte \eqref{eq:diameter angular distance} est la distance du diamètre angulaire. 
+%Cette distance 
+%prend en compte l'expansion de l'Univers et sa géométrie potentiellement courbe via la notion de distance comobile. 
+En pratique, on peut s'exprimer directement cette distance en terme du décalage vers le rouge, $z$, des photons émis par l'objet
+\citep[voir les manuels de référence][]{Bartelmann2004,Coles2002,Dodelson2003}
+\begin{equation}\label{eq:diameter angular distance}%Bartelmann2004
+        D_{z} = \frac{c}{H_0(1 + z)} \int_{0}^{z} \frac{dz'}{\sqrt{\Omega_{r,0} + \Omega_{m,0} (1 + z')^{-1}  + \Omega_{\Lambda,0}(1 + z')^{-4} + \Omega_{K}a(1 + z')^{-2}}}
+\end{equation} 
+où $\Omega_{r,0}$, $\Omega_{m,0}$ et $\Omega_{\Lambda, 0}$ sont les paramètres de densités au temps présent de la radiation, de la matière et l'énergie sombre 
+respectivement. $\Omega_K = 1 - \Omega_0$ est le paramètre de courbure et $H_0$ est la constante de Hubble, soit le taux 
+d'expansion de l'Univers au temps présent. 
+%Dans le tableau \ref{tab:cosmos}, on donne la valeur des paramètres 
+%du modèles cosmologique $\Lambda$CDM utilisé pour calculer \eqref{eq:diameter angular distance}. 
+Par soucis de complétude, 
+la valeur ajustée de ces paramètres par le téléscope Planck \citep{PlanckCollaboration2018}, 
+pour le modèle cosmologique $\Lambda$CDM, est rapportée dans 
+l'annexe \ref{app:lcdm}.
+
+% Mettre en appendice
+%\begin{table}[H]
+        %\centering
+        %\caption{Paramètres de $\Lambda$CDM ajusté avec les observations du fond diffus cosmologique par le téléscope Planck \citep{Planck2018}}
+        %\label{tab:cosmos}
+        %\begin{tabular}{cc}
+                %\hline
+                %Paramètre & Valeur \\\hline \hline
+                %$\Omega_{r,0}$ & $\sim 10^{-4}$\\
+                %$\Omega_{m,0}$  & 0.3158 \\
+                %$h^{2}\Omega_{c,0}$  & 0.022383 \\
+                %$\Omega_{b,0}h^{2}$ & 0.6842\\
+                %$\Omega_{\Lambda,0}$ & 0.6842\\
+                %$\Omega_{k}$ & $\equiv 0$\\
+                %$h$ & $0.6732$ \\
+               %\hline 
+        %\end{tabular}
+%\end{table}
+%Avec le modèle cosmologique $\Lambda$CDM, cette équation se simplifie en 
+%observant que l'Univers est plat et présentement dominé par la matière et l'énergie sombre, de sortes qu'on
+ %calcule généralement la distance
+%\begin{equation}\label{eq:diameter angular distance lcdm}
+        %D^{\Lambda\mathrm{CDM}} = \frac{c}{H_0(1 + z)} \int_{z_2}^{z_1} \frac{dz'}{ \sqrt{\Omega_{m,0} (1 + z')^{-1}  + \Omega_{\Lambda,0}(1 + z')^{-4} }}
 %\end{equation} 
-%où $\xi$ est une distance comobile, ç.-à-d. constante vis-à-vis l'expansion des coordonnées physiques, et 
+%\begin{align*}
+        %D &= c a(z_2) \int_{a(z_2)}^{a(z_1)} \frac{da}{a\dot{a}} \\
+        %\dot{a}^{2} &= H_0^{2} \left[  \Omega_{r,0}a^{2} + \Omega_{m,0} a  + \Omega_{\Lambda,0}a^{-2} + \Omega_{k} \right] \\
+        %H^{2} &= H_0^{2} \left[  \Omega_{r,0}a^{-4} + \Omega_{m,0} a^{-3}  + \Omega_{\Lambda,0} + \Omega_{K}a^{-2} \right]
+%\end{align*}
 
 Il est généralement pratique de travailler avec la forme adimensionnelle de l'équation \eqref{eq:lens equation}. 
 On introduit la densité critique 
@@ -868,7 +911,7 @@ En pratique, on peut construire une approximation de
 cette fonction avec un réseau de neuronnes convolutionnelles lorsque $\mathbf{x}$ est une image, 
 suivant le principe d'approximation universelle \citep{Cybenko1989,Hornik1991}. 
 
-L'objectif d'entraînement de la fonction $f_\phi$ nécessite de manipuler la ELBO de pour obtenir une 
+L'objectif d'entraînement de la fonction $f_\phi$ nécessite de manipuler la ELBO pour obtenir une 
 divergence KL
 \begin{align}
         \mathcal{L}_{\phi,\theta}(\mathbf{x}) &= \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[ \log p_\theta(\mathbf{z}, \mathbf{x}) - \log q_\phi (\mathbf{z} \mid \mathbf{x}) \bigg]\, ; \\
@@ -886,7 +929,7 @@ devrait correspondre à une distribution normale isotropique
         p_{\theta}(\mathbf{z}) = \mathcal{N}(0, \bbone)
 \end{equation}
 On est libre de faire ce choix sans pour autant limiter les formes possibles de la distribution qui nous intéresse $p_\theta(\mathbf{x})$.
-On peut alors exprimer la ELBO comme
+%On peut alors exprimer la ELBO comme
 %La divergence de KL obtenue au second terme du membre droit de l'équation \eqref{eq:final elbo} 
 La KL admet alors une solution fermée étant donné les familles paramétriques stipulées 
 pour $p_\theta(\mathbf{z})$ \eqref{eq:latent distribution} et $q_\phi(\mathbf{z} \mid \mathbf{x})$ \eqref{eq:q phi}
@@ -1084,11 +1127,11 @@ choisir judicieusement l'espace de solution $\mathcal{X}$ tel que $\mathrm{dim}_
 Dans ce cas, le problème inverse est balancé ou sur-déterminé. 
 Par exemple, pour modéliser la masse d'une lentille gravitationnelle, il est commun  
 de choisir un modèle singulier isotherme ou une loi de puissance elliptique \citep[e.g.][]{Koopmans2006,Barnabe2009,Auger2010}, 
-soit une fonction des coordonnées du plan de la lentille, $f_{\mathbf{x}}: \mathbb{R}^{2} \rightarrow \mathbb{R}_+$,
-modélisée par quelques paramètres seulement 
-$\dim_{\mathbb{R}}(\mathcal{X}) \sim 10$, tandis que 
+%soit une fonction des coordonnées du plan de la lentille, $f_{\mathbf{x}}: \mathbb{R}^{2} \rightarrow \mathbb{R}_+$,
+caractérisé par quelques paramètres seulement 
+($\dim_{\mathbb{R}}(\mathcal{X}) \sim 10$), tandis que 
 l'observation $\mathbf{y}$ est une image avec $\dim_{\mathbb{R}}(\mathcal{Y}) \gtrsim 10^{4} \gg \mathrm{dim}_{\mathbb{R}}(\mathcal{X})$. 
-Cette approche est considérablement plus stable, particulièrement pour les observations de basses qualités. Toutefois, 
+Cette approche est considérablement plus stable que les méthodes sous-déterminées. Toutefois, 
 les modèles analytiques deviennent rapidement complexes et difficiles à construire, voir justifier, lorsque l'observation des systèmes qui nous intéresse
 sont de haute qualité, ce qui révèle la complexité cachée de ces systèmes \citep[e.g.][]{Schuldt2019}. 
 De plus, ce cadre nous limite à seulement considérer les hypothèses construites par des humains 
@@ -1111,7 +1154,7 @@ on considère la méthode de discrétisation d'Euler
 où $\alpha$ est le taux d'apprentissage dans la littérature sur 
 l'apprentissage machine.
 On est garantie d'obtenir une solution 
-au problème à valeur initiale $\hat{\mathbf{x}}^{(0)} = \mathbf{x}_0$ si l'algorithme, après $T$ itérations, 
+au problème à valeur initiale ($\hat{\mathbf{x}}^{(0)} = \mathbf{x}_0$) si l'algorithme, après $T$ itérations, 
 satisfait la condition de Lipschitz. Pour la relation de récurrence \eqref{eq:map recurrence}, ceci revient 
 à assumer que l'erreur locale de chaque itération est proportionnelle à $\alpha^{2}$, ce qui est 
 satisfait si le gradient $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x} \mid \mathbf{y})$ 
@@ -1138,18 +1181,18 @@ le problème de modéliser la distribution a priori, ou plus directement le grad
 est équivalent à construire un modèle pour le gradient de la distribution a posteriori dans une relation 
 de récurrence.
 
-Pour le problème de reconstruction d'image, les modèles neuronaux convolutif avec une architecture de sablier ou 
-encore une architecture en forme de U \citep{Ronneberger2015} sont des choix naturels pour modéliser $g_{\varphi^{(t)}}$. 
+Pour le problème de reconstruction d'image, les modèles neuronaux convolutif avec une architecture de sablier (auto-encodeur) ou 
+avec une architecture U-net \citep{Ronneberger2015} sont des choix naturels pour modéliser $g_{\varphi^{(t)}}$. 
 Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}$ 
-satisfait la condition de Lipschitz, ce qui n'est pas trivialement respecté pour un réseau de neurones.
+satisfait possède une constante de Lipshitz $L\leq 1$, ce qui n'est pas trivialement respecté pour un réseau de neurones.
 Dans ce travail, cette condition n'est pas explicitement imposée au modèle. 
 On note toutefois que l'analyse de la condition de Lipschitz pour les réseaux neuronnaux est un 
 sujet de recherche actif \citep[e.g.][]{}, particulièrement dans l'étude des attaques antagonistes de réseaux de neuronnes \citep[e.g.][]{}. 
-Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux futurs.
+%Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux futurs.
 
 Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance envers $t$. Cet aspect 
 est directement inspiré des succès récents d'algorithmes d'optimisations comme la méthode d'accélération de \citet{Nesterov1983}, 
-RPROP \citep{Riedmiller1993},
+%RPROP \citep{Riedmiller1993},
 AdaGrad \citep{Duchi2011}, RMSProp\footnote{L'algorithme apparaît en premier dans le cours CSC321 à l'Université de Toronto, donné par Geoffrey Hinton en 2011.} \citep{Hinton2012} 
 et ADAM \citep{Kingma2014},
 qui utilisent explicitement l'information 
@@ -1168,8 +1211,7 @@ prétraiter le gradient de la vraisemblence $\grad_{\mathbf{x}}\log p(\mathbf{y}
 avant de le passer en entrée au réseau de neuronnes $g_{\varphi}$. 
 Cette idée à fait une première apparition dans les travaux de 
 \citet{Modi2021}, puis dans notre travail présenté au chapitre \ref{chap:censai}. 
-%L'algorithme est décrit 
-%dans l'annexe \ref{ap:adam}.
+L'algorithme est décrit avec plus de détails dans l'annexe \ref{ap:adam}.
 
 
 \subsection{Méta-apprentissage}
