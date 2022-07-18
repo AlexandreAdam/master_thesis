@@ -200,7 +200,7 @@
 %as a form of implicit regularisation for certain problems. 
 
 
-\section{Lentilles gravitationnelles de type galaxie-galaxie}\label{sec:lentilles gravitationnelles}
+\section{Lentilles gravitationnelles fortes de type galaxie-galaxie}\label{sec:lentilles gravitationnelles}
 % Plan pour cette section: Dériver eq de la lentille et alpha
 % Intro général: deflection de la lumière
 %% Approcha a l'intro -> contexte historique à notre pensée sur la déviation de la lumière
@@ -648,12 +648,12 @@ vers un détecteur fictif dans nos simulations. On notera que cette relation res
 \end{equation} 
 où $\xi$ est la taille physique d'un objet placé à une certaine distance de l'observateur, et $\theta$ est l'angle solide sous-tendu 
 par cet objet. Pour un Univers décrit par la métrique de Friedmann-Lemaître-Robertson-Walker,
-la notion de distance qui respecte \eqref{eq:diameter angular distance} est la distance du diamètre angulaire $D$. 
+la notion de distance qui respecte \eqref{eq:diameter angular distance} est la distance du diamètre angulaire. 
 %Dans ce contexte, on définit l'angle solide comme $\theta = \frac{\xi}{\chi(a(t))}$, où $\chi$ est la distance comobile 
 %entre l'observateur et la source d'un photon, émis au moment $t$ où l'Univers avait un facteur d'échelle $a(t)$. 
 En pratique, on peut exprimer $D$ en terme du décalage vers le rouge des photons émis par l'objet, $z$. 
 On note $a(z)$ le facteur d'échelle lorsque le photon est émis par la source et $a(0)$ le facteur d'échelle au moment présent ($z=0$).
-Pour un Univers plat \citep[voir les manuels de référence][]{Bartelmann2004,Coles2002,Dodelson2003}, on a donc
+Pour un Univers plat \citep[voir les manuels de référence][]{Bartelmann2004,Coles2002,Dodelson2003}
 \begin{align}
         D &= c a(z) \underbrace{\int_{a(z)}^{a(0)} \frac{da}{a \dot{a}}}_{\text{distance comobile}}; \\[2ex]
                 \nonumber
@@ -661,7 +661,7 @@ Pour un Univers plat \citep[voir les manuels de référence][]{Bartelmann2004,Co
               \label{eq:dang}
               &= \frac{c}{H_0(1 + z)} \int_{0}^{z} \frac{dz'}{\sqrt{\Omega_{r,0}(1 + z')^{4} + \Omega_{m,0} (1 + z')^{3} + \Omega_{\Lambda,0} }}\, .
 \end{align}
-On a utiliser la relation entre le facteur d'échelle, $a$, et le décalage vers le rouge, $a = (1 + z)^{-1}$, pour obtenir l'équation \eqref{eq:dang} 
+On a utilisé la relation entre le facteur d'échelle, $a$, et le décalage vers le rouge, $a = (1 + z)^{-1}$, pour obtenir l'équation \eqref{eq:dang} 
 par un changement de la variable d'intégration. 
 %\begin{equation}\label{eq:diameter angular distance}%Bartelmann2004
         %D_{z} = \frac{c}{H_0(1 + z)} \int_{0}^{z} \frac{dz'}{\sqrt{\Omega_{r,0} + \Omega_{m,0} (1 + z')^{-1}  + \Omega_{\Lambda,0}(1 + z')^{-4} + \Omega_{K}a(1 + z')^{-2}}}
@@ -674,9 +674,8 @@ d'expansion de l'Univers au temps présent. La distance $D_{\ell s}$ se trouve s
 %Dans le tableau \ref{tab:cosmos}, on donne la valeur des paramètres 
 %du modèles cosmologique $\Lambda$CDM utilisé pour calculer \eqref{eq:diameter angular distance}. 
 Par soucis de complétude, 
-je rapporte la valeur des paramètres du modèle cosmologique $\Lambda$CDM dans l'annexe 
-\ref{app:lcdm}, obtenue par l'équipe \citet{PlanckCollaboration2018} qui a analysé 
-le fond diffus cosmologique avec l'observatoire spatial Planck.
+je rapporte la valeur des paramètres du modèle cosmologique $\Lambda$CDM obtenue par l'équipe \citet{PlanckCollaboration2018}, 
+qui a analysé le fond diffus cosmologique avec l'observatoire spatial Planck, dans l'annexe \ref{app:lcdm}.
 % Mettre en appendice
 %\begin{table}[H]
         %\centering
@@ -816,8 +815,10 @@ qui satisfait l'équation de la lentille adimensionnelle
 \subsection{Description du modèle}
 
 Les auto-encodeurs variationnels (VAE) ont été introduits par \citet{Kingma2013} comme une approche 
-pour inférer approximativement les variables latentes (ou cachées) qui contrôlent un processus génératif 
-définie via une distribution marginale implicite comme un échantillon de données. Dans cette section, j'introduis 
+pour inférer approximativement les variables latentes (ou cachées) qui contrôlent un certain processus génératif. 
+Leur utilité est particulièrement marquée lorsque ce processus génératif est définit implicitement par un échantillon de données, 
+soit un cas où la forme fonctionnelle de la distribution n'est pas connue a priori.
+Dans cette section, j'introduis 
 les concepts principaux relié à ce type de modélisation. 
 Le lecteur peut aussi se référer au livre blanc de \citet{Kingma2019}.
 
@@ -828,7 +829,7 @@ On définit une approximation de cette distribution, $p_\theta(\mathbf{x})$, car
 et on définit un processus génératif modélisé par la conditionnelle sur la variable cachée $p_\theta(\mathbf{x \mid \mathbf{z}})$. 
 Déterminer $p_\theta$ directement est généralement difficile, voir impossible, si la dimensionalité de $\mathbf{x}$ est grande 
 ($\mathrm{dim(\mathbf{x}}) \gtrsim 10^{4}$ pour des images). 
-Pour contourner ce problème, on introduit une distribution variationnelle, $q_\phi(\mathbf{z} \mid \mathbf{x})$, dont le rôle est de 
+Pour contourner ce problème, on introduit une distribution variationnelle, $q_\phi(\mathbf{z} \mid \mathbf{x})$, dont le rôle est 
 d'inférer la variable latente $\mathbf{z}$ associé à $\mathbf{x} \sim p_\theta(\mathbf{x} \mid \mathbf{z})$. 
 En d'autres mots, $q_\phi(\mathbf{z} \mid \mathbf{x})$ est une approximation variationnelle de la distribution a posteriori $p_\theta(\mathbf{z} \mid \mathbf{x})$.
 La notion de distance entre ces deux distributions est mesurée par la divergence de Kullback-Leibler $D_{\mathrm{KL}}(\cdot \KL \cdot) \geq 0$: 
@@ -935,7 +936,7 @@ devrait correspondre à une distribution normale isotropique
 \begin{equation}\label{eq:latent distribution}
         p_{\theta}(\mathbf{z}) = \mathcal{N}(0, \bbone)
 \end{equation}
-On est libre de faire ce choix sans pour autant limiter sévèrement les formes possibles de la distribution qui nous intéresse $p_\theta(\mathbf{x})$.
+%On est libre de faire ce choix sans pour autant limiter les formes possibles de la distribution variationnelle $q_\phi(\mathbf{z})$ qui  intéresse $p_\theta(\mathbf{x})$.
 %On peut alors exprimer la ELBO comme
 %La divergence de KL obtenue au second terme du membre droit de l'équation \eqref{eq:final elbo} 
 La KL admet alors une solution fermée étant donné les familles paramétriques stipulées 
@@ -970,29 +971,68 @@ de sorte que
 
 \subsection{Principe du goulot d'information}
 
-Je note que la fondation théorique des auto-encodeurs variationnels repose sur le principe plus général 
-du goulot d'information \citep{Tishby1999}; un sujet qui n'est pas abordé dans ce travail, mais qui motive 
-l'utilisation de la version $\beta$-VAE du modèle esquissé dans cette section. Sans rentrer dans les détails, on note 
-qu'il est possible de dériver l'objectif de notre auto-encodeur via la théorie de l'information de \citet{Shannon1948} en interprétant 
-l'auto-encodeur comme un système de transmission d'information par compression, avec perte. 
-Une approche naïve pour modéliser ce système serait de maximiser le taux d'information transmise par le système, 
-ç.-à-d. que le nombre de bit moyen encodé dans une variable latente aléatoire $Z$, mesuré par l'information 
-mutuelle entre le message $X$ et le code $Z$ utilisé pour représenter le message $I(X; Z)$, devrait se rapprocher 
-d'un maximum qu'on nomme la capacité du système $C = \underset{P(X)}{\mathrm{max}}\, I(X;\,Z)$. 
-Toutefois, cet objectif ne mentionne rien sur la qualité ou la pertinence de cette information. Pour obtenir un message pertinent, 
-on veut contraindre la complexité de Kolmogorov du message, ce qui peut être accomplit en contraingnant le code $Z$
-à utiliser le moins de bit possible pour encoder le message. 
-C'est le principe de base de la théorie du taux de distortion \citep{Cover2006}. 
-\citet{Tishby1999} observe que la mesure du taux de distortion suivante 
-\begin{equation}\label{eq:bottleneck principle}
-        \mathcal{L}\left[ p(\hat{\mathbf{x}} \mid \mathbf{x}) \right]  = I(\hat{X}; X) - \beta I(\hat{X};Z)
-\end{equation}
-%permet d'atteindre un compromis entre les deux objectifs qui nous interesse, soit des reconstruction de haute qualité 
-%et une compression informative (ç.-à-d. minimale).
-Le paramètre $\beta$ est un multiplicateur de Lagrange qui contrôle le niveau de compression désiré
-%\citet{Tishby2000} observe que cet objectif ne contraint pas la qualité ou la pertinence de cette information. La théorème , mais plutôt 
-%où un multiplicateur de Lagrange vient multiplier la distance KL dans la ELBO.
-Le lecteur est invité à se référer à la revue sur le sujet par \citet{Goldfield2020}.
+La fondation théorique des auto-encodeurs variationnels repose sur le principe plus général 
+du goulot d'information \citep[BIP, de l'anglais \textit{bottleneck information principle:}][]{Tishby1999}. 
+Dans cette sous-section, je décrit rapidement certains concepts 
+liés à la théorie de l'information de \citet{Shannon1948}, en particulier la théorie du taux de distortion des auto-encodeurs,
+pour motiver l'introduction d'un multiplicateur de 
+Lagrange $\beta$ au terme de régularisation ${-D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z}))}$.
+Pour une discussion en profondeur, voir l'excellente revue sur l'utilisation de BIP dans le contexte de l'apprentissage 
+machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de l'information par \citet{Cover2006}.
+
+\begin{figure}[thb!]
+        \centering
+        \resizebox{\linewidth}{!}{
+        \begin{tikzpicture}
+                \node at (-8, 1.4) {Source};
+                \node at (-8, 0.9) {d'information};
+                \node[circle, draw=black, minimum size=1cm] (x) at (-8, 0) {$X$}; 
+                \node at (-4, 1.3) {Encodeur};
+                \node[rectangle, draw=black, minimum width=2cm, minimum height=2cm] (encoder) at (-4, 0) {$q_\phi(\mathbf{z} \mid \mathbf{x})$}; 
+                \node[circle, draw=black, minimum size=1cm] (z) at (0, 0) {$Z$};
+                \node[circle, draw=black, minimum size=1cm] (eps) at (0, -2) {$\epsilon$};
+                \node at (0, -2.8) {Source de bruit};
+                \node[rectangle, draw=black, minimum width=2cm, minimum height=2cm] (decoder) at (4, 0) {$p_\theta(\mathbf{x} \mid \mathbf{z})$};
+                \node at (4, 1.3) {Décodeur};
+                \node[circle, draw=black, minimum size=1cm] (xhat) at (8, 0) {$\hat{X}$};
+                \node at (8, 0.9) {Reconstruction};
+                
+                \draw[-latex] (x) -- node[midway, below] {Message} (encoder);
+                \draw[-latex] (encoder) -- node[midway, below] {Signal} (z);
+                \draw[-latex] (z) -- node[midway, below] {Signal} (decoder);
+                \node at (1.8, -0.8) {reçu};
+                \draw[-latex] (decoder) --node[midwat, below] {Message} (xhat);
+                \node at (6.2, -0.8) {reçu};
+                \draw[-latex] (eps) to (z);
+        \end{tikzpicture}
+}
+        \caption{VAE comme un système de transmission d'information.}
+        \label{fig:info VAE}
+\end{figure}
+
+%l'utilisation de la version $\beta$-VAE du modèle esquissé dans cette section. Sans rentrer dans les détails, on note 
+%qu'il est possible de dériver l'objectif de notre auto-encodeur via la théorie de l'information de \citet{Shannon1948} en interprétant 
+%l'auto-encodeur comme un système de transmission d'information par compression, avec perte. 
+Un auto-encodeur est un système de traitement d'information par compression, ç.-à-d. qu'une source d'information, qu'on note avec la 
+variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur au message $\mathrm{dim}_{\mathbb{R}}(Z) < \mathrm{dim}_{\mathbb{R}}(X)$. 
+%Une approche naïve pour modéliser ce système serait de maximiser le taux d'information transmise par le système, 
+%ç.-à-d. que le nombre de bit moyen encodé dans une variable latente aléatoire $Z$, mesuré par l'information 
+%mutuelle entre le message $X$ et le code $Z$ utilisé pour représenter le message $I(X; Z)$, devrait se rapprocher 
+%d'un maximum qu'on nomme la capacité du système $C = \underset{P(X)}{\mathrm{max}}\, I(X;\,Z)$. 
+%Toutefois, cet objectif ne mentionne rien sur la qualité ou la pertinence de cette information. Pour obtenir un message pertinent, 
+%on veut contraindre la complexité de Kolmogorov du message, ce qui peut être accomplit en contraingnant le code $Z$
+%à utiliser le moins de bit possible pour encoder le message. 
+%C'est le principe de base de la théorie du taux de distortion \citep{Cover2006}. 
+%\citet{Tishby1999} observe que la mesure du taux de distortion suivante 
+%\begin{equation}\label{eq:bottleneck principle}
+        %\mathcal{L}\left[ p(\hat{\mathbf{x}} \mid \mathbf{x}) \right]  = I(\hat{X}; X) - \beta I(\hat{X};Z)
+%\end{equation}
+%%permet d'atteindre un compromis entre les deux objectifs qui nous interesse, soit des reconstruction de haute qualité 
+%%et une compression informative (ç.-à-d. minimale).
+%Le paramètre $\beta$ est un multiplicateur de Lagrange qui contrôle le niveau de compression désiré
+%%\citet{Tishby2000} observe que cet objectif ne contraint pas la qualité ou la pertinence de cette information. La théorème , mais plutôt 
+%%où un multiplicateur de Lagrange vient multiplier la distance KL dans la ELBO.
+%Le lecteur est invité à se référer à la revue sur le sujet par \citet{Goldfield2020}.
 
 \section{Machines à inférence récurrentielles}
 \subsection{Formalisme bayésien des problèmes inverses}
