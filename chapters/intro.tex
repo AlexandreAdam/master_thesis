@@ -261,7 +261,7 @@ de l'effet de déviation gravitationnelle de la lumière par \citet{Eddington191
 est largement reconnu comme étant le premier à observer correctement qu'une lentille gravitationnelle, et en particulier 
 l'anneau d'Einstein, 
 est un phénomène particulièrement riche en information\footnote{ 
-        Les travaux pionniers de Franti\v{s}ek \citep{Link1936,1937}, largement ignoré dans la littérature anglo-saxonne, %\citep{Valls-Gabaud2006}, 
+        Les travaux pionniers de Franti\v{s}ek \citep{Link1936,Link1937}, largement ignoré dans la littérature anglo-saxonne, %\citep{Valls-Gabaud2006}, 
         offrent déjà une perspective riche et détaillées sur le phénomène des lentilles gravitationnelles au moment où \citet{Zwicky1937} publie 
         ses observation. 
         En particulier, \citet{Link1936} décrit la magnification d'une étoile lors du passage derrière un objet massif invisible et 
@@ -302,9 +302,9 @@ Les spectres partagent la même magnitude, $m=17$, le même décalage vers le ro
 chimiques suspicieusement semblables. Ces coïncidences suggèrent fortement que ces deux spectres sont deux copies provenant d'un même objet, soit un noyau 
 actif d'une galaxie en arrière plan, produites par l'effet de lentille gravitationnelle d'une galaxie en avant plan, invisible dans le 
 domaine radio à une fréquence de $966\,\mathrm{MHz}$. Cette hypothèse est rapidement confirmée par 
-l'observation optique de la galaxie-lentille ($z=0.39$) avec l'observatoire Palomar \citep{Young1980}, simulténament 
-observé et confirmé par le téléscope de $2.2\, m$ de l'Université d'Hawaii au mont Mauna Kea \citep{Stockton1980}, ainsi 
-que la modélisation de sa distribution de masse, de son environnement 
+l'observation optique de la galaxie-lentille ($z=0.355$) avec l'observatoire Palomar \citep{Young1980}\footnote{Simulténament 
+observé et confirmé par le téléscope de $2.2\, m$ de l'Université d'Hawaii au mont Mauna Kea \citep{Stockton1980}.} 
+ainsi que la modélisation de sa distribution de masse, de son environnement 
 et des angles de déflection qui causerait l'apparition d'une image double du quasar \citep{Young1981,Falco1991}
 %par des modèles d'une complexité rapidement croissante suivant les observations subséquentes du 
 %système \citep{Young1981}.
@@ -640,11 +640,13 @@ Ainsi, on peut faire un argument géométrique (euclidien)
        \implies D_s \boldsymbol{ \beta} &= D_s \boldsymbol{ \theta} - D_{\ell s} \boldsymbol{ \alpha}   
 \end{align} 
 La dernière relation est l'équation maîtresse qui nous permet de tracer les rayons lumineux d'une source 
-vers un détecteur fictif dans nos simulations. On notera que cette relation reste valide pour un Univers courbe et/ou en expansion 
+vers un détecteur fictif dans nos simulations. 
+
+On notera que cette relation reste valide pour un Univers courbe et/ou en expansion 
 (ç.-à-d.\ décrit par une géométrie non-euclidienne), 
 à condition qu'on utilise une notion de distance qui satisfait, par définition, la relation trigonométrique euclidienne
 \begin{equation}\label{eq:diameter angular distance}
-       D \equiv \frac{\xi}{\theta}
+       D \equiv \frac{\xi}{\theta}\, ,
 \end{equation} 
 où $\xi$ est la taille physique d'un objet placé à une certaine distance de l'observateur, et $\theta$ est l'angle solide sous-tendu 
 par cet objet. Pour un Univers décrit par la métrique de Friedmann-Lemaître-Robertson-Walker,
@@ -653,9 +655,9 @@ la notion de distance qui respecte \eqref{eq:diameter angular distance} est la d
 %entre l'observateur et la source d'un photon, émis au moment $t$ où l'Univers avait un facteur d'échelle $a(t)$. 
 En pratique, on peut exprimer $D$ en terme du décalage vers le rouge des photons émis par l'objet, $z$. 
 On note $a(z)$ le facteur d'échelle lorsque le photon est émis par la source et $a(0)$ le facteur d'échelle au moment présent ($z=0$).
-Pour un Univers plat \citep[voir les manuels de référence][]{Bartelmann2004,Coles2002,Dodelson2003}, on a donc
+Pour un Univers plat \citep[voir les manuels de référence][]{Bartelmann2004,Coles2002,Dodelson2003} 
 \begin{align}
-        D &= c a(z) \underbrace{\int_{a(z)}^{a(0)} \frac{da}{a \dot{a}}}_{\text{distance comobile}}; \\[2ex]
+        D &= c a(z) \underbrace{\int_{a(z)}^{a(0)} \frac{da}{a \dot{a}}}_{\strut\mathclap{\text{distance comobile}}}; \\[2ex]
                 \nonumber
               &= \frac{c a(z)}{H_0} \int_{a(z)}^{a(0)} \frac{da}{\sqrt{\Omega_{r,0} + \Omega_{m,0} a  + \Omega_{\Lambda,0}a^{4}}}; \\
               \label{eq:dang}
