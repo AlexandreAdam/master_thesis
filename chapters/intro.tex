@@ -991,6 +991,7 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
                 \node[circle, draw=black, minimum size=1cm] (x) at (-8, 0) {$X$}; 
                 \node at (-4, 1.3) {Encodeur};
                 \node[rectangle, draw=black, minimum width=2cm, minimum height=2cm] (encoder) at (-4, 0) {$q_\phi(\mathbf{z} \mid \mathbf{x})$}; 
+                \node at (0, 0.9) {Code};
                 \node[circle, draw=black, minimum size=1cm] (z) at (0, 0) {$Z$};
                 \node[circle, draw=black, minimum size=1cm] (eps) at (0, -2) {$\epsilon$};
                 \node at (0, -2.8) {Source de bruit};
@@ -1016,8 +1017,14 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
 %qu'il est possible de dériver l'objectif de notre auto-encodeur via la théorie de l'information de \citet{Shannon1948} en interprétant 
 %l'auto-encodeur comme un système de transmission d'information par compression, avec perte. 
 Un auto-encodeur est un système de traitement d'information par compression, ç.-à-d. qu'une source d'information, qu'on note avec la 
-variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur au message $\mathrm{dim}_{\mathbb{R}}(Z) < \mathrm{dim}_{\mathbb{R}}(X)$. 
-%Une approche naïve pour modéliser ce système serait de maximiser le taux d'information transmise par le système, 
+variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur au message. On peut estimer une 
+limite supérieur pour la longueur de ces messages avec dimensionalité des vecteurs représentant les variables aléatoires $\mathrm{dim}_{\mathbb{R}}(Z) < \mathrm{dim}_{\mathbb{R}}(X)$. 
+En principe, il est possible d'entraîner (ou choisir) un encodeur et un décodeur tel que l'information transmise est 
+maximisé pour une certaine longueur de message $\mathrm{dim}(Z)$. On mesure l'information transmise par l'information 
+mutuelle entre la source d'information et la reconstruction de l'information $I(\hat{X};X)$. 
+Une approche naïve pour optimiser l'auto-encodeur serait de maximiser $I(\hat{X} ; X)$, toutefois on 
+réalise rapidement que cette approche ne contraint pas le code $Z$ à encoder l'information de façon pertinente 
+ou informative. 
 %ç.-à-d. que le nombre de bit moyen encodé dans une variable latente aléatoire $Z$, mesuré par l'information 
 %mutuelle entre le message $X$ et le code $Z$ utilisé pour représenter le message $I(X; Z)$, devrait se rapprocher 
 %d'un maximum qu'on nomme la capacité du système $C = \underset{P(X)}{\mathrm{max}}\, I(X;\,Z)$. 
@@ -1235,13 +1242,13 @@ de récurrence.
 Pour le problème de reconstruction d'image, les modèles neuronaux convolutif avec une architecture de sablier (auto-encodeur) ou 
 avec une architecture U-net \citep{Ronneberger2015} sont des choix naturels pour modéliser $g_{\varphi^{(t)}}$. 
 Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}$ 
-satisfait possède une constante de Lipshitz $L\leq 1$, ce qui n'est pas trivialement respecté pour un réseau de neurones.
+possède une constante de Lipshitz $L\leq 1$, ce qui n'est pas trivialement respecté pour un réseau de neurones.
 Dans ce travail, cette condition n'est pas explicitement imposée au modèle. 
 On note toutefois que l'analyse de la condition de Lipschitz pour les réseaux neuronnaux est un 
 sujet de recherche actif \citep[e.g.][]{}, particulièrement dans l'étude des attaques antagonistes de réseaux de neuronnes \citep[e.g.][]{}. 
 %Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux futurs.
 
-Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance envers $t$. Cet aspect 
+Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance des paramètres $\varphi^{(t)}$ envers $t$. Cet aspect 
 est directement inspiré des succès récents d'algorithmes d'optimisations comme la méthode d'accélération de \citet{Nesterov1983}, 
 %RPROP \citep{Riedmiller1993},
 AdaGrad \citep{Duchi2011}, RMSProp\footnote{L'algorithme apparaît en premier dans le cours CSC321 à l'Université de Toronto, donné par Geoffrey Hinton en 2011.} \citep{Hinton2012} 
