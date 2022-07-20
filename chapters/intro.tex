@@ -978,7 +978,7 @@ du goulot d'information \citep[BIP, de l'anglais \textit{bottleneck information 
 Dans cette sous-section, je décrit rapidement certains concepts 
 liés à la théorie de l'information de \citet{Shannon1948}, en particulier la théorie du taux de distortion des auto-encodeurs,
 pour motiver l'introduction d'un multiplicateur de 
-Lagrange $\beta$ au terme de régularisation ${-D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z}))}$.
+Lagrange $\beta$ au terme de régularisation de la ELBO ${-D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z}))}$.
 Pour une discussion en profondeur, voir l'excellente revue sur l'utilisation de BIP dans le contexte de l'apprentissage 
 machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de l'information par \citet{Cover2006}.
 
@@ -1017,14 +1017,24 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
 %qu'il est possible de dériver l'objectif de notre auto-encodeur via la théorie de l'information de \citet{Shannon1948} en interprétant 
 %l'auto-encodeur comme un système de transmission d'information par compression, avec perte. 
 Un auto-encodeur est un système de traitement d'information par compression, ç.-à-d. qu'une source d'information, qu'on note avec la 
-variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur au message. On peut estimer une 
-limite supérieur pour la longueur de ces messages avec dimensionalité des vecteurs représentant les variables aléatoires $\mathrm{dim}_{\mathbb{R}}(Z) < \mathrm{dim}_{\mathbb{R}}(X)$. 
-En principe, il est possible d'entraîner (ou choisir) un encodeur et un décodeur tel que l'information transmise est 
-maximisé pour une certaine longueur de message $\mathrm{dim}(Z)$. On mesure l'information transmise par l'information 
-mutuelle entre la source d'information et la reconstruction de l'information $I(\hat{X};X)$. 
-Une approche naïve pour optimiser l'auto-encodeur serait de maximiser $I(\hat{X} ; X)$, toutefois on 
-réalise rapidement que cette approche ne contraint pas le code $Z$ à encoder l'information de façon pertinente 
-ou informative. 
+variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur au message $\mathrm{dim}_{\mathbb{R}}(Z) < \mathrm{dim}_{\mathbb{R}}(X)$. 
+\begin{equation}
+        C = \underset{P(X)}{\mathrm{argmax}}\, I(X ; \hat{X}) 
+\end{equation} 
+\begin{equation}
+        I(X ; \hat{X}) = H(X) - H(X \mid \hat{X})   
+\end{equation} 
+where $H(X)$ is the intrinsic uncertainty of the source of information (or the number of bits needed to encode it) and 
+$H(X \mid \hat{X})$ is the conditional uncertainty. For an optimal system, this second term vanishes, meaning $\hat{X}$ tells you 
+everything about $X$. If the channel is noisy, then this means that the capacity of the system is less than a perfect one. 
+%Naïvement, on penserait que le système optimal est celui qui maximise l'information transmise $I(X ; \hat{X})$
+%En principe, il est possible d'entraîner (ou choisir) un encodeur et un décodeur tel que l'information transmise est 
+%maximisée, qu'on mesure par l'information 
+%mutuelle entre la source d'information et la reconstruction de l'information $I(X;\hat{x})$. 
+%Une approche naïve pour optimiser l'auto-encodeur serait de maximiser $I(X ; \hat{X})$, 
+%toutefois on 
+%réalise rapidement que cette approche ne contraint pas le code $Z$ à encoder l'information de façon pertinente 
+%ou informative. 
 %ç.-à-d. que le nombre de bit moyen encodé dans une variable latente aléatoire $Z$, mesuré par l'information 
 %mutuelle entre le message $X$ et le code $Z$ utilisé pour représenter le message $I(X; Z)$, devrait se rapprocher 
 %d'un maximum qu'on nomme la capacité du système $C = \underset{P(X)}{\mathrm{max}}\, I(X;\,Z)$. 
