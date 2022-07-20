@@ -261,7 +261,7 @@ de l'effet de déviation gravitationnelle de la lumière par \citet{Eddington191
 est largement reconnu comme étant le premier à observer correctement qu'une lentille gravitationnelle, et en particulier 
 l'anneau d'Einstein, 
 est un phénomène particulièrement riche en information\footnote{ 
-        Les travaux pionniers de Franti\v{s}ek \citep{Link1936,Link1937}, largement ignoré dans la littérature anglo-saxonne, %\citep{Valls-Gabaud2006}, 
+        Les travaux pionniers de Franti\v{s}ek \citet{Link1936,Link1937}, largement ignoré dans la littérature anglo-saxonne, %\citep{Valls-Gabaud2006}, 
         offrent déjà une perspective riche et détaillées sur le phénomène des lentilles gravitationnelles au moment où \citet{Zwicky1937} publie 
         ses observation. 
         En particulier, \citet{Link1936} décrit la magnification d'une étoile lors du passage derrière un objet massif invisible et 
@@ -956,7 +956,7 @@ La reconstruction s'accomplit en utilisant d'abord le modèle d'inférence
 $\mathbf{z}^{(1:L)} \overset{\mathrm{i.i.d}}{\sim} q_\phi(\mathbf{z} \mid \mathbf{x})$ 
 pour obtenir un échantillon de représentations latentes à partir des équations \eqref{eq:p epsilon} à \eqref{eq:reparametrisation}, 
 puis en utilisant le modèle génératif $\hat{\mathbf{x}}^{(i)} \sim p_\theta(\mathbf{x} \mid \mathbf{z}^{(i)})$ pour obtenir 
-un échantillon de reconstructions $\mathbf{\hat{x}}^{(1:L)}$ similaire à l'exemple originel $\mathbf{\mathbf{x}}$. 
+un échantillon de reconstructions $\mathbf{\hat{x}}^{(1:L)}$ de l'exemple originel $\mathbf{\mathbf{x}}$. 
 Comme on a déjà une variable auxiliaire $\boldsymbol{ \epsilon} $ 
 qui se charge de l'aspect génératif du modèle, on peut construire une approximation du 
 modèle génératif avec une fonction générique des variables latentes 
@@ -1230,7 +1230,7 @@ en encore si la norme de la dérivée seconde de $\log p_\theta(\mathbf{x} \mid 
 où $g_{\varphi^{(t)}}: \mathcal{X}^{2} \rightarrow \mathcal{X}$ est le modèle du gradient de la distribution 
 a posteriori. 
 On remarque que la relation de récurrence \eqref{eq:map recurrence} est un cas spécial de la relation \eqref{eq:rim putzky}, 
-soit le cas où on a un modèle explicite pour la distribution a priori (ou son gradient) $\grad_{\mathbf{x}} \log p_\theta(\mathbf{x})$ 
+soit le cas où on a un modèle explicite pour la distribution a priori, ou son gradient $\grad_{\mathbf{x}} \log p_\theta(\mathbf{x})$,
 et la taux d'apprentissage $\alpha$. 
 Dans la relation \eqref{eq:rim putzky}, les paramètres $\alpha$ et $\theta$ sont absorbés dans les paramètres d'inférence $\varphi^{(t)}$, ce qui nous donne 
 une plus grande liberté pour modéliser la distribution a priori en utilisant le théorème d'approximation universelle \citep{Cybenko1989,Hornik1991}. 
