@@ -978,7 +978,7 @@ du goulot d'information \citep[BIP, de l'anglais \textit{bottleneck information 
 Dans cette sous-section, je décrit rapidement certains concepts 
 liés à la théorie de l'information de \citet{Shannon1948}, en particulier la théorie du taux de distortion des auto-encodeurs,
 pour motiver l'introduction d'un multiplicateur de 
-Lagrange $\beta$ au terme de régularisation de la ELBO ${-D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z}))}$.
+Lagrange $\beta$ au terme de régularisation de la ELBO, ${-D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z}))}$.
 Pour une discussion en profondeur, voir l'excellente revue sur l'utilisation de BIP dans le contexte de l'apprentissage 
 machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de l'information par \citet{Cover2006}.
 
@@ -1018,15 +1018,65 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
 %l'auto-encodeur comme un système de transmission d'information par compression, avec perte. 
 Un auto-encodeur est un système de traitement d'information par compression, ç.-à-d. qu'une source d'information, qu'on note avec la 
 variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur au message $\mathrm{dim}_{\mathbb{R}}(Z) < \mathrm{dim}_{\mathbb{R}}(X)$. 
+
+% Go directly into BIP loss here
+% Then describe it in 1 paragraph
+% Then make the connection w/ beta-VAE then stop
+
+%Naïvement, on penserait que le système optimal est celui qui maximise l'information transmise $I(X ; \hat{X})$, 
+%dont le maximum correspond à la capacité du système d'information $C$
+%\begin{equation}\label{eq:channel capacity}
+        %C = \underset{P(X)}{\mathrm{max}}\, I(X ; \hat{X}) 
+%\end{equation} 
+%Or, cet objectif est mal posé pour un auto-encodeur générique. La stratégie la plus directe pour optimiser \eqref{eq:channel capacity} 
+%est de choisir la source de bruit comme 
+%étant négligeable et un code de taille similaire à la source d'information, $\mathrm{dim}(Z) \lesssim \mathrm{dim}(X)$. 
+%de sortes que la capacité du système est atteinte $C \leq H(X)$.
+%Avec cette approche, on peut atteindre la capacité d'un système d'information $C \leq H(X)$, sans compre
+%En effet, l'entropie de Shannon conditionnelle $H(X \mid \hat{X})$, soit la perte d'information dû à la compression et au bruit dans le canal de compression, devient nulle
+%si on est libre de ne pas comprimer l'information et si on élimine la source de bruit complètement.
+%\begin{equation}
+        %I(X ; \hat{X}) = H(X) - \cancelto{0}{H(X \mid \hat{X})}\, , 
+%\end{equation}
+%de sortes qu'on atteint la limite théorique de l'information mutuelle pour la reconstruction de la source d'information ($X = \hat{X}$).
+%La liberté de choisir un code qui compresse si peut l'information mène à un problème significatif:
+%l'encodeur et le décodeur optimal peuvent être, tout simplement, la fonction identité.
+%Dans ce cas, qu'est-ce qu'on apprend sur la source d'information $X$? Rien. 
+%Malgrès cela, cet objectif est précisément 
+%celui d'un auto-encodeur traditionnel \citep[e.g.][]{Vincent2011}, soit celui de construire une représentation fidèle à $X$, 
+%libre de l'entropie, soit la source d'incertitude $H(X)$, intrinsèque à la source d'information. 
+%Cet objectif est particulièrement utile 
+%pour toute tâche liée au débruitage de la donnée, mais ne produit pas un code $Z$ informatif, ou utile, pour toute tâche en aval.
+
+
+%c'est précisément le 
+%problème qui limite l'applicabilité des auto-encodeurs génériques \citep{Vincent}.
+%Qu'est-ce qu'on a appris sur la source 
+%d'information en construisant un auto-encodeur équivalent à l'identité? 
+
+Il s'avère que l'objectif de comprimer l'information est intimement lié à l'objectif de d'obtenir un sommaire informatif; ç.-à-d. qu'un 
+code d'une complexité de Kolmogorov minimale décrit la source d'information de la manière la plus informative possible. Cette connexion 
+remarquable, observée par \citet{kolmogorov1965,}, est une application concrète du principe du rasoir d'Occam: l'explication adéquate la plus simple est la meilleure.
+C'est le sujet de la théorie du taux de distortion de l'information que de minimiser l'objectif
 \begin{equation}
-        C = \underset{P(X)}{\mathrm{argmax}}\, I(X ; \hat{X}) 
+        \mathcal{L}_{\phi,\theta}(p(\hat{\mathbf{x}} \mid \mathbf{x})) 
 \end{equation} 
-\begin{equation}
-        I(X ; \hat{X}) = H(X) - H(X \mid \hat{X})   
+
+
+%L'objectif optimal pour un auto-encodeur est donc
+%\begin{equation}\label{eq:}
+%\phi^{\star},\,\theta^{\star} = \underset{\phi,\,\theta}{\mathrm{argmax}}\,\, \mathcal{L}_{\phi,\,\theta}(p(\hat{\mathbf{x}} \mid \mathbf{x})) =  
+%\end{equation} 
+
+%C'est précisément le problème rencontré lorsqu'on essai de compresser l'information $X$ dans
+\begin{equation}\label{eq:}
+        
 \end{equation} 
-where $H(X)$ is the intrinsic uncertainty of the source of information (or the number of bits needed to encode it) and 
-$H(X \mid \hat{X})$ is the conditional uncertainty. For an optimal system, this second term vanishes, meaning $\hat{X}$ tells you 
-everything about $X$. If the channel is noisy, then this means that the capacity of the system is less than a perfect one. 
+%Or, comme on a une liberté immense sur le choix du code $Z$ pour représenter l'information, on peut en principe choise 
+%$\mathrm{dim}(Z) \lesssim \mathrm{dim}(X)$ dans le cas où la source de 
+%where $H(X)$ is the intrinsic uncertainty of the source of information (or the number of bits needed to encode it) and 
+%$H(X \mid \hat{X})$ is the conditional uncertainty. For an optimal system, this second term vanishes, meaning $\hat{X}$ tells you 
+%everything about $X$. If the channel is noisy, then this means that the capacity of the system is less than a perfect one. 
 %Naïvement, on penserait que le système optimal est celui qui maximise l'information transmise $I(X ; \hat{X})$
 %En principe, il est possible d'entraîner (ou choisir) un encodeur et un décodeur tel que l'information transmise est 
 %maximisée, qu'on mesure par l'information 
@@ -1090,12 +1140,12 @@ si un problème inverse est bien posé
         \item \label{hadamard:1}Une solution existe;
         \item \label{hadamard:2}Cette solution est unique;
         \item \label{hadamard:3} La fonction $G_\varphi: \mathcal{Y} \rightarrow \mathcal{X}$ 
-                qui infère les paramètres $\mathbf{x}$ satisfait la condition de Lipshitz.
+                qui infère les paramètres $\mathbf{x}$ satisfait la condition de Lipschitz.
 \end{enumerate}
 Le troisième critère \ref{hadamard:3} requière que la fonction d'inférence soit stable, ç.-à-d. qu'un petit changement 
-dans le vecteur d'observations devrait correspondre à un petit changement de la solution, mesuré par la constante de Lipshitz
+dans le vecteur d'observations devrait correspondre à un petit changement de la solution, mesuré par la constante de Lipschitz
 $L \geq 0$
-\begin{equation}\label{eq:Lipshitz}
+\begin{equation}\label{eq:Lipschitz}
         \lVert G_\varphi(\mathbf{y}_1) - G_\varphi(\mathbf{y}_2)\rVert_{\mathcal{X}} \leq L \lVert \mathbf{y}_1 - \mathbf{y}_2\rVert_{\mathcal{Y}}\, ,
 \end{equation}
 où $\lVert \cdot \rVert_{\mathcal{V}}$ est une métrique de distance définit pour l'espace vectoriel $\mathcal{V}$.
@@ -1252,7 +1302,7 @@ de récurrence.
 Pour le problème de reconstruction d'image, les modèles neuronaux convolutif avec une architecture de sablier (auto-encodeur) ou 
 avec une architecture U-net \citep{Ronneberger2015} sont des choix naturels pour modéliser $g_{\varphi^{(t)}}$. 
 Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}$ 
-possède une constante de Lipshitz $L\leq 1$, ce qui n'est pas trivialement respecté pour un réseau de neurones.
+possède une constante de Lipschitz $L\leq 1$, ce qui n'est pas trivialement respecté pour un réseau de neurones.
 Dans ce travail, cette condition n'est pas explicitement imposée au modèle. 
 On note toutefois que l'analyse de la condition de Lipschitz pour les réseaux neuronnaux est un 
 sujet de recherche actif \citep[e.g.][]{}, particulièrement dans l'étude des attaques antagonistes de réseaux de neuronnes \citep[e.g.][]{}. 
