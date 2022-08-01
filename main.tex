@@ -7,16 +7,12 @@
 % packages
 %\usepackage[square,numbers]{natbib}
 \usepackage{aasmacros}
-\usepackage[authoryear,round]{natbib}
+\usepackage[round]{natbib}
 \bibliographystyle{abbrvnat}
 
 \usepackage{epigraph}
 \setlength{\epigraphwidth}{0.6\textwidth}
 \setlength{\epigraphrule}{0pt}
-%%%*********************************************
-\newcommand{\myopeningquote}{\smash{\raisebox{-0.5\height}{\llap{\scalebox{3}
-          {\textcolor{Silver}{``}}\,}}}}
-\newcommand{\myclosingquote}{\raisebox{-0.66\height}{\scalebox{3}{\textcolor{Silver}{”}}}}
 
 
 \usepackage[colorlinks,
@@ -24,7 +20,7 @@
     citecolor={blue},
     urlcolor={black}]{hyperref} % for links
 \usepackage{graphicx} % for embedding graphics
-\usepackage{booktabs} % for pretty tables
+%\usepackage{booktabs} % for pretty tables
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage[nottoc]{tocbibind} % adds lot and lof to toc
@@ -64,7 +60,7 @@
 % author data
 \author{Alexandre Adam}
 %\title{Reconstruction agnostique de lentilles gravitationnelles de type galaxie-galaxie}
-\title{Reconstruction d'images avec les machines à inférences récurentielles}
+\title{La reconstruction d'image dans le contexte des problèmes inverses mal posées et non-linéaires avec les machines à inférence récurentielles}
 \degree{Maître ès sciences (M.Sc.)}
 \department{Département de physique}
 \gradyear{2022}
@@ -113,7 +109,9 @@
 %\input{chapters/censai}
 
 {\scriptsize
+  %\bibliographystyle{apalike} % <== and here you specify the style for your bibliography
   \bibliography{intro_bib,censai_bib}
+
 }
 
   \appendix

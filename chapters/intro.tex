@@ -23,6 +23,7 @@
  
 \chapter{Introduction}
 \thispagestyle{empty}
+% Introduce the 4 chapters, 2 applications of non-linear image inverse problems and two important DL models used in our work
 
 % 1 ouverture -> les problèmes inverses, l'importance des images en astrophysique -> e.g. image des trou noirs de EHT.
 % 2 sujet amené -> la reconstruction d'image dans le contexte de problèmes inverses
@@ -259,20 +260,39 @@
 Fritz \citet{Zwicky1937}, suivant les calculs publiés par \citet{Einstein1936} et la première observation 
 de l'effet de déviation gravitationnelle de la lumière par \citet{Eddington1919}, 
 est largement reconnu comme étant le premier à observer correctement qu'une lentille gravitationnelle, et en particulier 
-l'anneau d'Einstein, 
+l'anneau d'Einstein \citep{Chwolson1924},
 est un phénomène particulièrement riche en information\footnote{ 
         Les travaux pionniers de Franti\v{s}ek \citet{Link1936,Link1937}, largement ignoré dans la littérature anglo-saxonne, %\citep{Valls-Gabaud2006}, 
         offrent déjà une perspective riche et détaillées sur le phénomène des lentilles gravitationnelles au moment où \citet{Zwicky1937} publie 
         ses observation. 
-        En particulier, \citet{Link1936} décrit la magnification d'une étoile lors du passage derrière un objet massif invisible et 
+        En particulier, \citet{Link1936} décrit la magnification d'une étoile lors du passage derrière un objet massif et 
         observe que les amas globulaires et les galaxies sont des candidats idéaux pour une recherche systématique du 
         phénomène.
         }. 
-Ce phénomène se produit lorsque la lumière d'une source lointaine est fortement déviée par le champ gravitationnel d'un objet massif 
-(e.g. une galaxie, un trou noir, une étoile, etc.) 
-exceptionnellement bien aligné avec cette source selon le point de vue d'un observateur sur Terre.
+L'article de \citet{Zwicky1937} articule précisément deux idées centrales qui nous motivent encore aujourd'hui à 
+étudier ces objets. En premier lieu, une lentille gravitationnelle est un télescope naturel, de sortes qu'un tel 
+système nous permettrait en principe d'étudier l'image lentillée de la source en arrière plan avec une résolution beaucoup plus grande que nos instruments 
+nous le permettraient si l'effet de lentille n'avait pas eu lieu. En second lieu, la déflection de l'image de la source 
+est directement proportionnelle à la masse (gravitationnelle) de la lentille. 
+\begin{equation}\label{eq:Taille Lentille}
+        \theta_E = \sqrt{\frac{4 G M}{c^{2} D}} \simeq 3\left( \frac{M}{M_{\odot}} \right)^{\frac{1}{2}} \left( \frac{D}{1\, \mathrm{Gpc}} \right)^{-\frac{1}{2}}\, \mu\mathrm{as} \hspace{1cm} \left\{D \equiv \frac{D_{\ell} D_s}{D_{\ell s}}\right\}\, .
+\end{equation}
+Par exemple, une galaxie typique de masse $M\sim 10^{11} M_{\odot}$, à une distance caractéristique $D= 3 \, \mathrm{Gpc}$ produirait des 
+images de la source séparées par $2 \theta_E \sim 1''$. C'est cette observation qui intéressait particulièrement 
+\citet{Zwicky1937b}, insatisfait par les méthodes pour mesurer la masses des nébuleuses extra-galactiques (galaxies) 
+de l'époque, basées largement sur des comparaisons de la luminosité totales de ces galaxies avec $L_\odot$, la luminosité du Soleil, 
+ou des courbes de rotation képlériennes.\footnote{
+La masse de l'amas de Coma estimée à $\gtrsim 4.5\times  10^{13}M_\odot$ avec le théorème du viriel par \citet{Zwicky1937b} est 
+largement en accord avec la valeur acceptée aujourd'hui par la mesure des effets de lentilles faibles produite par l'amas 
+sur l'image des galaxies environnantes \citep[$5^{+4.3}_{-2.1} \times 10^{14}\, h^{-1}_{70}\,M_\odot$,][]{Gavazzi2009}.
+} 
+%Ce phénomène se produit lorsque la lumière d'une source lointaine est fortement déviée par le champ gravitationnel d'un objet massif 
+%(e.g. une galaxie, un trou noir, une étoile, etc.) 
+%exceptionnellement bien aligné avec cette source selon le point de vue d'un observateur sur Terre.
+%En effet, un tel phénomène permettrait en principe de mesurer précisément la masse gravitationnelle 
+%des nébuleuses extra-galactiques (galaxies),
+%tout juste découvertes à l'époque. 
 % Talk about Zwicky 1937b, et la réalisation de l'importance des lentilles pour mesurer la masses de galaxies.
-%L'article de \citet{Zwicky1937} articule précisément deux idées qui nous motivent encore aujourd'hui 
 %(plus de 85 ans plus tard) à étudier ces objets, soit
 %\begin{enumerate}
         %\item d'imager des galaxies trop lointaine pour que l'on puisse les résoudre avec 
@@ -280,26 +300,24 @@ exceptionnellement bien aligné avec cette source selon le point de vue d'un obs
         %\item de mesurer directement la masse gravitationnelle de galaxies (appellées nébuleuse extra-galactique à l'époque) agissant 
                 %comme lentilles.
 %\end{enumerate}
-\citet{Einstein1936} considérait l'éventualité d'observer ces systèmes extrêmement 
-improbable en raison de la miniscule taille angulaire caractéristique du rayon d'un 
-anneau d'Einstein \citep{Chwolson1924,Einstein1936} 
-\begin{equation}\label{eq:Taille Lentille}
-        \theta_E \simeq 3\left( \frac{M}{M_{\odot}} \right)^{\frac{1}{2}} \left( \frac{D}{1\, \mathrm{Gpc}} \right)^{-\frac{1}{2}}\, \mu\mathrm{as} \hspace{1cm} \left\{D \equiv \frac{D_{\ell} D_s}{D_{\ell s}}\right\}\, .
-\end{equation}
-Par exemple, une galaxie spirale comme la Voie Lactée, $M\sim 10^{12} M_{\odot}$, à une distance caractéristique $D= 2\, \mathrm{Gpc}$ produirait des 
-images séparées par $2 \theta_E \sim 4''$. 
 %pour être résolue par les téléscopes optiques de l'époque, largement limité par les effets de turbulence de l'air.
 %À cette époque, la masses et la distances $D$ des nébuleuses extra-galactiques n'avaient pas de contraintes fiables\citep{Zwicky1937b}.
 %Toutefois, même avec les suppositions les plus optimistes, la distance caractéristique entre deux images est attendu à être de 
 %l'ordre de 1 seconde d'arc, une distance inférieur à la résolution des télèscopes optiques de l'époque (principalement 
 %limité par les effets de turbulence de l'aire).
 
+Il est intéressant de noter qu'\citet{Einstein1936} 
+considérait l'éventualité d'observer ces systèmes extrêmement 
+improbable, pointant vers les limitations instrumentales de l'époque. En effet, les télescopes terrestres étaient 
+largement limité par l'effet de \textit{seeing} atmosphérique, soit la distortion de l'image causé par la turbulence de 
+l'atmosphère.
+
 Dû à cette difficulté pratique, 
-la première lentille gravitationnelle est découverte seulement $43$ ans après la prédiction de leur existence par \citet{Walsh1979}, 
+la première lentille gravitationnelle est découverte plusieurs décennies après la prédiction de leur existence par \citet{Walsh1979}, 
 suivant l'identification de deux spectres radios de quasars identiques, QSO 0957+561 A et B, séparés par $5.7$ secondes d'arcs
-et capturés avec le téléscope Mark II à l'observatioire Jodrell Bank. 
+et capturés avec le télescope radio Mark II à l'observatoire Jodrell Bank. 
 Les spectres partagent la même magnitude, $m=17$, le même décalage vers le rouge, $z=1.405$, et possèdent des détails 
-chimiques suspicieusement semblables. Ces coïncidences suggèrent fortement que ces deux spectres sont deux copies provenant d'un même objet, soit un noyau 
+chimiques suspicieusement semblables. Ces coïncidences suggèrent fortement que ces deux spectres sont des copies d'un seul objet, soit un noyau 
 actif d'une galaxie en arrière plan, produites par l'effet de lentille gravitationnelle d'une galaxie en avant plan, invisible dans le 
 domaine radio à une fréquence de $966\,\mathrm{MHz}$. Cette hypothèse est rapidement confirmée par 
 l'observation optique de la galaxie-lentille ($z=0.355$) avec l'observatoire Palomar \citep{Young1980}\footnote{Simulténament 
@@ -316,6 +334,22 @@ et des angles de déflection qui causerait l'apparition d'une image double du qu
         \label{fig:doubel quasar}
 \end{figure}
 
+À la suite de cette découverte fortuite, l'étude des lentilles gravitationnelles est devenu un sujet d'étude 
+particulièrement riche, avec beaucoup de promesses pour la cosmologie \citep{Blandford1992,Bartelmann2010,Treu2010}. 
+De ce fait, beaucoup d'effort ont été déployés pour trouver systématiquement ces objets dans le ciel. Le programme 
+\textit{Sloan Lens ACS Survey} \citep[SLAC,][]{Bolton2005,Bolton2006}, basé sur la recherche systématique de spectres de galaxies de type ETG\footnote{\textit{Early-Type Galaxies}} 
+avec des lignes d'absorptions à un décalage vers le rouge plus grand que les lignes d'émission, 
+est un des programmes les plus réussi, ayant mené à la découverte 
+confirmée de plus de $150$ lentilles gravitationnelles de type galaxie-galaxie \citep{Bolton2008,Shu2017}. Les programmes 
+basés sur la recherche visuelle d'images double, triples, d'arcs ou d'anneau \citep[e.g.][]{Faure2008} dans les champs larges et profonds comme 
+COSMOS \citep{Koekemoer2007,Scoville2007}, connaissent aujourd'hui une renaissance nourrie par les succès récents de l'apprentissage profond 
+pour la perception visuelle \citep{Krizhevsky2012}. Cette nouvelle approche à déjà menée à la découverte de plus de $1000$ lentilles 
+gravitationnelles \citep{Petrillo2017,Huang2021}, et est projetée de découvrir plus de $10^{5}$ systèmes avec les nouvelles expéditions 
+à champs large comme les observatoires Rubin \citep{lsst2009} et Euclid \citep{Euclid2010}.
+
+%Une application particulièrement im1portante est 
+% Refsdal 1964, Shapiro 1964
+% 
 % Importance and difficuly of mass modelling
 % For QSO, only 2 points and their relative magnitude can be used as constraint. Mass models has 5 params.
 % Think about RXJ1131, which has a quad and we can see the galaxy in F814w -> importance to map the red and infra red!!
@@ -355,12 +389,40 @@ et des angles de déflection qui causerait l'apparition d'une image double du qu
 %\end{enumerate}
 
 %Cette découverte remarquable marque l'origine d'une ét
-Le sujet de ce travail se concentre autour des lentilles gravitationnelles fortes de type galaxie-galaxie, e.g. QSO 0957+561. 
-De tels systèmes sont caractérisé minimalement par une distortion de l'image source suffisamment forte pour causer 
-l'apparition d'au moins deux images résolues de la source.
-Pour une discussion plus général du phénomène, le lecteur peut se référer aux manuels de références par \citet{Meneghetti2013,Congdon2018} 
-ou aux excellentes revues du sujet par \citet{Bartelmann2010,Treu2010}. 
+%Le sujet de ce travail se concentre autour des lentilles gravitationnelles fortes de type galaxie-galaxie, e.g. QSO 0957+561. 
+%De tels systèmes sont caractérisé minimalement par une distortion de l'image source suffisamment forte pour causer 
+%l'apparition d'au moins deux images résolues de la source.
+%Pour une discussion plus général du phénomène, le lecteur peut se référer aux manuels de références par \citet{Meneghetti2013,Congdon2018} 
+%ou aux excellentes revues du sujet par \citet{Bartelmann2010,Treu2010}. 
 
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.45\textwidth}
+                \includegraphics[width=\linewidth]{figures/rxj1131} 
+                \caption{Quasar quadruplement lentillé (A, B, C et D) par une galaxie (G). L'image de la galaxie hébergeant le quasar 
+                        est déformée tangentiellement, formant un anneau d'Einstein. Image prise par HST avec le filtre F814W.}
+                \label{fig:rxj1131}
+        \end{subfigure}
+        ~
+        \begin{subfigure}[t]{0.45\textwidth}
+                \includegraphics[width=\linewidth]{figures/sdssj1148} 
+                \caption{Le fer à cheval cosmique, soit l'image d'une proto-galaxie à très haut décalage vers le rouge 
+                        ($z=2.379$) fortement magnifiée et déformée par une galaxie elliptique lumineuse en infrarouge (G) exceptionnellement massive 
+                        \citep[${5.2\times 10^{12}\, h_{72}^{-1}\, M_\odot}$,][]{Schuldt2019}. 
+                 Image prise par HST avec le filtre F814W.}
+                \label{fig:sdssj1148}
+        \end{subfigure}
+        \caption{Lentilles gravitationnelles de type galaxie-galaxie.}
+        \label{fig:important lenses}
+\end{figure}
+
+Le sujet du chapitre \ref{chap:censai} se concentre sur le défi de développer un algorithme pour modéliser la distribution de masse et 
+la morphologie de la source dédié à analyser un nombre aussi grand 
+de lentilles gravitationnelles dans toute leur complexité et dans un temps à l'échelle humaine. 
+Comme introduction à ce travail, je dérive les équations centrales qui nous permettent 
+d'étudier les lentilles gravitationnelles de type galaxie-galaxie.
+Mon traitement est largement inspiré 
+des manuels de références de \citet{Meneghetti2013} et \citet{Congdon2018}. 
 
 %Une application importante de ces systèmes est l'étude du taux d'expansion de l'Univers 
 
@@ -368,30 +430,6 @@ ou aux excellentes revues du sujet par \citet{Bartelmann2010,Treu2010}.
 % Cosmologie - Image of RXJ1131 (mine) -> quasars
 % Mass mapping + substructure detection (side mention of cluster and weak lensing) (constraints on dark matter?_
 % Hierachecal studies (Ronan and previous paper Sonnenfeld etc)
-
-
-%Il est intéressant de noter qu'\citet{Einstein1936} considérait la possibilité d'observer ce phénomène extrêmement improbable. En 
-%fait, les calculs sont publiés 
-%La résolution des télescopes optiques durant la majorité du XX\textsuperscript{e} siècle étaient 
-%limités à environ $ 0.5$ arcsecondes par la turbulence de 
-%l'air. Avec une telle résolution, un anneau d'Einstein d'une taille caractéristique de 1 arcseconde 
-%apparaîtrait comme un point lumineux étalé, et ne serait donc pas distinguable d'une étoile. 
-
-%Ce qu'il n'avait pas pris en compte c'est la possibilité de distinguer le spectre de l'objet 
-%lentille à l'objet-lentille. En effet, comme ces objets se situent à deux redshift différent (pour un 
-%système lentille observé en dehors du plan galactique de la Voie Lactée), alors il est possible en pratique 
-%de détecter une lentille gravitationnelle simplement en analysant la raie spectrale du système. C'est de cette 
-%façon que la première lentille gravitationelle fut découverte par \citet{Walsh1979} avec le téléscope radio Jodrell Bank MkIA. 
-%Deux spectres identifiables à un rayonnement quasi-stellaire (quasar) presque identique, séparés de $5.7$ arcsecondes, 
-%est la marque de la double image d'un seul quasar en arrière plan d'une galaxie. Dans ce cas particulier, le spectre de la 
-%galaxie contamine légèrement le spectre de la contre-image du quasar, vu l'alignement imparfait. Il fallu quelques années 
-%pour accepter ce résultat.
-
-%Toutefois, cette première preuve expérimentale lanca le champ de recherche dans une nouvelle aire. L'étude du phénomène 
-%s'est largement séparé en trois régime distinct: le régime micrométrique, le régime faible et le régime fort. Dans cette 
-%étude, on s'intéresse principalement au régime fort, qui se distingue principalement des autres régime par le fait 
-%que les déviations sont généralement de l'ordre de l'arcesecondes, de sortes qu'on peut observer les effet, et qu'on 
-%distingue généralement plus d'une image de la source.
 
 %Un autre direction de recherche, initiée par \citet{Refsdal1964}, est d'étudier l'évolution temporelle de supernovae lentillées 
 %pour déterminer directement la constante de Hubble $H_0$, ou encore d'étudier, à une cadence de quelques jours entre chaque exposition, 
@@ -475,11 +513,6 @@ ou aux excellentes revues du sujet par \citet{Bartelmann2010,Treu2010}.
 %d'étudier les lentilles gravitationnelles.
 
 \subsection{Les angles de déflections}
-Dans les paragraphes qui suivent, je dérive les équations centrales qui nous permettent 
-d'étudier les lentilles gravitationnelles de type galaxie-galaxie.
-Mon traitement est largement inspiré 
-des manuels de références de \citet{Meneghetti2013} et 
-\citet{Carroll2003}.
 
 Supposons qu'un photon est sur une trajectoire parallèle à l'axe de 
 visée $\mathbf{e}_{\parallel}$ d'un observateur sur Terre. 
@@ -575,8 +608,7 @@ Cette approximation est justfiée
 dans le contexte des lentilles gravitationnelles de type galaxie-galaxie, 
 puisque les angles de déviation sont généralement de 
 l'ordre de l'arcseconde ou plus petit. 
-Comme le vecteur $\dot{\mathbf{x}}$ est tangent à la trajectoire du photon, le 
-terme $ \propto \dot{\mathbf{x}} \times \mathbf{e}_{\parallel} $ s'annule. 
+Comme le vecteur $\dot{\mathbf{x}}$ est tangent à la trajectoire du photon, les termes $ \propto \dot{\mathbf{x}} \times \mathbf{e}_{\parallel} $ s'annulent. 
 En subsitutuant l'indice de réfraction par \eqref{eq:n} dans $\mathbf{e}_{\parallel} \times \eqref{eq:EulerLagrange3}$, on obtient
 \begin{equation}\label{eq:sol}
         \ddot{\mathbf{x}} \times \mathbf{e}_{\parallel} = \frac{1}{n} \grad_\perp n = \grad_\perp \log n
@@ -655,9 +687,9 @@ la notion de distance qui respecte \eqref{eq:diameter angular distance} est la d
 %entre l'observateur et la source d'un photon, émis au moment $t$ où l'Univers avait un facteur d'échelle $a(t)$. 
 En pratique, on peut exprimer $D$ en terme du décalage vers le rouge des photons émis par l'objet, $z$. 
 On note $a(z)$ le facteur d'échelle lorsque le photon est émis par la source et $a(0)$ le facteur d'échelle au moment présent ($z=0$).
-Pour un Univers plat \citep[voir les manuels de référence][]{Bartelmann2004,Coles2002,Dodelson2003}
+Pour un Univers plat \citep[voir les manuels de référence][]{Coles2002,Dodelson2003,Bartelmann2004}
 \begin{align}
-        D &= c a(z) \underbrace{\int_{a(z)}^{a(0)} \frac{da}{a \dot{a}}}_{\strut\mathclap{\text{distance comobile}}}; \\[2ex]
+        D_z &= c a(z) \underbrace{\int_{a(z)}^{a(0)} \frac{da}{a \dot{a}}}_{\strut\mathclap{\text{distance comobile}}}; \\[2ex]
                 \nonumber
               &= \frac{c a(z)}{H_0} \int_{a(z)}^{a(0)} \frac{da}{\sqrt{\Omega_{r,0} + \Omega_{m,0} a  + \Omega_{\Lambda,0}a^{4}}}; \\
               \label{eq:dang}
@@ -676,8 +708,10 @@ d'expansion de l'Univers au temps présent. La distance $D_{\ell s}$ se trouve s
 %Dans le tableau \ref{tab:cosmos}, on donne la valeur des paramètres 
 %du modèles cosmologique $\Lambda$CDM utilisé pour calculer \eqref{eq:diameter angular distance}. 
 Par soucis de complétude, 
-je rapporte la valeur des paramètres du modèle cosmologique $\Lambda$CDM obtenue par l'équipe \citet{PlanckCollaboration2018}, 
-qui a analysé le fond diffus cosmologique avec l'observatoire spatial Planck, dans l'annexe \ref{app:lcdm}.
+je rapporte la valeur des paramètres du modèle cosmologique $\Lambda$CDM obtenue par l'équipe \citet{PlanckCollaboration2018}
+%, 
+%qui a analysé le fond diffus cosmologique avec l'observatoire spatial Planck, 
+dans l'annexe \ref{app:lcdm}.
 % Mettre en appendice
 %\begin{table}[H]
         %\centering
@@ -730,11 +764,6 @@ qui satisfait l'équation de la lentille adimensionnelle
         \caption{Schéma d'une lentille gravitationnelle.}
         \label{fig:cartoon}
 \end{figure}
-
-
-% 
-
-
 
 
 %Strong gravitational lensing is a natural phenomenon through which multiple distorted images of luminous background objects, 
@@ -804,16 +833,15 @@ qui satisfait l'équation de la lentille adimensionnelle
 
 
 \section{Interférométrie par masque non-régulier}
-
 %\subsection{Contexte historique}
 
 \subsection{Les angles de fermeture}
 
-\subsection{Applications}
 
 
 \section{Auto-encodeur variationnel}
-
+% Intro into why we talk about this here -> Modeling a distribution for images, generative process for training etc.
+ 
 \subsection{Description du modèle}
 
 Les auto-encodeurs variationnels (VAE) ont été introduits par \citet{Kingma2013} comme une approche 
@@ -945,7 +973,7 @@ La KL admet alors une solution fermée étant donné les familles paramétriques
 pour $p_\theta(\mathbf{z})$ \eqref{eq:latent distribution} et $q_\phi(\mathbf{z} \mid \mathbf{x})$ \eqref{eq:q phi}
 \begin{equation}\label{eq:final KL}
         -D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z})) =
-        \frac{1}{2}\sum_{j=1}^{\mathrm{dim}(\mathbf{z})} (1 + [\log \boldsymbol{ \sigma}_\phi^{2} ]_j - [\boldsymbol{ \mu}_\phi ]_j - [\boldsymbol{ \sigma}_\phi^{2} ]_j)
+        \frac{1}{2}\sum_{j=1}^{h} (1 + [\log \boldsymbol{ \sigma}_\phi^{2} ]_j - [\boldsymbol{ \mu}_\phi ]_j - [\boldsymbol{ \sigma}_\phi^{2} ]_j)
 \end{equation} 
 Une dérivation de ce terme est donnée dans l'annexe B de \citet{Kingma2013}. 
 %Cette solution se dérive directement par rapport à $\phi$. 
@@ -963,12 +991,12 @@ modèle génératif avec une fonction générique des variables latentes
 ${g_\theta: \mathbb{R}^{h} \rightarrow \mathbb{R}^{m};\, \mathbf{z}^{(i)} \mapsto \hat{\mathbf{x}}^{(i)}}$.
 Encore une fois, un réseau de neuronnes convolutionnelles est un choix pratique pour modéliser cette fonction 
 dans le cas où $\mathbf{x}$ est une image. En général, on choisit une erreur quadratique moyenne pour modéliser le terme de reconstruction, 
-de sorte que
+de sortes que
 \begin{equation}\label{eq:reconstruction}
         \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[
                 \log p_\theta(\mathbf{x} \mid \mathbf{z})
         \bigg] 
-        \simeq -\frac{1}{L}\sum_{i=1}^{L} \lVert \mathbf{x} - \hat{\mathbf{x}}^{(i)} \rVert_2^{2}
+        = -\frac{1}{L}\sum_{i=1}^{L} \lVert \mathbf{x} - \hat{\mathbf{x}}^{(i)} \rVert_2^{2}
 \end{equation} 
 
 \subsection{Principe du goulot d'information}
@@ -976,16 +1004,18 @@ de sorte que
 La fondation théorique des auto-encodeurs variationnels repose sur le principe plus général 
 du goulot d'information \citep[BIP, de l'anglais \textit{bottleneck information principle:}][]{Tishby1999}. 
 Dans cette sous-section, je décrit rapidement certains concepts 
-liés à la théorie de l'information de \citet{Shannon1948}, en particulier la théorie du taux de distortion des auto-encodeurs,
+liés à la théorie de l'information de \citet{Shannon1948} 
 pour motiver l'introduction d'un multiplicateur de 
 Lagrange $\beta$ au terme de régularisation de la ELBO, ${-D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z}))}$.
 Pour une discussion en profondeur, voir l'excellente revue sur l'utilisation de BIP dans le contexte de l'apprentissage 
 machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de l'information par \citet{Cover2006}.
-
 \begin{figure}[thb!]
         \centering
         \resizebox{\linewidth}{!}{
         \begin{tikzpicture}
+                \node at (-8, -2.8) {Indice d'un};
+                \node at (-8, -3.3) {ensemble de données};
+                \node[circle, draw=black, minimum size=1cm] (obj) at (-8, -2) {$Y$}; 
                 \node at (-8, 1.4) {Source};
                 \node at (-8, 0.9) {d'information};
                 \node[circle, draw=black, minimum size=1cm] (x) at (-8, 0) {$X$}; 
@@ -999,7 +1029,8 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
                 \node at (4, 1.3) {Décodeur};
                 \node[circle, draw=black, minimum size=1cm] (xhat) at (8, 0) {$\hat{X}$};
                 \node at (8, 0.9) {Reconstruction};
-                
+               
+                \draw[-latex] (obj) -- (x);
                 \draw[-latex] (x) -- node[midway, below] {Message} (encoder);
                 \draw[-latex] (encoder) -- node[midway, below] {Signal} (z);
                 \draw[-latex] (z) -- node[midway, below] {Signal} (decoder);
@@ -1013,11 +1044,139 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
         \label{fig:info VAE}
 \end{figure}
 
+%Un système de traitement d'information idéal est un système qui perd le 
+L'objectif d'un auto-encoder est de construire un code $Z$ d'une longueur minimale qui capture un maximum d'information contenu dans un message $X$. 
+Formellement, on utilise l'information mutuelle de Shannon pour mesurer l'information capturée par $Z$ à propos de $X$
+\begin{equation}\label{eq:ShannonInfo}
+        I(Z ; X) = D_{\mathrm{KL}}\left(p(\mathbf{x}, \mathbf{z}) \KL p(\mathbf{x}) p(\mathbf{z})\right) %= \mathbb{E}_{p(x,z)} \bigg[\log \frac{p(x,z)}{p(x) p(z)}\bigg] %= \sum_{x \in \mathcal{X}} \sum_{z \in \mathcal{Z}} p(x, z) \log \frac{p(x, z)}{p(x) p(z)}.
+\end{equation} 
+Selon cet objectif, un auto-encodeur idéal atteindra la limite supérieure de l'information mutuelle, soit la 
+capacité du canaux d'information
+\begin{equation}\label{eq:info entropy}
+        C = \underset{p(\mathbf{x})}{\mathrm{max}}\,\, I(Z ; X) = \underset{p(\mathbf{x})}{\mathrm{max}}\,\, H(X) - H(Z \mid X) \leq \underset{p(\mathbf{x})}{\mathrm{max}} \,\,H(X),
+\end{equation} 
+où $H(X)$ est l'entropie du message. L'entropie est une mesure de l'incertitude dans une variable aléatoire
+\begin{equation}\label{eq:entropy}
+        H(X) = -\mathbb{E}_{p(\mathbf{x})}\big[\log p(\mathbf{x}) \big] \geq 0\, ,
+\end{equation} 
+qu'on interprète aussi comme une mesure de la longueur minimal d'un code, $Z$, pour 
+transmettre un message, $X$, d'un émetteur à un receveur avec le minimum de perte d'information \citep{Shannon1948,Kolmogorov1965}.
+Selon ce point de vue, $H(Z \mid X) = -\mathbb{E}_{p(\mathbf{x},\mathbf{z})}\big[ \log p(\mathbf{z} \mid \mathbf{x}) \big]$ correspond donc à une perte d'information (augmentation de notre incertitude) 
+dû au traitement de l'information par un encodeur et une source de bruit.
+
+Posé de cette façon, déterminer l'auto-encodeur optimal est un problème mal posé. En effet, on pourrait naïvement maximiser l'objectif \eqref{eq:ShannonInfo} avec 
+la fonction identité comme auto-encodeur: $f_{\phi,\theta}(X) = \bbone X$, de sortes que $\hat{X} = Z = X$. Or, $Z$ n'est pas une représentation pertinente dans ce cas. 
+Pour éliminer les solutions non-désirées, on introduit une contrainte sur la complexité de \citet{Kolmogorov1965} du code $Z$, c'est à dire qu'on cherche 
+un auto-encodeur qui compresse le message et conserve simultanément 
+le maximum d'information possible à propos du message. On introduit l'objectif du goulot d'information 
+\begin{equation}\label{eq:IB}
+\begin{aligned}
+        \underset{\phi,\theta}{\mathrm{max}}&\,\,I(Z ; X) \\[1ex]
+        \text{sujet à}&\,\, I(Z; Y) \leq \alpha\, .
+\end{aligned}
+\end{equation} 
+La contrainte $I(Z; Y) \leq \alpha$ impose à l'auto-encodeur %$p_{\phi,\theta}(\hat{X} \mid X)$
+une limite sur l'information mutuelle entre le code 
+utilisé pour représenter $X$ et l'identité $Y=i$ de chaque exemples d'un ensemble de donnée qu'on veut modéliser $\mathcal{D} = \{\mathbf{x}_i \}_{i=1}^{N}$.
+Si $\alpha$ est trop grand, e.g. $\alpha > H(Y)$, alors l'objectif redevient l'objectif mal-posé d'un auto-encodeur classique discuté plus 
+haut: l'auto-encodeur est libre de choisir une relation un-pour-un entre $Y$ et $Z$ (et $X$). 
+D'un autre côté, $\alpha < H(Y)$ force l'auto-encodeur à comprimer le message. Finalement, de façon intéressante, $\alpha < H(X) < H(Y)$ force 
+l'auto-encodeur à éliminer l'information redondante dans le message $X$.
+En effet, l'objectif de comprimer l'information est intimement lié à l'objectif d'obtenir un sommaire informatif; ç.-à-d. qu'un 
+code d'une complexité de \citet{Kolmogorov1965} minimale décrit la source d'information de la manière la plus informative possible. Cette connexion 
+remarquable est une application concrète du principe du rasoir d'Occam: l'explication adéquate la plus simple est la meilleure explication.
+
+Dans ce qui suit, je m'applique à redériver l'objectif d'un auto-encodeur variationnel suivant les approximations 
+proposées par \citet{Alemi2017}. Puis je termine avec une courte interprétation des VAE sous la lumière du principe du goulot d'information.
+On commence par construire une limite inférieur variationnelle sur $I(Z; X)$. 
+On assume d'abord que la distribution jointe $p(X, Y, Z)$ se factorise de la façon suivante
+\begin{equation}\label{eq:factorisation}
+       p(X, Y, Z) = p(X \mid Z) p(Y \mid X) p(X) 
+\end{equation} 
+où $p(X \mid Z, Y) = p(X \mid Z)$ suivant le fait qu'on assume une chaîne de Markov $Y \rightarrow X \rightarrow Z$ pour les 
+variables aléatoires (voir figure \ref{fig:info VAE}).
+On introduit un encodeur 
+$q_\phi (\mathbf{z} \mid \mathbf{x})$ qui modélise notre système de transmission d'information par compression, $p(X \mid Z)$. Il 
+suit que 
+\begin{align}
+        I(Z; X) &= \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log \frac{q_\phi(\mathbf{x} \mid \mathbf{z})}{p(\mathbf{x})} \bigg]\, ;  \\[1.5ex]
+                &= -\mathbb{E}_{p(\mathbf{x})}\bigg[\log p(\mathbf{x}) \bigg]  
+                + \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi(\mathbf{x} \mid \mathbf{z})\bigg]\, ;  \\[1.5ex]
+                \label{eq:maximum info}
+                &\geq \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]\, .
+\end{align}
+À la dernière ligne, on a éliminer l'entropie du message $H(X)$ puisque c'est une constante qui ne dépend pas de $\phi$, et 
+on a introduit l'approximation variationnelle $p_\theta (\mathbf{x} \mid \mathbf{z}) \approx q_\phi (\mathbf{x} \mid \mathbf{z})$ 
+pour approximer la distribution a posteriori de l'encodeur (soit le décodeur). Cette approximation est valide dans le contexte où 
+on cherche une limite inférieure pour $I(Z; X)$ puisque la divergence KL entre ces deux distributions est strictement positive.
+Ensuite, on cherche une borne supérieur au terme de compression $I(Z; Y)$. 
+Pour ce qui suit, on remplace $p(Y=i)$ par $\mathbf{x}^{(i)} \sim \mathcal{D}$ pour illustrer avec plus de clarté 
+comment le processus génératif de l'indice induit une sélection d'un exemple $\mathbf{x}^{(i)}$ dans l'ensemble 
+d'entraînement $\mathcal{D}$. Il suit que 
+\begin{align}
+        I(Z; Y) &= \mathbb{E}_{\mathbf{x}^{(i)} \sim \mathcal{D}} \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x}^{(i)})} \bigg[ 
+                \log \frac{q_\phi(\mathbf{z} \mid \mathbf{x}^{(i)}) }{q_\phi (\mathbf{z})}        
+        \bigg]\, ; \\[1.5ex]
+        \label{eq:compression}
+        I(Z; Y) &\leq \mathbb{E}_{\mathbf{x}^{(i)} \sim \mathcal{D}} \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x}^{(i)})} \bigg[ 
+                \log \frac{q_\phi(\mathbf{z} \mid \mathbf{x}^{(i)}) }{p_\theta (\mathbf{z})}        
+        \bigg]\, , 
+\end{align}
+où on a introduit l'approximation variationelle $p_\theta(\mathbf{z}) \approx q_\phi(\mathbf{z})$. 
+L'inégalité suit encore une fois 
+du fait que la divergence KL entre ces deux distributions est strictement positive.
+On finit la dérivation en écrivant l'objectif du goulot d'information \eqref{eq:IB} en introduisant un multiplicateur 
+de Lagrange $\beta$ pour le terme $I(Z; Y)$, et en introduisant 
+les limites variationnelles \eqref{eq:maximum info} et \eqref{eq:compression}. On ignore  
+l'espérance mathématique $\mathbb{E}_{p(\mathbf{x})} = \mathbb{E}_{\mathbf{x}^{(i)} \sim \mathcal{D}}$ pour mieux illustrer la connection 
+avec la ELBO \eqref{eq:final elbo}
+\begin{equation}\label{eq:beta VAE}
+       \mathcal{L}_{\phi,\theta,\beta}(\mathbf{x}) =  
+ \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]
+ -
+ \beta  \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[ 
+                \log q_\phi(\mathbf{z} \mid \mathbf{x})        
+                -\log p_\theta(\mathbf{z})
+                \bigg]
+\end{equation} 
+On note qu'on a délaisser la constante $\alpha$, principalement dû au fait que le terme de régularisation est une limite inférieur et 
+la valeur de $\alpha$ est difficile à déterminer en pratique. Réintégrer la constante $\alpha$ dans la ELBO 
+reviendrait à choisir la fonction objective qui est le sujet du travail par \citet{Zhao2017}.
+
+Il est intéressant de noter que cette nouvelle dérivation commence d'un point de vue complètement différent. On 
+a supposé que le modèle génératif $p_\theta(\mathbf{x} \mid \mathbf{z})$ est une approximation variationnelle de 
+l'a posteriori du modèle 
+d'inférence $q_\phi(\mathbf{x} \mid \mathbf{z})$. L'approche de \citet{Kingma2013} est parfaitement l'inverse.
+De plus, le terme de régularisation a maintenant une interprétation beaucoup plus riche, avec un paramètre 
+$\beta$ qui contrôle le niveau de compression de l'information désiré et qui s'avère à contrôler plus ou moins 
+directement le nombre de partitions possibles dans l'espace latent \citep{}
+%\begin{align}
+        %\mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi(\mathbf{x} \mid \mathbf{z})\bigg] 
+        %&= 
+        %\mathbb{E}_{q_\phi(\mathbf{z})}\mathbb{E}_{q_\phi(\mathbf{x} \mid \mathbf{z})} \bigg[\log q_\phi(\mathbf{x} \mid \mathbf{z}) 
+        %+ \log p_\theta (\mathbf{x} \mid \mathbf{z}) - \log p(\mathbf{x} \mid \mathbf{z})\bigg] 
+        %\\[1.5ex]
+        %&= 
+        %\mathbb{e}_{q_\phi(\mathbf{z})} \bigg[ d_{\mathrm{kl}} \left( q_\phi (\mathbf{x} \mid \mathbf{z}) \kl p_\theta (\mathbf{x} \mid \mathbf{z}) \right)\bigg]
+        %+\mathbb{e}_{p(\mathbf{x})}\mathbb{e}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta(\mathbf{x} \mid \mathbf{z})\bigg] 
+        %\\[1.5ex]
+        %&\geq 
+        %\mathbb{E}_{p(\mathbf{x})}\mathbb{e}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta(\mathbf{x} \mid \mathbf{z})\bigg] 
+        %\\[1.5ex]
+%\end{align}
+
+
+
+%C'est le sujet de la théorie du taux de distortion de l'information que de minimiser l'objectif
+%\begin{equation}
+        %\mathcal{L}_{\phi,\theta}(p(\hat{\mathbf{x}} \mid \mathbf{x})) 
+%\end{equation} 
+%En soit, cet objectif n'est pas suffisant pour obtenir un code pertinent. En effet, on pourrait 
 %l'utilisation de la version $\beta$-VAE du modèle esquissé dans cette section. Sans rentrer dans les détails, on note 
 %qu'il est possible de dériver l'objectif de notre auto-encodeur via la théorie de l'information de \citet{Shannon1948} en interprétant 
 %l'auto-encodeur comme un système de transmission d'information par compression, avec perte. 
-Un auto-encodeur est un système de traitement d'information par compression, ç.-à-d. qu'une source d'information, qu'on note avec la 
-variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur au message $\mathrm{dim}_{\mathbb{R}}(Z) < \mathrm{dim}_{\mathbb{R}}(X)$. 
+%Un auto-encodeur est un système de traitement d'information par compression, ç.-à-d. qu'une source d'information, qu'on note avec la 
+%variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur au message $\mathrm{dim}_{\mathbb{R}}(Z) < \mathrm{dim}_{\mathbb{R}}(X)$. 
 
 % Go directly into BIP loss here
 % Then describe it in 1 paragraph
@@ -1054,13 +1213,6 @@ variable aléatoire $X$, est encodée par un code $Z$ d'une longueur inférieur 
 %Qu'est-ce qu'on a appris sur la source 
 %d'information en construisant un auto-encodeur équivalent à l'identité? 
 
-Il s'avère que l'objectif de comprimer l'information est intimement lié à l'objectif de d'obtenir un sommaire informatif; ç.-à-d. qu'un 
-code d'une complexité de Kolmogorov minimale décrit la source d'information de la manière la plus informative possible. Cette connexion 
-remarquable, observée par \citet{kolmogorov1965,}, est une application concrète du principe du rasoir d'Occam: l'explication adéquate la plus simple est la meilleure.
-C'est le sujet de la théorie du taux de distortion de l'information que de minimiser l'objectif
-\begin{equation}
-        \mathcal{L}_{\phi,\theta}(p(\hat{\mathbf{x}} \mid \mathbf{x})) 
-\end{equation} 
 
 
 %L'objectif optimal pour un auto-encodeur est donc
@@ -1069,9 +1221,9 @@ C'est le sujet de la théorie du taux de distortion de l'information que de mini
 %\end{equation} 
 
 %C'est précisément le problème rencontré lorsqu'on essai de compresser l'information $X$ dans
-\begin{equation}\label{eq:}
+%\begin{equation}\label{eq:}
         
-\end{equation} 
+%\end{equation} 
 %Or, comme on a une liberté immense sur le choix du code $Z$ pour représenter l'information, on peut en principe choise 
 %$\mathrm{dim}(Z) \lesssim \mathrm{dim}(X)$ dans le cas où la source de 
 %where $H(X)$ is the intrinsic uncertainty of the source of information (or the number of bits needed to encode it) and 
@@ -1317,19 +1469,24 @@ qui utilisent explicitement l'information
 des gradients d'itérations antérieurs à $t$ pour calculer la mise à jour dans la relation de récurrence \eqref{eq:rim putzky}.
 Cette propriété permet à ces algorithmes de collecter de l'information par rapport à la seconde dérivée de la fonction 
 objective, sans la calculer directement.
-Ainsi, il est important de considérer une classe de modèles avec une mémoire des itérations précédentes. Pour ce 
-faire, on utilise des unités récurrentielles à porte \citep[de l'anglais \textit{gated recurrent units}:][]{Cho2014} 
-pour modéliser une fonction $g_{\varphi}$ augmentée d'un ensemble d'états latents $\{\mathbf{h}^{(t)}_i\}_{i=1}^{H}$ 
-qui agissent comme une mémoire des activations précédentes du réseau de neuronnes. Les détails 
-de cette couche neuronale sont données dans l'annexe \ref{ap:gru}. 
+Ainsi, il est important de considérer une classe de modèles avec une mémoire des itérations précédentes. 
 
-Comme ADAM est considéré comme l'algorithme le plus performant parmis ceux énuméré précédemment, 
-une machine à inférence récurentielle bénéficie énormément de son utilisation pour 
-prétraiter le gradient de la vraisemblence $\grad_{\mathbf{x}}\log p(\mathbf{y} \mid \mathbf{x})$ 
-avant de le passer en entrée au réseau de neuronnes $g_{\varphi}$. 
-Cette idée à fait une première apparition dans les travaux de 
-\citet{Modi2021}, puis dans notre travail présenté au chapitre \ref{chap:censai}. 
-L'algorithme est décrit avec plus de détails dans l'annexe \ref{ap:adam}.
+% Show augmented equation with recurrent relation -> link to RNN papers and LSTM + GRU papers. (study of dynamical systems).
+
+%Pour ce 
+%faire, on utilise des unités récurrentielles à porte \citep[de l'anglais \textit{gated recurrent units}:][]{Cho2014} 
+%pour modéliser une fonction $g_{\varphi}$ augmentée d'un ensemble d'états latents $\{\mathbf{h}^{(t)}_i\}_{i=1}^{H}$ 
+%qui agissent comme une mémoire des activations précédentes du réseau de neuronnes. Les détails 
+%de cette couche neuronale sont données dans l'annexe \ref{ap:gru}. 
+
+% maybe not necessary to say this
+%Comme ADAM est considéré comme l'algorithme le plus performant parmis ceux énuméré précédemment, 
+%une machine à inférence récurentielle bénéficie énormément de son utilisation pour 
+%prétraiter le gradient de la vraisemblence $\grad_{\mathbf{x}}\log p(\mathbf{y} \mid \mathbf{x})$ 
+%avant de le passer en entrée au réseau de neuronnes $g_{\varphi}$. 
+%Cette idée à fait une première apparition dans les travaux de 
+%\citet{Modi2021}, puis dans notre travail présenté au chapitre \ref{chap:censai}. 
+%L'algorithme est décrit avec plus de détails dans l'annexe \ref{ap:adam}.
 
 
 \subsection{Méta-apprentissage}
