@@ -1,9 +1,21 @@
-\chapter{Pixelated Reconstruction of Gravitational Lenses using Recurrent Inference Machine}\label{chap:censai}
-\thispagestyle{empty}
 
-%\begin{resume}
-%put traduction here 
-%\end{resume}
+%\begin{document}
+
+\chapter{Pixelated Reconstruction of Gravitational Lenses using Recurrent Inference Machine}
+
+%\author{\href{https://orcid.org/0000-0001-8806-7936}{\includegraphics[width=8pt]{orcid.pdf}} Alexandre Adam }
+%\affiliation{Department of Physics, Université de Montréal, Montréal, Canada}
+%\affiliation{Mila - Quebec Artificial Intelligence Institute, Montréal, Canada}
+
+%\author{\href{https://orcid.org/0000-0003-3544-3939}{\includegraphics[width=8pt]{orcid.pdf}} Laurence Perreault-Levasseur }
+%\affiliation{Department of Physics, Université de Montréal, Montréal, Canada}
+%\affiliation{Mila - Quebec Artificial Intelligence Institute, Montréal, Canada}
+%\affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, 10010, New York, NY, USA}
+
+
+%\author{ \href{https://orcid.org/0000-0002-8669-5733}{\includegraphics[width=8pt]{orcid.pdf}} Yashar Hezaveh}
+%\affiliation{Department of Physics, Université de Montréal, Montréal, Canada}
+%\affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, 10010, New York, NY, USA}
 
 %\begin{abstract}
 %Modeling strong gravitational lenses in order to 
@@ -20,6 +32,7 @@
 %the proposed method is significantly more expressive and can reconstruct complex mass distributions, 
 %which we demonstrate by using realistic lensing galaxies taken from the cosmological hydrodynamic simulation IllustrisTNG. 
 %\end{abstract}
+
 
 %\keywords{
         %Gravitational lensing (670) ---
@@ -265,7 +278,7 @@ In our case, the inverse problem is non-linear, as it is given by equation (\ref
 
 \begin{figure}[tb!]
        \centering 
-       \includegraphics[width=\linewidth]{figures/main_figurev2}
+       \includegraphics[width=0.7\linewidth]{figures/main_figurev2}
        \caption{Example of a simulated lensed image in the test set that 
 exhibits a large deflection in its eastern arc which indicates the presence of a massive object
  --- in this case a dark matter subhalo. The fine-tuning procedure is able to recover 
@@ -314,7 +327,7 @@ the model would get stuck in local minima at
 test time due to poor initialization. 
 \begin{figure}[t!]
         \centering
-		\includegraphics[width=\linewidth]{figures/schematic_rim}
+		\includegraphics[width=0.6\linewidth]{figures/schematic_rim}
         \caption{Rolled computational graph of the RIM. Dashed arrows represent operations not recorded for BPTT.}
         \label{fig:rolled graph}
 \end{figure}
@@ -571,7 +584,7 @@ VAE and the convergence VAE near the baseline prediction of the RIM. Figure \ref
 
 \begin{figure}[t!]
         \centering
-        \includegraphics[width=\linewidth]{figures/vae_samples_similar_to_highlight}
+        \includegraphics[width=0.8\linewidth]{figures/vae_samples_similar_to_highlight}
         \caption{Examples similar to the test task, also shown in Figure \ref{fig:main result}. The first column shows the ground truth used to simulate the lensed image. The second column shows the baseline prediction that is then encoded in the latent space of the VAE in order to sample the next 4 columns.
 }
         \label{fig:vae fine-tuning}
@@ -628,7 +641,7 @@ to train the RIM.
 
 \begin{figure}[t!]
         \centering
-        \includegraphics[width=\linewidth]{figures/gal_vae_sample}
+        \includegraphics[width=0.7\linewidth]{figures/gal_vae_sample}
         \caption{Examples of COSMOS galaxy images 
                 (top row) and VAE generated samples (bottom row) used as labels in $\mathcal{D}$.}
         \label{fig:source}
@@ -678,7 +691,7 @@ around the centroid of the halo as prescribed in section \ref{sec:SPL}.
 
 \begin{figure}[t!]
         \centering
-        \includegraphics[width=\linewidth]{figures/kap_vae_sample}
+        \includegraphics[width=0.7\linewidth]{figures/kap_vae_sample}
         \caption{Examples of smoothed Illustris TNG100 convergence map (top row) 
         and VAE generated samples (bottom row) used as labels in $\mathcal{D}$.}
         \label{fig:kappa}
@@ -877,31 +890,6 @@ to be trained for an additional 6 days.
 We only report the results for the best architectures out of these 4.
 %We report the hyperparameters for 
 %the best architecture after this second stage of training in table \ref{tab:baseline hparams}.
-\begin{figure*}[ht!]
-        \centering
-        \includegraphics[width=0.9\linewidth]{figures/main_result}
-        \caption{
-                Cherry-picked sample of the fine-tuned RIM reconstructions 
-                on a test set of 3000 examples. 
-                Examples are ordered from the best $\chi^2$ (top) to the worst (bottom). 
-                The percentile rank of each example is in the leftmost column. 
-                The last example 
-        shown has SNR above the threshold defined in Figure \ref{fig:chi squared vs noise}.}
-        \label{fig:main result}
-        \vspace{-1.5pt} % fix
-\end{figure*}
-
-\begin{figure*}[thb!]
-        \centering
-        \includegraphics[width=0.8\textwidth]{figures/loss_and_likelihood}
-        \caption{Distribution of the goodness of fit for the baseline and fine-tuned network (right panel), as well as log-loss difference between the two network for a given example in the test set (left panel).
-        % The 
-        % $\chi^2$ is significantly improved by the optimisation. The log-loss difference is 
-        % found to have a scatter $\sigma = 0.28$ smaller than the intrinsic scatter of the baseline 
-        % log-loss $\sigma(\log \mathcal{L}(\varphi^\star_{\mathcal{D}})) = 0.36$ (see Table \ref{tab:loss}) because of the regularisation by EWC.
-}
-        \label{fig:loss and chi squared}
-\end{figure*}
 
 Each reconstruction is performed by fine-tuning the baseline model 
 on a test task composed of an observation vector, a PSF and a noise covariance.
@@ -912,7 +900,7 @@ In practice, fine-tuning the test of $3\,000$ examples can be accomplished in pa
 % authors, no other method can accomplish this task, let alone in less than a week. 
 %\vfill\null
 
-\begin{table}[htb!]
+\begin{table}[H]
         \centering
         \caption{Hyperparameters for fine-tuning the RIM.}
         \label{tab:fine-tuning hparams}
@@ -929,6 +917,30 @@ In practice, fine-tuning the test of $3\,000$ examples can be accomplished in pa
                 \hline
         \end{tabular}
 \end{table}
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{figures/main_result}
+        \caption{
+                Cherry-picked sample of the fine-tuned RIM reconstructions 
+                on a test set of 3000 examples. 
+                Examples are ordered from the best $\chi^2$ (top) to the worst (bottom). 
+                The percentile rank of each example is in the leftmost column. 
+                The last example 
+        shown has SNR above the threshold defined in Figure \ref{fig:chi squared vs noise}.}
+        \label{fig:main result}
+        \vspace{-1.5pt} % fix
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=1.1\linewidth]{figures/test_set_no_cherry_pick}
+        \caption{
+                30 reconstructions taken at random from the test set of 3000 examples simulated from COSMOS 
+                and IllustrisTNG data at high SNR.
+                The colorscale are the same as in Figure \ref{fig:main result}.}
+        \label{fig:random sample}
+\end{figure}
+
 
 
 \section{Results}\label{sec:results}
@@ -951,6 +963,19 @@ Indeed, many methods can reconstruct free-form sources
 once the convergence map is known or well constrained 
 \citep{Warren2003,Suyu2006,Vegetti2009,Birrer2018,Morningstar2019,Galan2021,Karchev2022,Mishra-Sharma2022}.
 
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/loss_and_likelihood}
+        \caption{Distribution of the goodness of fit for the baseline and fine-tuned network (right panel), as well as log-loss difference between the two network for a given example in the test set (left panel).
+        % The 
+        % $\chi^2$ is significantly improved by the optimisation. The log-loss difference is 
+        % found to have a scatter $\sigma = 0.28$ smaller than the intrinsic scatter of the baseline 
+        % log-loss $\sigma(\log \mathcal{L}(\varphi^\star_{\mathcal{D}})) = 0.36$ (see Table \ref{tab:loss}) because of the regularisation by EWC.
+}
+        \label{fig:loss and chi squared}
+\end{figure}
+
+
 To offset our selection bias, we selected samples in different percentile from the
 test set rank ordered by the $\chi^2$ metric. 
 We also show a randomly selected sample from the test set in Figure \ref{fig:random sample}.
@@ -963,7 +988,7 @@ The left panel of Figure \ref{fig:loss and chi squared}
 shows the distribution of the log-loss difference between the fine-tuned prediction and the baseline model. This distribution shows that the fine-tuning procedure loss is constrained within $\sim 1$ order of magnitude of the original loss with a $99.73\,\%$ probability. We find that the log-loss difference has a scatter of $\sigma = 0.28$, which is smaller than the scatter of the baseline log-loss over the entire test set $\sigma(\log \mathcal{L}(\varphi^\star_{\mathcal{D}})) = 0.36$ reported in Table \ref{tab:loss}.
 We note that this metric is not optimized during fine-tuning, 
 and is only computed as an oracle metric --- still, the fine-tuning procedure does not significantly deteriorate or improve the loss of the baseline prediction in average. We report the first 2 moments of the loss log-normal distribution for the baseline and the fine-tuned reconstructions in Table \ref{tab:loss} in order to compare explicitly the loss distributions. As can be seen in this table, there is no significant difference between the two distribution. This statement can be proven for the measured mean values --- $\mu(\log \mathcal{L}(\hat{\varphi}_{\mathrm{MAP}})) = \mu(\log \mathcal{L}(\varphi^{\star}_{\mathcal{D}})) $ --- using the two-sided normal p-value test \citep{Casella2001}, which we find satisfy the null hypothesis with $p=0.87288$ ($Z = -0.16$). All those observations support our claim that EWC regularisation preserves the prior learned during pretraining, or at least that it preserves the surrogate measures of the prior we reported. 
-\begin{table}[]
+\begin{table}[H]
     \centering
     \caption{$\log_{10}$-normal moments of the loss on the test set}
     \label{tab:loss}
@@ -990,7 +1015,7 @@ compared to the baseline (black histogram in Figure \ref{fig:loss and chi square
 
 \begin{figure}[t!]
         \centering
-        \includegraphics[width=\columnwidth]{figures/chisq_vs_noise_ewc}
+        \includegraphics[width=0.7\textwidth]{figures/chisq_vs_noise_ewc}
         \caption{Goodness of fit as a function of SNR shows a threshold 
         behavior where our method reaches its limit.}
         \label{fig:chi squared vs noise}
@@ -1001,21 +1026,21 @@ compared to the baseline (black histogram in Figure \ref{fig:loss and chi square
         \tikzset{font={\fontsize{8pt}{12}\selectfont}}
         \begin{tikzpicture}
                 \node at (0, 0) {\includegraphics[width=\linewidth]{figures/rim_map_on_vae_cherry_picks}};
-                \draw[-latex] (-8, 3.5) -- (-8, -3.5) node[midway, above, rotate=90] {Increasing SNR};
-                \node at (-6.5, 4.5) {Source};
-                \node at (-4, 4.5) {Reconstruction};
-                \node at (-6.5, 4.1) {VAE};
-                \node at (-4.9, 4.1) {RIM};
-                \node at (-3.2, 4.07) {RIM+FT};
-                \node at (-1.5, 4.5) {Convergence};
-                \node at (1, 4.5) {Reconstruction};
-                \node at (-1.5, 4.1) {VAE};
-                \node at (0.1, 4.1) {RIM};
-                \node at (1.7, 4.07) {RIM+FT};
-                \node at (3.5, 4.1) {Observation};
-                \node at (5.8, 4.5) {Residuals};
-                \node at (5, 4.1) {RIM};
-                \node at (6.7, 4.07) {RIM+FT};
+                \draw[-latex] (-7, 3.2) -- (-7, -3.2) node[midway, above, rotate=90] {Increasing SNR};
+                %\node at (-6, 4.3) {\strut GT};
+                \node at (-3.8, 4.2) {\strut Reconstruction};
+                \node at (-6, 3.7) {\strut VAE};
+                \node at (-4.5, 3.7) {\strut RIM};
+                \node at (-3 , 3.7) {\strut RIM+FT};
+                %\node at (-1.5, 4.3) {GT};
+                \node at (0.9, 4.2) {\strut Reconstruction};
+                \node at (-1.5, 3.7) {\strut VAE};
+                \node at (0.1, 3.7) {\strut RIM};
+                \node at (1.6, 3.7) {\strut RIM+FT};
+                \node at (3.2, 3.7) {\strut Observation};
+                \node at (5.5, 4.2) {\strut Residuals};
+                \node at (4.6, 3.7) {\strut RIM};
+                \node at (6.1, 3.7) {\strut RIM+FT};
         \end{tikzpicture}
         \caption{
         Comparison between baseline (RIM) and fine-tuned (RIM+FT) reconstructions for VAE generated 
@@ -1029,7 +1054,7 @@ down to the third decimal place, where the baseline prediction breaks down.}
 
 \begin{figure}[t!]
         \centering
-        \includegraphics[width=\linewidth]{figures/coherence_spectrum}
+        \includegraphics[width=0.7\linewidth]{figures/coherence_spectrum}
         \caption{Statistics of the coherence spectrum on the test set. The solid line is the average 
         coherence. The transparent region is the $68\%$ confidence interval. The fine-tuning 
         procedure yields a noticeable improvement on the coherence of the source at all frequencies.}
@@ -1179,17 +1204,16 @@ https://doi.org/10.5281/zenodo.6555463}}. This research made use of \texttt{Tens
 \texttt{Matplotlib} \citep{matplotlib}, 
 \texttt{Scikit-image} \citep{scikit-image}, 
 \texttt{IPython} \citep{ipython}, 
-\texttt{Pandas} \citep{pandas1}, 
+\texttt{Pandas} \citep{pandas1,pandas2}, 
 \texttt{Scikit-learn} \citep{scikit-learn}, 
 \texttt{Astropy} \citep{astropy:2013,astropy:2018} 
 and \texttt{GalSim} \citep{galsim}.
 
-\section*{Acknowledgements}
-We thank Ronan Legin for fruitful discussion and insights about 
-training the neural network and comments about the manuscript.
-This research was supported by the Schmidt Futures Foundation. The work was also enabled in part by computational resources provided by Calcul Quebec, Compute Canada and the Digital Research Alliance of Canada. Y.H. and L.P. acknowledge support from the National Sciences and Engineering Council of Canada grant RGPIN-2020-05102, the Fonds de recherche du Québec grant 2022-NC-301305, and the Canada Research Chairs Program. A.A. was supported by an IVADO scholarship.
-
-\clearpage
+%\section*{Acknowledgements}
+%We thank Ronan Legin for fruitful discussion and insights about 
+%training the neural network and comments about the manuscript.
+%This research was supported by the Schmidt Futures Foundation. The work was also enabled in part by computational resources provided by Calcul Quebec, Compute Canada and the Digital Research Alliance of Canada. Y.H. and L.P. acknowledge support from the National Sciences and Engineering Council of Canada grant RGPIN-2020-05102, the Fonds de recherche du Québec grant 2022-NC-301305, and the Canada Research Chairs Program. A.A. was supported by an IVADO scholarship.
+%\clearpage
 %\bibliography{bibliography}
 %\appendix
 
@@ -1528,46 +1552,11 @@ This research was supported by the Schmidt Futures Foundation. The work was also
 %\end{table}
 
 
-%\begin{figure}[H]
-        %\centering
-        %\begin{tikzpicture}
-                %\tikzstyle{every node}=[font=\scriptsize]
-                %\node at (0, 0) {\includegraphics[width=\linewidth]{figures/test_set_no_cherry_pick}};
-                %\node at (-8.2, 11) {COSMOS\strut};
-                %\node at (-6.8, 11) {RIM+FT\strut};
-                %\node at (-5.3, 11) {IllustrisTNG\strut};
-                %\node at (-3.7, 11) {RIM+FT\strut};
-                %\node at (-2.2, 11) {Observation\strut};
-                %\node at (-0.8, 11) {RIM+FT\strut};
-
-                %\node at (0.6, 11) {COSMOS\strut};
-                %\node at (2.1, 11) {RIM+FT\strut};
-                %\node at (3.7, 11) {IllustrisTNG\strut};
-                %\node at (5.2, 11) {RIM+FT\strut};
-                %\node at (6.7, 11) {Observation\strut};
-                %\node at (8.2, 11) {RIM+FT\strut};
-
-                
-                %% \node at (-7.5, 11.2) {COSMOS};
-                %% \node at (-4.5, 11.2) {RIM+FT};
-                %% \node at (-6, 11.7) {Sources};
-                %% \node at (-1.5, 11.2) {Illustris TNG};
-                %% \node at (1.5, 11.2) {RIM+FT};
-                %% \node at (0, 11.7) {Convergence};
-                %% \node at (4.5, 11.2) {Observation};
-                %% \node at (7.5, 11.2) {RIM+FT};
-        %\end{tikzpicture}
-        %\caption{
-                %30 reconstructions taken at random from the test set of 3000 examples simulated from COSMOS 
-                %and IllustrisTNG data at high SNR.
-                %The colorscale are the same as in Figure \ref{fig:main result}.}
-        %\label{fig:random sample}
-%\end{figure}
 
 
 
 %%\section{}
 
 
-%\end{document}
+%%\end{document}
 

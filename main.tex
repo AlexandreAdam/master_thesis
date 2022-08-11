@@ -9,6 +9,8 @@
 \usepackage{aasmacros}
 \usepackage[round]{natbib}
 \bibliographystyle{abbrvnat}
+\usepackage[autostyle]{csquotes} 
+
 
 \usepackage{epigraph}
 \setlength{\epigraphwidth}{0.6\textwidth}
@@ -46,6 +48,31 @@
 
 \def\frenchlistfigurename{Liste des figures}
 \def\frenchlisttablename{Liste des tableaux}
+
+\newif\ifnewauthor
+\newauthortrue
+
+\newcounter{affils}
+
+\makeatletter
+\def\chapterauthor[#1]#2{\ifnewauthor\else, \fi
+       #2\textsuperscript{\hyperref[authaffil\the\value{chapter}.#1]{#1}}%
+       \ifnewauthor\newauthorfalse\gdef\chapterauthors{#2}\else
+               \g@addto@macro\chapterauthors{, #2}\fi
+       \ignorespaces % to remove end of line spaces from
+                     % \chapterauthor[foo]{bar} input lines
+}
+\makeatother
+
+\def\chapteraffil[#1]{\item[#1 --]%
+    \refstepcounter{affils}%
+    \label{authaffil\the\value{chapter}.#1}%
+}
+
+\newenvironment{affils}
+   {{\chapterauthors\string\par}\begin{enumerate}}
+   {\end{enumerate}\global\newauthortrue}
+
 
 
 \usepackage[nogroupskip,nonumberlist,acronym,toc,sort=def]{glossaries} 
@@ -106,7 +133,7 @@
         \glsaddall
     \input{chapters/intro}
 
-%\input{chapters/censai}
+\input{chapters/censai}
 
 {\scriptsize
   %\bibliographystyle{apalike} % <== and here you specify the style for your bibliography

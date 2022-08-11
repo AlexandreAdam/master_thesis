@@ -21,7 +21,7 @@
  %%Appendix for derivatives of likelihood for interferometry.
  %%Appendix on VAE
  
-\chapter{Introduction}
+\chapter{Introduction}\label{chap:intro}
 \thispagestyle{empty}
 % Introduce the 4 chapters, 2 applications of non-linear image inverse problems and two important DL models used in our work
 
@@ -313,7 +313,7 @@ largement limité par l'effet de \textit{seeing} atmosphérique, soit la distort
 l'atmosphère.
 
 Dû à cette difficulté pratique, 
-la première lentille gravitationnelle est découverte plusieurs décennies après la prédiction de leur existence par \citet{Walsh1979}, 
+la première lentille gravitationnelle est découverte plusieurs décennies après la prédiction de leur existence, par \citet{Walsh1979}, 
 suivant l'identification de deux spectres radios de quasars identiques, QSO 0957+561 A et B, séparés par $5.7$ secondes d'arcs
 et capturés avec le télescope radio Mark II à l'observatoire Jodrell Bank. 
 Les spectres partagent la même magnitude, $m=17$, le même décalage vers le rouge, $z=1.405$, et possèdent des détails 
@@ -326,7 +326,7 @@ ainsi que la modélisation de sa distribution de masse, de son environnement
 et des angles de déflection qui causerait l'apparition d'une image double du quasar \citep{Young1981,Falco1991}
 %par des modèles d'une complexité rapidement croissante suivant les observations subséquentes du 
 %système \citep{Young1981}.
-\begin{figure}[htb!]
+\begin{figure}[tb!]
         \centering
         \includegraphics[width=0.8\textwidth]{figures/zoomed_in_qso0957}
         \caption{Le quasar double (QSO 0957+561 A et B) et la galaxie-lentille (G) imagé par le téléscope spatial Hubble. 
@@ -336,6 +336,39 @@ et des angles de déflection qui causerait l'apparition d'une image double du qu
 
 À la suite de cette découverte fortuite, l'étude des lentilles gravitationnelles est devenu un sujet d'étude 
 particulièrement riche, avec beaucoup de promesses pour la cosmologie \citep{Blandford1992,Bartelmann2010,Treu2010}. 
+Par exemples, les lentilles gravitationnelles permettent de mesurer 
+la constante de \citet{Hubble1929}, $H_0$, qui mesure le taux de l'expansion de l'Univers au temps présent. Les deux principales méthodes 
+pour faire cette mesure à l'aide des lentilles gravitationnelles sont la caractérisation de la courbe de lumière des supernovae \citet{Refsdal1964}, 
+ç.-à-d. lentillé par une ou plusieurs galaxies \citep[e.g.][]{Kelly2015,Goobar2017}, et la surveillance décennale de quasars lentillés 
+\citep[e.g.][]{Vanderriest1989,Wong2020}. 
+%Les lentilles gravitatinnelles permettent aussi 
+%d'inférer la distribution de masse de la lentille pour une galaxie, ou un amas de galaxie, et caractériser la distribution/présence 
+%de matière noire ou d'un trou noir supermassif
+%\citep[e.g.,][]{Dala2002,Treu2004,Hezaveh2016,Gilman2020,Gilman2021}.
+%%dark matter and its properties outside of the Milky Way 
+
+\begin{figure}[tb!]
+        \centering
+        \begin{subfigure}[t]{0.45\textwidth}
+                \includegraphics[width=\linewidth]{figures/rxj1131} 
+                \caption{Quasar quadruplement lentillé (A, B, C et D) par une galaxie (G). L'image de la galaxie hébergeant le quasar 
+                        est déformée tangentiellement, formant un anneau d'Einstein. Image prise par HST avec le filtre F814W.}
+                \label{fig:rxj1131}
+        \end{subfigure}
+        ~
+        \begin{subfigure}[t]{0.45\textwidth}
+                \includegraphics[width=\linewidth]{figures/sdssj1148} 
+                \caption{Le fer à cheval cosmique, soit l'image d'une proto-galaxie à très haut décalage vers le rouge 
+                        ($z=2.379$) fortement magnifiée et déformée par une galaxie elliptique lumineuse en infrarouge (G) exceptionnellement massive 
+                        \citep[${5.2\times 10^{12}\, h_{72}^{-1}\, M_\odot}$,][]{Schuldt2019}. 
+                 Image prise par HST avec le filtre F814W.}
+                \label{fig:sdssj1148}
+        \end{subfigure}
+        \caption{Lentilles gravitationnelles de type galaxie-galaxie.}
+        \label{fig:important lenses}
+\end{figure}
+ 
+
 De ce fait, beaucoup d'effort ont été déployés pour trouver systématiquement ces objets dans le ciel. Le programme 
 \textit{Sloan Lens ACS Survey} \citep[SLAC,][]{Bolton2005,Bolton2006}, basé sur la recherche systématique de spectres de galaxies de type ETG\footnote{\textit{Early-Type Galaxies}} 
 avec des lignes d'absorptions à un décalage vers le rouge plus grand que les lignes d'émission, 
@@ -364,10 +397,6 @@ gravitationnelles \citep{Petrillo2017,Huang2021}, et est projetée de découvrir
 %\begin{description}
         %\item[Cosmographie]
         %La cosmographie par délai temporelles \citep{Treu2016td,Suyu2017} permet en particulier de contraindre 
-                %la constante de \citet{Hubble1929}, $H_0$, qui mesure le taux de l'expansion de l'Univers au temps présent. Les deux principales méthodes 
-                %pour faire cette mesure sont la caractérisation de la courbe de lumière des supernovae \citet{Refsdal1964}, 
-                %ç.-à-d. lentillé par une ou plusieurs galaxies \citep[e.g.][]{Kelly2015,Goobar2017}, et la surveillance décennale de quasars lentillés 
-                %\citep[e.g.][]{Vanderriest1989,Wong2020};
         %\item[Inférence de la masse] Caractériser précisément les angles de déflections d'une lentille gravitationnelles permettent, en principe, 
                 %d'inférer la distribution de masse
 %\end{description}
@@ -377,8 +406,8 @@ gravitationnelles \citep{Petrillo2017,Huang2021}, et est projetée de découvrir
                 %pour faire cette mesure sont la caractérisation de la courbe de lumière des supernovae \citet{Refsdal1964}, 
                 %ç.-à-d. lentillé par une ou plusieurs galaxies \citep[e.g.][]{Kelly2015,Goobar2017}, et la surveillance décennale de quasars lentillés 
                 %\citep[e.g.][]{Vanderriest1989,Wong2019};
-        %%\item Inférer la distribution de masse de la lentille pour une galaxie, ou un groupe de galaxie, et caractériser la distribution/présence 
-                %%de matière noire, voir même de trous noirs supermassif ou de planètes ou étoiles extragalactiques (tdcosmos);
+        %\item inférer la distribution de masse de la lentille pour une galaxie, ou un groupe de galaxie, et caractériser la distribution/présence 
+                %de matière noire, voir même de trous noirs supermassif ou de planètes ou étoiles extragalactiques (tdcosmos);
 %%dark matter and its properties outside of the Milky Way \citep[e.g.,][]{Dala2002,Treu2004,Hezaveh2016,Gilman2020,Gilman2021}.
                 %% Microlensing 
         %%\item De caractériser la structure de des protogalaxies dans l'Univers jeune, leur taux de formation d'étoiles et finalement 
@@ -395,26 +424,6 @@ gravitationnelles \citep{Petrillo2017,Huang2021}, et est projetée de découvrir
 %Pour une discussion plus général du phénomène, le lecteur peut se référer aux manuels de références par \citet{Meneghetti2013,Congdon2018} 
 %ou aux excellentes revues du sujet par \citet{Bartelmann2010,Treu2010}. 
 
-\begin{figure}[H]
-        \centering
-        \begin{subfigure}[t]{0.45\textwidth}
-                \includegraphics[width=\linewidth]{figures/rxj1131} 
-                \caption{Quasar quadruplement lentillé (A, B, C et D) par une galaxie (G). L'image de la galaxie hébergeant le quasar 
-                        est déformée tangentiellement, formant un anneau d'Einstein. Image prise par HST avec le filtre F814W.}
-                \label{fig:rxj1131}
-        \end{subfigure}
-        ~
-        \begin{subfigure}[t]{0.45\textwidth}
-                \includegraphics[width=\linewidth]{figures/sdssj1148} 
-                \caption{Le fer à cheval cosmique, soit l'image d'une proto-galaxie à très haut décalage vers le rouge 
-                        ($z=2.379$) fortement magnifiée et déformée par une galaxie elliptique lumineuse en infrarouge (G) exceptionnellement massive 
-                        \citep[${5.2\times 10^{12}\, h_{72}^{-1}\, M_\odot}$,][]{Schuldt2019}. 
-                 Image prise par HST avec le filtre F814W.}
-                \label{fig:sdssj1148}
-        \end{subfigure}
-        \caption{Lentilles gravitationnelles de type galaxie-galaxie.}
-        \label{fig:important lenses}
-\end{figure}
 
 Le sujet du chapitre \ref{chap:censai} se concentre sur le défi de développer un algorithme pour modéliser la distribution de masse et 
 la morphologie de la source dédié à analyser un nombre aussi grand 
@@ -650,6 +659,13 @@ linairement de la masse $M$:
         \frac{\boldsymbol{ \xi}  - \boldsymbol{ \xi} '}{\lVert \boldsymbol{ \xi}  - \boldsymbol{ \xi} ' \rVert^{2}}d^{2}\boldsymbol{ \xi} '
 \end{equation} 
 
+\begin{figure}[tb!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/lensing_cartoon}
+        \caption{Schéma d'une lentille gravitationnelle.}
+        \label{fig:cartoon}
+\end{figure}
+
 L'angle de déviation est une quantité cruciale pour résoudre une lentille gravitationnelle 
 puisqu'il décrit une transformation des coordonnées angulaires du plan de la lentille ($\boldsymbol{ \theta} $) 
 vers les coordonnées angulaires du plan de la source ($\boldsymbol{ \beta} $). 
@@ -758,12 +774,6 @@ qui satisfait l'équation de la lentille adimensionnelle
         \boldsymbol{ \beta} = \boldsymbol{ \theta} - \hat{\boldsymbol{ \alpha}}(\boldsymbol{ \theta})\, . 
 \end{equation}
 
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\textwidth]{figures/lensing_cartoon}
-        \caption{Schéma d'une lentille gravitationnelle.}
-        \label{fig:cartoon}
-\end{figure}
 
 
 %Strong gravitational lensing is a natural phenomenon through which multiple distorted images of luminous background objects, 
@@ -833,11 +843,152 @@ qui satisfait l'équation de la lentille adimensionnelle
 
 
 \section{Interférométrie par masque non-régulier}
-%\subsection{Contexte historique}
+% Mentionner le scope restreint (Aperture masking, etc.)
+% Optical does not mean optical wavelength, only means we are using optics
+%to manipulate the light (lens, mirrors,mas)
+% Cite Monnier for an excellent review
+
+% History
+La première conceptualisation de l'interférométrie par masque apparaît dans un rapport sur le Concours Bordin de l'année 1867, 
+
+
+\blockquote{
+        Il existe en effet pour la plupart des phénomènes d'interférences, tels que les franges d'[Young], celles des miroirs 
+        de Fresnel et celles qui donnent lieu à la scintillation des étoiles d'après Arago, une relation remarquable et 
+        nécessaire entre la dimension des franges et celle de la source lumineuse, en sortes que les franges d'une 
+        ténuité extrêmes ne peuvent prendre naissance que lorsque la source de lumière n'a plus que des dimensions angulaires 
+        presque insensibles; d'où, pour le dire en passant, il est peut-être permis d'espérer qu'en s'appuyant sur ce principe et 
+        en formant par exemple, au moyen de deux franges d'interférences au foyer des grands instruments destinés à observer les étoiles, 
+        il deviendra possible d'obtenir quelques données nouvelles sur les diamètres angulaires de ces astres.
+}
+
+Pour bien comprendre ce phénomène, on peut utiliser l'expérience des deux fentes de Young. 
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/young_cartoon}
+        \caption{Reproduction de Monnier 2000}
+        \label{fig:young}
+\end{figure}
+
+Dans le cas où la taille de l'objet est trop petite, le patron d'interférence est celui de gauche. Dans le cas où 
+la taille angulaire, ou la distance angulaire entre deux objets singuliers, atteint un seuil caractéristique 
+$\Delta \theta = \frac{\lambda}{2b}$, nommé le critère de Michelson, alors la visibilité atteint un minimum tel qu'illustré 
+dans le patron de droit dans l'image.
+$\omega = 2 \pi \nu$, $\nu \lambda = c$.
+$D$ est la distance du diamètre angulaire entre la source et les fentes, qu'on prend beaucoup plus grande
+
+\begin{equation}\label{eq:E1}
+        E_1(\ell, m, t) = A(\ell,m, t - \frac{R_1}{c}) \frac{e^{-i\omega (t - \frac{R_1}{c})}}{R_1} 
+\end{equation} 
+
+Dans l'approximation où le champ élecromagnétique de deux sources, $E_1$ et $E_2$, sont monochromatique, de longueur d'onde $\lambda$, on 
+peut écrire la luminosité totale observée sur l'écran image comme
+\begin{equation}\label{eq:Itot}
+        \begin{aligned}
+                I(\ell, m) &=  \int_{0}^{T} (E_1(\ell, m, t) + E_2(\ell, m, t)))^{2}dt \\[1.5ex]
+                I(\ell, m) &=  \int_{0}^{T} (E_1(\ell, m, t) + E_2(\ell, m, t)))^{2}dt %\\[1.5ex]
+        \end{aligned}
+\end{equation} 
+
+
+%Le truc est donc de changer la longueur de base $\mathbf{b}$ pour obtenir un minimum pour la visibilité
+% Fizeau note 1868 (voir Monnier thesis for source)
+% Michelson applied to measure diameter of Jupyter Moons (1891) and Betelgeuse (1921)
+% Jennison + radio telescopes
+% 90s-20s Optical interferometry with masks
+% Van Cittert-Zernike Theorem 
+
+
+% In practice, we go and measure the visibilities and try to take the inverse Fourier transform
+\subsection{Théorème de van Cittert-Zernike}
+Pour obtenir un peu d'intuition sur ce théorème important, on utilise l'expérience classique des deux 
+fentes de \citep{Young}. On considère deux fentes séparées par une distance $\mathbf{D}$, et on illumine ces 
+deux fentes avec de la lumière monochromatique de longueur d'onde $\lambda$.
+
+% Maybe show picture here
+Supposons
+
+\begin{equation}\label{eq:Mutual Coherence}
+        \Gamma_{12} = \lim_{T \rightarrow \infty } \frac{1}{2T} \int_{-T}^{T} E_{1}(t)\tilde{E}_2(t - \tau) dt 
+\end{equation} 
+
+
+% Time average
+\begin{equation}\label{eq:time average}
+        \langle E_1\tilde{E}_2\rangle_{t} = \langle A(\ell,m,t - \frac{R_1}{c}) \tilde{A}(\ell,m,t - \frac{R_2}{c}) \rangle_t
+       \frac{e^{i\omega(\frac{R_1 - R_2}{c})}}{R_1 R_2} 
+\end{equation} 
+
+Now $\langle A(\ell,m,t - \frac{R_1}{c}) \tilde{A}(\ell,m,t - \frac{R_2}{c}) \rangle_t = I(\ell, m)$ for incoherent source
+
+% Explaining the resolution, we need to look at the visibility curve, a binary is resolved when V reaches its minimum (for Michelson interferometry, where we can change the baseline by changing the OPD.
+
+% Rayleigh Criterion
+\begin{equation}\label{eq:Rayleigh}
+       \Delta \theta_{\text{Télescope}} = 1.22 \frac{\lambda}{D}
+\end{equation} 
+
+% Micheslon criterion
+\begin{equation}\label{eq:Michelson}
+        \Delta \theta_{\text{Interféromètre}} = \frac{\lambda}{2b} 
+\end{equation} 
+Nearly twice as good.
+
+% Consider two point source (two planar EM waves) 
+% Consider two slits, common Young experiment, we get interference fringes. 
+% Michelson 1920 defined visibility in term of P_min and P_max 
+% See Lawson for the best reference on this
+
+% I could show the little presentation here to showcase Slit experiment and V in term of I_min I_max
+
+% Show a classical Two slit Young experiment
+% Generalize this too multiple slits by a simple sum
+% Show how to retrieve V from the complex mess (FT)
+% From von Citter th, show hyw we try to inverse FT our Vs to retrieve true source emission.
+
+% P = P_0 (1 + Re{V e^ {ik delta}}) (for a single fringe)
+
+% Pupil-plane or Michelson interferometry
+% Image plan interferometry <- is what I am doing
+
+
+Le théorème de von Cittert-Zernike nous assure que les visibilités mesurées correspondent à la transformée 
+de Fourier de l'intensité de la source, de sortes que le problème de reconstruction d'image par interférométrie et 
+de prendre la transformée de Fourier inverse des visibilitées mesurées.
+
+Showing what visibilities are, fringes etc.
+Show how fringes emerges, through time averaged cross correlation of EM fields.
+
+\begin{equation}
+        \tilde{\mathcal{V}}\left( \frac{\mathbf{D}}{\lambda} \right) = \frac{\displaystyle \int_{\Omega}dx_\Omega dy_\Omega I_\lambda (\mathbf{r}_\Omega) e^{-\frac{\mathbf{D}}{\lambda} \cdot \mathbf{r}_\Omega}}{\displaystyle \int_{\Omega} dx_\Omega dy_\Omega I_\lambda (\mathbf{r}_{\Omega})}
+\end{equation}
+
+En pratique, comme le nombre de mesure n'est pas complet, le problème de reconstruction d'image 
+est mal-posé, et on doit introduire certaine contraintes pour reconstruire les visibilitées qui ne sont 
+pas mesurées. Parler de DFT. 
+% montrer un u, v plot
+
+% Solution for binaries, Disk are nice to put here.
+
+
+% Number of baselines = N choose 2
+
+% Useful citations
+%\citep{Sivaramakrishnan2012} Introduction of NIRISS AMI
+%\citep{Greenbaum2015} Image plane algorithm for NIRISS AMI
+%\citep{Thiebault2017} Review of image reconstruction with optical interferometers
+%\citep{Claes2020} Astrophysical prior based image reconstruction (using GAN)
+%^\citep{Issaoun2019} VLBI imaging
+%\citep{Morningstar2019} Interferometric reocnstruction with RIM
+%\citep{Chael2018} ELT direct optimisation of bispectra
+% \citep{Pope2016} Kernel phase and kernel amplitude in Fizeau imaging
+% \citep{Fizeau1868} Aperture masking 
+% \citep{Jennison} Closure phases
+% \citep{Monnier1999} Phd thesis, aperture masking with Keck to analyze circumstellar disks
+% \citep{Monnier2007} Review
+% \citep{Tuthill1999} Surface imaging of a variable star
 
 \subsection{Les angles de fermeture}
-
-
 
 \section{Auto-encodeur variationnel}
 % Intro into why we talk about this here -> Modeling a distribution for images, generative process for training etc.
@@ -940,7 +1091,7 @@ En effet, on peut maintenant échanger les opérateurs $\grad_{\phi,\theta}$ et 
 ce qui nous permet d'appliquer le gradient à l'intérieur de l'espérance mathématique.
 De plus, $\phi$ décrit maintenant une fonction générique dont le rôle est d'inférer les 
 paramètres de la distribution $q_\phi(\mathbf{z} \mid \mathbf{x})$
-\begin{equation}\label{eq:}
+\begin{equation}
         \begin{aligned}
                 f_\phi: \mathbb{R}^{m} &\rightarrow \mathbb{R}^{h} \times \mathbb{R}^{h}\\ \mathbf{x} &\mapsto (\boldsymbol{\mu},\, \log \boldsymbol{\sigma}^{2})
         \end{aligned}
@@ -1043,6 +1194,8 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
         \caption{VAE comme un système de transmission d'information.}
         \label{fig:info VAE}
 \end{figure}
+%Thus, the mutual information I (X; Y ) is the reduction in the uncertainty
+%of X due to the knowledge of Y
 
 %Un système de traitement d'information idéal est un système qui perd le 
 L'objectif d'un auto-encoder est de construire un code $Z$ d'une longueur minimale qui capture un maximum d'information contenu dans un message $X$. 
@@ -1061,8 +1214,21 @@ où $H(X)$ est l'entropie du message. L'entropie est une mesure de l'incertitude
 \end{equation} 
 qu'on interprète aussi comme une mesure de la longueur minimal d'un code, $Z$, pour 
 transmettre un message, $X$, d'un émetteur à un receveur avec le minimum de perte d'information \citep{Shannon1948,Kolmogorov1965}.
-Selon ce point de vue, $H(Z \mid X) = -\mathbb{E}_{p(\mathbf{x},\mathbf{z})}\big[ \log p(\mathbf{z} \mid \mathbf{x}) \big]$ correspond donc à une perte d'information (augmentation de notre incertitude) 
-dû au traitement de l'information par un encodeur et une source de bruit.
+% Check that this is canonical
+%Selon ce point de vue, $H(Z \mid X) = -\mathbb{E}_{p(\mathbf{x},\mathbf{z})}\big[ \log p(\mathbf{z} \mid \mathbf{x}) \big]$ correspond  une perte d'information  
+%dû au traitement de l'information par un encodeur et une source de bruit. 
+
+% Problem here
+%Puisque $H(Z \mid X) \geq 0$, on peut 
+%définir l'inégalité du traitement de l'information pour la chaîne de Markov $X \rightarrow Z \rightarrow \hat{X}$
+%\begin{equation}\label{eq:DPI}
+        %I(Z; X) \geq  I(\hat{X}, X),
+%\end{equation} 
+%qu'on peut aussi voir comme un analogue de la seconde loi de la thermodynamique, soit que la variation de l'entropie, étant donné un 
+%travail interne à un système, ne peut qu'être positive ou nulle $H(X) \geq H(X \mid Z) \geq H(X \mid \hat{X})$. 
+%L'inégalité \eqref{eq:DPI} nous indique qu'on ne peut pas augmenter notre connaissance du message par un traitement de ce message.
+%de sortes que l'entropie de la variable latente $H(Z)$ augmente 
+
 
 Posé de cette façon, déterminer l'auto-encodeur optimal est un problème mal posé. En effet, on pourrait naïvement maximiser l'objectif \eqref{eq:ShannonInfo} avec 
 la fonction identité comme auto-encodeur: $f_{\phi,\theta}(X) = \bbone X$, de sortes que $\hat{X} = Z = X$. Or, $Z$ n'est pas une représentation pertinente dans ce cas. 
@@ -1078,10 +1244,11 @@ le maximum d'information possible à propos du message. On introduit l'objectif 
 La contrainte $I(Z; Y) \leq \alpha$ impose à l'auto-encodeur %$p_{\phi,\theta}(\hat{X} \mid X)$
 une limite sur l'information mutuelle entre le code 
 utilisé pour représenter $X$ et l'identité $Y=i$ de chaque exemples d'un ensemble de donnée qu'on veut modéliser $\mathcal{D} = \{\mathbf{x}_i \}_{i=1}^{N}$.
-Si $\alpha$ est trop grand, e.g. $\alpha > H(Y)$, alors l'objectif redevient l'objectif mal-posé d'un auto-encodeur classique discuté plus 
-haut: l'auto-encodeur est libre de choisir une relation un-pour-un entre $Y$ et $Z$ (et $X$). 
-D'un autre côté, $\alpha < H(Y)$ force l'auto-encodeur à comprimer le message. Finalement, de façon intéressante, $\alpha < H(X) < H(Y)$ force 
-l'auto-encodeur à éliminer l'information redondante dans le message $X$.
+% Check the maths here
+%Si $\alpha$ est trop grand, e.g. $\alpha > H(Y)$, alors l'objectif redevient l'objectif mal-posé d'un auto-encodeur classique discuté plus 
+%haut: l'auto-encodeur est libre de choisir une relation un-pour-un entre $Y$ et $Z$ (et $X$). 
+%D'un autre côté, $\alpha < H(Y)$ force l'auto-encodeur à comprimer le message. Finalement, de façon intéressante, $\alpha < H(X) < H(Y)$ force 
+%l'auto-encodeur à éliminer l'information redondante dans le message $X$.
 En effet, l'objectif de comprimer l'information est intimement lié à l'objectif d'obtenir un sommaire informatif; ç.-à-d. qu'un 
 code d'une complexité de \citet{Kolmogorov1965} minimale décrit la source d'information de la manière la plus informative possible. Cette connexion 
 remarquable est une application concrète du principe du rasoir d'Occam: l'explication adéquate la plus simple est la meilleure explication.
@@ -1089,21 +1256,23 @@ remarquable est une application concrète du principe du rasoir d'Occam: l'expli
 Dans ce qui suit, je m'applique à redériver l'objectif d'un auto-encodeur variationnel suivant les approximations 
 proposées par \citet{Alemi2017}. Puis je termine avec une courte interprétation des VAE sous la lumière du principe du goulot d'information.
 On commence par construire une limite inférieur variationnelle sur $I(Z; X)$. 
-On assume d'abord que la distribution jointe $p(X, Y, Z)$ se factorise de la façon suivante
+On assume d'abord la chaîne de Markoz $Y \rightarrow X \rightarrow Z$ pour les variables 
+aléatoires représentées dans la figure \ref{fig:info VAE}. La chaîne de Markov 
+induit la factorisation de la probabilité jointe
 \begin{equation}\label{eq:factorisation}
        p(X, Y, Z) = p(X \mid Z) p(Y \mid X) p(X) 
 \end{equation} 
-où $p(X \mid Z, Y) = p(X \mid Z)$ suivant le fait qu'on assume une chaîne de Markov $Y \rightarrow X \rightarrow Z$ pour les 
-variables aléatoires (voir figure \ref{fig:info VAE}).
-On introduit un encodeur 
-$q_\phi (\mathbf{z} \mid \mathbf{x})$ qui modélise notre système de transmission d'information par compression, $p(X \mid Z)$. Il 
+où $p(X \mid Z,\, Y) = p(X \mid Z)$ suit du fait que $Z$ et $Y$ sont des variables conditionnellement indépendantes étant donné $X$.
+On introduit ensuite un modèle pour l'encodeur,
+$q_\phi (Z \mid X)$, soit un système de transmission d'information par compression. Il 
 suit que 
 \begin{align}
-        I(Z; X) &= \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log \frac{q_\phi(\mathbf{x} \mid \mathbf{z})}{p(\mathbf{x})} \bigg]\, ;  \\[1.5ex]
+        I(Z;\, X) &\equiv \mathbb{E}_{p(\mathbf{z},\, \mathbf{x})} \bigg[\log \frac{p(\mathbf{x},\, \mathbf{z})}{p(\mathbf{x}) p(\mathbf{z})} \bigg]\, ;  \\[1.5ex]
+        &= \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log \frac{q_\phi(\mathbf{x} \mid \mathbf{z})}{p(\mathbf{x})} \bigg]\, ;  \\[1.5ex]
                 &= -\mathbb{E}_{p(\mathbf{x})}\bigg[\log p(\mathbf{x}) \bigg]  
                 + \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi(\mathbf{x} \mid \mathbf{z})\bigg]\, ;  \\[1.5ex]
                 \label{eq:maximum info}
-                &\geq \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]\, .
+                \implies I(Z;\, X)&\geq \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]\, .
 \end{align}
 À la dernière ligne, on a éliminer l'entropie du message $H(X)$ puisque c'est une constante qui ne dépend pas de $\phi$, et 
 on a introduit l'approximation variationnelle $p_\theta (\mathbf{x} \mid \mathbf{z}) \approx q_\phi (\mathbf{x} \mid \mathbf{z})$ 
@@ -1131,25 +1300,41 @@ les limites variationnelles \eqref{eq:maximum info} et \eqref{eq:compression}. O
 l'espérance mathématique $\mathbb{E}_{p(\mathbf{x})} = \mathbb{E}_{\mathbf{x}^{(i)} \sim \mathcal{D}}$ pour mieux illustrer la connection 
 avec la ELBO \eqref{eq:final elbo}
 \begin{equation}\label{eq:beta VAE}
-       \mathcal{L}_{\phi,\theta,\beta}(\mathbf{x}) =  
- \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]
- -
- \beta  \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[ 
+        \mathcal{L}_{\phi,\theta,\beta}(\mathbf{x}) =  \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]
+        -  \beta  \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[ 
                 \log q_\phi(\mathbf{z} \mid \mathbf{x})        
                 -\log p_\theta(\mathbf{z})
                 \bigg]
 \end{equation} 
-On note qu'on a délaisser la constante $\alpha$, principalement dû au fait que le terme de régularisation est une limite inférieur et 
-la valeur de $\alpha$ est difficile à déterminer en pratique. Réintégrer la constante $\alpha$ dans la ELBO 
-reviendrait à choisir la fonction objective qui est le sujet du travail par \citet{Zhao2017}.
+On note qu'on a laissé tomber la constante $\alpha$ car elle ne dépend pas des paramètres $\phi$ et $\theta$, et généralement le paramètres $\beta$ 
+n'est pas optimisé directement. $\beta$ est considéré comme un hyperparamètre. 
+Je note que l'objectif \eqref{eq:beta VAE} a fait une première apparition dans le travail introduisant les $\beta$-VAE par \citet{Higgins2017}, 
+suivant des motivations complètement différentes de celles qu'on a suivit ici. La dérivation accomplit ici 
+montre clairement que la ELBO, $\mathcal{L}_{\phi,\theta,\beta}(\mathbf{x})$, est une limite inférieure 
+sur $I(Z; X) - \beta I(Z; Y)$, soit l'objectif de maximiser l'information transmise par un auto-encodeur, avec une 
+contrainte sur la complexité du code $Z$. En particulier, cette dérivation illumine le choix de la marginale $p_\theta(\mathbf{z})$ 
+comme étant une approximation variationnelle de la marginale de l'encodeur $q_\phi(\mathbf{z})$, contrairement à la dérivation 
+montrée plus haut où $p_\theta(\mathbf{z})$ apparaît comme un objectif arbitraire permettant d'améliorer l'aspect 
+génératif du décodeur.
 
-Il est intéressant de noter que cette nouvelle dérivation commence d'un point de vue complètement différent. On 
+Il est intéressant de noter que la dérivation accomplit dans cette sous-section commence d'un point de vue complètement différent à 
+celui de \citet{Kingma2013}. On 
 a supposé que le modèle génératif $p_\theta(\mathbf{x} \mid \mathbf{z})$ est une approximation variationnelle de 
 l'a posteriori du modèle 
 d'inférence $q_\phi(\mathbf{x} \mid \mathbf{z})$. L'approche de \citet{Kingma2013} est parfaitement l'inverse.
 De plus, le terme de régularisation a maintenant une interprétation beaucoup plus riche, avec un paramètre 
 $\beta$ qui contrôle le niveau de compression de l'information désiré et qui s'avère à contrôler plus ou moins 
-directement le nombre de partitions possibles dans l'espace latent \citep{}
+directement le nombre de partitions possibles dans l'espace latent \citep{Alemi2017,Rezende2018}.
+La valeur optimale de $\beta$ dépend largement du problème, ç.-à-d. $p(X)$, et de 
+la capacité des modèles $q_\phi$ et $p_\theta$. 
+% Mentionner aussi la chaine d'idées lié au VQ-VAE.
+Pour une discussion détaillé de l'espace de phase de la ELBO en fonction de $\beta$, je réfère le lecteur 
+au travail de \citet{Alemi2018}.
+
+%En particulier, la valeur $\beta=1$ est optimale seulement 
+%dans la limite où l'auto-encodeur possède une capacité théoriquement maximale. 
+%Pour tout les autre cas et pour une discussion 
+%détaillée du sujet, je réfère le lecteur au travail de \citet{Alemi2018}. 
 %\begin{align}
         %\mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi(\mathbf{x} \mid \mathbf{z})\bigg] 
         %&= 
@@ -1216,12 +1401,12 @@ directement le nombre de partitions possibles dans l'espace latent \citep{}
 
 
 %L'objectif optimal pour un auto-encodeur est donc
-%\begin{equation}\label{eq:}
+%\begin{equation}
 %\phi^{\star},\,\theta^{\star} = \underset{\phi,\,\theta}{\mathrm{argmax}}\,\, \mathcal{L}_{\phi,\,\theta}(p(\hat{\mathbf{x}} \mid \mathbf{x})) =  
 %\end{equation} 
 
 %C'est précisément le problème rencontré lorsqu'on essai de compresser l'information $X$ dans
-%\begin{equation}\label{eq:}
+%\begin{equation}
         
 %\end{equation} 
 %Or, comme on a une liberté immense sur le choix du code $Z$ pour représenter l'information, on peut en principe choise 
@@ -1279,7 +1464,7 @@ On suppose qu'on connait la distribution de ce bruit, de sortes qu'on peut modé
 Le problème d'inférence est celui de déterminer les paramètres $\mathbf{x}$ qui reproduisent l'observation $\mathbf{y}$, 
 ç.-à-d. l'estimé des paramètres $\hat{\mathbf{x}}_{\mathrm{MLE}}$ 
 qui maximisent la fonction de vraisemblence (MLE de l'anglais \textit{maximum likelihood estimate}), 
-ou de façon équivalente ceux qui maximisent le log de la vraisemblence
+ou, de façon équivalente, ceux qui maximisent le log de la vraisemblence
 \begin{equation}\label{eq:likelihood max}
         \hat{\mathbf{x}}_{\mathrm{MLE}} = \underset{\mathbf{x} \in \mathcal{X}}{\mathrm{argmax}}\, \log p(\mathbf{y} \mid \mathbf{x})\, .
 \end{equation} 
@@ -1401,7 +1586,9 @@ de choisir un modèle singulier isotherme ou une loi de puissance elliptique \ci
 caractérisé par quelques paramètres seulement 
 ($\dim_{\mathbb{R}}(\mathcal{X}) \sim 10$), tandis que 
 l'observation $\mathbf{y}$ est une image avec $\dim_{\mathbb{R}}(\mathcal{Y}) \gtrsim 10^{4} \gg \mathrm{dim}_{\mathbb{R}}(\mathcal{X})$. 
-Cette approche est considérablement plus stable que les méthodes sous-déterminées. Toutefois, 
+Cette approche est considérablement plus stable que les méthodes sous-déterminées. 
+
+Toutefois, 
 les modèles analytiques deviennent rapidement complexes et difficiles à construire, voir justifier, lorsque l'observation des systèmes qui nous intéresse
 sont de haute qualité, ce qui révèle la complexité cachée de ces systèmes \citep[e.g.][]{Schuldt2019}. 
 De plus, ce cadre nous limite à seulement considérer les hypothèses construites par des humains 
@@ -1409,9 +1596,9 @@ ou par régression symbolique \citep[e.g.][]{Lemos2022}, et non l'ensemble des h
 C'est cette observation qui nous motive à utiliser l'approche esquissée plus haut, 
 où l'espace $\mathcal{X}$ est construit de manière presque agnostique à la solution 
 physique recherchée (e.g. une grille de pixels pour modéliser une distribution de masse), 
-de manière à contenir toutes, ou au moins la plupart, des solutions physiques. Ce genre d'approche a 
+de manière à contenir toutes, ou au moins la plupart, des solutions physiques. Une telle approche a 
 le potentiel de produire des résultats surprenant ou intéressant, puisque l'exploration de l'espace des solutions physiques 
-peut être ajustée via la distribution a priori, $p_\theta(\mathbf{x})$, selon la complexité de l'observation.
+peut être ajustée, en principe, via la distribution a priori, $p_\theta(\mathbf{x})$, selon la complexité de l'observation.
 
 \subsection{La relation de récurrence}
 Pour résoudre l'équation différentielle ordinaire sous-entendue par le problème \eqref{eq:MAP intro}, 
@@ -1424,14 +1611,15 @@ on considère la méthode de discrétisation d'Euler
 où $\alpha$ est le taux d'apprentissage dans la littérature sur 
 l'apprentissage machine.
 On est garantie d'obtenir une solution 
-au problème à valeur initiale ($\hat{\mathbf{x}}^{(0)} = \mathbf{x}_0$) si l'algorithme, après $T$ itérations, 
+au problème à valeur initiale si l'algorithme, après $T$ itérations, 
 satisfait la condition de Lipschitz. Pour la relation de récurrence \eqref{eq:map recurrence}, ceci revient 
 à assumer que l'erreur locale de chaque itération est proportionnelle à $\alpha^{2}$, ce qui est 
 satisfait si le gradient $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x} \mid \mathbf{y})$ 
 satisfait la condition de Lipschitz dans la région de $\mathcal{X}$ explorée par l'algorithme \citep{Atkinson1989,Butcher2016}, 
-en encore si la norme de la dérivée seconde de $\log p_\theta(\mathbf{x} \mid \mathbf{y})$ est bornée dans cette région.
+ou encore si la norme de la dérivée seconde de $\log p_\theta(\mathbf{x} \mid \mathbf{y})$ est bornée dans cette région.
 
-\citet{Putzky2017} observent qu'on peut réécrire \eqref{eq:map recurrence} de la façon suivante
+\citet{Putzky2017} observent qu'on peut réécrire \eqref{eq:map recurrence} en utilisant le théorème de Bayes et 
+en absorbant le gradient de la distribution a priori dans une fonction $g_{\varphi^{(t)}}$
 \begin{align}
         \hat{\mathbf{x}}^{(t+1)} &= 
         \hat{\mathbf{x}}^{(t)} + \alpha \big( \grad_{\hat{\mathbf{x}}^{(t)}}\log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}) 
@@ -1455,21 +1643,47 @@ Pour le problème de reconstruction d'image, les modèles neuronaux convolutif a
 avec une architecture U-net \citep{Ronneberger2015} sont des choix naturels pour modéliser $g_{\varphi^{(t)}}$. 
 Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}$ 
 possède une constante de Lipschitz $L\leq 1$, ce qui n'est pas trivialement respecté pour un réseau de neurones.
-Dans ce travail, cette condition n'est pas explicitement imposée au modèle. 
+Dans ce travail, cette condition n'est pas explicitement imposée au modèle.  
 On note toutefois que l'analyse de la condition de Lipschitz pour les réseaux neuronnaux est un 
 sujet de recherche actif \citep[e.g.][]{}, particulièrement dans l'étude des attaques antagonistes de réseaux de neuronnes \citep[e.g.][]{}. 
 %Nous reportons l'étude de la troisième condition d'Hadamard pour des travaux futurs.
 
-Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance des paramètres $\varphi^{(t)}$ envers $t$. Cet aspect 
-est directement inspiré des succès récents d'algorithmes d'optimisations comme la méthode d'accélération de \citet{Nesterov1983}, 
+Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance des paramètres $\varphi^{(t)}$ envers $t$. Plusieurs 
+algorithmes d'optimisations récents comme la méthode d'accélération de \citet{Nesterov1983}, 
 %RPROP \citep{Riedmiller1993},
 AdaGrad \citep{Duchi2011}, RMSProp\footnote{L'algorithme apparaît en premier dans le cours CSC321 à l'Université de Toronto, donné par Geoffrey Hinton en 2011.} \citep{Hinton2012} 
 et ADAM \citep{Kingma2014},
-qui utilisent explicitement l'information 
+utilisent explicitement l'information 
 des gradients d'itérations antérieurs à $t$ pour calculer la mise à jour dans la relation de récurrence \eqref{eq:rim putzky}.
 Cette propriété permet à ces algorithmes de collecter de l'information par rapport à la seconde dérivée de la fonction 
 objective, sans la calculer directement.
 Ainsi, il est important de considérer une classe de modèles avec une mémoire des itérations précédentes. 
+Pour se faire, on augmente la relation de récurrence \eqref{eq:rim putzky} avec une seconde relation de 
+récurrence sur un tenseur caché $\mathbf{h}^{(t)}$:
+\begin{equation}\label{eq:hidden recurrence}
+        \mathbf{h}^{(t)} = g_{\varphi}\big(\hat{\mathbf{x}}^{(t)},\, \grad_{\hat{\mathbf{x}}^{(t)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}),\,  \mathbf{h}^{(t-1)}\big)\, ,
+\end{equation} 
+Dans le cas de ADAM, la relation de récurrence cachée est un lissage exponentiel des deux premiers 
+moments du gradient d'une fonction objective $\mathcal{L}_{\mathbf{x}}$ (comme le log de la fonction de vraisemblance par exemple) 
+en terme des paramètres d'intérêts, $\mathbf{x}$
+\begin{align}
+        \mathbb{E}_{t \in \{0,T\}}\bigg[ \grad_{\mathbf{x}^{(t)}} \mathcal{L}_{\mathbf{x}^{(T)}}\bigg]  &= \beta_1 
+        \mathbb{E}_{t \in \{0,T-1\}}\bigg[ \grad_{\mathbf{x}^{(t)}} \mathcal{L}_{\mathbf{x}^{(t)}} \bigg]  
+        + (1 - \beta_1) \grad_{\mathbf{x}^{(T)}} \mathcal{L}_{\mathbf{x}^{(T)}} \\[1.5ex]
+        \mathbb{E}_{t \in \{0,T\}}\bigg[ \left(\grad_{\mathbf{x}^{(t)}} \mathcal{L}_{\mathbf{x}^{(t)}}\right)^{2}\bigg]  &= \beta_2
+        \mathbb{E}_{t \in \{0,T-1\}}\bigg[ \left(\grad_{\mathbf{x}^{(t)}} \mathcal{L}_{\mathbf{x}^{(t)}}\right)^{2} \bigg]  
+        + (1 - \beta_2) \left(\grad_{\mathbf{x}^{(T)}} \mathcal{L}_{\mathbf{x}^{(T)}}\right)^{2}
+\end{align}
+La relation \eqref{eq:hidden recurrence} est donc une généralisation de ADAM, 
+où on a remplacer le lissage exponentiel par une relation récurrente sur un tenseur caché $\mathbf{h}^{(t)}$ quelconque, 
+dont le rôle et de compresser l'information de 
+la trajectoire $\hat{\mathbf{x}}^{(0:t)}$ dans un sommaire informatif. Ayant ainsi comprimé l'information dans une variable 
+séparée, on peut réutiliser les poids du réseau de neuronnes $\varphi$ à chaque itérations temporelles $t$, ce 
+qui réduit considérablement la complexité du problème d'apprentissage.
+
+%La littérature sur les réseaux de neuronnes 
+%récurrents est particulièrement riche, alors 
+%Cette relation de récurrence 
 
 % Show augmented equation with recurrent relation -> link to RNN papers and LSTM + GRU papers. (study of dynamical systems).
 
@@ -1489,31 +1703,48 @@ Ainsi, il est important de considérer une classe de modèles avec une mémoire 
 %L'algorithme est décrit avec plus de détails dans l'annexe \ref{ap:adam}.
 
 
-\subsection{Méta-apprentissage}
-Le méta-apprentissage est un sujet de recherche qui a une longue histoire dans le champ de recherche sur l'apprentissage machine, qu'on peut 
-tracer jusqu'aux travaux de Marvin Minsky, puis Schmidhuber 1991 (LSTM and thesis and meta algorithm) et Bengio 1990 \citep{}. 
-Le lecteur peut se référer à la revue de Hospedales pour une vue moderne sur le sujet \citep{}. L'approche qui nous intéresse est classée 
-dans la catégorie de méta-apprentissage par optimisation.
+\subsection{Méta-apprentissage par rétropropagation de gradients}
+%Le problème de méta-apprentissage est légèrement différen
 
-La première apparition concrète de cette méthode est Younger 2001 et Hochreiter 2001, où le théorème de l'approximation universelle est utilisée pour 
-justifier l'utilisation de cellules à mémoire longues et courtes (LSTM, Schidhuber) pour découvrir un algorithme d'optimisation pour un classe 
-de fonctions (e.g. un modèle neuronnal). L'observation qui est faite est précisément que l'algorithme d'Euler est un cas particulier d'une 
-classe plus générale de relations de récurrences qui permettent de résoudre des problèmes de type \eqref{eq:mle}. Ainsi, un réseau de neuronnes 
-récurrent est une classe de fonctions qui peuvent représenter, en principe, une large portion de cette classe de fonctions. 
-Ce genre d'approche est motivé par le \textit{no free lunch theorem} pour l'optimisation, qui stipule qu'il 
-n'existe aucun algorithme général d'optimisation en mesure de résoudre toutes les classes de problèmes. Dans ca cas, la solution à ce problème est 
-d'introduire des biais inductifs ou des connaissances a priori pour contraindre l'espace des solutions recherchées à un espace où au moins une solution existe. 
-Le problème de méta-apprentissage est donc précisément d'apprendre ou encoder ces biais inductifs dans un modèle d'apprentissage, 
-de sortes que les problèmes d'optimisations subséquents, sur des taches d'essai, sont garanties d'avoir une solution.
+% Wolpert 1992: Stacked Generalization, not clear how usefull or pertinent this is
+% Maybe just mention review here
+%Le méta-apprentissage est un sujet de recherche qui a une longue histoire dans le champ de recherche sur l'apprentissage machine, qu'on peut 
+%tracer jusqu'aux travaux de Marvin Minsky, puis Schmidhuber 1991 (LSTM and thesis and meta algorithm) et %\citep{Bengio1990} this paper kinda sucks 
+%Le lecteur peut se référer à la revue de Hospedales pour une vue moderne sur le sujet \citep{}. L'approche qui nous intéresse est classée 
+%dans la catégorie de méta-apprentissage par optimisation.
+Le méta-apprentissage est un sujet de recherche qui se concentre sur la construction de règles d'apprentissages qui permettent 
+d'accélérer l'apprentissage de fonctions pour certaines tâches spécifiques. Ce double aspect d'apprentissage, soit apprendre à mieux 
+apprendre, est précisément ce qui est sous-entendu par le terme méta-apprentissage. Pour une revue du sujet, le lecteur peut consulter 
+la revue par \citet{Hospedales2020}. Cette sous-section se concentre sur les techniques liées au méta-apprentissage basé sur l'optimisation, 
+en particulier l'accélération d'un algorithme de grimpe de gradient comme \eqref{eq:map recurrence} par l'apprentissage profond de bias inductifs.
+%qu'on se concentre à accélérer ou apprendre un algorithme d'optimisation tel que la grimpe de gradient \eqref{eq:map recurrence}.
 
-Le travail de \citet{Andrychowicz2016} utilise ces idées pour construire un algorithme d'optimisation, aussi basé sur les cellules LSTM, qui performe 
-beaucoup mieux que les algorithmes d'optimisations traditionnelles (e.g. ADAM) pour entraîner un second réseau de neuronnes pour les tâches spécifiques 
-sur lesquelles l'algorithme de méta apprentissage est entrainé (style transfer etc.). Le travail de Putzky et Welling est une généralisation de cette approche 
-aux problèmes inverses en général.
+Le travail de \citet{Younger2001} est la première apparition concrète d'une approche basée seulement sur la rétropropagation de gradients 
+pour trouver et améliorer un algorithme d'apprentissage.
+Leur travail démontre qu'une cellule récurrente à mémoire longue et courte \citep[LSTM,][]{Hochreiter1997} est en mesure d'apprendre 
+un algorithme d'entraînement pour un réseau de neuronnes, étant donnés un ensemble de problèmes d'apprentissages. 
+Contrairement à un réseau avec poids fixes, comme le perceptron \citep{Rosenblatt1958}, 
+un réseau à cellules récurrentes (RNN) est Turing-complet \citep{Siegelmann1992}.
+Un RNN est en mesure de modifier son état interne, de sortes qu'un tel système peut représenter une classe d'algorithmes plus grande qu'un perceptron, 
+incluant une descente de gradient tel que \eqref{eq:map recurrence} et \eqref{eq:rim putzky}, 
+soit la classe des algorithmes pouvant être représentée par les machines de Turing.
+
+%Le travail de \citet{Andrychowicz2016} utilise ces idées pour construire un algorithme d'optimisation, aussi basé sur les cellules LSTM, qui performe 
+%beaucoup mieux que les algorithmes d'optimisations traditionnelles (e.g. ADAM) pour entraîner un second réseau de neuronnes pour les tâches spécifiques 
+%sur lesquelles l'algorithme de méta apprentissage est entrainé (style transfer etc.). Le travail de Putzky et Welling est une généralisation de cette approche 
+%aux problèmes inverses en général.
+
+%La pertinence de se travail 
+%Ce genre d'approche est motivé par le \textit{no free lunch theorem} pour l'optimisation, qui stipule qu'il 
+%n'existe aucun algorithme général d'optimisation en mesure de résoudre toutes les classes de problèmes. Dans ca cas, la solution à ce problème est 
+%d'introduire des biais inductifs ou des connaissances a priori pour contraindre l'espace des solutions recherchées à un espace où au moins une solution existe. 
+%Le problème de méta-apprentissage est donc précisément d'apprendre ou encoder ces biais inductifs dans un modèle d'apprentissage, 
+%de sortes que les problèmes d'optimisations subséquents, sur des taches d'essai, sont garanties d'avoir une solution.
+
 
 Pour un problème de méta-apprentissage, l'ensemble de donné d'entrainement est légèrement différent d'une tâche d'interpolation ou de classification, 
 où $\mathcal{D} = \{\mathbf{x}_i,\,\mathbf{y}_i\}_{i=1}^{N}$ est construit à partir d'exemples dans le domaine $\mathcal{X}$ et l'image $\mathcal{Y}$ 
-connecté par la fonction qu'on essai d'approximer. Pour le méta-apprentissage, l'ensemble d'entraînement est constitué de tâche à performer. Dans 
+connecté par la fonction qu'on essai d'approximer. Pour le méta-apprentissage, l'ensemble d'entraînement est constitué de tâches à performer. Dans 
 notre cas, la tâche à performer est l'optimisation d'une fonction de vraisemblence. On a donc
 \begin{equation}\label{eq:dmeta}
 \mathcal{D} = \{\mathbf{x}_i,\, \log p_i(\mathbf{y} \mid \mathbf{x}) \}_{i=1}^{N}
@@ -1560,4 +1791,16 @@ de vue qu'une fonction approximative inverse du modèle physique $\hat{F}_{\varp
 en particulier si l'image de cette fonction se situe dans la région de haute densité de distribution a prior empirique 
 déterminée par $\mathcal{D}$.
 
+\section{Description du mémoire}
+
+Chapitre 2: principale investigation de ma matrise,
+Chapitre 3: Investigation secondaire, utilisant RIM, pour reconstruire des images avec AMI
+Chapitre 4: Conclusions des investigations accomplits.
+
+\section{Déclaration de l'étudiant}
+Je, Alexandre Adam, déclare que l'entièreté du travail présenté dans ce mémoire est le mien. J'ai effectué la revue de 
+la littérature présentée dans le chapite \ref{chap:intro}. Lorsque j'ai utiliser des figurres prvenant de sources externes, j'ai clairement 
+identifié le titre la figure avec la source associée.
+
+Pour l'article présenté au chapitre \ref{chap:censai}, 
 
