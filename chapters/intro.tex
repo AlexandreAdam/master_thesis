@@ -431,7 +431,7 @@ de lentilles gravitationnelles dans toute leur complexité et dans un temps à l
 Comme introduction à ce travail, je dérive les équations centrales qui nous permettent 
 d'étudier les lentilles gravitationnelles de type galaxie-galaxie.
 Mon traitement est largement inspiré 
-des manuels de références de \citet{Meneghetti2013} et \citet{Congdon2018}. 
+des manuels de références de \citet{Meneghetti2013,Congdon2018}. 
 
 %Une application importante de ces systèmes est l'étude du taux d'expansion de l'Univers 
 
@@ -852,15 +852,15 @@ qui satisfait l'équation de la lentille adimensionnelle
 La première conceptualisation de l'interférométrie par masque apparaît dans un rapport sur le Concours Bordin de l'année 1867, 
 
 
-\blockquote{
-        Il existe en effet pour la plupart des phénomènes d'interférences, tels que les franges d'[Young], celles des miroirs 
-        de Fresnel et celles qui donnent lieu à la scintillation des étoiles d'après Arago, une relation remarquable et 
-        nécessaire entre la dimension des franges et celle de la source lumineuse, en sortes que les franges d'une 
-        ténuité extrêmes ne peuvent prendre naissance que lorsque la source de lumière n'a plus que des dimensions angulaires 
-        presque insensibles; d'où, pour le dire en passant, il est peut-être permis d'espérer qu'en s'appuyant sur ce principe et 
-        en formant par exemple, au moyen de deux franges d'interférences au foyer des grands instruments destinés à observer les étoiles, 
-        il deviendra possible d'obtenir quelques données nouvelles sur les diamètres angulaires de ces astres.
-}
+%\blockquote{
+        %Il existe en effet pour la plupart des phénomènes d'interférences, tels que les franges d'[Young], celles des miroirs 
+        %de Fresnel et celles qui donnent lieu à la scintillation des étoiles d'après Arago, une relation remarquable et 
+        %nécessaire entre la dimension des franges et celle de la source lumineuse, en sortes que les franges d'une 
+        %ténuité extrêmes ne peuvent prendre naissance que lorsque la source de lumière n'a plus que des dimensions angulaires 
+        %presque insensibles; d'où, pour le dire en passant, il est peut-être permis d'espérer qu'en s'appuyant sur ce principe et 
+        %en formant par exemple, au moyen de deux franges d'interférences au foyer des grands instruments destinés à observer les étoiles, 
+        %il deviendra possible d'obtenir quelques données nouvelles sur les diamètres angulaires de ces astres.
+%}
 
 Pour bien comprendre ce phénomène, on peut utiliser l'expérience des deux fentes de Young. 
 \begin{figure}[H]
@@ -1203,17 +1203,26 @@ Formellement, on utilise l'information mutuelle de Shannon pour mesurer l'inform
 \begin{equation}\label{eq:ShannonInfo}
         I(Z ; X) = D_{\mathrm{KL}}\left(p(\mathbf{x}, \mathbf{z}) \KL p(\mathbf{x}) p(\mathbf{z})\right) %= \mathbb{E}_{p(x,z)} \bigg[\log \frac{p(x,z)}{p(x) p(z)}\bigg] %= \sum_{x \in \mathcal{X}} \sum_{z \in \mathcal{Z}} p(x, z) \log \frac{p(x, z)}{p(x) p(z)}.
 \end{equation} 
-Selon cet objectif, un auto-encodeur idéal atteindra la limite supérieure de l'information mutuelle, soit la 
-capacité du canaux d'information
+Il est utile de décomposer cet objectif en terme de l'entropie du message $H(X)$ et l'entropie 
+conditionnelle de ce message étant donné le code $Z$, $H(X \mid Z)$
 \begin{equation}\label{eq:info entropy}
-        C = \underset{p(\mathbf{x})}{\mathrm{max}}\,\, I(Z ; X) = \underset{p(\mathbf{x})}{\mathrm{max}}\,\, H(X) - H(Z \mid X) \leq \underset{p(\mathbf{x})}{\mathrm{max}} \,\,H(X),
+       I(Z; X) = H(X) - H(X \mid Z) 
 \end{equation} 
-où $H(X)$ est l'entropie du message. L'entropie est une mesure de l'incertitude dans une variable aléatoire
+%Selon cet objectif, un auto-encodeur idéal atteindra la limite supérieure de l'information mutuelle, soit la 
+%capacité du canaux d'information
+%\begin{equation}\label{eq:info entropy}
+        %C = \underset{p(\mathbf{x})}{\mathrm{max}}\,\, I(Z ; X) = \underset{p(\mathbf{x})}{\mathrm{max}}\,\, H(X) - H(Z \mid X) \leq \underset{p(\mathbf{x})}{\mathrm{max}} \,\,H(X),
+%\end{equation} 
+%où $H(X)$ est l'entropie du message. 
+L'entropie est une mesure de l'incertitude dans une variable aléatoire
 \begin{equation}\label{eq:entropy}
         H(X) = -\mathbb{E}_{p(\mathbf{x})}\big[\log p(\mathbf{x}) \big] \geq 0\, ,
 \end{equation} 
 qu'on interprète aussi comme une mesure de la longueur minimal d'un code, $Z$, pour 
 transmettre un message, $X$, d'un émetteur à un receveur avec le minimum de perte d'information \citep{Shannon1948,Kolmogorov1965}.
+L'entropie conditionnelle $H(X \mid Z)$ est une  mesure de l'incertitude résiduelle étant donné la connaissance du code $Z$. Dans le cas où $Z$ 
+détermine complètement le message $X$, alors $H(X \mid Z) = 0$ et l'information mutuelle atteint sont maximum $I(Z; X) = H(X)$.
+Dans le cas où $Z$ et $X$ sont deux variables aléatoires indépendantes, $H(X \mid Z) = H(X)$ et l'information mutuelle devient nulle.
 % Check that this is canonical
 %Selon ce point de vue, $H(Z \mid X) = -\mathbb{E}_{p(\mathbf{x},\mathbf{z})}\big[ \log p(\mathbf{z} \mid \mathbf{x}) \big]$ correspond  une perte d'information  
 %dû au traitement de l'information par un encodeur et une source de bruit. 
@@ -1231,7 +1240,8 @@ transmettre un message, $X$, d'un émetteur à un receveur avec le minimum de pe
 
 
 Posé de cette façon, déterminer l'auto-encodeur optimal est un problème mal posé. En effet, on pourrait naïvement maximiser l'objectif \eqref{eq:ShannonInfo} avec 
-la fonction identité comme auto-encodeur: $f_{\phi,\theta}(X) = \bbone X$, de sortes que $\hat{X} = Z = X$. Or, $Z$ n'est pas une représentation pertinente dans ce cas. 
+la fonction identité comme auto-encodeur: $f_{\phi,\theta}(X) = \bbone X$, de sortes que $Z = X$ et $I(Z; X) = H(X)$. 
+Or, $Z$ n'est pas une représentation pertinente dans ce cas. 
 Pour éliminer les solutions non-désirées, on introduit une contrainte sur la complexité de \citet{Kolmogorov1965} du code $Z$, c'est à dire qu'on cherche 
 un auto-encodeur qui compresse le message et conserve simultanément 
 le maximum d'information possible à propos du message. On introduit l'objectif du goulot d'information 
@@ -1249,14 +1259,14 @@ utilisé pour représenter $X$ et l'identité $Y=i$ de chaque exemples d'un ense
 %haut: l'auto-encodeur est libre de choisir une relation un-pour-un entre $Y$ et $Z$ (et $X$). 
 %D'un autre côté, $\alpha < H(Y)$ force l'auto-encodeur à comprimer le message. Finalement, de façon intéressante, $\alpha < H(X) < H(Y)$ force 
 %l'auto-encodeur à éliminer l'information redondante dans le message $X$.
-En effet, l'objectif de comprimer l'information est intimement lié à l'objectif d'obtenir un sommaire informatif; ç.-à-d. qu'un 
+Il s'avère que l'objectif de comprimer l'information est intimement lié à l'objectif d'obtenir un sommaire informatif; ç.-à-d. qu'un 
 code d'une complexité de \citet{Kolmogorov1965} minimale décrit la source d'information de la manière la plus informative possible. Cette connexion 
 remarquable est une application concrète du principe du rasoir d'Occam: l'explication adéquate la plus simple est la meilleure explication.
 
 Dans ce qui suit, je m'applique à redériver l'objectif d'un auto-encodeur variationnel suivant les approximations 
 proposées par \citet{Alemi2017}. Puis je termine avec une courte interprétation des VAE sous la lumière du principe du goulot d'information.
-On commence par construire une limite inférieur variationnelle sur $I(Z; X)$. 
-On assume d'abord la chaîne de Markoz $Y \rightarrow X \rightarrow Z$ pour les variables 
+On commence par construire une limite variationnelle inférieur sur $I(Z; X)$. 
+On assume d'abord la chaîne de Markov $Y \rightarrow X \rightarrow Z$ pour les variables 
 aléatoires représentées dans la figure \ref{fig:info VAE}. La chaîne de Markov 
 induit la factorisation de la probabilité jointe
 \begin{equation}\label{eq:factorisation}
@@ -1274,7 +1284,7 @@ suit que
                 \label{eq:maximum info}
                 \implies I(Z;\, X)&\geq \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]\, .
 \end{align}
-À la dernière ligne, on a éliminer l'entropie du message $H(X)$ puisque c'est une constante qui ne dépend pas de $\phi$, et 
+À la dernière ligne, on a éliminer l'entropie du message $H(X)$ puisque c'est une constante strictement positive qui ne dépend pas de $\phi$, et 
 on a introduit l'approximation variationnelle $p_\theta (\mathbf{x} \mid \mathbf{z}) \approx q_\phi (\mathbf{x} \mid \mathbf{z})$ 
 pour approximer la distribution a posteriori de l'encodeur (soit le décodeur). Cette approximation est valide dans le contexte où 
 on cherche une limite inférieure pour $I(Z; X)$ puisque la divergence KL entre ces deux distributions est strictement positive.
@@ -1719,7 +1729,63 @@ la revue par \citet{Hospedales2020}. Cette sous-section se concentre sur les tec
 en particulier l'accélération d'un algorithme de grimpe de gradient comme \eqref{eq:map recurrence} par l'apprentissage profond de bias inductifs.
 %qu'on se concentre à accélérer ou apprendre un algorithme d'optimisation tel que la grimpe de gradient \eqref{eq:map recurrence}.
 
-Le travail de \citet{Younger2001} est la première apparition concrète d'une approche basée seulement sur la rétropropagation de gradients 
+
+
+Pour un problème de méta-apprentissage, l'ensemble de donné d'entrainement est légèrement différent d'une tâche d'interpolation ou de classification, 
+où l'ensemble d'entraînement $\mathcal{D} = \{\mathbf{x}^{(i)},\,\mathbf{y}^{(i)}\}_{i=1}^{N}$ 
+est construit à partir d'exemples dans le domaine $\mathcal{X}$ et l'image $\mathcal{Y}$, implicitement connectés par une fonction qu'on veut reconstruire ou 
+approximer. Dans le contexte du méta-apprentissage, l'ensemble d'entraînement est plutôt constitués de tâches à performer $\mathcal{T} = \{\mathcal{D}^{(i)}, \mathcal{L}^{(i)}\}_{i=1}^{N}$, où 
+$\mathcal{L}_i$ est une fonction objective pour la tâche $i$. 
+Le problème de méta-apprentissage est donc d'extraire ou encoder des biais inductifs, ç.-à-d. des connaissances qui permettent d'accélérer 
+l'apprentissage d'une tâche spécifique, dans une liste de paramètres $\varphi$
+\begin{equation}\label{eq:meta-learning}
+        \varphi^{\star}_{\text{méta}} = \underset{\varphi}{\mathrm{argmin}}\,\, \mathbb{E}_{\mathcal{T}^{(i)} \sim p(\mathcal{T})} \bigg[ \mathcal{L}^{(i)}_\varphi(\mathcal{D}^{(i)}) \bigg]
+\end{equation} 
+
+Il est particulièrement pertinent de considérer la notion de généralisation dans ce contexte, et en particulier faire le contraste avec 
+la notion de généralisation dans le contexte de la régression. Dans le contexte de la régression, le concept de généralisation est synonyme 
+avec celui d'extrapolation, ç.-à-d. la mesure de la performance d'une certaine fonction, d'un algorithme ou d'une théorie étant donné un ou plusieurs exemples tests, 
+potentiellement similaire ou différent des exemples de l'ensemble d'entraînement utilisés pour ajuster les paramètres d'une fonction 
+$f_\varphi: \mathcal{X} \rightarrow \mathcal{Y}$. Pour plusieurs objectifs scientifiques, la capacité d'un modèle ou d'une loi physique $f_\varphi$ 
+à généraliser au delà d'un ensembles de mesures $\mathcal{D}$ est cruciale. 
+Par exemple, un test important de le relativité général, testée et découverte dans le régime de champs faible sur Terre, est 
+de savoir si les lois physiques restent valides dans le régime de champ fort près des trous noirs, des étoiles à neutron ou encore 
+au moment du Big Bang. 
+
+Or, si les biais inductifs utilisés pour entraîner (apprendre, découvrir) $f_\varphi$ ne sont pas suffisamment 
+informatif sur la nature du problème ou du phénomène d'intérêt (e.g. la gravité), 
+alors un algorithme d'optimisation générique n'est pas garantie de converger 
+vers une représentation informative $f_\varphi$ de la fonction implicitement 
+définie dans l'ensemble d'entraînement $\mathcal{D}$. Cette observation suit essentiellement du \textit{no free lunch theorem} (théorème NFL) pour 
+l'optimisation \citep{Wolpert1997}, et en particulier 
+du théorème NFL pour l'apprentissage supervisé \citep{Wolpert1992,Wolpert1996}.
+%Une telle fonction ne vas donc pas extrapoler correctement vers des points d'une 
+%distribution différente de la distribution implicite dans $\mathcal{D}$.
+
+%Dans 
+%notre cas, la tâche à performer est l'optimisation d'une fonction de vraisemblence. On a donc
+%\begin{equation}\label{eq:dmeta}
+%\mathcal{D} = \{\mathbf{x}_i,\, \log p_i(\mathbf{y} \mid \mathbf{x}) \}_{i=1}^{N}
+%\end{equation} 
+%où $\mathbf{x}_i$ est la solution qu'on cherche et $\log p_i(\mathbf{y} \mid \mathbf{x})$ est la fonction de vraisemblence que 
+%l'algorithme doit optimiser pour obtenir la solution. Les paramètres d'inférence $\varphi$ sont 
+%optimisés sur toute l'ensemble de la trajectoire construire par la relation de récurrence 
+%par une erreur quadratique moyenne
+%\begin{equation}\label{eq:loss intro}
+        %\mathcal{L}_{\varphi}(\mathbf{x}, \log p(\mathbf{y} \mid \mathbf{x})) = 
+        %\sum_{t=1}^{T} w^{(t)}\lVert \mathbf{x} - \hat{\mathbf{x}}^{(t)} \rVert_{\mathcal{X}}^{2}
+%\end{equation} 
+%où $w^{(t)}$ est un poids qu'on associe à l'itération $t$ de la relation de récurrence. Dans la plupart des travaux, 
+%$w^{(t)} = \frac{1}{T}$. Cet objectif est optimisé par la rétropropagation temporelle des gradients (BPTT, de l'anglais 
+%\textit{backpropagation through time}). 
+%Le problème de méta-apprentissage est donc un problème de minimisation du risque empirique observé de la 
+%fonction objective
+%\begin{equation}\label{eq:risk intro}
+        %\varphi_{\mathcal{D}}^{\star} = \underset{\varphi}{\mathrm{argmin}}\, \mathbb{E}_{\mathcal{D}}\big[ \mathcal{L}_{\varphi} \big]
+%\end{equation} 
+
+Le travail de \citet{Younger2001} est la première apparition concrète d'une approche pour le méta-apprentissage 
+basée seulement sur la rétropropagation de gradients 
 pour trouver et améliorer un algorithme d'apprentissage.
 Leur travail démontre qu'une cellule récurrente à mémoire longue et courte \citep[LSTM,][]{Hochreiter1997} est en mesure d'apprendre 
 un algorithme d'entraînement pour un réseau de neuronnes, étant donnés un ensemble de problèmes d'apprentissages. 
@@ -1740,31 +1806,6 @@ soit la classe des algorithmes pouvant être représentée par les machines de T
 %d'introduire des biais inductifs ou des connaissances a priori pour contraindre l'espace des solutions recherchées à un espace où au moins une solution existe. 
 %Le problème de méta-apprentissage est donc précisément d'apprendre ou encoder ces biais inductifs dans un modèle d'apprentissage, 
 %de sortes que les problèmes d'optimisations subséquents, sur des taches d'essai, sont garanties d'avoir une solution.
-
-
-Pour un problème de méta-apprentissage, l'ensemble de donné d'entrainement est légèrement différent d'une tâche d'interpolation ou de classification, 
-où $\mathcal{D} = \{\mathbf{x}_i,\,\mathbf{y}_i\}_{i=1}^{N}$ est construit à partir d'exemples dans le domaine $\mathcal{X}$ et l'image $\mathcal{Y}$ 
-connecté par la fonction qu'on essai d'approximer. Pour le méta-apprentissage, l'ensemble d'entraînement est constitué de tâches à performer. Dans 
-notre cas, la tâche à performer est l'optimisation d'une fonction de vraisemblence. On a donc
-\begin{equation}\label{eq:dmeta}
-\mathcal{D} = \{\mathbf{x}_i,\, \log p_i(\mathbf{y} \mid \mathbf{x}) \}_{i=1}^{N}
-\end{equation} 
-où $\mathbf{x}_i$ est la solution qu'on cherche et $\log p_i(\mathbf{y} \mid \mathbf{x})$ est la fonction de vraisemblence que 
-l'algorithme doit optimiser pour obtenir la solution. Les paramètres d'inférence $\varphi$ sont 
-optimisés sur toute l'ensemble de la trajectoire construire par la relation de récurrence 
-par une erreur quadratique moyenne
-\begin{equation}\label{eq:loss intro}
-        \mathcal{L}_{\varphi}(\mathbf{x}, \log p(\mathbf{y} \mid \mathbf{x})) = 
-        \sum_{t=1}^{T} w^{(t)}\lVert \mathbf{x} - \hat{\mathbf{x}}^{(t)} \rVert_{\mathcal{X}}^{2}
-\end{equation} 
-où $w^{(t)}$ est un poids qu'on associe à l'itération $t$ de la relation de récurrence. Dans la plupart des travaux, 
-$w^{(t)} = \frac{1}{T}$. Cet objectif est optimisé par la rétropropagation temporelle des gradients (BPTT, de l'anglais 
-\textit{backpropagation through time}). 
-Le problème de méta-apprentissage est donc un problème de minimisation du risque empirique observé de la 
-fonction objective
-\begin{equation}\label{eq:risk intro}
-        \varphi_{\mathcal{D}}^{\star} = \underset{\varphi}{\mathrm{argmin}}\, \mathbb{E}_{\mathcal{D}}\big[ \mathcal{L}_{\varphi} \big]
-\end{equation} 
 
 Il est important de discuter de la notion de généralisation dans le contexte de méta-apprentissage. Dans le contexte 
 où on cherche à construire une interpolation, la notion de généralisation réfère généralement au test où un point $\mathbf{x}$ 

@@ -1,7 +1,8 @@
 
 %\begin{document}
 
-\chapter{Pixelated Reconstruction of Gravitational Lenses using Recurrent Inference Machine}
+\chapter{Pixelated Reconstruction of Gravitational Lenses using Recurrent Inference Machine}\label{chap:censai}
+\thispagestyle{empty}
 
 %\author{\href{https://orcid.org/0000-0001-8806-7936}{\includegraphics[width=8pt]{orcid.pdf}} Alexandre Adam }
 %\affiliation{Department of Physics, Université de Montréal, Montréal, Canada}
@@ -16,6 +17,10 @@
 %\author{ \href{https://orcid.org/0000-0002-8669-5733}{\includegraphics[width=8pt]{orcid.pdf}} Yashar Hezaveh}
 %\affiliation{Department of Physics, Université de Montréal, Montréal, Canada}
 %\affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, 10010, New York, NY, USA}
+
+%\begin{resume}
+        
+%\end{resume}
 
 %\begin{abstract}
 %Modeling strong gravitational lenses in order to 
@@ -766,6 +771,7 @@ source coordinate system through the lens equation \eqref{eq:LensEquation}.
 
 \begin{table}[htb!]
 \centering
+\begin{threeparttable}
 \caption{Physical model parameters.}
 \label{tab:phys}
 \begin{tabular}{ccc}
@@ -775,11 +781,14 @@ source coordinate system through the lens equation \eqref{eq:LensEquation}.
         Source redshift $z_s$ & $1.5$ \\
         Field of view ('') & $7.69$ \\
         Source field of view ('') & $3$ \\
-        PSF FWHM ('') & $\mathcal{TN}(0.06,\, 0.3;\, 0.08,\, 0.05)$
-        \footnote{We defined the parameters of the truncated normal in the order $\mathcal{TN}(a,\, b;\, \mu,\, \sigma)$, where $[a,\, b]$ defines the support of the distribution.} \\
-        Noise amplitude $\sigma$ & $\mathcal{TN}(0.001,\, 0.1;\, 0.01,\,0.03)$\\
+        PSF FWHM ('') & $\mathcal{TN}(0.06,\, 0.3;\, 0.08,\, 0.05)$\tnote{*}\\
+        Noise amplitude $\sigma$ & $\mathcal{TN}(0.001,\, 0.1;\, 0.01,\,0.03)$\tnote{*}\\
         \hline
 \end{tabular}
+\begin{tablenotes}\footnotesize
+\item[*]We defined the parameters of the truncated normal in the order $\mathcal{TN}(a,\, b;\, \mu,\, \sigma)$, where $[a,\, b]$ defines the support of the distribution.
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 $400\,000$ observations are simulated from random pairs of COSMOS sources 
@@ -891,17 +900,9 @@ We only report the results for the best architectures out of these 4.
 %We report the hyperparameters for 
 %the best architecture after this second stage of training in table \ref{tab:baseline hparams}.
 
-Each reconstruction is performed by fine-tuning the baseline model 
-on a test task composed of an observation vector, a PSF and a noise covariance.
-In practice, fine-tuning the test of $3\,000$ examples can be accomplished in parallel so as to be done in at most a few days by spreading the computation on $\sim 10$ Nvidia A100 GPUs (or 10 hours on $\sim 100$ GPUs). Each reconstruction uses at most 2000 steps, which turns out to be approximately $20$ minutes (wall-time) per reconstruction. Early stopping is applied when the $\chi^2$ reaches noise level. The hyperparameters for this procedure are reported in Table \ref{tab:fine-tuning hparams}.
-% Despite this seemingly extreme computational cost, we note that our approach is unique 
-% in that it can reconstruct such a large amount of diverse non-parametric systems with the level 
-% of precision reported in section \ref{sec:results}. To the knowledge of the 
-% authors, no other method can accomplish this task, let alone in less than a week. 
-%\vfill\null
-
 \begin{table}[H]
-        \centering
+\centering
+\begin{threeparttable}
         \caption{Hyperparameters for fine-tuning the RIM.}
         \label{tab:fine-tuning hparams}
         \begin{tabular}{cc}
@@ -912,34 +913,23 @@ In practice, fine-tuning the test of $3\,000$ examples can be accomplished in pa
                 $\lambda$ & $2\times 10^{5}$\\
                 $\ell_2$ & 0 \\
                 Number of samples from VAE & 200 \\
-                Latent space distribution & $\mathcal{N}(\mathbf{z}^{(T)}, \sigma=0.3)$
-                \footnote{$\mathbf{z}^{(T)}$ is the latent code of the RIM baseline source or convergence.}\\
+                Latent space distribution & $\mathcal{N}(\mathbf{z}^{(T)}, \sigma=0.3)$\tnote{*}\\
                 \hline
         \end{tabular}
+\begin{tablenotes}\footnotesize
+\item[*]$\mathbf{z}^{(T)}$ is the latent code of the RIM baseline source or convergence.
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=\linewidth]{figures/main_result}
-        \caption{
-                Cherry-picked sample of the fine-tuned RIM reconstructions 
-                on a test set of 3000 examples. 
-                Examples are ordered from the best $\chi^2$ (top) to the worst (bottom). 
-                The percentile rank of each example is in the leftmost column. 
-                The last example 
-        shown has SNR above the threshold defined in Figure \ref{fig:chi squared vs noise}.}
-        \label{fig:main result}
-        \vspace{-1.5pt} % fix
-\end{figure}
 
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=1.1\linewidth]{figures/test_set_no_cherry_pick}
-        \caption{
-                30 reconstructions taken at random from the test set of 3000 examples simulated from COSMOS 
-                and IllustrisTNG data at high SNR.
-                The colorscale are the same as in Figure \ref{fig:main result}.}
-        \label{fig:random sample}
-\end{figure}
+Each reconstruction is performed by fine-tuning the baseline model 
+on a test task composed of an observation vector, a PSF and a noise covariance.
+In practice, fine-tuning the test of $3\,000$ examples can be accomplished in parallel so as to be done in at most a few days by spreading the computation on $\sim 10$ Nvidia A100 GPUs (or 10 hours on $\sim 100$ GPUs). Each reconstruction uses at most 2000 steps, which turns out to be approximately $20$ minutes (wall-time) per reconstruction. Early stopping is applied when the $\chi^2$ reaches noise level. The hyperparameters for this procedure are reported in Table \ref{tab:fine-tuning hparams}.
+% Despite this seemingly extreme computational cost, we note that our approach is unique 
+% in that it can reconstruct such a large amount of diverse non-parametric systems with the level 
+% of precision reported in section \ref{sec:results}. To the knowledge of the 
+% authors, no other method can accomplish this task, let alone in less than a week. 
+%\vfill\null
 
 
 
@@ -963,6 +953,49 @@ Indeed, many methods can reconstruct free-form sources
 once the convergence map is known or well constrained 
 \citep{Warren2003,Suyu2006,Vegetti2009,Birrer2018,Morningstar2019,Galan2021,Karchev2022,Mishra-Sharma2022}.
 
+To offset our selection bias, we selected samples in different percentile from the
+test set rank ordered by the $\chi^2$ metric. 
+We also show a randomly selected sample from the test set in Figure \ref{fig:random sample}.
+
+
+Figure \ref{fig:loss and chi squared} shows a comparison between 
+the goodness of fit of the baseline model and the fine-tuned prediction. 
+Since we empirically observe that the distribution of the loss on the test set (and the training set) follows a log-normal distribution, we find much more informative to look at the $\log$-loss 
+distribution to extract information about the fine-tuning procedure. 
+The left panel of Figure \ref{fig:loss and chi squared} 
+shows the distribution of the log-loss difference between the fine-tuned prediction and the baseline model. This distribution shows that the fine-tuning procedure loss is constrained within $\sim 1$ order of magnitude of the original loss with a $99.73\,\%$ probability. We find that the log-loss difference has a scatter of $\sigma = 0.28$, which is smaller than the scatter of the baseline log-loss over the entire test set $\sigma(\log \mathcal{L}(\varphi^\star_{\mathcal{D}})) = 0.36$ reported in Table \ref{tab:loss}.
+We note that this metric is not optimized during fine-tuning, 
+and is only computed as an oracle metric --- still, the fine-tuning procedure does not significantly deteriorate or improve the loss of the baseline prediction in average. We report the first 2 moments of the loss log-normal distribution for the baseline and the fine-tuned reconstructions in Table \ref{tab:loss} in order to compare explicitly the loss distributions. As can be seen in this table, there is no significant difference between the two distribution. This statement can be proven for the measured mean values --- $\mu(\log \mathcal{L}(\hat{\varphi}_{\mathrm{MAP}})) = \mu(\log \mathcal{L}(\varphi^{\star}_{\mathcal{D}})) $ --- using the two-sided normal p-value test \citep{Casella2001}, which we find satisfy the null hypothesis with $p=0.87288$ ($Z = -0.16$). All those observations support our claim that EWC regularisation preserves the prior learned during pretraining, or at least that it preserves the surrogate measures of the prior we reported. 
+
+
+
+
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.90\linewidth]{figures/main_result}
+        \caption{
+                Cherry-picked sample of the fine-tuned RIM reconstructions 
+                on a test set of 3000 examples. 
+                Examples are ordered from the best $\chi^2$ (top) to the worst (bottom). 
+                The percentile rank of each example is in the leftmost column. 
+                The last example 
+        shown has SNR above the threshold defined in Figure \ref{fig:chi squared vs noise}.}
+        \label{fig:main result}
+        \vspace{-1.5pt} % fix
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{figures/test_set_no_cherry_pick}
+        \caption{
+                30 reconstructions taken at random from the test set of 3000 examples simulated from COSMOS 
+                and IllustrisTNG data at high SNR.
+                The colorscale are the same as in Figure \ref{fig:main result}.}
+        \label{fig:random sample}
+\end{figure}
+
+
 \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{figures/loss_and_likelihood}
@@ -976,18 +1009,7 @@ once the convergence map is known or well constrained
 \end{figure}
 
 
-To offset our selection bias, we selected samples in different percentile from the
-test set rank ordered by the $\chi^2$ metric. 
-We also show a randomly selected sample from the test set in Figure \ref{fig:random sample}.
 
-Figure \ref{fig:loss and chi squared} shows a comparison between 
-the goodness of fit of the baseline model and the fine-tuned prediction. 
-Since we empirically observe that the distribution of the loss on the test set (and the training set) follows a log-normal distribution, we find much more informative to look at the $\log$-loss 
-distribution to extract information about the fine-tuning procedure. 
-The left panel of Figure \ref{fig:loss and chi squared} 
-shows the distribution of the log-loss difference between the fine-tuned prediction and the baseline model. This distribution shows that the fine-tuning procedure loss is constrained within $\sim 1$ order of magnitude of the original loss with a $99.73\,\%$ probability. We find that the log-loss difference has a scatter of $\sigma = 0.28$, which is smaller than the scatter of the baseline log-loss over the entire test set $\sigma(\log \mathcal{L}(\varphi^\star_{\mathcal{D}})) = 0.36$ reported in Table \ref{tab:loss}.
-We note that this metric is not optimized during fine-tuning, 
-and is only computed as an oracle metric --- still, the fine-tuning procedure does not significantly deteriorate or improve the loss of the baseline prediction in average. We report the first 2 moments of the loss log-normal distribution for the baseline and the fine-tuned reconstructions in Table \ref{tab:loss} in order to compare explicitly the loss distributions. As can be seen in this table, there is no significant difference between the two distribution. This statement can be proven for the measured mean values --- $\mu(\log \mathcal{L}(\hat{\varphi}_{\mathrm{MAP}})) = \mu(\log \mathcal{L}(\varphi^{\star}_{\mathcal{D}})) $ --- using the two-sided normal p-value test \citep{Casella2001}, which we find satisfy the null hypothesis with $p=0.87288$ ($Z = -0.16$). All those observations support our claim that EWC regularisation preserves the prior learned during pretraining, or at least that it preserves the surrogate measures of the prior we reported. 
 \begin{table}[H]
     \centering
     \caption{$\log_{10}$-normal moments of the loss on the test set}
