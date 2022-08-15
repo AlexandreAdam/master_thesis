@@ -4,6 +4,70 @@
 \chapter{Pixelated Reconstruction of Gravitational Lenses using Recurrent Inference Machine}\label{chap:censai}
 \thispagestyle{empty}
 
+\begin{center}
+Alexandre Adam,$^{1,2}$
+Laurence Perreault-Levasseur,$^{1,2,3}$
+Yashar Hevazeh$^{1,3}$
+\end{center}
+
+\vspace*{0.5cm}
+\noindent $^{1}$\textit{D\'{e}partement de physique, Universit\'{e} de Montr\'{e}al, Montr\'{e}al, H3C 3J7, Canada}\\
+$^{2}$\textit{Mila - Quebec Artificial Intelligence Institute, Montréal, Canada}\\
+$^{3}$\textit{Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, 10010, New York, NY, USA}\\
+\vspace*{1.5cm}
+
+\begin{center}
+Un résumé de cet article à été accepté à l'atelier \textit{Machine Learning for Astrophysics
+Workshop at the Thirty-ninth International Conference on Machine Learning (ICML 2022)}. \\
+Cet article sera soumis à la revue \textit{The Astrophysical Journal} (ApJ) durant le prochains mois. 
+\end{center}
+
+
+\clearpage
+%\begin{resume}
+\section*{Résumé}
+Modéliser les lentilles gravitationnelles dans le but de quantifier les distorsions des images 
+d'arrière-plan et de reconstruire la densité de masse de la lentille en avant-plan est encore aujourd'hui 
+un problème difficile, posant un défi computationnel majeur. Avec le nombre croissant de lentilles découvertes et 
+la résolution croissante des images de ces systèmes, la tâche d'exploiter complètement l'information qu'elles contiennent 
+est présentement un problème hors d'atteinte pour les algorithmes traditionnels.
+Dans ce travail, on introduit un réseau neuronal récurrent basé sur les machines à inférence récurentielles (RIM) 
+pour reconstruire simultanément une image non déformée de la source en arrière-plan et une image de la densité de masse de la lentille. 
+La méthode que nous présentons reconstruit de façon itérative les paramètres du modèle (les pixels de la source et de la densité de la lentille) 
+en apprenant le processus d'optimisation de la vraisemblance étant donné une observation et un modèle physique (une simulation des chemins lumineux), 
+régularisée par des biais inductifs appris implicitement par le réseau de neurones avec les données d'entraînement. 
+Comparée aux méthodes traditionnelles basées sur des modèles paramétriques de la densité de masse, notre approche 
+est significativement plus expressive et peut reconstruire des distributions de masses complexes, ce qu'on démontre 
+en utilisant des galaxies lentilles réalistes provenant de la simulation cosmologique hydrodynamique IllustrisTNG.
+
+\textbf{Mots-clés:} Lentilles gravitationnelles ---
+        Simulations astrophysiques  ---
+        Inférence non-paramétrique ---
+        Réseaux neuronaux convolutifs.
+%\end{resume}
+
+
+\section*{Abstract}
+Modeling strong gravitational lenses in order to 
+quantify the distortions in the images of background sources and 
+to reconstruct the mass density in the foreground lenses has 
+traditionally been a difficult computational challenge. 
+As the quality of gravitational lens images increases, the task of fully exploiting the information they contain 
+becomes computationally and algorithmically more difficult. 
+In this work, we use a neural network based on the Recurrent Inference Machine (RIM) to simultaneously reconstruct 
+an undistorted image of the background source and the lens mass density distribution as pixelated maps. 
+The method we present iteratively reconstructs the model parameters (the source and density map pixels) by learning 
+the process of optimization of their likelihood given the data using the physical model (a ray-tracing simulation), regularized
+by a prior implicitly learned by the neural network through its training data. When compared to more traditional parametric models, 
+the proposed method is significantly more expressive and can reconstruct complex mass distributions, 
+which we demonstrate by using realistic lensing galaxies taken from the cosmological hydrodynamic simulation IllustrisTNG. 
+
+\textbf{Keywords:} Gravitational lensing (670) ---
+        Astronomical simulations (1857) ---
+        Nonparametric inference (1903) ---
+        Convolutional Neural Networks (1938).
+
+
 %\author{\href{https://orcid.org/0000-0001-8806-7936}{\includegraphics[width=8pt]{orcid.pdf}} Alexandre Adam }
 %\affiliation{Department of Physics, Université de Montréal, Montréal, Canada}
 %\affiliation{Mila - Quebec Artificial Intelligence Institute, Montréal, Canada}
@@ -22,21 +86,6 @@
         
 %\end{resume}
 
-%\begin{abstract}
-%Modeling strong gravitational lenses in order to 
-%quantify the distortions in the images of background sources and 
-%to reconstruct the mass density in the foreground lenses has 
-%traditionally been a difficult computational challenge. 
-%As the quality of gravitational lens images increases, the task of fully exploiting the information they contain 
-%becomes computationally and algorithmically more difficult. 
-%In this work, we use a neural network based on the Recurrent Inference Machine (RIM) to simultaneously reconstruct 
-%an undistorted image of the background source and the lens mass density distribution as pixelated maps. 
-%The method we present iteratively reconstructs the model parameters (the source and density map pixels) by learning 
-%the process of optimization of their likelihood given the data using the physical model (a ray-tracing simulation), regularized
-%by a prior implicitly learned by the neural network through its training data. When compared to more traditional parametric models, 
-%the proposed method is significantly more expressive and can reconstruct complex mass distributions, 
-%which we demonstrate by using realistic lensing galaxies taken from the cosmological hydrodynamic simulation IllustrisTNG. 
-%\end{abstract}
 
 
 %\keywords{
@@ -900,7 +949,7 @@ We only report the results for the best architectures out of these 4.
 %We report the hyperparameters for 
 %the best architecture after this second stage of training in table \ref{tab:baseline hparams}.
 
-\begin{table}[H]
+\begin{table}[ht!]
 \centering
 \begin{threeparttable}
         \caption{Hyperparameters for fine-tuning the RIM.}
@@ -971,6 +1020,7 @@ and is only computed as an oracle metric --- still, the fine-tuning procedure do
 
 
 
+
 \begin{figure}[H]
         \centering
         \includegraphics[width=0.90\linewidth]{figures/main_result}
@@ -987,14 +1037,13 @@ and is only computed as an oracle metric --- still, the fine-tuning procedure do
 
 \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\linewidth]{figures/test_set_no_cherry_pick}
+        \includegraphics[width=\linewidth]{figures/test_set_no_cherry_pick}
         \caption{
                 30 reconstructions taken at random from the test set of 3000 examples simulated from COSMOS 
                 and IllustrisTNG data at high SNR.
                 The colorscale are the same as in Figure \ref{fig:main result}.}
         \label{fig:random sample}
 \end{figure}
-
 
 \begin{figure}[H]
         \centering
@@ -1024,6 +1073,16 @@ and is only computed as an oracle metric --- still, the fine-tuning procedure do
 
 \end{table}
 
+
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{figures/chisq_vs_noise_ewc}
+        \caption{Goodness of fit as a function of SNR shows a threshold 
+        behavior where our method reaches its limit.}
+        \label{fig:chi squared vs noise}
+\end{figure}
+
 The right panel of Figure \ref{fig:loss and chi squared} shows that 
 the $\chi^2$ of the reconstruction is improved substantially compared to the 
 baseline model. The $\chi^2$ is directly optimized by the fine-tuning procedure 
@@ -1035,13 +1094,6 @@ $\nu=128^{2}$. For those reconstructions that do not satisfy this criteria,
 we still observe a significant improvement in the distribution of goodness of fit 
 compared to the baseline (black histogram in Figure \ref{fig:loss and chi squared}).
 
-\begin{figure}[t!]
-        \centering
-        \includegraphics[width=0.7\textwidth]{figures/chisq_vs_noise_ewc}
-        \caption{Goodness of fit as a function of SNR shows a threshold 
-        behavior where our method reaches its limit.}
-        \label{fig:chi squared vs noise}
-\end{figure}
 
 \begin{figure*}[t!]
         \centering
@@ -1201,7 +1253,7 @@ improvement which we illustrate in Figure \ref{fig:main figure}.
 %upcoming images from facilities like the James Webb Telescope, thereby pushing our understanding of 
 %dark matter and baryonic matter distribution at the very small scale.
 
-The results obtained here demonstrate the effectiveness of machine learning methods for inferring pixelated maps of the distribution of mass in lensing galaxies. Since this is a heavily under-constrained problem, stringent priors are needed to avoid overfitting the data, a task that has traditionally been difficult to accomplish \citep[e.g., ][]{Saha1997}. The model proposed here can implicitly learn these priors from a set of training data. 
+The results obtained here demonstrate the effectiveness of machine learning methods for inferring pixelated maps of the distribution of mass in lensing galaxies. Since this is a heavily under-constrained problem, stringent priors are needed to avoid overfitting the data, a task that has traditionally been difficult to accomplish \citep[e.g.,][]{Saha1997}. The model proposed here can implicitly learn these priors from a set of training data. 
 
 The flexible and expressive form of the reconstructions means that, in principle, any lensing system (e.g., a single simple galaxy, or a group of complex galaxies) could be analyzed by this model, without any need for pre-determining the model parameterization. This is of high value given the diversity of observed lensing systems, and their relevance for constraining astrophysical and cosmological parameters. 
 

@@ -842,14 +842,14 @@ qui satisfait l'équation de la lentille adimensionnelle
 %the neural network that update the solution parameters at each iteration. 
 
 
-\section{Interférométrie par masque non-régulier}
+%\section{Interférométrie par masque non-régulier}
 % Mentionner le scope restreint (Aperture masking, etc.)
 % Optical does not mean optical wavelength, only means we are using optics
 %to manipulate the light (lens, mirrors,mas)
 % Cite Monnier for an excellent review
 
 % History
-La première conceptualisation de l'interférométrie par masque apparaît dans un rapport sur le Concours Bordin de l'année 1867, 
+%La première conceptualisation de l'interférométrie par masque apparaît dans un rapport sur le Concours Bordin de l'année 1867, 
 
 
 %\blockquote{
@@ -862,77 +862,77 @@ La première conceptualisation de l'interférométrie par masque apparaît dans 
         %il deviendra possible d'obtenir quelques données nouvelles sur les diamètres angulaires de ces astres.
 %}
 
-Pour bien comprendre ce phénomène, on peut utiliser l'expérience des deux fentes de Young. 
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\textwidth]{figures/young_cartoon}
-        \caption{Reproduction de Monnier 2000}
-        \label{fig:young}
-\end{figure}
+%Pour bien comprendre ce phénomène, on peut utiliser l'expérience des deux fentes de Young. 
+%\begin{figure}[H]
+        %\centering
+        %\includegraphics[width=0.8\textwidth]{figures/young_cartoon}
+        %\caption{Reproduction de Monnier 2000}
+        %\label{fig:young}
+%\end{figure}
 
-Dans le cas où la taille de l'objet est trop petite, le patron d'interférence est celui de gauche. Dans le cas où 
-la taille angulaire, ou la distance angulaire entre deux objets singuliers, atteint un seuil caractéristique 
-$\Delta \theta = \frac{\lambda}{2b}$, nommé le critère de Michelson, alors la visibilité atteint un minimum tel qu'illustré 
-dans le patron de droit dans l'image.
-$\omega = 2 \pi \nu$, $\nu \lambda = c$.
-$D$ est la distance du diamètre angulaire entre la source et les fentes, qu'on prend beaucoup plus grande
+%Dans le cas où la taille de l'objet est trop petite, le patron d'interférence est celui de gauche. Dans le cas où 
+%la taille angulaire, ou la distance angulaire entre deux objets singuliers, atteint un seuil caractéristique 
+%$\Delta \theta = \frac{\lambda}{2b}$, nommé le critère de Michelson, alors la visibilité atteint un minimum tel qu'illustré 
+%dans le patron de droit dans l'image.
+%$\omega = 2 \pi \nu$, $\nu \lambda = c$.
+%$D$ est la distance du diamètre angulaire entre la source et les fentes, qu'on prend beaucoup plus grande
 
-\begin{equation}\label{eq:E1}
-        E_1(\ell, m, t) = A(\ell,m, t - \frac{R_1}{c}) \frac{e^{-i\omega (t - \frac{R_1}{c})}}{R_1} 
-\end{equation} 
+%\begin{equation}\label{eq:E1}
+        %E_1(\ell, m, t) = A(\ell,m, t - \frac{R_1}{c}) \frac{e^{-i\omega (t - \frac{R_1}{c})}}{R_1} 
+%\end{equation} 
 
-Dans l'approximation où le champ élecromagnétique de deux sources, $E_1$ et $E_2$, sont monochromatique, de longueur d'onde $\lambda$, on 
-peut écrire la luminosité totale observée sur l'écran image comme
-\begin{equation}\label{eq:Itot}
-        \begin{aligned}
-                I(\ell, m) &=  \int_{0}^{T} (E_1(\ell, m, t) + E_2(\ell, m, t)))^{2}dt \\[1.5ex]
-                I(\ell, m) &=  \int_{0}^{T} (E_1(\ell, m, t) + E_2(\ell, m, t)))^{2}dt %\\[1.5ex]
-        \end{aligned}
-\end{equation} 
-
-
-%Le truc est donc de changer la longueur de base $\mathbf{b}$ pour obtenir un minimum pour la visibilité
-% Fizeau note 1868 (voir Monnier thesis for source)
-% Michelson applied to measure diameter of Jupyter Moons (1891) and Betelgeuse (1921)
-% Jennison + radio telescopes
-% 90s-20s Optical interferometry with masks
-% Van Cittert-Zernike Theorem 
+%Dans l'approximation où le champ élecromagnétique de deux sources, $E_1$ et $E_2$, sont monochromatique, de longueur d'onde $\lambda$, on 
+%peut écrire la luminosité totale observée sur l'écran image comme
+%\begin{equation}\label{eq:Itot}
+        %\begin{aligned}
+                %I(\ell, m) &=  \int_{0}^{T} (E_1(\ell, m, t) + E_2(\ell, m, t)))^{2}dt \\[1.5ex]
+                %I(\ell, m) &=  \int_{0}^{T} (E_1(\ell, m, t) + E_2(\ell, m, t)))^{2}dt %\\[1.5ex]
+        %\end{aligned}
+%\end{equation} 
 
 
-% In practice, we go and measure the visibilities and try to take the inverse Fourier transform
-\subsection{Théorème de van Cittert-Zernike}
-Pour obtenir un peu d'intuition sur ce théorème important, on utilise l'expérience classique des deux 
-fentes de \citep{Young}. On considère deux fentes séparées par une distance $\mathbf{D}$, et on illumine ces 
-deux fentes avec de la lumière monochromatique de longueur d'onde $\lambda$.
-
-% Maybe show picture here
-Supposons
-
-\begin{equation}\label{eq:Mutual Coherence}
-        \Gamma_{12} = \lim_{T \rightarrow \infty } \frac{1}{2T} \int_{-T}^{T} E_{1}(t)\tilde{E}_2(t - \tau) dt 
-\end{equation} 
+%%Le truc est donc de changer la longueur de base $\mathbf{b}$ pour obtenir un minimum pour la visibilité
+%% Fizeau note 1868 (voir Monnier thesis for source)
+%% Michelson applied to measure diameter of Jupyter Moons (1891) and Betelgeuse (1921)
+%% Jennison + radio telescopes
+%% 90s-20s Optical interferometry with masks
+%% Van Cittert-Zernike Theorem 
 
 
-% Time average
-\begin{equation}\label{eq:time average}
-        \langle E_1\tilde{E}_2\rangle_{t} = \langle A(\ell,m,t - \frac{R_1}{c}) \tilde{A}(\ell,m,t - \frac{R_2}{c}) \rangle_t
-       \frac{e^{i\omega(\frac{R_1 - R_2}{c})}}{R_1 R_2} 
-\end{equation} 
+%% In practice, we go and measure the visibilities and try to take the inverse Fourier transform
+%\subsection{Théorème de van Cittert-Zernike}
+%Pour obtenir un peu d'intuition sur ce théorème important, on utilise l'expérience classique des deux 
+%fentes de \citep{Young}. On considère deux fentes séparées par une distance $\mathbf{D}$, et on illumine ces 
+%deux fentes avec de la lumière monochromatique de longueur d'onde $\lambda$.
 
-Now $\langle A(\ell,m,t - \frac{R_1}{c}) \tilde{A}(\ell,m,t - \frac{R_2}{c}) \rangle_t = I(\ell, m)$ for incoherent source
+%% Maybe show picture here
+%Supposons
 
-% Explaining the resolution, we need to look at the visibility curve, a binary is resolved when V reaches its minimum (for Michelson interferometry, where we can change the baseline by changing the OPD.
+%\begin{equation}\label{eq:Mutual Coherence}
+        %\Gamma_{12} = \lim_{T \rightarrow \infty } \frac{1}{2T} \int_{-T}^{T} E_{1}(t)\tilde{E}_2(t - \tau) dt 
+%\end{equation} 
 
-% Rayleigh Criterion
-\begin{equation}\label{eq:Rayleigh}
-       \Delta \theta_{\text{Télescope}} = 1.22 \frac{\lambda}{D}
-\end{equation} 
 
-% Micheslon criterion
-\begin{equation}\label{eq:Michelson}
-        \Delta \theta_{\text{Interféromètre}} = \frac{\lambda}{2b} 
-\end{equation} 
-Nearly twice as good.
+%% Time average
+%\begin{equation}\label{eq:time average}
+        %\langle E_1\tilde{E}_2\rangle_{t} = \langle A(\ell,m,t - \frac{R_1}{c}) \tilde{A}(\ell,m,t - \frac{R_2}{c}) \rangle_t
+       %\frac{e^{i\omega(\frac{R_1 - R_2}{c})}}{R_1 R_2} 
+%\end{equation} 
+
+%Now $\langle A(\ell,m,t - \frac{R_1}{c}) \tilde{A}(\ell,m,t - \frac{R_2}{c}) \rangle_t = I(\ell, m)$ for incoherent source
+
+%% Explaining the resolution, we need to look at the visibility curve, a binary is resolved when V reaches its minimum (for Michelson interferometry, where we can change the baseline by changing the OPD.
+
+%% Rayleigh Criterion
+%\begin{equation}\label{eq:Rayleigh}
+       %\Delta \theta_{\text{Télescope}} = 1.22 \frac{\lambda}{D}
+%\end{equation} 
+
+%% Micheslon criterion
+%\begin{equation}\label{eq:Michelson}
+        %\Delta \theta_{\text{Interféromètre}} = \frac{\lambda}{2b} 
+%\end{equation} 
+%Nearly twice as good.
 
 % Consider two point source (two planar EM waves) 
 % Consider two slits, common Young experiment, we get interference fringes. 
@@ -952,20 +952,20 @@ Nearly twice as good.
 % Image plan interferometry <- is what I am doing
 
 
-Le théorème de von Cittert-Zernike nous assure que les visibilités mesurées correspondent à la transformée 
-de Fourier de l'intensité de la source, de sortes que le problème de reconstruction d'image par interférométrie et 
-de prendre la transformée de Fourier inverse des visibilitées mesurées.
+%Le théorème de von Cittert-Zernike nous assure que les visibilités mesurées correspondent à la transformée 
+%de Fourier de l'intensité de la source, de sortes que le problème de reconstruction d'image par interférométrie et 
+%de prendre la transformée de Fourier inverse des visibilitées mesurées.
 
-Showing what visibilities are, fringes etc.
-Show how fringes emerges, through time averaged cross correlation of EM fields.
+%Showing what visibilities are, fringes etc.
+%Show how fringes emerges, through time averaged cross correlation of EM fields.
 
-\begin{equation}
-        \tilde{\mathcal{V}}\left( \frac{\mathbf{D}}{\lambda} \right) = \frac{\displaystyle \int_{\Omega}dx_\Omega dy_\Omega I_\lambda (\mathbf{r}_\Omega) e^{-\frac{\mathbf{D}}{\lambda} \cdot \mathbf{r}_\Omega}}{\displaystyle \int_{\Omega} dx_\Omega dy_\Omega I_\lambda (\mathbf{r}_{\Omega})}
-\end{equation}
+%\begin{equation}
+        %\tilde{\mathcal{V}}\left( \frac{\mathbf{D}}{\lambda} \right) = \frac{\displaystyle \int_{\Omega}dx_\Omega dy_\Omega I_\lambda (\mathbf{r}_\Omega) e^{-\frac{\mathbf{D}}{\lambda} \cdot \mathbf{r}_\Omega}}{\displaystyle \int_{\Omega} dx_\Omega dy_\Omega I_\lambda (\mathbf{r}_{\Omega})}
+%\end{equation}
 
-En pratique, comme le nombre de mesure n'est pas complet, le problème de reconstruction d'image 
-est mal-posé, et on doit introduire certaine contraintes pour reconstruire les visibilitées qui ne sont 
-pas mesurées. Parler de DFT. 
+%En pratique, comme le nombre de mesure n'est pas complet, le problème de reconstruction d'image 
+%est mal-posé, et on doit introduire certaine contraintes pour reconstruire les visibilitées qui ne sont 
+%pas mesurées. Parler de DFT. 
 % montrer un u, v plot
 
 % Solution for binaries, Disk are nice to put here.
@@ -988,7 +988,7 @@ pas mesurées. Parler de DFT.
 % \citep{Monnier2007} Review
 % \citep{Tuthill1999} Surface imaging of a variable star
 
-\subsection{Les angles de fermeture}
+%\subsection{Les angles de fermeture}
 
 \section{Auto-encodeur variationnel}
 % Intro into why we talk about this here -> Modeling a distribution for images, generative process for training etc.
@@ -1244,7 +1244,7 @@ la fonction identité comme auto-encodeur: $f_{\phi,\theta}(X) = \bbone X$, de s
 Or, $Z$ n'est pas une représentation pertinente dans ce cas. 
 Pour éliminer les solutions non-désirées, on introduit une contrainte sur la complexité de \citet{Kolmogorov1965} du code $Z$, c'est à dire qu'on cherche 
 un auto-encodeur qui compresse le message et conserve simultanément 
-le maximum d'information possible à propos du message. On introduit l'objectif du goulot d'information 
+le maximum d'information possible à propos du message. On introduit l'objectif du goulot d'information \citep{Tishby1999}
 \begin{equation}\label{eq:IB}
 \begin{aligned}
         \underset{\phi,\theta}{\mathrm{max}}&\,\,I(Z ; X) \\[1ex]
@@ -1725,48 +1725,138 @@ qui réduit considérablement la complexité du problème d'apprentissage.
 Le méta-apprentissage est un sujet de recherche qui se concentre sur la construction de règles d'apprentissages qui permettent 
 d'accélérer l'apprentissage de fonctions pour certaines tâches spécifiques. Ce double aspect d'apprentissage, soit apprendre à mieux 
 apprendre, est précisément ce qui est sous-entendu par le terme méta-apprentissage. Pour une revue du sujet, le lecteur peut consulter 
-la revue par \citet{Hospedales2020}. Cette sous-section se concentre sur les techniques liées au méta-apprentissage basé sur l'optimisation, 
-en particulier l'accélération d'un algorithme de grimpe de gradient comme \eqref{eq:map recurrence} par l'apprentissage profond de bias inductifs.
+la revue par \citet{Hospedales2020}. Cette sous-section se veut une introduction au méta-apprentissage basé sur l'optimisation,
+soit l'apprentissage profond de bias inductifs par rétropropagation de gradients.
 %qu'on se concentre à accélérer ou apprendre un algorithme d'optimisation tel que la grimpe de gradient \eqref{eq:map recurrence}.
 
-
-
-Pour un problème de méta-apprentissage, l'ensemble de donné d'entrainement est légèrement différent d'une tâche d'interpolation ou de classification, 
-où l'ensemble d'entraînement $\mathcal{D} = \{\mathbf{x}^{(i)},\,\mathbf{y}^{(i)}\}_{i=1}^{N}$ 
-est construit à partir d'exemples dans le domaine $\mathcal{X}$ et l'image $\mathcal{Y}$, implicitement connectés par une fonction qu'on veut reconstruire ou 
-approximer. Dans le contexte du méta-apprentissage, l'ensemble d'entraînement est plutôt constitués de tâches à performer $\mathcal{T} = \{\mathcal{D}^{(i)}, \mathcal{L}^{(i)}\}_{i=1}^{N}$, où 
-$\mathcal{L}_i$ est une fonction objective pour la tâche $i$. 
-Le problème de méta-apprentissage est donc d'extraire ou encoder des biais inductifs, ç.-à-d. des connaissances qui permettent d'accélérer 
-l'apprentissage d'une tâche spécifique, dans une liste de paramètres $\varphi$
-\begin{equation}\label{eq:meta-learning}
-        \varphi^{\star}_{\text{méta}} = \underset{\varphi}{\mathrm{argmin}}\,\, \mathbb{E}_{\mathcal{T}^{(i)} \sim p(\mathcal{T})} \bigg[ \mathcal{L}^{(i)}_\varphi(\mathcal{D}^{(i)}) \bigg]
+Pour un problème de méta-apprentissage, l'ensemble de donné d'entrainement est légèrement différent d'une tâche d'interpolation ou de classification. 
+Considérons un ensemble d'entraînement $\mathcal{D} = \{\mathbf{x}^{(i)},\,\mathbf{y}^{(i)}\}_{i=1}^{N}$, 
+construit à partir d'exemples dans le domaine $\mathcal{X}$ et l'image $\mathcal{Y}$, implicitement connectés par une fonction qu'on veut reconstruire ou 
+approximer. Dans ce contexte, l'objectif est généralement d'apprendre une fonction $f_\theta: \mathcal{X} \rightarrow \mathcal{Y}$ 
+qui minimisation de l'erreur quadratique moyenne, soit le risque empirique sur l'ensemble d'entraîenement
+\begin{equation}\label{eq:Regression}
+        \theta^{\star} = \underset{\theta}{\mathrm{argmin}}\,\, 
+        \mathbb{E}_{(\mathbf{x},\mathbf{y}) \sim \mathcal{D}} \bigg[ \big\lVert f_\theta(\mathbf{x}) - \mathbf{y} \big\rVert^{2}_{\mathcal{Y}}  \bigg]
 \end{equation} 
 
-Il est particulièrement pertinent de considérer la notion de généralisation dans ce contexte, et en particulier faire le contraste avec 
+Dans le contexte du méta-apprentissage, 
+l'ensemble d'entraînement est plutôt constitués de tâches à performer $\mathcal{T} = \{\mathcal{D}^{(i)}, \mathcal{L}^{(i)}\}_{i=1}^{N}$, où 
+$\mathcal{L}^{(i)}$ est une fonction objective pour la tâche $i$ et $\mathcal{D}^{(i)}$ 
+est l'ensemble de donné pour résoudre ce problème. 
+Le problème de méta-apprentissage est donc d'extraire ou encoder des biais inductifs, ç.-à-d. des connaissances qui permettent d'accélérer 
+et généraliser l'apprentissage d'une tâche spécifique, dans une liste de paramètres $\varphi$. Spécifiquement 
+pour le méta-apprentissage par optimisation, on a le double niveau d'optimisation
+\begin{equation}\label{eq:meta learning}
+        \begin{aligned}
+                \varphi^{\star}_{\text{méta}} &= \underset{\varphi}{\mathrm{argmin}}\,\, 
+                \mathbb{E}_{(\mathcal{L},\,\mathcal{D}) \sim \mathcal{T}} \bigg[ \mathcal{L}_{\theta^{\star}(\varphi)}(\mathcal{D}) \bigg]\, ; \\[1.5ex]
+                \text{sujet à}\,\,\, \theta^{\star }(\varphi) &= \underset{\theta}{\mathrm{argmin}}\,\, \mathcal{L}_{\theta(\varphi)}(\mathcal{D})
+        \end{aligned}
+\end{equation} 
+
+Il est pertinent de considérer la notion de généralisation dans ce contexte, et en particulier faire le contraste avec 
 la notion de généralisation dans le contexte de la régression. Dans le contexte de la régression, le concept de généralisation est synonyme 
-avec celui d'extrapolation, ç.-à-d. la mesure de la performance d'une certaine fonction, d'un algorithme ou d'une théorie étant donné un ou plusieurs exemples tests, 
+avec celui d'extrapolation, ç.-à-d. la mesure de la performance d'une certaine fonction, d'un algorithme ou d'une loi physique 
+étant donné un ou plusieurs exemples tests, 
 potentiellement similaire ou différent des exemples de l'ensemble d'entraînement utilisés pour ajuster les paramètres d'une fonction 
-$f_\varphi: \mathcal{X} \rightarrow \mathcal{Y}$. Pour plusieurs objectifs scientifiques, la capacité d'un modèle ou d'une loi physique $f_\varphi$ 
+$f_\theta: \mathcal{X} \rightarrow \mathcal{Y}$. Pour plusieurs objectifs scientifiques, la capacité d'un modèle ou d'une loi physique  
 à généraliser au delà d'un ensembles de mesures $\mathcal{D}$ est cruciale. 
-Par exemple, un test important de le relativité général, testée et découverte dans le régime de champs faible sur Terre, est 
+Par exemple, un test important de le relativité général, testée et découverte dans le régime de champs faible, est 
 de savoir si les lois physiques restent valides dans le régime de champ fort près des trous noirs, des étoiles à neutron ou encore 
 au moment du Big Bang. 
 
-Or, si les biais inductifs utilisés pour entraîner (apprendre, découvrir) $f_\varphi$ ne sont pas suffisamment 
+Or, si les biais inductifs utilisés pour entraîner (apprendre, découvrir) $f_{\theta}$ ne sont pas suffisamment 
 informatif sur la nature du problème ou du phénomène d'intérêt (e.g. la gravité), 
-alors un algorithme d'optimisation générique n'est pas garantie de converger 
-vers une représentation informative $f_\varphi$ de la fonction implicitement 
-définie dans l'ensemble d'entraînement $\mathcal{D}$. Cette observation suit essentiellement du \textit{no free lunch theorem} (théorème NFL) pour 
+alors un algorithme d'optimisation générique n'est pas garantie de converger vers 
+une hypothèse universelle, ç.-à-d. en mesure d'extrapoler en dehors de l'ensemble 
+d'entraînement $\mathcal{D}$.
+%vers une représentation informative $f_\varphi$ de la fonction implicitement 
+%définie dans l'ensemble d'entraînement $\mathcal{D}$. 
+Cette observation suit essentiellement du \textit{no free lunch theorem} (théorème NFL) pour 
 l'optimisation \citep{Wolpert1997}, et en particulier 
-du théorème NFL pour l'apprentissage supervisé \citep{Wolpert1992,Wolpert1996}.
-%Une telle fonction ne vas donc pas extrapoler correctement vers des points d'une 
-%distribution différente de la distribution implicite dans $\mathcal{D}$.
+du théorème NFL pour l'apprentissage supervisé \citep{Wolpert1992,Wolpert1996}, soit que tous les 
+algorithmes d'apprentissages, des fonctions de l'ensemble de données $\mathcal{D}$ vers une hypothèse $f_{\theta^{\star}}$, 
+sont équivalents en terme du risque moyen encouru sur l'erreur de généralisation. 
+Des biais inductifs sont nécessaire pour déterminer uniquement une hypothèse universelle, 
+ou du moins une hypothèse qui satisfait certains critères déterminés a priori.
 
-%Dans 
-%notre cas, la tâche à performer est l'optimisation d'une fonction de vraisemblence. On a donc
-%\begin{equation}\label{eq:dmeta}
-%\mathcal{D} = \{\mathbf{x}_i,\, \log p_i(\mathbf{y} \mid \mathbf{x}) \}_{i=1}^{N}
-%\end{equation} 
+%Une solution à ce problème est d'ajouter des biais inductifs au problème d'apprentissage. Dans ce cas, 
+%il est possible de choisir a priori des algorithmes d'apprentissages qui performent bien pour une classe 
+%de problème qui nous intéresse, ce qui contourne le théorème NFL.
+
+Dans le contexte du méta-apprentissage, la généralisation réfère plutôt au concept de transfert d'apprentissage, ç.-à-d. le transfert des connaissances 
+et le transfert de la structure du problème vers des tâches d'essais. 
+Cette approche est plus appropriée dans un contexte scientifique, où la nature des hypothèses est 
+constamment testée et jugée sur des critères comme leur capacité à reproduire et expliquer un phénomène, souvent mesuré par 
+la simplicité de l'hypothèse. En ce sens, 
+si l'hypothèse, $f_\theta$, est une boîte noire comme un réseau de neuronnes, alors il y a très peu de moyen de soumettre 
+cette hypothèse aux critères scientifiques requis pour convaincre une communauté sceptique. 
+Le problème du méta-apprentissage se concerne plutôt à améliorer la méthode par laquelle l'hypothèse est obtenue, 
+souvent par l'apprentissage explicite ou implicite de biais inductifs. 
+Par exemple, une hypothèse peut être construite par régression symbolique 
+de façon à satisfaire une communauté sceptique par la construction explicite 
+d'un terme dans la fonction objective dont le rôle est de favoriser une hypothèse simple \citep[e.g.][]{Lemos2022}.
+Les machines à inférences récurentielles et la plupart des méthodes de méta-apprentissage basées sur la 
+rétropropagation de gradients \citep[e.g.][]{Finn2017} apprennent plutôt ces biais inductifs de façon implicite.
+
+Strictement dans le contexte où on cherche à construire une seule hypothèse, et non une distribution d'hypothèses 
+plausibles, il est possible de remplacer n'importe quel algorithme d'optimisation $G_\varphi$, qui sont aussi souvent considérés 
+comme des boîtes noires, par une autre boîte noire $G_{\varphi_{\text{méta}}}$. L'hypothèse obtenue par 
+l'algorithme d'optimisation $G_{\varphi_{\text{méta}}}$, qu'on peut noté comme $f_\theta$ ou encore $\hat{\mathbf{x}}^{(T)}$ 
+dans le contexte des problèmes inverses, peut alors être soumise aux tests de validités 
+requis par la communauté. 
+%Pour un problème inverse, le premier critère à satisfaire 
+%est la capacité de l'hypothèse, $\hat{\mathbf{x}}^{(T)}$, à reproduire l'observation $\mathbf{y}$.
+%comme le test la de validation croisée \citep{Wolpert1992b} 
+%pour estimer la qualité de la généralisation de $f_\theta$ \citep[e.g.][]{}
+%ou comme la comparaison de la vraisemblance ou 
+
+%\citep{Schimdhuber1987,Naik1992,bengio1992,Thrun1998}
+Le travail de \citet{Younger2001} est la première apparition concrète d'une approche pour le méta-apprentissage 
+basée seulement sur la rétropropagation de gradients.
+Les travaux plus récent de \citet{Andrychowicz2016} 
+démontre empiriquement qu'une cellule récurrente à mémoire longue et courte \citep[LSTM,][]{Hochreiter1997} est en mesure d'apprendre 
+un algorithme d'entraînement pour un réseau de neuronnes avec un taux de convergence plus rapide que les algorithmes d'optimisations génériques.
+Contrairement à un réseau avec poids fixes, comme le perceptron \citep{Rosenblatt1958}, 
+un réseau à cellules récurrentes (RNN) est Turing-complet \citep{Siegelmann1992}.
+Un RNN est en mesure de modifier son état interne, de sortes qu'un tel système peut représenter une classe d'algorithmes plus grande qu'un perceptron, 
+incluant une descente de gradient tel que \eqref{eq:map recurrence} et \eqref{eq:rim putzky}, 
+soit la classe des algorithmes pouvant être représentée par les machines de Turing.
+%Les travaux plus récent d'\citet{Andrychowicz2016} montrent aussi que cette approche pour le 
+%méta-apprentissage peut s'appliquer dans des situations
+
+La contribution du travail de \citet{Putzky2017} est d'appliquer ces méthodes pour les problèmes inverses, spécifiquements les 
+problèmes inverses pour la reconstruction d'images. Dans ce contexte, la notion des biais inductifs est 
+équivalente à celle d'une distribution a priori $p_\theta(\mathbf{x})$ sur l'espace 
+des hypothèses. Le problème de méta-apprentissage devient
+\begin{equation}\label{eq:loss intro}
+        \begin{aligned}
+                \varphi^{\star} &= \underset{\varphi}{\mathrm{argmin}}\,\, 
+        \mathbb{E}_{(\log p(\mathbf{y} \mid \mathbf{x}),\,\, \mathbf{x}) \sim \mathcal{D}} 
+        \bigg[ \frac{1}{T} \sum_{t=1}^{T} \big\lVert \mathbf{x} - \hat{\mathbf{x}}^{(t)} \big\rVert^{2}_{\mathcal{X}}  \bigg]\,; \\[1.5ex]
+        \text{sujet à}\,\,\,\hat{\mathbf{x}}^{(t)} &= 
+        \hat{\mathbf{x}}^{(t-1)} + g_\varphi\big(\hat{\mathbf{x}}^{(t-1)},\, \grad_{\hat{\mathbf{x}}^{(t-1)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t-1)}) \big)\, .
+        \end{aligned}
+\end{equation} 
+La fonction de vraisemblance, ou plus spécifiquement sont gradient $\grad_{\mathbf{x}}\log p(\mathbf{y} \mid \mathbf{x})$, 
+encode le modèle physique, ou la simulation des paramètres $\mathbf{x}$ vers une observation $\mathbf{y}$.
+C'est via cette fonction qu'on peut intégrer nos connaissances sur la nature du phénomène à l'étude, e.g. les équations \eqref{eq:alpha adim} et \eqref{eq:lens equation adim} 
+pour les lentilles gravitationnelles, directement dans le problème d'apprentissage.
+De cette façon, l'objectif de méta-apprentissage pour les paramètres $\varphi$ est d'encoder seulement 
+les connaissances manquantes aux problèmes, soit $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x})$.
+
+%Puisque les machines à inférences récurentielles apprennent par méta-apprentissage, elles sont en mesure de généraliser beaucoup mieux qu'une 
+%fonction apprise par régression. En effet, le problème d'apprentissage, soit la relation \eqref{eq:rim putzky}, 
+%est transférable à la classe de problèmes pour laquelle 
+%les biais inductifs appris sont informatifs. Par exemple, \citet{Morningstar2019} montrent qu'une machine à récurentielles 
+%entraîné à reconstruire des images de galaxies fortement lentillées est en mesure reconstruire l'image d'un portion de 
+%paragraphe, ce qui n'a rien à voir a priori avec des images de galaxies. 
+%D'un autre côté, une fonction inverse $f_\theta: \mathcal{Y} \rightarrow \mathcal{X}$, apprise par régression,
+%est sujette aux problèmes liés à l'extrapolation mentionnés plus haut, et ne serait pas en mesure d'extrapoler en 
+%dehors de la variété implicitement définit par $\mathcal{D}$.
+
+%\subsection{Note sur les biais inductifs des réseaux convolutifs}
+
 %où $\mathbf{x}_i$ est la solution qu'on cherche et $\log p_i(\mathbf{y} \mid \mathbf{x})$ est la fonction de vraisemblence que 
 %l'algorithme doit optimiser pour obtenir la solution. Les paramètres d'inférence $\varphi$ sont 
 %optimisés sur toute l'ensemble de la trajectoire construire par la relation de récurrence 
@@ -1784,53 +1874,92 @@ du théorème NFL pour l'apprentissage supervisé \citep{Wolpert1992,Wolpert1996
         %\varphi_{\mathcal{D}}^{\star} = \underset{\varphi}{\mathrm{argmin}}\, \mathbb{E}_{\mathcal{D}}\big[ \mathcal{L}_{\varphi} \big]
 %\end{equation} 
 
-Le travail de \citet{Younger2001} est la première apparition concrète d'une approche pour le méta-apprentissage 
-basée seulement sur la rétropropagation de gradients 
-pour trouver et améliorer un algorithme d'apprentissage.
-Leur travail démontre qu'une cellule récurrente à mémoire longue et courte \citep[LSTM,][]{Hochreiter1997} est en mesure d'apprendre 
-un algorithme d'entraînement pour un réseau de neuronnes, étant donnés un ensemble de problèmes d'apprentissages. 
-Contrairement à un réseau avec poids fixes, comme le perceptron \citep{Rosenblatt1958}, 
-un réseau à cellules récurrentes (RNN) est Turing-complet \citep{Siegelmann1992}.
-Un RNN est en mesure de modifier son état interne, de sortes qu'un tel système peut représenter une classe d'algorithmes plus grande qu'un perceptron, 
-incluant une descente de gradient tel que \eqref{eq:map recurrence} et \eqref{eq:rim putzky}, 
-soit la classe des algorithmes pouvant être représentée par les machines de Turing.
 
-%Le travail de \citet{Andrychowicz2016} utilise ces idées pour construire un algorithme d'optimisation, aussi basé sur les cellules LSTM, qui performe 
+
+% Does not work, or I did not managed to make it work
+%Pour éclaircir ce dernier point, on peut considérer le problème d'apprentissage avec comme objectif de recouvrir 
+%une fonction $f(x)$ à partir d'un ensemble limité d'exemples. On considère plus spécifiquement 
+%une fonction possédant une série de Taylor infinie et un ensemble d'entraînement avec un support fini 
+%et un nombre limité de points de données
+%\begin{equation}\label{eq:RegressionProblem}
+        %\begin{aligned}
+                %f_{\theta^{\star}} &= \underset{f_\theta \in \mathcal{H}}{\min}\,\,\mathbb{E}_{(x,y) \sim \mathcal{D}} \bigg[(f_\theta(x) - y)^2\bigg]\,; \\[1.5ex]
+                %\mathcal{D} &= \bigg\{\left(x^{(i)},\, \sin(5x^{(i)} + \frac{\pi}{2})\right)\, \bigg| \, x^{(i)} \sim \mathcal{U}(-2, 2)\bigg\}_{i=1}^{100}$\, .
+        %\end{aligned}
+%\end{equation} 
+%On construit un espace d'hypothèses, $\mathcal{H}$, très peu informatif sur la solution en supposant que $f(x)$ peut être 
+%approximé par $f_\theta$, un perceptron \citep{Rosenblatt1958} avec 2 couches cachées et une activation non-linéaire ELU \citep{Clevert2016}. 
+%En utilisant un algorithme générique d'optimisation comme ADAM \citep{Kingma2014}, on est en mesure d'ajuster parfaitement 
+%l'ensemble d'entraînement, mais notre hypothèse ne se généralise pas au-delà du support fini de $\mathcal{D}$ (voir la figure \ref{fig:regression}).
+%\begin{figure}[thb!]
+        %\centering
+        %\begin{subfigure}[t]{0.3\linewidth}
+                %\centering
+                %\includegraphics[width=\textwidth]{figures/regression_exemple}
+                %\caption{Extrapolation d'un modèle très expressif $f_{\theta}$ ajusté sans biais inductifs avec 
+                %$\mathcal{D}$. }
+                %\label{fig:regression}
+        %\end{subfigure}
+        %~
+        %\begin{subfigure}[t]{0.3\linewidth}
+                %\centering
+                %\includegraphics[width=\textwidth]{figures/reg_learning_curves}
+                %\caption{Effet des biais inductifs sur l'interpolation. On compare un biais explicite, soit l'ajout en entrée de $f_\theta$ 
+                %des puissances de $x$ pour accélérer l'apprentissage d'une série de Taylor, avec des biais implicite, appris par méta-apprentissage (courbe rouge 
+                %pointillée).}
+                %\label{fig:learning curves}
+        %\end{subfigure}
+        %~
+        %\begin{subfigure}[t]{0.3\linewidth}
+                %\centering
+                %\includegraphics[width=\textwidth]{figures/regression_exemple}
+                %\caption{Extrapolation d'un modèle très expressif $f_\theta$ ajusté avec
+                %des biais inductifs encodé dans un modèle $g_{\varphi}: \mathcal{D} \rightarrow \mathcal{H}$.}
+                %\label{fig:meta regression}
+        %\end{subfigure}
+        %\caption{Effet des biais inductifs sur l'apprentissage d'une fonction $f_\theta$.}
+        %\label{fig:meta}
+%\end{figure}
+
+%La solution à ce problème est particulièrement claire: on doit restreindre l'espace des 
+%hypothèses tel que la solution universelle au problème, $f(x)$, peut être retrouvée aisément. 
+%L'objectif du méta-apprentissage se concentre précisément sur l'apprentissage de ces biais inductifs, 
+%non-seulement pour accélérer le problème d'apprentissage \eqref{eq:RegressionProblem} (voir figure \ref{fig:learning curves}), mais aussi 
+%pour résoudre le problème de généralisation, ç.-à-d. réduire le risque empirique d'appliquer 
+%l'hypothèse $f_{\theta^\star}$ sur un ensemble de données test, $\mathcal{D}^{\mathrm{test}}$.
+%Ce problème ne peut pas être résolue autrement qu'en supposant dès le départ un espace 
+%d'hypothèse $\mathcal{H}$ extrêmement informatif sur la solution.
+
+
+%Une possible 
+%résolution de ce problème est l'utilisation de biais inductifs, 
+%ç.-à-d. une sélection a priori des hypothèse $f_\varphi \in \mathcal{H}$ possibles. 
+%sont strictement nécessaire pour l'apprentissage de fonction universelles \citep{Mitchell1980}. 
+%, qui stipule qu'il 
+%n'existe pas d'algorithme d'optimisation universelle purement informé par les données d'entraînements. 
+%Une telle fonction ne vas donc pas extrapoler correctement vers des points d'une 
+%distribution différente de la distribution implicite dans $\mathcal{D}$.
+
+
+%pour construire un algorithme d'optimisation, aussi basé sur les cellules LSTM, qui performe 
 %beaucoup mieux que les algorithmes d'optimisations traditionnelles (e.g. ADAM) pour entraîner un second réseau de neuronnes pour les tâches spécifiques 
 %sur lesquelles l'algorithme de méta apprentissage est entrainé (style transfer etc.). Le travail de Putzky et Welling est une généralisation de cette approche 
 %aux problèmes inverses en général.
 
-%La pertinence de se travail 
-%Ce genre d'approche est motivé par le \textit{no free lunch theorem} pour l'optimisation, qui stipule qu'il 
-%n'existe aucun algorithme général d'optimisation en mesure de résoudre toutes les classes de problèmes. Dans ca cas, la solution à ce problème est 
-%d'introduire des biais inductifs ou des connaissances a priori pour contraindre l'espace des solutions recherchées à un espace où au moins une solution existe. 
-%Le problème de méta-apprentissage est donc précisément d'apprendre ou encoder ces biais inductifs dans un modèle d'apprentissage, 
-%de sortes que les problèmes d'optimisations subséquents, sur des taches d'essai, sont garanties d'avoir une solution.
 
-Il est important de discuter de la notion de généralisation dans le contexte de méta-apprentissage. Dans le contexte 
-où on cherche à construire une interpolation, la notion de généralisation réfère généralement au test où un point $\mathbf{x}$ 
-en dehors du support implicite définit par l'ensemble d'entraînement $\mathcal{D}$ est donné en entré à la fonction $f_{\varphi}$ 
-qu'on a construit. Un modèle est en mesure de généraliser si l'erreur quadratique moyenne sur la prédiction est similaire 
-au risque empirique observé sur l'ensemble d'entraînement. 
-
-Dans notre contexte, la généralisation réfère plutôt au concept de transfert d'apprentissage, c'est à dire transferrer les connaissances 
-apprises dans un certain contexte en transferrant la structure du problème pour vers des tâches d'essais. Ainsi, on comprend que la généralisation, 
-dans notre contexte, est équivalente à la notion de transfert de connaissance. Les paramètres d'inférences $\varphi$, plutôt que d'encoder les détails 
-d'une fonction, encode des biais inductifs, ou autrement des connaissances a priori sur la structure du problème qui sont transferrable d'une problème 
-à un autre. Cette réalisation est particuliè
 %  generalisation, transfer learning, 
 % Mention also the threads with MAML and Reptile -> could be interesting to mention that figuring out initialization is important, nice intro to our network.
 
-Finalement, on note que la notion d'initialisation dans la relation de récurrence $\mathbf{x}^{(0)} = \mathbf{x}_0$ est particulièrement 
-importante dans notre traitement. En effet, on assume que la fonction $g_\varphi$ se comporte bien dans une région 
-de $\mathcal{X}$ qui connecte $\mathbf{x}^{(0)}$ à $\mathbf{x}^{(T)}$. Or, un mauvais choix d'initialisation fait en sortes que 
-la troisième condition d'Hadamard est difficilement respectée. La notion d'apprendre une initialisation 
-qui accélère l'apprentissage de la descente de gradient est un sujet actif du champ de recherche de méta-apprentissage. 
-MAML et Reptile approchent se problème via une boucle double d'optimisation. Or, une approche beaucoup plus simple 
-peut être mise en place si on fait utilisation de l'observation dans notre problème d'inférence. Ici, on peut prendre le point 
-de vue qu'une fonction approximative inverse du modèle physique $\hat{F}_{\varphi'}^{-1}$ est un bon point de départ pour $\mathbf{x}_0$, 
-en particulier si l'image de cette fonction se situe dans la région de haute densité de distribution a prior empirique 
-déterminée par $\mathcal{D}$.
+%Finalement, on note que la notion d'initialisation dans la relation de récurrence $\mathbf{x}^{(0)} = \mathbf{x}_0$ est particulièrement 
+%importante dans notre traitement. En effet, on assume que la fonction $g_\varphi$ se comporte bien dans une région 
+%de $\mathcal{X}$ qui connecte $\mathbf{x}^{(0)}$ à $\mathbf{x}^{(T)}$. Or, un mauvais choix d'initialisation fait en sortes que 
+%la troisième condition d'Hadamard est difficilement respectée. La notion d'apprendre une initialisation 
+%qui accélère l'apprentissage de la descente de gradient est un sujet actif du champ de recherche de méta-apprentissage. 
+%MAML et Reptile approchent se problème via une boucle double d'optimisation. Or, une approche beaucoup plus simple 
+%peut être mise en place si on fait utilisation de l'observation dans notre problème d'inférence. Ici, on peut prendre le point 
+%de vue qu'une fonction approximative inverse du modèle physique $\hat{F}_{\varphi'}^{-1}$ est un bon point de départ pour $\mathbf{x}_0$, 
+%en particulier si l'image de cette fonction se situe dans la région de haute densité de distribution a prior empirique 
+%déterminée par $\mathcal{D}$.
 
 \section{Description du mémoire}
 

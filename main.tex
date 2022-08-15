@@ -60,30 +60,6 @@
 \def\frenchlistfigurename{Liste des figures}
 \def\frenchlisttablename{Liste des tableaux}
 
-%\newif\ifnewauthor
-%\newauthortrue
-
-%\newcounter{affils}
-
-%\makeatletter
-%\def\chapterauthor[#1]#2{\ifnewauthor\else, \fi
-       %#2\textsuperscript{\hyperref[authaffil\the\value{chapter}.#1]{#1}}%
-       %\ifnewauthor\newauthorfalse\gdef\chapterauthors{#2}\else
-               %\g@addto@macro\chapterauthors{, #2}\fi
-       %\ignorespaces % to remove end of line spaces from
-                     %% \chapterauthor[foo]{bar} input lines
-%}
-%\makeatother
-
-%\def\chapteraffil[#1]{\item[#1 --]%
-    %\refstepcounter{affils}%
-    %\label{authaffil\the\value{chapter}.#1}%
-%}
-
-%\newenvironment{affils}
-   %{{\chapterauthors\string\par}\begin{enumerate}}
-   %{\end{enumerate}\global\newauthortrue}
-
 \usepackage[nogroupskip,nonumberlist,acronym,toc,sort=def]{glossaries} 
 \newglossary[slg]{symbolslist}{syi}{syg}{Symboles}
 %\newglossary[slg]{acronyms}{syi}{syg}{Abbréviations}
@@ -91,12 +67,10 @@
 \usepackage{glossary_entry}
 \makeglossaries 
 
-%\setlist[description]{font=\normalfont\boldseries}
-
 % author data
 \author{Alexandre Adam}
-%\title{Reconstruction agnostique de lentilles gravitationnelles de type galaxie-galaxie}
-\title{La reconstruction d'image dans le contexte des problèmes inverses mal posées et non-linéaires avec les machines à inférence récurentielles}
+\title{Reconstruction libre de lentilles gravitationnelles de type galaxie-galaxie avec les machines à inférence récurentielle}
+%\title{La reconstruction d'image dans le contexte des problèmes inverses mal posées et non-linéaires avec les machines à inférence récurentielles}
 \degree{Maître ès sciences (M.Sc.)}
 \department{Département de physique}
 \gradyear{2022}
@@ -109,10 +83,71 @@
 
 	\selectlanguage{french}
     \begin{resume}
+	Les lentilles gravitationnelles de type galaxie-galaxie se produisent lorsque la lumière d'une galaxie 
+	en arrière-plan est déviée par le champ gravitationnel d'une galaxie en avant-plan, formant des 
+	des images doubles, quadruples ou même des anneaux d'Einstein selon le point de vue d'un observateur sur Terre. 
+	Ces phénomènes permettent non seulement 
+	d'étudier les galaxies lointaines, magnifiées par la galaxie-lentille, mais aussi de comprendre la distribution 
+	de masse de la galaxie-lentille et de son environnement, une opportunité unique pour 
+	sonder la matière noire contenue dans ces galaxies. 
+	Or, les méthodes traditionnelles pour analyser ces systèmes requièrent une quantité 
+	significative de temps ordinateur (de quelques heures à quelques jours), sans compter le temps des 
+	experts pour faire converger les analyses MCMC requises pour obtenir les paramètres d'intérêts. 
+	Ce problème est significatif, considérant que 
+	les sondages à champs larges comme les observatoires Rubin et Euclid sont projetés de découvrir plusieurs 
+	centaines de milliers de lentilles gravitationnelles.  
+	De plus, le Télescope géant européen (ELT), faisant usage de la technologie d'optique adaptative, 
+	et le télescope spatial James Webb, vont nous offrir une vue sans précédent de ces systèmes, avec un 
+	pouvoir de résolution projeté de permettre certaines analyses comme la recherche de halo de matière noir froid, 
+	longtemps prédite par le modèle cosmologique standard $\Lambda$CDM. Les approximations traditionnelles faites pour 
+	simplifier la reconstruction des lentilles gravitationnelles ne seront plus valident dans ce régime.
+
+	Dans ce mémoire, je présente un travail qui s'attaque à ces deux problèmes. Je présente une 
+	méthode d'optimisation basée sur les machines à inférence récurentielle pour reconstruire 
+	deux images, soit celle d'une galaxie d'arrière-plan et une image pour la distribution de masse 
+	de la galaxie d'avant-plan. La représentation paramétrique choisie a la potentiel de reconstruire 
+	une classe très large de lentilles gravitationnelles, incluant des halos et sous-halos de matière noire, 
+	ce qu'on démontre dans ce travail en utilisant des profiles de densité réalistes provenant de 
+	la simulation cosmologique hydrodynamique IllustrisTNG. 
+	Nos reconstructions s'exécutent sur une fraction du temps requis pour exécuter une analyse traditionnelle, à 
+	une résolution similaire à celle de Hubble, soit un pas 
+	significatif vers une méthode pouvant adresser le défi d'analyser autant de systèmes complexes et variés en 
+	un temps à l'échelle humaine.
+
     \end{resume}
 
 	\selectlanguage{english}
     \begin{abstract}
+	Galaxy-Galaxy gravitational lenses is a phenomenon that happens when the light, coming from a background 
+	galaxy, is bent by the gravitational field of a foreground galaxy, producing double, quadruple or even 
+	Einstein ring images of the background source from the point of view of an observer on Earth.
+	These phenomena allow us to study in detail the morphology of the background galaxy, magnified 
+	by the lens, but also study the mass density distribution of the lens and its environment, thus offering a 
+	unique probe of dark matter in lensing galaxies.
+	But traditional methods to study these systems often require significant compute time (from hours to days), 
+	and this is without taking into account the time spent by experts required 
+	to make the MCMC chains required to obtain parameters 
+	of interest converge. This problem is significant, considering that 
+	large surveys from observatories like Rubin and Euclid are projected to discover hundreds of thousands of 
+	gravitational lenses. Moreover, the Extremely Large Telescope (ELT), using adaptive optics, and the 
+	James Webb Space Telescope, will offer an unprecedented glimpse of these systems, with a resolving power 
+	predicted to enable searches for cold dark matter subhalos, long predicted by the standard cosmological model
+	$\Lambda$CDM. Approximations used in traditional methods to make analysis tractable will no longer be valid 
+	in that regime.
+
+	In this thesis, I present a method that aims to address these two issues. The method, 
+	based on Recurrent Inference Machines (RIM), reconstructs two pixelated maps, one for the 
+	background source and another for the mass density map of the foreground lensing galaxy. 
+	This free-form parametric representation has the potential to reconstruct a large class 
+	of gravitational lenses, including those with dark matter halos and subhalos, which 
+	we demonstrate using realistic of mass density profiles from the cosmological 
+	hydrodynamic simulation IllustrisTNG.
+	Our reconstructions are executed in a fraction of the time required by traditional methods, 
+	at a resolution comparable to the Hubble Space Telescope (HST), which is a significant step 
+	toward solving the challenge of studying such a large number of complex and varied 
+	systems in a human timescale.
+
+
     \end{abstract}
 
 	\selectlanguage{french}
@@ -121,35 +156,35 @@
     \listoffigures
     %\printglossary[type=abbrev]
     \printglossaries
-
-        \clearpage
+     \clearpage
     \begin{dedication}
       À Maman et Julia
     \end{dedication}
     \begin{acknowledgements}
-            %Je tiens à remercier ma superviseure, Laurence, 
+            Je tiens à remercier ma superviseure, Laurence Perreault-Levasseur, 
+            pour ces heures innombrables passées à discuter de ma recherche, à 
+            me pousser et m'inspirer à réfléchir aux problèmes à toutes les échelles, des petits bugs 
+            jusqu'aux problèmes les plus ambitieux.
+
+             Je tiens à remercier Yashar Hezaveh, pour ses encouragements et 
+             sa passion contagieuse pour la recherche, qui m'a infecté 
+                même après deux ans d'isolation.
+
+            Je tiens aussi à remercier mes collègues, Ronan Legin, Ève Campeau-Poirier et Charles Wilson 
+            qui ont été là durant deux ans de pandémie pour parler de la vie, de la recherche 
+            et de toutes les autres choses entre les deux, virtuellement ou autrement.
+        
+            Et surtout, merci à mes parents, mon frère et ma copine pour leur support inconditionnel 
+            dans cette aventure que j'ai entrepris.
             
-            % Je tiens à remercier Yashar, pour ses encouragements et 
-            % sa contagieuse passion pour la recherche qui m'a infecté.
-
-            %Je tiens aussi à remercier les collègues que j'ai côtoyer 
-            %durant ma maîtrise.
-           
-            %Ronan, merci pour toutes nos discussions techniques, semi-sérieuses
-            %et pas-du-tout sérieuses entretenu virtuellement ou autrement ces 
-            %deux dernières années.
-
-            %Charles, merci pour tes encouragements et tout ce temps que tu as passer 
-            % écouter mes idées folles. 
-
-            %Ève, merci 
     \end{acknowledgements}
   \mainmatter
-  \glsaddall
-  \input{chapters/intro}
+  \input{chapters/intro_wo_notes}
 	\selectlanguage{english}
   \input{chapters/censai}
-
+	\selectlanguage{french}
+  \input{chapters/conclusion}
+	\selectlanguage{english}
   {\scriptsize
     \bibliography{intro_bib,censai_bib}
         %\printbibliography
@@ -158,5 +193,6 @@
   \input{chapters/annexe_planck}
   \input{chapters/censai_appendices}
   \input{chapters/annexe_gru}
+  \glsaddall
 \end{document}
 
