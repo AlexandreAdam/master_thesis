@@ -84,7 +84,7 @@
 	\selectlanguage{french}
     \begin{resume}
 	Les lentilles gravitationnelles de type galaxie-galaxie se produisent lorsque la lumière d'une galaxie 
-	en arrière-plan est déviée par le champ gravitationnel d'une galaxie en avant-plan, formant des 
+	en arrière-plan est déviée par le champ gravitationnel d'une galaxie en avant-plan, formant 
 	des images doubles, quadruples ou même des anneaux d'Einstein selon le point de vue d'un observateur sur Terre. 
 	Ces phénomènes permettent non seulement 
 	d'étudier les galaxies lointaines, magnifiées par la galaxie-lentille, mais aussi de comprendre la distribution 
@@ -98,14 +98,14 @@
 	centaines de milliers de lentilles gravitationnelles.  
 	De plus, le Télescope géant européen (ELT), faisant usage de la technologie d'optique adaptative, 
 	et le télescope spatial James Webb, vont nous offrir une vue sans précédent de ces systèmes, avec un 
-	pouvoir de résolution projeté de permettre certaines analyses comme la recherche de halo de matière noir froid, 
+	pouvoir de résolution qui rendra possible certaines analyses comme la recherche de halo de matière noire froide, 
 	longtemps prédite par le modèle cosmologique standard $\Lambda$CDM. Les approximations traditionnelles faites pour 
-	simplifier la reconstruction des lentilles gravitationnelles ne seront plus valident dans ce régime.
+	simplifier la reconstruction des lentilles gravitationnelles ne seront plus valides dans ce régime.
 
 	Dans ce mémoire, je présente un travail qui s'attaque à ces deux problèmes. Je présente une 
 	méthode d'optimisation basée sur les machines à inférence récurentielle pour reconstruire 
-	deux images, soit celle d'une galaxie d'arrière-plan et une image pour la distribution de masse 
-	de la galaxie d'avant-plan. La représentation paramétrique choisie a la potentiel de reconstruire 
+	deux images, soit celle d'une galaxie en arrière-plan et une image pour la distribution de masse 
+	de la galaxie en avant-plan. La représentation paramétrique choisie a le potentiel de reconstruire 
 	une classe très large de lentilles gravitationnelles, incluant des halos et sous-halos de matière noire, 
 	ce qu'on démontre dans ce travail en utilisant des profiles de densité réalistes provenant de 
 	la simulation cosmologique hydrodynamique IllustrisTNG. 
@@ -124,8 +124,8 @@
 	These phenomena allow us to study in detail the morphology of the background galaxy, magnified 
 	by the lens, but also study the mass density distribution of the lens and its environment, thus offering a 
 	unique probe of dark matter in lensing galaxies.
-	But traditional methods to study these systems often require significant compute time (from hours to days), 
-	and this is without taking into account the time spent by experts required 
+	But traditional methods studying these systems often need significant compute time (from hours to days), 
+	and this is without taking into account the time spent by experts 
 	to make the MCMC chains required to obtain parameters 
 	of interest converge. This problem is significant, considering that 
 	large surveys from observatories like Rubin and Euclid are projected to discover hundreds of thousands of 
@@ -140,7 +140,7 @@
 	background source and another for the mass density map of the foreground lensing galaxy. 
 	This free-form parametric representation has the potential to reconstruct a large class 
 	of gravitational lenses, including those with dark matter halos and subhalos, which 
-	we demonstrate using realistic of mass density profiles from the cosmological 
+	we demonstrate using realistic mass density profiles from the cosmological 
 	hydrodynamic simulation IllustrisTNG.
 	Our reconstructions are executed in a fraction of the time required by traditional methods, 
 	at a resolution comparable to the Hubble Space Telescope (HST), which is a significant step 
@@ -172,7 +172,7 @@
 
             Je tiens aussi à remercier mes collègues, Ronan Legin, Ève Campeau-Poirier et Charles Wilson 
             qui ont été là durant deux ans de pandémie pour parler de la vie, de la recherche 
-            et de toutes les autres choses entre les deux, virtuellement ou autrement.
+            et de toutes les choses entre les deux, virtuellement ou autrement.
         
             Et surtout, merci à mes parents, mon frère et ma copine pour leur support inconditionnel 
             dans cette aventure que j'ai entrepris.
@@ -187,12 +187,11 @@
 	\selectlanguage{english}
   {\scriptsize
     \bibliography{intro_bib,censai_bib}
-        %\printbibliography
   }
   \appendix
   \input{chapters/annexe_planck}
   \input{chapters/censai_appendices}
   \input{chapters/annexe_gru}
-  \glsaddall
+  \input{chapters/annexe_congres}
 \end{document}
 

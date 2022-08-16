@@ -1,4 +1,5 @@
 \chapter{Introduction}\label{chap:intro}
+\glsaddall
 \thispagestyle{empty}
 
 
@@ -10,9 +11,9 @@ de l'effet de déviation gravitationnelle de la lumière par \citet{Eddington191
 est largement reconnu comme étant le premier à observer correctement qu'une lentille gravitationnelle, et en particulier 
 l'anneau d'Einstein \citep{Chwolson1924},
 est un phénomène particulièrement riche en information\footnote{ 
-        Les travaux pionniers de Franti\v{s}ek \citet{Link1936,Link1937}, largement ignoré dans la littérature anglo-saxonne, %\citep{Valls-Gabaud2006}, 
-        offrent déjà une perspective riche et détaillées sur le phénomène des lentilles gravitationnelles au moment où \citet{Zwicky1937} publie 
-        ses observation. 
+        Les travaux pionniers de Franti\v{s}ek \citet{Link1936,Link1937}, largement ignorés dans la littérature anglo-saxonne, %\citep{Valls-Gabaud2006}, 
+        offrent déjà une perspective riche et détaillée sur le phénomène des lentilles gravitationnelles au moment où \citet{Zwicky1937} publie 
+        ses observations. 
         En particulier, \citet{Link1936} décrit la magnification d'une étoile lors du passage derrière un objet massif et 
         observe que les amas globulaires et les galaxies sont des candidats idéaux pour une recherche systématique du 
         phénomène.
@@ -30,29 +31,17 @@ images de la source séparées par $2 \theta_E \sim 1''$. C'est cette observatio
 \citet{Zwicky1937b}, insatisfait par les méthodes pour mesurer la masse des nébuleuses extragalactiques (galaxies) 
 de l'époque, basées largement sur des comparaisons de la luminosité totale de ces galaxies avec $L_\odot$, la luminosité du Soleil, 
 ou des courbes de rotation képlériennes.\footnote{
-\citet{Zwicky1937b} a estimée la masse de l'amas de Coma à $\gtrsim 4.5\times  10^{13}M_\odot$ avec le théorème du viriel. 
-Cette limite inférieur est un très bon estimé de 
-la valeur acceptée aujourd'hui, dérivé avec les effets de lentilles faibles produites par l'amas 
+\citet{Zwicky1937b} a estimé la masse de l'amas de Coma à $\gtrsim 4.5\times  10^{13}M_\odot$ avec le théorème du viriel. 
+Cette limite inférieure est un très bon estimé de 
+la valeur acceptée aujourd'hui, dérivée avec les effets de lentilles faibles produites par l'amas 
 sur l'image des galaxies environnantes, soit $5^{+4.3}_{-2.1} \times 10^{14}\, h^{-1}_{70}\,M_\odot$\citep{Gavazzi2009}.
 } 
 
-\citet{Einstein1936} considérait l'éventualité d'observer ces systèmes extrêmement 
-improbables, pointant vers les limitations instrumentales de l'époque. En effet, les télescopes terrestres étaient 
+\citet{Einstein1936} considérait l'éventualité d'observer ces systèmes comme étant extrêmement 
+improbable, pointant vers les limitations instrumentales de l'époque. En effet, les télescopes terrestres étaient 
 largement limités par l'effet de \textit{seeing} atmosphérique, soit la distorsion de l'image causée par la turbulence de 
 l'atmosphère.
 
-Dû à cette difficulté pratique, 
-la première lentille gravitationnelle est découverte plusieurs décennies après la prédiction de leur existence, par \citet{Walsh1979}, 
-suivant l'identification de deux spectres radios de quasars identiques, QSO 0957+561 A et B, séparés par $5.7$ secondes d'arcs
-et capturés avec le télescope radio Mark II à l'observatoire Jodrell Bank. 
-Les spectres partagent la même magnitude, $m=17$, le même décalage vers le rouge, $z=1.405$, et possèdent des détails 
-chimiques suspicieusement semblables. Ces coïncidences suggèrent fortement que ces deux spectres sont des copies d'un seul objet, soit un noyau 
-actif d'une galaxie en arrière-plan, produite par l'effet de lentille gravitationnelle d'une galaxie en avant-plan, invisible dans le 
-domaine radio à une fréquence de $966\,\mathrm{MHz}$. Cette hypothèse est rapidement confirmée par 
-l'observation optique de la galaxie-lentille ($z=0.355$) avec l'observatoire Palomar \citep{Young1980}\footnote{Simulténament 
-observé et confirmé par le télescope de $2.2\, m$ de l'Université d'Hawaii au mont Mauna Kea \citep{Stockton1980}.} 
-Ainsi que la modélisation de sa distribution de masse, de son environnement 
-et des angles de déflexion qui causerait l'apparition d'une image double du quasar \citep{Young1981,Falco1991}
 \begin{figure}[tb!]
         \centering
         \includegraphics[width=0.8\textwidth]{figures/zoomed_in_qso0957}
@@ -61,12 +50,26 @@ et des angles de déflexion qui causerait l'apparition d'une image double du qua
         \label{fig:doubel quasar}
 \end{figure}
 
+Dû à cette difficulté pratique, 
+la première lentille gravitationnelle est découverte seulement plusieurs décennies après la prédiction de leur existence par \citet{Walsh1979}, 
+suivant l'identification de deux spectres radios de quasars identiques, QSO 0957+561 A et B, séparés par $5.7$ secondes d'arcs
+et capturés avec le télescope radio Mark II à l'observatoire Jodrell Bank. 
+Les spectres partagent la même magnitude, $m=17$, le même décalage vers le rouge, $z=1.405$, et possèdent des détails 
+chimiques suspicieusement semblables. Ces coïncidences suggèrent fortement que ces deux spectres sont des copies d'un seul objet, soit un noyau 
+actif d'une galaxie en arrière-plan, produite par l'effet de lentille gravitationnelle d'une galaxie en avant-plan, invisible dans le 
+domaine radio à une fréquence de $966\,\mathrm{MHz}$. Cette hypothèse est rapidement confirmée par 
+l'observation optique de la galaxie-lentille ($z=0.355$) avec l'observatoire Palomar \citep{Young1980}\footnote{Simulténament 
+observé et confirmé par le télescope de $2.2\, m$ de l'Université d'Hawaii au mont Mauna Kea \citep{Stockton1980}.}, 
+ainsi que la modélisation de sa distribution de masse, de son environnement 
+et des angles de déflexion qui causeraient l'apparition d'une image double du quasar \citep{Young1981,Falco1991}
+
 À la suite de cette découverte fortuite, l'étude des lentilles gravitationnelles est devenue un sujet d'étude 
 particulièrement riche et prometteur pour la cosmologie \citep{Blandford1992,Bartelmann2010,Treu2010}. 
 Par exemple, les lentilles gravitationnelles permettent de mesurer 
-la constante de \citet{Hubble1929}, $H_0$, qui mesure le taux de l'expansion de l'Univers au temps présent. Les deux principales méthodes 
-pour faire cette mesure à l'aide des lentilles gravitationnelles sont la caractérisation de la courbe de lumière des supernovae \citet{Refsdal1964}, 
-c.-à-d. lentillé par une ou plusieurs galaxies \citep[e.g.][]{Kelly2015,Goobar2017}, et la surveillance décennale de quasars lentillés 
+la constante de \citet{Hubble1929}, $H_0$, qui mesure le taux de l'expansion de l'Univers au temps présent. Les deux méthodes principales 
+pour faire cette mesure à l'aide des lentilles gravitationnelles sont la caractérisation de la courbe de lumière des supernovas lentillées 
+\citep{Refsdal1964,Kelly2015,Goobar2017} 
+et la surveillance décennale de quasars lentillés 
 \citep[e.g.][]{Vanderriest1989,Wong2020}. 
 
 
@@ -93,15 +96,15 @@ c.-à-d. lentillé par une ou plusieurs galaxies \citep[e.g.][]{Kelly2015,Goobar
 \end{figure}
  
 
-De ce fait, beaucoup d'effort a été déployé pour trouver systématiquement ces objets dans le ciel. Le programme 
+De ce fait, plusieurs programmes ont été entamés pour trouver des lentilles gravitationnelles. Le programme 
 \textit{Sloan Lens ACS Survey} \citep[SLAC,][]{Bolton2005,Bolton2006}, basé sur la recherche systématique de spectres de galaxies de type ETG\footnote{\textit{Early-Type Galaxies}} 
-avec des lignes d'absorptions à un décalage vers le rouge plus grand que les lignes d'émission, 
+avec des lignes d'absorption à un décalage vers le rouge plus grand que les lignes d'émission, 
 est un des programmes les plus réussis, ayant mené à la découverte 
 confirmée de plus de $150$ lentilles gravitationnelles de type galaxie-galaxie \citep{Bolton2008,Shu2017}. Les programmes 
-basés sur la recherche visuelle d'images doubles, triples, d'arcs ou d'anneau \citep[e.g.][]{Faure2008} dans les champs larges et profonds comme 
-COSMOS \citep{Koekemoer2007,Scoville2007}, connais aujourd'hui une renaissance nourrie par les succès récents de l'apprentissage profond 
-pour la perception visuelle \citep{Krizhevsky2012}. Cette nouvelle approche à déjà menée à la découverte de plus de $1000$ lentilles 
-gravitationnelles \citep{Petrillo2017,Huang2021}, et est projetée de découvrir plus de $10^{5}$ systèmes avec les nouvelles expéditions 
+basés sur la recherche visuelle d'images doubles, triples, d'arcs ou d'anneaux \citep[e.g.][]{Faure2008} dans les champs larges et profonds comme 
+COSMOS \citep{Koekemoer2007,Scoville2007}, connaissent aujourd'hui une renaissance nourrie par les succès récents de l'apprentissage profond 
+pour la perception visuelle \citep{Krizhevsky2012}. Cette nouvelle approche a déjà mené à la découverte de plus de $1000$ lentilles 
+gravitationnelles \citep{Petrillo2017,Huang2021}, et est projetée de découvrir plus de $10^{5}$ systèmes grâce aux nouvelles expéditions 
 à champs larges comme les observatoires Rubin \citep{lsst2009} et Euclid \citep{Euclid2010}.
 
 
@@ -118,9 +121,9 @@ des manuels de références de \citet{Meneghetti2013,Congdon2018}.
 
 Supposons qu'un photon est sur une trajectoire parallèle à l'axe de 
 visée $\mathbf{e}_{\parallel}$ d'un observateur sur Terre. 
-Supposons de plus que la source d'un champ gravitationnel $\Phi$ est situé sur l'axe de visée, 
+Supposons de plus que la source d'un champ gravitationnel $\Phi$ est située sur l'axe de visée, 
 ce qui a pour effet de courber la 
-trajectoire de ce photon entre son point d'origine $A$ et son point d'arrivé $B$.
+trajectoire de ce photon entre son point d'origine $A$ et son point d'arrivée $B$.
 On définit l'angle de déviation comme la déviation totale de cette trajectoire 
 dans la direction perpendiculaire à l'axe de visée de l'observateur. 
 De façon générale, cette déviation s'écrit
@@ -175,8 +178,7 @@ on peut réécrire l'équation \eqref{eq:Fermat} sous la forme
         \delta \int_{\lambda_A}^{\lambda_B} n(\mathbf{x}) \lVert \mathbf{\dot{x}} \rVert d\lambda = 0.
 \end{equation} 
 Par correspondance avec la fonctionnelle de l'action 
-$J(x) = \int_{\lambda_0}^{\lambda_1} \mathcal{L}(\lambda,\, x,\,\dot{x}) d\lambda$ 
-on trouve que 
+$J(x) = \int_{\lambda_0}^{\lambda_1} \mathcal{L}(\lambda,\, x,\,\dot{x}) d\lambda$, on trouve que 
 le lagrangien de la trajectoire s'écrit 
 $
         \mathcal{L} = n(\mathbf{x})  \sqrt{\dot{x}^{2}}.
@@ -221,12 +223,12 @@ que l'on aurait obtenue avec une dérivation classique (newtonienne).
 On est maintenant en mesure de calculer l'angle de déviation. 
 J'introduis le paramètre d'impact $\boldsymbol{\xi}$ qui est la distance perpendiculaire entre 
 la position d'origine du photon sur le plan de la lentille  
-et l'axe de visé (voir Figure \ref{fig:cartoon}).
+et l'axe de visée (voir Figure \ref{fig:cartoon}).
 Dans le cas où le potentiel est généré par une masse $M$ ponctuelle, c.-à-d.\ qu'on 
 suppose $\rho = M\delta^{3}(\mathbf{x})$, où $\delta $ est la fonction delta de Dirac, 
 alors le potentiel qui satisfait l'équation de Poisson \eqref{eq:Poisson} est 
 la fonction de Green 
-$\displaystyle \Phi = -\frac{GM}{\sqrt{ \xi^{2} + z^{2}}}$, où $z$ est la coordonné 
+$\displaystyle \Phi = -\frac{GM}{\sqrt{ \xi^{2} + z^{2}}}$, où $z$ est la coordonnée 
 sur l'axe de visée. L'équation \eqref{eq:intro alpha} se réécrit finalement comme 
 \begin{align}
 \nonumber
@@ -235,7 +237,7 @@ sur l'axe de visée. L'équation \eqref{eq:intro alpha} se réécrit finalement 
         \implies \boldsymbol{ \alpha}(\boldsymbol{ \xi})  &= \frac{4GM}{c^{2}  \xi^{2} } \boldsymbol{ \xi}
 \end{align} 
 Cette solution se généralise naturellement à un profil de masse quelconque en assumant 
-qu'il s'exprime comme une somme d'élément de masses $dm = \Sigma d^{2}\boldsymbol{ \xi}'$, 
+qu'il s'exprime comme une somme d'éléments de masse $dm = \Sigma d^{2}\boldsymbol{ \xi}'$, 
 où $\Sigma = \int \rho dz$ est une densité surfacique de masse. 
 L'angle de déviation total mesuré à un point $\boldsymbol{\xi} $ est alors une convolution 
 sur tout le plan de la lentille (mince) puisque l'équation \eqref{eq:deflection approx} dépend 
@@ -262,7 +264,7 @@ sont beaucoup plus grandes que les distances perpendiculaires à l'axe de visée
 Cette approximation est justifiée pour les objets qui nous intéressent,
 pour lesquels les distances parallèles à l'axe de visée sont généralement 
 de l'ordre du Gpc, alors que les distances perpendiculaires sont généralement 
-de l'ordre du kpc; soit 6 ordres de grandeur de différences.
+de l'ordre du kpc; soit 6 ordres de grandeur de différence.
 Ainsi, on peut faire un argument géométrique (euclidien) 
 \begin{align}
 \nonumber
@@ -285,7 +287,7 @@ On notera que cette relation reste valide pour un Univers courbe et/ou en expans
 \end{equation} 
 où $\xi$ est la taille physique d'un objet placé à une certaine distance de l'observateur, et $\theta$ est l'angle solide sous-tendu 
 par cet objet. Pour un Univers décrit par la métrique de Friedmann-Lemaître-Robertson-Walker,
-la notion de distance qui respecte \eqref{eq:diameter angular distance} est la distance du diamètre angulaire. 
+la notion de distance qui respecte la définition \eqref{eq:diameter angular distance} est la distance du diamètre angulaire. 
 En pratique, on peut exprimer $D$ en termes du décalage vers le rouge des photons émis par l'objet, $z$. 
 On note $a(z)$ le facteur d'échelle lorsque le photon est émis par la source et $a(0)$ le facteur d'échelle au moment présent ($z=0$).
 Pour un Univers plat \citep[voir les manuels de référence][]{Coles2002,Dodelson2003,Bartelmann2004}
@@ -344,7 +346,7 @@ et on définit un processus génératif modélisé par la conditionnelle sur la 
 Déterminer $p_\theta$ directement est généralement difficile, voir impossible, si la dimensionnalité de $\mathbf{x}$ est grande 
 ($\mathrm{dim(\mathbf{x}}) \gtrsim 10^{4}$ pour des images). 
 Pour contourner ce problème, on introduit une distribution variationnelle, $q_\phi(\mathbf{z} \mid \mathbf{x})$, dont le rôle est 
-d'inférer la variable latente $\mathbf{z}$ associé à $\mathbf{x} \sim p_\theta(\mathbf{x} \mid \mathbf{z})$. 
+d'inférer la variable latente $\mathbf{z}$ associée à $\mathbf{x} \sim p_\theta(\mathbf{x} \mid \mathbf{z})$. 
 En d'autres mots, $q_\phi(\mathbf{z} \mid \mathbf{x})$ est une approximation variationnelle de la distribution a posteriori $p_\theta(\mathbf{z} \mid \mathbf{x})$.
 La notion de distance entre ces deux distributions est mesurée par la divergence de Kullback-Leibler $D_{\mathrm{KL}}(\cdot \KL \cdot) \geq 0$: 
 \begin{align}
@@ -412,7 +414,7 @@ font partie de la famille gaussienne isotropique
         \label{eq:reparametrisation}
         \mathbf{z} &= \boldsymbol{\mu}_\phi + \boldsymbol{ \sigma}_\phi \odot \boldsymbol{ \epsilon}\, , 
 \end{align} 
-de sortes que 
+de sorte que 
 \begin{equation}\label{eq:q phi}
         \mathbf{z} \sim q_\phi(\mathbf{z} \mid \mathbf{x}) = \mathcal{N}(\boldsymbol{ \mu}_\phi (\mathbf{x}),\, \bbone \boldsymbol{\sigma}_\phi^{2}(\mathbf{x}))\, .
 \end{equation} 
@@ -495,7 +497,7 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
         \resizebox{\linewidth}{!}{
         \begin{tikzpicture}
                 \node at (-8, -2.8) {Indice d'un};
-                \node at (-8, -3.3) {ensemble de données};
+                \node at (-8, -3.3) {ensemble des données};
                 \node[circle, draw=black, minimum size=1cm] (obj) at (-8, -2) {$Y$}; 
                 \node at (-8, 1.4) {Source};
                 \node at (-8, 0.9) {d'information};
@@ -541,7 +543,7 @@ L'entropie est une mesure de l'incertitude dans une variable aléatoire
 qu'on interprète aussi comme une mesure de la longueur minimale d'un code, $Z$, pour 
 transmettre un message, $X$, d'un émetteur à un receveur avec le minimum de perte d'information \citep{Shannon1948,Kolmogorov1965}.
 L'entropie conditionnelle $H(X \mid Z)$ est une  mesure de l'incertitude résiduelle étant donné la connaissance du code $Z$. Dans le cas où $Z$ 
-détermine complètement le message $X$, alors $H(X \mid Z) = 0$ et l'information mutuelle atteint sont maximum $I(Z; X) = H(X)$.
+détermine complètement le message $X$, alors $H(X \mid Z) = 0$ et l'information mutuelle atteint son maximum $I(Z; X) = H(X)$.
 Dans le cas où $Z$ et $X$ sont deux variables aléatoires indépendantes, $H(X \mid Z) = H(X)$ et l'information mutuelle devient nulle.
 
 Déterminer l'auto-encodeur optimal, c.-à-d. celui qui maximise $I(Z;X)$, est un problème mal posé. 
@@ -559,13 +561,13 @@ le maximum d'information possible à propos du message. On introduit l'objectif 
 \end{equation} 
 La contrainte $I(Z; Y) \leq \alpha$ impose à l'auto-encodeur %$p_{\phi,\theta}(\hat{X} \mid X)$
 une limite sur l'information mutuelle entre le code 
-utilisé pour représenter $X$ et l'identité $Y=i$ de chaque exemple d'un ensemble de données qu'on veut modéliser $\mathcal{D} = \{\mathbf{x}_i \}_{i=1}^{N}$.
-Il s'avère que l'objectif de comprimer l'information est intimement lié à l'objectif d'obtenir un sommaire informatif; c.-à-d. qu'un 
+utilisé pour représenter $X$ et l'identité $Y=i$ de chaque exemple d'un ensemble des données qu'on veut modéliser $\mathcal{D} = \{\mathbf{x}_i \}_{i=1}^{N}$.
+Il s'avère que l'objectif de comprimer l'information est intimement lié à l'objectif d'obtenir un sommaire informatif, c.-à-d. qu'un 
 code d'une complexité de \citet{Kolmogorov1965} minimale décrit la source d'information de la manière la plus informative possible. Cette connexion 
 remarquable est une application concrète du principe du rasoir d'Occam: l'explication adéquate la plus simple est la meilleure explication.
 
 Dans ce qui suit, je m'applique à redériver l'objectif d'un auto-encodeur variationnel suivant les approximations 
-proposées par \citet{Alemi2017}. Puis je termine avec une courte interprétation des VAE sous la lumière du principe du goulot d'information.
+proposées par \citet{Alemi2017}. Puis, je termine avec une courte interprétation des VAE sous la lumière du principe du goulot d'information.
 On commence par construire une limite variationnelle inférieure sur $I(Z; X)$. 
 On assume d'abord la chaîne de Markov $Y \rightarrow X \rightarrow Z$ pour les variables 
 aléatoires représentées dans la figure \ref{fig:info VAE}. La chaîne de Markov 
@@ -585,10 +587,10 @@ suit que
                 \label{eq:maximum info}
                 \implies I(Z;\, X)&\geq \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]\, .
 \end{align}
-À la dernière ligne, on a éliminé l'entropie du message $H(X)$ puisque c'est une constante strictement positive qui ne dépend pas de $\phi$, et 
-on a introduit l'approximation variationnelle $p_\theta (\mathbf{x} \mid \mathbf{z}) \approx q_\phi (\mathbf{x} \mid \mathbf{z})$ 
+À la dernière ligne, on a éliminé l'entropie du message $H(X)$, puisque c'est une constante strictement positive qui ne dépend pas de $\phi$.
+On a aussi introduit l'approximation variationnelle $p_\theta (\mathbf{x} \mid \mathbf{z}) \approx q_\phi (\mathbf{x} \mid \mathbf{z})$ 
 pour approximer la distribution a posteriori de l'encodeur (soit le décodeur). Cette approximation est valide dans le contexte où 
-on cherche une limite inférieure pour $I(Z; X)$ puisque la divergence KL entre ces deux distributions est strictement positive.
+on cherche une limite inférieure pour $I(Z; X)$, puisque la divergence KL entre ces deux distributions est strictement positive.
 Ensuite, on cherche une borne supérieure au terme de compression $I(Z; Y)$. 
 Pour ce qui suit, on remplace $p(Y=i)$ par $\mathbf{x}^{(i)} \sim \mathcal{D}$ pour illustrer avec plus de clarté 
 comment le processus génératif de l'indice induit une sélection d'un exemple $\mathbf{x}^{(i)}$ dans l'ensemble 
@@ -606,7 +608,7 @@ où on a introduit l'approximation variationnelle $p_\theta(\mathbf{z}) \approx 
 L'inégalité suit encore une fois 
 du fait que la divergence KL entre ces deux distributions est strictement positive.
 On finit la dérivation en écrivant l'objectif du goulot d'information \eqref{eq:IB} en introduisant un multiplicateur 
-de Lagrange $\beta$ pour le terme $I(Z; Y)$, et en introduisant 
+de Lagrange $\beta$ pour le terme $I(Z; Y)$ et en introduisant 
 les limites variationnelles \eqref{eq:maximum info} et \eqref{eq:compression}. On ignore  
 l'espérance mathématique $\mathbb{E}_{p(\mathbf{x})} = \mathbb{E}_{\mathbf{x}^{(i)} \sim \mathcal{D}}$ pour mieux illustrer la connexion 
 avec la ELBO \eqref{eq:final elbo}
@@ -620,7 +622,7 @@ avec la ELBO \eqref{eq:final elbo}
 On note qu'on a laissé tomber la constante $\alpha$, car elle ne dépend pas des paramètres $\phi$ et $\theta$, et généralement le paramètre $\beta$ 
 n'est pas optimisé directement. $\beta$ est considéré comme un hyperparamètre. 
 Je note que l'objectif \eqref{eq:beta VAE} a fait une première apparition dans le travail introduisant les $\beta$-VAE par \citet{Higgins2017}, 
-suivant des motivations complètement différentes de celles qu'on a suivies ici. La dérivation accomplit ici 
+suivant des motivations complètement différentes de celles qu'on a suivies ici. La dérivation accomplie ici 
 montre clairement que la ELBO, $\mathcal{L}_{\phi,\theta,\beta}(\mathbf{x})$, est une limite inférieure 
 sur $I(Z; X) - \beta I(Z; Y)$, soit l'objectif de maximiser l'information transmise par un auto-encodeur, avec une 
 contrainte sur la complexité du code $Z$. En particulier, cette dérivation illumine le choix de la marginale $p_\theta(\mathbf{z})$ 
@@ -628,7 +630,7 @@ comme étant une approximation variationnelle de la marginale de l'encodeur $q_\
 montrée plus haut où $p_\theta(\mathbf{z})$ apparaît comme un objectif arbitraire permettant d'améliorer l'aspect 
 génératif du décodeur.
 
-La dérivation accomplit dans cette sous-section commence d'un point de vue complètement différent 
+La dérivation accomplie dans cette sous-section commence d'un point de vue complètement différent 
 de \citet{Kingma2013}. On 
 a supposé que le modèle génératif $p_\theta(\mathbf{x} \mid \mathbf{z})$ est une approximation variationnelle de 
 la distribution a posteriori du modèle 
@@ -647,16 +649,16 @@ au travail de \citet{Alemi2018}.
 \subsection{Formalisme bayésien des problèmes inverses}
 
 Les machines à inférence récurentielle (RIM) ont été introduites par \citet{Putzky2017} pour résoudre des problèmes 
-inverses pour lesquels le terme de régularisation est nécessaire, mais inconnue a priori et/ou difficile à 
+inverses pour lesquels le terme de régularisation est nécessaire, mais inconnu a priori et/ou difficile à 
 construire, voir même calculer. Dans cette section, j'introduis le formalisme bayésien des problèmes inverses sur lequel 
-ce modèle repose, puis j'introduis l'algorithme d'inférence et les concepts d'apprentissage machinent qui motivent 
+ce modèle repose, puis j'introduis l'algorithme d'inférence et les concepts d'apprentissage machine qui motivent 
 l'utilisation d'une RIM pour des problèmes inverses mal posés et sous-déterminés.
 
 Les problèmes inverses en astrophysique prennent généralement la forme
 \begin{equation}\label{eq:inverse problem lineaire}
        \mathbf{y} = F(\mathbf{x}) + \boldsymbol{\eta}\, ,
 \end{equation} 
-où $\mathbf{y}\in \mathcal{Y}$ est un vecteur d'observables (comme l'image capturé par les capteurs photographiques CCD dans un télescope), 
+où $\mathbf{y}\in \mathcal{Y}$ est un vecteur d'observables (comme l'image capturée par les capteurs photographiques CCD dans un télescope), 
 $\mathbf{x}\in\mathcal{X}$ est un vecteur de paramètres qui gouvernent le phénomène physique qui nous intéresse, 
 modélisé par le modèle physique $F:\mathcal{X} \rightarrow \mathcal{Y}$.
 Le vecteur $\boldsymbol{\eta}$ est une réalisation d'un bruit additif. 
@@ -688,7 +690,7 @@ $L \geq 0$
 \begin{equation}\label{eq:Lipschitz}
         \lVert G_\varphi(\mathbf{y}_1) - G_\varphi(\mathbf{y}_2)\rVert_{\mathcal{X}} \leq L \lVert \mathbf{y}_1 - \mathbf{y}_2\rVert_{\mathcal{Y}}\, ,
 \end{equation}
-où $\lVert \cdot \rVert_{\mathcal{V}}$ est une métrique de distance définit pour l'espace vectoriel $\mathcal{V}$.
+où $\lVert \cdot \rVert_{\mathcal{V}}$ est une métrique de distance définie pour l'espace vectoriel $\mathcal{V}$.
 
 Pour un problème mal posé,
 %, ce qui est le cas pour le problème d'inférence des paramètres d'une lentille 
@@ -702,7 +704,7 @@ la seconde condition de Hadamard \ref{hadamard:2} n'est pas respectée; la fonct
 ne peut pas distingué la solution physique du nombre infini de solutions non physiques au problème \eqref{eq:likelihood max}.
 
 La condition d'unicité de la solution est résolue par la construction d'une
-mesure de probabilité a priori sur l'espace des paramètres d'intérêts 
+mesure de probabilité a priori sur l'espace des paramètres d'intérêt 
 $p_\theta: \mathcal{X} \rightarrow \mathbb{R}, \,\, \mathrm{t.q.}\,\, \int_{\mathcal{X}} p_\theta(\mathbf{x}) d\mathbf{x} = 1$,
 tel que les solutions non physiques sont exclues de la région de haute densité de cette distribution.
 On peut alors modifier le problème \eqref{eq:likelihood max} en introduisant cette distribution 
@@ -711,7 +713,7 @@ a priori comme un terme de régularisation de la vraisemblance
         \hat{\mathbf{x}}_{\mathrm{MAP}} = \underset{\mathbf{x} \in \mathcal{X}}{\mathrm{argmax}}\, \log p(\mathbf{y} \mid \mathbf{x}) + \log p_\theta(\mathbf{x})\, .
 \end{equation} 
 La solution $\hat{\mathbf{x}}_{\mathrm{MAP}}$ maximise la distribution posteriori $p_\theta(\mathbf{x} \mid \mathbf{y})$, 
-tel que définit par le théorème de Bayes
+tel que définie par le théorème de Bayes
 \begin{equation}\label{eq:Bayes}
         p_\theta(\mathbf{x} \mid \mathbf{y}) = \frac{p(\mathbf{y} \mid \mathbf{x}) p_\theta(\mathbf{x})}{\int_{\mathcal{X}} p(\mathbf{\mathbf{y}} \mid \mathbf{x}) p_\theta(\mathbf{x}) d\mathbf{x}}\, .
 \end{equation} 
@@ -721,9 +723,9 @@ car elle n'est pas nécessaire (et souvent impossible à calculer)
 pour la recherche d'un maximum de la distribution a posteriori ou 
 la comparaison de solutions par le ratio de la fonction de vraisemblance (ou de la distribution a posteriori).
 
-On note que la stratégie la plus commune pour résoudre les problèmes inverses qui nous intéresse est plutôt de 
-choisir judicieusement l'espace de solution $\mathcal{X}$ tel que $\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) \leq \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$. 
-Dans ce cas, le problème inverse est balancé ou sur-déterminé. 
+On note que la stratégie la plus commune pour résoudre les problèmes inverses qui nous intéressent est plutôt de 
+choisir judicieusement l'espace des solutions $\mathcal{X}$ tel que $\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) \leq \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$. 
+Dans ce cas, le problème inverse est bien posé ou sur-déterminé. 
 Par exemple, pour modéliser la masse d'une lentille gravitationnelle, il est commun  
 de choisir un modèle singulier isotherme ou une loi de puissance elliptique \citep[e.g.][]{Koopmans2006,Barnabe2009,Auger2010}, 
 %soit une fonction des coordonnées du plan de la lentille, $f_{\mathbf{x}}: \mathbb{R}^{2} \rightarrow \mathbb{R}_+$,
@@ -733,15 +735,15 @@ l'observation $\mathbf{y}$ est une image avec $\dim_{\mathbb{R}}(\mathcal{Y}) \g
 Cette approche est considérablement plus stable que les méthodes sous-déterminées. 
 
 Toutefois, 
-les modèles analytiques deviennent rapidement complexes et difficiles à construire, voir justifier, lorsque l'observation des systèmes qui nous intéresse
-est de haute qualité, ce qui révèle la complexité cachée de ces systèmes \citep[e.g.][]{Schuldt2019}. 
+les modèles analytiques deviennent rapidement complexes et difficiles à construire, voir justifier, lorsque l'observation des systèmes qui nous intéressent
+est de haute qualité. Ceci révèle la complexité cachée de ces systèmes \citep[e.g.][]{Schuldt2019}.
 De plus, ce cadre nous limite à seulement considérer les hypothèses construites par des humains 
 ou par régression symbolique \citep[e.g.][]{Lemos2022}, et non l'ensemble des hypothèses possibles.
 C'est cette observation qui nous motive à utiliser l'approche esquissée plus haut, 
 où l'espace $\mathcal{X}$ est construit de manière presque agnostique à la solution 
 physique recherchée (p. ex. une grille de pixels pour modéliser une distribution de masse), 
 de manière à contenir toutes, ou au moins la plupart, des solutions physiques. Une telle approche a 
-le potentiel de produire des résultats surprenant ou intéressant, puisque l'exploration de l'espace des solutions physiques 
+le potentiel de produire des résultats surprenants ou intéressants, puisque l'exploration de l'espace des solutions physiques 
 peut être ajustée, en principe, via la distribution a priori, $p_\theta(\mathbf{x})$, selon la complexité de l'observation.
 
 \subsection{La relation de récurrence}
@@ -752,10 +754,10 @@ on considère la méthode de discrétisation d'Euler
 \end{equation} 
 où $\alpha$ est le taux d'apprentissage dans la littérature sur 
 l'apprentissage machine.
-On est garantie d'obtenir une solution 
-au problème à valeur initiale si l'algorithme, après $T$ itérations, 
-satisfait la condition de Lipschitz. Pour la relation de récurrence \eqref{eq:map recurrence}, ceci revient 
-à assumer que l'erreur locale de chaque itération est proportionnelle à $\alpha^{2}$, ce qui est 
+%Une solution au problème à valeur initiale est garantie d'exister si l'algorithme, après $T$ itérations, 
+%satisfait la condition de Lipschitz. 
+La relation de récurrence \eqref{eq:map recurrence} satisfait la condition de Lipschitz 
+si l'erreur locale de chaque itération est proportionnelle à $\alpha^{2}$, ce qui est 
 satisfait si le gradient $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x} \mid \mathbf{y})$ 
 satisfait la condition de Lipschitz dans la région de $\mathcal{X}$ explorée par l'algorithme \citep{Atkinson1989,Butcher2016}, 
 ou encore si la norme de la dérivée seconde de $\log p_\theta(\mathbf{x} \mid \mathbf{y})$ est bornée dans cette région.
@@ -783,16 +785,15 @@ de récurrence.
 
 Pour le problème de reconstruction d'image, les modèles neuronaux convolutifs avec une architecture de sablier (auto-encodeur) ou 
 avec une architecture U-net \citep{Ronneberger2015} sont des choix naturels pour modéliser $g_{\varphi^{(t)}}$. 
-Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} est respectée seulement si $g_{\varphi^{(t)}}$ 
-possède une constante de Lipschitz $L\leq 1$, ce qui n'est pas trivialement respecté pour un réseau de neurones.
-Dans ce travail, cette condition n'est pas explicitement imposée au modèle.  
+Toutefois, la troisième condition d'Hadamard \ref{hadamard:3} n'est pas trivialement respectée lorsque $g_{\varphi^{(t)}}$ 
+est un réseau de neuronnes. Dans ce travail, cette condition n'est pas explicitement imposée au modèle.  
 On note toutefois que l'analyse de la condition de Lipschitz pour les réseaux neuronaux est un 
 sujet de recherche important \citep[e.g.][]{Myiato2018,Scaman2018,Weng2018}, spécifiquement pour 
-l'étude de méthodes robustes d'entraînement des réseaux neuronaux de manière pour prévenir ou défendre contre 
+l'étude de méthodes robustes d'entraînement des réseaux neuronaux pour prévenir ou défendre contre 
 les attaques antagonistes \citep{Szegedy2013,Goodfellow2014}. 
 
 Finalement, on note un aspect important du modèle $g_{\varphi^{(t)}}$, soit la possible dépendance des paramètres $\varphi^{(t)}$ envers $t$. Plusieurs 
-algorithmes d'optimisations récents comme la méthode d'accélération de \citet{Nesterov1983}, 
+algorithmes d'optimisation récents comme la méthode d'accélération de \citet{Nesterov1983}, 
 AdaGrad \citep{Duchi2011}, RMSProp\footnote{L'algorithme apparaît en premier dans le cours CSC321 à l'Université de Toronto, donné par Geoffrey Hinton en 2011.} \citep{Hinton2012} 
 et ADAM \citep{Kingma2014},
 utilisent explicitement l'information 
@@ -800,7 +801,7 @@ des gradients d'itérations antérieurs à $t$ pour calculer la mise à jour dan
 Cette propriété permet à ces algorithmes de collecter de l'information par rapport à la seconde dérivée de la fonction 
 objective, sans la calculer directement.
 Ainsi, il est important de considérer une classe de modèles avec une mémoire des itérations précédentes. 
-Pour se faire, on augmente la relation de récurrence \eqref{eq:rim putzky} avec une seconde relation de 
+Pour ce faire, on augmente la relation de récurrence \eqref{eq:rim putzky} avec une seconde relation de 
 récurrence sur un tenseur caché $\mathbf{h}^{(t)}$:
 \begin{equation}\label{eq:hidden recurrence}
         \mathbf{h}^{(t)} = g_{\varphi}\big(\hat{\mathbf{x}}^{(t)},\, \grad_{\hat{\mathbf{x}}^{(t)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}),\,  \mathbf{h}^{(t-1)}\big)\, ,
@@ -819,7 +820,7 @@ moments du gradient d'une fonction objective.
 %\end{align}
 La relation \eqref{eq:hidden recurrence} est donc une généralisation de ADAM, 
 où on a remplacé le lissage exponentiel par une relation récurrente sur un tenseur caché $\mathbf{h}^{(t)}$ quelconque, 
-dont le rôle et de compresser l'information de 
+dont le rôle est de compresser l'information de 
 la trajectoire $\hat{\mathbf{x}}^{(0:t)}$ dans un sommaire informatif. Ayant ainsi comprimé l'information dans une variable 
 séparée, on peut réutiliser les poids du réseau de neurones $\varphi$ à chaque itération temporelle $t$, ce 
 qui réduit considérablement la complexité du problème d'apprentissage.
@@ -827,17 +828,17 @@ qui réduit considérablement la complexité du problème d'apprentissage.
 
 \subsection{Méta-apprentissage par rétropropagation de gradients}
 %
-Le méta-apprentissage est un sujet de recherche qui se concentre sur la construction de règles d'apprentissages qui permettent 
-d'accélérer l'apprentissage de fonctions pour certaines tâches spécifiques. Ce double aspect d'apprentissage, soit apprendre à mieux 
-apprendre est précisément ce qui est sous-entendu par le terme méta-apprentissage. Pour une revue du sujet, le lecteur peut consulter 
+Le méta-apprentissage est un sujet de recherche qui se concentre sur la construction de règles d'apprentissage qui permettent 
+d'accélérer l'apprentissage de fonctions pour certaines tâches spécifiques. Ce double aspect d'apprentissage, soit d'apprendre à mieux 
+apprendre, est précisément ce qui est sous-entendu par le terme méta-apprentissage. Pour une revue du sujet, le lecteur peut consulter 
 la revue par \citet{Hospedales2020}. Cette sous-section se veut une introduction au méta-apprentissage basé sur l'optimisation,
 soit l'apprentissage profond de biais inductifs par rétropropagation de gradients.
 
-Pour un problème de méta-apprentissage, l'ensemble de données d'entraînement est légèrement différent d'une tâche d'interpolation ou de classification. 
+Pour un problème de méta-apprentissage, l'ensemble des données d'entraînement est légèrement différent d'une tâche d'interpolation ou de classification. 
 Considérons un ensemble d'entraînement $\mathcal{D} = \{\mathbf{x}^{(i)},\,\mathbf{y}^{(i)}\}_{i=1}^{N}$, 
 construit à partir d'exemples dans le domaine $\mathcal{X}$ et l'image $\mathcal{Y}$, implicitement connectés par une fonction qu'on veut reconstruire ou 
 approximer. Dans ce contexte, l'objectif est généralement d'apprendre une fonction $f_\theta: \mathcal{X} \rightarrow \mathcal{Y}$ 
-qui minimisation de l'erreur quadratique moyenne, soit le risque empirique sur l'ensemble d'entraînement
+qui minimise l'erreur quadratique moyenne, soit le risque empirique sur l'ensemble d'entraînement
 \begin{equation}\label{eq:Regression}
         \theta^{\star} = \underset{\theta}{\mathrm{argmin}}\,\, 
         \mathbb{E}_{(\mathbf{x},\mathbf{y}) \sim \mathcal{D}} \bigg[ \big\lVert f_\theta(\mathbf{x}) - \mathbf{y} \big\rVert^{2}_{\mathcal{Y}}  \bigg]
@@ -846,15 +847,15 @@ qui minimisation de l'erreur quadratique moyenne, soit le risque empirique sur l
 Dans le contexte du méta-apprentissage, 
 l'ensemble d'entraînement est plutôt constitué de tâches à performer $\mathcal{T} = \{\mathcal{D}^{(i)}, \mathcal{L}^{(i)}\}_{i=1}^{N}$, où 
 $\mathcal{L}^{(i)}$ est une fonction objective pour la tâche $i$ et $\mathcal{D}^{(i)}$ 
-est l'ensemble de donné pour résoudre ce problème. 
+est l'ensemble des données pour résoudre ce problème. 
 Le problème de méta-apprentissage est donc d'extraire ou encoder des biais inductifs, c.-à-d. des connaissances qui permettent d'accélérer 
 et généraliser l'apprentissage d'une tâche spécifique, dans une liste de paramètres $\varphi$. Spécifiquement 
 pour le méta-apprentissage par optimisation, on a le double niveau d'optimisation
 \begin{equation}\label{eq:meta learning}
         \begin{aligned}
                 \varphi^{\star}_{\text{méta}} &= \underset{\varphi}{\mathrm{argmin}}\,\, 
-                \mathbb{E}_{(\mathcal{L},\,\mathcal{D}) \sim \mathcal{T}} \bigg[ \mathcal{L}_{\theta^{\star}(\varphi)}(\mathcal{D}) \bigg]\, ; \\[1.5ex]
-                \text{sujet à}\,\,\, \theta^{\star }(\varphi) &= \underset{\theta}{\mathrm{argmin}}\,\, \mathcal{L}_{\theta(\varphi)}(\mathcal{D})
+                \mathbb{E}_{(\mathcal{L},\,\mathcal{D}) \sim \mathcal{T}} \bigg[ \mathcal{L}^{\text{méta}}_{\theta^{\star}(\varphi)}(\mathcal{D}) \bigg]\, ; \\[1.5ex]
+                \text{sujet à}\,\,\, \theta^{\star }(\varphi) &= \underset{\theta}{\mathrm{argmin}}\,\, \mathcal{L}^{\text{tâche}}_{\theta(\varphi)}(\mathcal{D})
         \end{aligned}
 \end{equation} 
 
@@ -862,22 +863,22 @@ Il est pertinent de considérer la notion de généralisation dans ce contexte, 
 la notion de généralisation dans le contexte de la régression. Dans le contexte de la régression, le concept de généralisation est synonyme 
 avec celui d'extrapolation, c.-à-d. la mesure de la performance d'une certaine fonction, d'un algorithme ou d'une loi physique 
 étant donné un ou plusieurs exemples tests, 
-potentiellement similaire ou différent des exemples de l'ensemble d'entraînement utilisés pour ajuster les paramètres d'une fonction 
+potentiellement similaires ou différents des exemples de l'ensemble d'entraînement utilisés pour ajuster les paramètres d'une fonction 
 $f_\theta: \mathcal{X} \rightarrow \mathcal{Y}$. Pour plusieurs objectifs scientifiques, la capacité d'un modèle ou d'une loi physique  
-à généraliser au-delà d'un ensemble de mesures $\mathcal{D}$ est cruciale. 
-Par exemple, un test important de la relativité générale, testée et découverte dans le régime de champs faible, est 
-de savoir si les lois physiques restent valides dans le régime de champ fort près des trous noirs, des étoiles à neutron ou encore 
+à généraliser au-delà d'un ensemble des mesures $\mathcal{D}$ est cruciale. 
+Par exemple, un test important de la théorie de la relativité générale, testée et découverte dans le régime des champs faibles, est 
+de savoir si les lois physiques restent valides dans le régime des champs forts près des trous noirs, des étoiles à neutrons ou encore 
 au moment du Big Bang. 
 
 Or, si les biais inductifs utilisés pour entraîner (apprendre, découvrir) $f_{\theta}$ ne sont pas suffisamment 
-informatif sur la nature du problème ou du phénomène d'intérêt (p. ex. la gravité), 
+informatifs sur la nature du problème ou du phénomène d'intérêt (p. ex. la gravité), 
 alors un algorithme d'optimisation générique n'est pas garanti de converger vers 
 une hypothèse universelle, c.-à-d. en mesure d'extrapoler en dehors de l'ensemble 
 d'entraînement $\mathcal{D}$.
-Cette observation suit essentiellement du \textit{no free lunch theorem} (théorème NFL) pour 
+Cette observation suit essentiellement le \textit{no free lunch theorem} (théorème NFL) pour 
 l'optimisation \citep{Wolpert1997}, et en particulier 
-du théorème NFL pour l'apprentissage supervisé \citep{Wolpert1992,Wolpert1996}, soit que tous les 
-algorithmes d'apprentissages, des fonctions de l'ensemble de données $\mathcal{D}$ vers une hypothèse $f_{\theta^{\star}}$, 
+le théorème NFL pour l'apprentissage supervisé \citep{Wolpert1992,Wolpert1996}, qui stipule que tous les 
+algorithmes d'apprentissage %, des fonctions de l'ensemble des données $\mathcal{D}$ vers une hypothèse $f_{\theta^{\star}}$, 
 sont équivalents en termes du risque moyen encouru sur l'erreur de généralisation. 
 Des biais inductifs sont nécessaires pour déterminer uniquement une hypothèse universelle, 
 ou du moins une hypothèse qui satisfait certains critères déterminés a priori.
@@ -885,7 +886,7 @@ ou du moins une hypothèse qui satisfait certains critères déterminés a prior
 Dans le contexte du méta-apprentissage, la généralisation réfère plutôt au concept de transfert d'apprentissage, c.-à-d. le transfert des connaissances 
 et le transfert de la structure du problème vers des tâches d'essais. 
 Cette approche est plus appropriée dans un contexte scientifique, où la nature des hypothèses est 
-constamment testée et jugée sur des critères comme leur capacité à reproduire et expliquer un phénomène, souvent mesuré par 
+constamment testée et jugée sur des critères comme leur capacité à reproduire et expliquer un phénomène, souvent mesurée par 
 la simplicité de l'hypothèse. En ce sens, 
 si l'hypothèse, $f_\theta$, est une boîte noire comme un réseau de neurones, alors il y a très peu de moyens de soumettre 
 cette hypothèse aux critères scientifiques requis pour convaincre une communauté sceptique. 
@@ -900,15 +901,15 @@ rétropropagation de gradients \citep[e.g.][]{Finn2017} apprennent plutôt ces b
 Strictement dans le contexte où on cherche à construire une seule hypothèse, et non une distribution d'hypothèses 
 plausibles, il est possible de remplacer n'importe quel algorithme d'optimisation $G_\varphi$, qui sont aussi souvent considérés 
 comme des boîtes noires, par une autre boîte noire $G_{\varphi_{\text{méta}}}$. L'hypothèse obtenue par 
-l'algorithme d'optimisation $G_{\varphi_{\text{méta}}}$, qu'on peut noté comme $f_\theta$ ou encore $\hat{\mathbf{x}}^{(T)}$ 
-dans le contexte des problèmes inverses, peut alors être soumise aux tests de validités 
+l'algorithme d'optimisation $G_{\varphi_{\text{méta}}}$, qu'on peut noter comme $f_\theta$ ou encore $\hat{\mathbf{x}}^{(T)}$ 
+dans le contexte des problèmes inverses, peut alors être soumise aux tests de validité
 requis par la communauté. 
 
 Le travail de \citet{Younger2001} est la première apparition concrète d'une approche pour le méta-apprentissage 
 basée seulement sur la rétropropagation de gradients.
 Les travaux plus récents de \citet{Andrychowicz2016} 
-démontre empiriquement qu'une cellule récurrente à mémoire longue et courte \citep[LSTM,][]{Hochreiter1997} est en mesure d'apprendre 
-un algorithme d'entraînement pour un réseau de neurones avec un taux de convergence plus rapide que les algorithmes d'optimisations génériques.
+démontrent empiriquement qu'une cellule récurrente à mémoire longue et courte \citep[LSTM,][]{Hochreiter1997} est en mesure d'apprendre 
+un algorithme d'entraînement pour un second réseau de neurones. %avec un taux de convergence plus rapide que les algorithmes d'optimisations génériques.
 Contrairement à un réseau avec poids fixes, comme le perceptron \citep{Rosenblatt1958}, 
 un réseau à cellules récurrentes (RNN) est Turing complet \citep{Siegelmann1992}.
 Un RNN est en mesure de modifier son état interne, de sorte qu'un tel système peut représenter une classe d'algorithmes plus grande qu'un perceptron, 
@@ -930,8 +931,9 @@ des hypothèses. Le problème de méta-apprentissage devient
         \end{aligned}
 \end{equation} 
 La fonction de vraisemblance, ou plus spécifiquement son gradient $\grad_{\mathbf{x}}\log p(\mathbf{y} \mid \mathbf{x})$, 
-encode le modèle physique, ou la simulation des paramètres $\mathbf{x}$ vers une observation $\mathbf{y}$.
-C'est par cette fonction qu'on peut intégrer nos connaissances sur la nature du phénomène à l'étude, p. ex. les équations \eqref{eq:alpha adim} et \eqref{eq:lens equation adim} 
+encode le modèle physique ou la simulation des paramètres $\mathbf{x}$ vers une observation $\mathbf{y}$.
+La fonction de vraisemblance nous permet d'intégrer nos connaissances sur la nature du phénomène à l'étude, 
+p. ex. les équations \eqref{eq:alpha adim} et \eqref{eq:lens equation adim} 
 pour les lentilles gravitationnelles, directement dans le problème d'apprentissage.
 De cette façon, l'objectif de méta-apprentissage pour les paramètres $\varphi$ est d'encoder seulement 
 les connaissances manquantes aux problèmes, soit $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x})$.
@@ -954,10 +956,10 @@ modéliser la distribution de masse et
 la morphologie de la source dédiée à analyser un grand nombre ($> 10^{3}$)
 de lentilles gravitationnelles dans toute leur complexité et dans un temps à l'échelle humaine. 
 
-Le chapitre \ref{chap:intro} est une introduction détaillée aux méthodes requise pour construire 
-cet algorithme, soit le modèle physique pour simuler les chemins lumineux des lentilles gravitationnelles (section \ref{sec:lentilles gravitationnelles}), 
-les auto-encodeurs variationnels pour modéliser la distribution implicite des images de galaxies (section \ref{sec:vae}) et 
-les machines à inférences récurentielle pour accomplir la reconstruction libre de lentilles gravitationnelles (section \ref{sec:intro rim}).
+Le chapitre \ref{chap:intro} est une introduction détaillée aux méthodes requises pour construire 
+cet algorithme. Le modèle physique pour simuler les lentilles gravitationnelles est introduit dans la section \ref{sec:lentilles gravitationnelles}. 
+Les auto-encodeurs variationnels, utilisés pour modéliser la distribution implicite des images de galaxies, sont introduits dans la section \ref{sec:vae}.  
+Les machines à inférences récurentielle, utilisée pour accomplir la reconstruction libre de lentilles gravitationnelles, sont introduites dans la section \ref{sec:intro rim}.
 
 Le chapitre \ref{chap:censai} est un rapport détaillé de l'application de ces méthodes 
 appliquées à des lentilles gravitationnelles simulées 

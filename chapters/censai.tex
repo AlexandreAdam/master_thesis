@@ -601,6 +601,14 @@ While \ref{prior:early stopping} and \ref{prior:learning rate} can
 potentially alleviate \ref{cf:steps}, \ref{cf:weights} is not 
 trivially addressed by the inductive biases introduced so far.
 
+\begin{figure}[t!]
+        \centering
+        \includegraphics[width=0.8\linewidth]{figures/vae_samples_similar_to_highlight}
+        \caption{Examples similar to the test task, also shown in Figure \ref{fig:main result}. The first column shows the ground truth used to simulate the lensed image. The second column shows the baseline prediction that is then encoded in the latent space of the VAE in order to sample the next 4 columns.
+}
+        \label{fig:vae fine-tuning}
+\end{figure}
+
 We follow the work of \citet{Kirkpatrick2016} to define a prior distribution
 over $\varphi$ that address this issue
 \begin{equation}\label{eq:Prior} 
@@ -630,19 +638,13 @@ for the particular task at hand.
 We've included a derivation 
 of this term in the appendix \ref{ap:ewc}.
 
+
 %We define the distribution of examples from $\mathcal{D}$ similar to the test task $\mathcal{T}$ with 
 %the surrogate conditional $\tilde{p}(\mathcal{D} \mid \mathcal{T})$. 
 Examples are drawn from the set of training examples similar to the test task 
 by sampling the latent space of both the source 
 VAE and the convergence VAE near the baseline prediction of the RIM. Figure \ref{fig:vae fine-tuning} illustrates what we mean by \textit{similar}. 
 
-\begin{figure}[t!]
-        \centering
-        \includegraphics[width=0.8\linewidth]{figures/vae_samples_similar_to_highlight}
-        \caption{Examples similar to the test task, also shown in Figure \ref{fig:main result}. The first column shows the ground truth used to simulate the lensed image. The second column shows the baseline prediction that is then encoded in the latent space of the VAE in order to sample the next 4 columns.
-}
-        \label{fig:vae fine-tuning}
-\end{figure}
 
 %By definition, the Fisher matrix is the 
 %expected value of the observed information that 
@@ -1006,6 +1008,18 @@ To offset our selection bias, we selected samples in different percentile from t
 test set rank ordered by the $\chi^2$ metric. 
 We also show a randomly selected sample from the test set in Figure \ref{fig:random sample}.
 
+\begin{figure}[th!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/loss_and_likelihood}
+        \caption{Distribution of the goodness of fit for the baseline and fine-tuned network (right panel), as well as log-loss difference between the two network for a given example in the test set (left panel).
+        % The 
+        % $\chi^2$ is significantly improved by the optimisation. The log-loss difference is 
+        % found to have a scatter $\sigma = 0.28$ smaller than the intrinsic scatter of the baseline 
+        % log-loss $\sigma(\log \mathcal{L}(\varphi^\star_{\mathcal{D}})) = 0.36$ (see Table \ref{tab:loss}) because of the regularisation by EWC.
+}
+        \label{fig:loss and chi squared}
+\end{figure}
+
 
 Figure \ref{fig:loss and chi squared} shows a comparison between 
 the goodness of fit of the baseline model and the fine-tuned prediction. 
@@ -1017,6 +1031,38 @@ We note that this metric is not optimized during fine-tuning,
 and is only computed as an oracle metric --- still, the fine-tuning procedure does not significantly deteriorate or improve the loss of the baseline prediction in average. We report the first 2 moments of the loss log-normal distribution for the baseline and the fine-tuned reconstructions in Table \ref{tab:loss} in order to compare explicitly the loss distributions. As can be seen in this table, there is no significant difference between the two distribution. This statement can be proven for the measured mean values --- $\mu(\log \mathcal{L}(\hat{\varphi}_{\mathrm{MAP}})) = \mu(\log \mathcal{L}(\varphi^{\star}_{\mathcal{D}})) $ --- using the two-sided normal p-value test \citep{Casella2001}, which we find satisfy the null hypothesis with $p=0.87288$ ($Z = -0.16$). All those observations support our claim that EWC regularisation preserves the prior learned during pretraining, or at least that it preserves the surrogate measures of the prior we reported. 
 
 
+\begin{table}[th!]
+    \centering
+    \caption{$\log_{10}$-normal moments of the loss on the test set}
+    \label{tab:loss}
+    \begin{tabular}{ccc}
+        \hline
+          Model  & $\mu(\log \mathcal{L})$ & $\sigma(\log \mathcal{L})$ \\
+        \hline \hline
+        Baseline ($\varphi_{\mathcal{D}}^\star)$ &  -1.96 & 0.36 \\
+        Fine-tuned ($\hat{\varphi}_{\mathrm{MAP}}$) & -2.02 & 0.37 \\\hline
+    \end{tabular}
+
+\end{table}
+
+\begin{figure}[th!]
+        \centering
+        \includegraphics[width=0.6\textwidth]{figures/chisq_vs_noise_ewc}
+        \caption{Goodness of fit as a function of SNR shows a threshold 
+        behavior where our method reaches its limit.}
+        \label{fig:chi squared vs noise}
+\end{figure}
+
+The right panel of Figure \ref{fig:loss and chi squared} shows that 
+the $\chi^2$ of the reconstruction is improved substantially compared to the 
+baseline model. The $\chi^2$ is directly optimized by the fine-tuning procedure 
+(equation \eqref{eq:MAP}). Thus, this improvement is to be expected. 
+Out of the 
+3000 reconstructions, 1262 reach $|\chi^2 - \nu| \leq 296$, which is the criteria 
+that satisfy the null hypothesis for the number of degrees of freedom 
+$\nu=128^{2}$. For those reconstructions that do not satisfy this criteria, 
+we still observe a significant improvement in the distribution of goodness of fit 
+compared to the baseline (black histogram in Figure \ref{fig:loss and chi squared}).
 
 
 
@@ -1047,56 +1093,6 @@ and is only computed as an oracle metric --- still, the fine-tuning procedure do
 
 \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{figures/loss_and_likelihood}
-        \caption{Distribution of the goodness of fit for the baseline and fine-tuned network (right panel), as well as log-loss difference between the two network for a given example in the test set (left panel).
-        % The 
-        % $\chi^2$ is significantly improved by the optimisation. The log-loss difference is 
-        % found to have a scatter $\sigma = 0.28$ smaller than the intrinsic scatter of the baseline 
-        % log-loss $\sigma(\log \mathcal{L}(\varphi^\star_{\mathcal{D}})) = 0.36$ (see Table \ref{tab:loss}) because of the regularisation by EWC.
-}
-        \label{fig:loss and chi squared}
-\end{figure}
-
-
-
-\begin{table}[H]
-    \centering
-    \caption{$\log_{10}$-normal moments of the loss on the test set}
-    \label{tab:loss}
-    \begin{tabular}{ccc}
-        \hline
-          Model  & $\mu(\log \mathcal{L})$ & $\sigma(\log \mathcal{L})$ \\
-        \hline \hline
-        Baseline ($\varphi_{\mathcal{D}}^\star)$ &  -1.96 & 0.36 \\
-        Fine-tuned ($\hat{\varphi}_{\mathrm{MAP}}$) & -2.02 & 0.37 \\\hline
-    \end{tabular}
-
-\end{table}
-
-
-
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.6\textwidth]{figures/chisq_vs_noise_ewc}
-        \caption{Goodness of fit as a function of SNR shows a threshold 
-        behavior where our method reaches its limit.}
-        \label{fig:chi squared vs noise}
-\end{figure}
-
-The right panel of Figure \ref{fig:loss and chi squared} shows that 
-the $\chi^2$ of the reconstruction is improved substantially compared to the 
-baseline model. The $\chi^2$ is directly optimized by the fine-tuning procedure 
-(equation \eqref{eq:MAP}). Thus, this improvement is to be expected. 
-Out of the 
-3000 reconstructions, 1262 reach $|\chi^2 - \nu| \leq 296$, which is the criteria 
-that satisfy the null hypothesis for the number of degrees of freedom 
-$\nu=128^{2}$. For those reconstructions that do not satisfy this criteria, 
-we still observe a significant improvement in the distribution of goodness of fit 
-compared to the baseline (black histogram in Figure \ref{fig:loss and chi squared}).
-
-
-\begin{figure*}[t!]
-        \centering
         \tikzset{font={\fontsize{8pt}{12}\selectfont}}
         \begin{tikzpicture}
                 \node at (0, 0) {\includegraphics[width=\linewidth]{figures/rim_map_on_vae_cherry_picks}};
@@ -1124,16 +1120,8 @@ compared to the baseline (black histogram in Figure \ref{fig:loss and chi square
         over the baseline. The intensity color scale is chosen to show the reconstruction
 down to the third decimal place, where the baseline prediction breaks down.}
         \label{fig:increasing SNR}
-\end{figure*}
-
-\begin{figure}[t!]
-        \centering
-        \includegraphics[width=0.7\linewidth]{figures/coherence_spectrum}
-        \caption{Statistics of the coherence spectrum on the test set. The solid line is the average 
-        coherence. The transparent region is the $68\%$ confidence interval. The fine-tuning 
-        procedure yields a noticeable improvement on the coherence of the source at all frequencies.}
-        \label{fig:coherence}
 \end{figure}
+
 
 
 To understand why some of the reconstructions do not reach noise level, we 
@@ -1202,6 +1190,15 @@ since most of the information about the source and the convergence morphology is
 %\vfill\null 
 
 \subsection{Quality of the Reconstructions}\label{sec:quality of reconstructions}
+
+\begin{figure}[th!]
+        \centering
+        \includegraphics[width=0.7\linewidth]{figures/coherence_spectrum}
+        \caption{Statistics of the coherence spectrum on the test set. The solid line is the average 
+        coherence. The transparent region is the $68\%$ confidence interval. The fine-tuning 
+        procedure yields a noticeable improvement on the coherence of the source at all frequencies.}
+        \label{fig:coherence}
+\end{figure}
 
 
 In addition to a visual inspection of the reconstructed sources 
