@@ -119,28 +119,257 @@
 \g@addto@macro\frontmatter{\pagenumbering{romanskip}\pagestyle{plain}}
 \g@addto@macro\mainmatter {\pagenumbering{arabic}\pagestyle{headings}}
 \renewcommand*{\maketitle}%
-  {\thispagestyle{empty}
-   \begin{center}
-      \large
-      \singlespacing
-      \null
-      \vfill
-      \textbf{\LARGE{\textsc{\@title}}}
-      \vfill
-      par
-      \vfill
-      {\@author}
-      \vfill
-      \vfill
-	  Mémoire présenté en vue de l’obtention du grade de\\
-      {\@degree}\\[1ex]
-      {\@department}\\
-Université de Montréal\\
-      \vfill
-      {\copyright} {\@gradyear}, {\@author}
-   \end{center}
+  %{\thispagestyle{empty}
+   %\begin{center}
+      %\large
+      %\singlespacing
+      %\null
+      %\vfill
+      %\textbf{\LARGE{\textsc{\@title}}}
+      %\vfill
+      %par
+      %\vfill
+      %{\LARGE \textbf{\@author}}
+      %%\vfill
+      %\\[2ex]
+      %{\@department}\\
+%Université de Montréal\\
+      %\vfill
+      %\vfill
+	  %Mémoire présenté en vue de l’obtention du grade de\\
+      %{\@degree}\\[1ex]
+      %\vfill
+      %{\copyright} {\@gradyear}, {\@author}
+   %\end{center}
+   %{{\pagestyle{empty}\ocleardoublepage}}
+  %}
+{
+    \clearpage \thispagestyle{empty}%
+    \begingroup
+        \normalfont\normalsize
+        \topskip=84\p@  %Espace au haut de la page
+        \advance\topskip by -\headsep
+        \advance\topskip by -\headheight
+        \vskip12\p@\@plus12\p@
+        \centerline{\bf\Large\@university}
+        \vskip42\p@
+        \vtop{\centering
+            \bgroup\bf\Large\expandafter\upshape\expandafter{\@title}\@@par\egroup%
+            \ifx\@empty\@soustitre\relax
+            \else\vtop{
+                \large\vrule width0pt height 20pt
+                \sl\@soustitre%
+            }\fi
+            \global\dimen@i=\prevdepth%
+        }%
+        \prevdepth=\dimen@i
+        \vskip-32pt
+        \vfill
+        \centerline{\rm par}\vskip20pt%
+        %\ifx\@empty\authors
+            %\dms@erreur\author %on rappelle de définir \author
+        %\else %ici, \authors est non vide
+            \vtop{\centering
+                {\bf\Large\@author}\@@par
+                \global\dimen@i=\prevdepth%
+            }\relax%
+            \prevdepth=\dimen@i
+        %\fi
+        \vskip18\p@\@plus12\p@
+        \vtop{\centering
+            {\rm\footnotesize\@department\\
+            %\ifx\@empty\@faculty%
+                %{Facult\'e des arts et des sciences}
+            %\else%
+                \@faculty
+            %\fi
+            \@@par}
+        }%Fin du \vtop
+    \vfill
+        \baselineskip9\p@
+        \vtop{\centering\bgroup\rm\small%
+            M\'emoire pr\'esent\'e
+            %\ifrapport@ Rapport de stage pr\'esent\'e \fi
+            %\iftravail@ Travail dirigé pr\'esent\'e   \fi
+            %\ifphd@     Th\`ese pr\'esent\'ee         \fi
+	    en vue de l'obtention du grade de\\
+            \@degree\\
+            en\strut\
+            \ifx\@empty\@sujet
+            \dms@erreur\sujet
+            \else
+            \@sujet
+            \fi
+            \ifx\@empty\@orientation\else \\[\baselineskip] Orientation \@orientation\fi
+            \egroup%
+        }
+        \vfill
+	\centerline{\rm\ifx\@empty\@date {\MoYrfr}
+		\else\@date\fi}
+	\@@par
+        \vfill
+      	\centerline{{\copyright} {\@author}, {\@gradyear}}
+        %\copyrightline
+    \endgroup
+    \cleardoublepage
+}
+
+\def\university#1{\def\@university{{\normalfont\bf\Large#1}}}
+\university{{\bf\Large Universit\'e de Montr\'eal}}
+
+\def\faculty#1{\def\@facultyto{{\normalfont\rm#1}}}
+
+\def\facultyto#1{\def\@facultyto{{\normalfont\rm#1}}}
+\facultyto{{\rm Facult\'e des arts et des sciences}}
+
+\let\@faculty=\@facultyto
+
+\def\department#1{\def\@department{{\normalfont\rm#1}}}
+\def\@department{ D\'epartement de math\'ematiques et de statistique}
+
+\def\orientation#1{\def\@orientation{{\normalfont\rm\small#1}}}
+\def\@orientation{}
+
+\def\sujet#1{\def\@sujet{{\normalfont\rm\small#1}}}
+\def\@sujet{}
+
+\def\president#1{\def\@president{{\normalfont\sl#1}}}
+\def\@president{}
+
+\def\directeur#1{\def\@directeur{{\normalfont\sl#1}}}
+\def\@directeur{}
+
+\def\codirecteur#1{\def\@codirecteur{{\normalfont\sl#1}}}
+\def\@codirecteur{}
+
+\def\codirecteurs#1{\def\@codirecteurs{{\normalfont\sl#1}}}
+\def\@codirecteurs{}
+
+\def\membrejury#1{\def\@membrejury{{\normalfont\sl#1}}}
+\def\@membrejury{}
+
+\def\membresjury#1{\def\@membresjury{{\normalfont\sl#1}}}
+\def\@membresjury{}
+
+\def\plusmembresjury#1{\def\@plusmembresjury{{\normalfont\sl#1}}}
+\def\@plusmembresjury{}
+
+\def\examinateur#1{\def\@examinateur{{\normalfont\sl#1}}}
+\def\@examinateur{}
+
+\def\repdoyen#1{\def\@repdoyen{{\normalfont\sl#1}}}
+\def\@repdoyen{}
+
+\def\dateacceptation#1{\def\@dateacceptation{{\normalfont\sl#1}}}
+\def\@dateacceptation{}
+
+\def\maketitletwo{
+    \cleardoublepage\thispagestyle{empty}
+    \begingroup
+        \topskip 5pc\relax
+        \vskip12\p@\@plus6\p@
+        \normalfont\normalsize
+        \centerline{\bf\Large\@university}
+        \setbox0=\hbox{\rm\@facultyto}
+        \centerline{\copy0}
+        \nointerlineskip
+        \dimen0=\wd0
+        \advance\dimen0 by 2pc
+        \centerline{\vrule width \dimen0 height -3pt depth 3.3pt}
+        \vskip18\p@\@plus12\p@
+        \centerline{Ce m\'emoire intitul\'e}
+        %\ifrapport@  \centerline{Ce rapport de stage intitul\'e}\fi
+        %\iftravail@  \centerline{Ce travail dirig\'e intitul\'e}\fi
+        %\ifphd@ {\centerline{Cette th\`ese intitul\'ee}}\fi
+        \vskip12\p@\@plus6\p@
+        \vtop{
+            \centering\bf\large
+            \expandafter\upshape\expandafter{\@title}\@@par
+            %
    {{\pagestyle{empty}\ocleardoublepage}}
-  }
+	    \ifx\@soustitre\@empty\else
+		\rm\large
+		\vskip1pc
+		%
+		\setbox0=\hbox{\@soustitre}
+		\expandafter\upshape\expandafter{\unhbox0}\@@par
+		\dimen0=\textwidth\advance\dimen0 by -60pt\relax
+	    \fi
+            \global\dimen@i\prevdepth%
+           }
+        \vskip18\p@\@plus12\p@\relax
+        \centerline{pr\'esent\'e par}
+        %\ifrapport@\centerline{pr\'esent\'e par}\fi
+        %\iftravail@\centerline{pr\'esent\'e par}\fi
+        %\ifphd@\centerline{pr\'esent\'ee par}\fi
+        \vskip18\p@\@plus6\p@
+        %\ifx\@empty\authors
+	  %\author
+        %\else
+	    \vtop{
+		\centering
+		\bf\Large\@author
+	    }
+	    %\prevdepth\dimen@i
+        %\fi
+        \vskip24\p@\@plus12\p@
+        \centerline{a \'et\'e \'evalu\'e par un jury compos\'e des personnes suivantes :}%
+        %\ifrapport@\centerline{a \'et\'e \'evalu\'e par un jury compos\'e des personnes suivantes :} \fi%
+        %\iftravail@\centerline{a \'et\'e \'evalu\'e par un jury compos\'e des personnes suivantes :} \fi%
+        %\ifphd@\centerline{a \'et\'e \'evalu\'ee par un jury compos\'e des personnes suivantes :}\fi %
+        \par\vskip24\p@ plus 12pt minus 12pt\relax
+        \baselineskip9\p@
+        \vtop to 11cm{\centering%
+            \vtop{\centering
+                \strut\par\vskip5pt
+		\centerline{\small\@president}
+                \strut\par\vskip-25pt
+                \noindent\vrule height 0.4pt depth 0pt width 11pc
+                \par\vskip1pt
+                {\footnotesize(pr\'esident-rapporteur)}}%
+            %\lignemembre\membre{\@president}\titre{pr\'esident-rapporteur}
+            \vfil
+
+                %Obligatoire
+            %\lignemembre\membre{\@directeur}\titre{directeur de recherche}
+            \vtop{\centering
+		\centerline{\@directeur}
+                \strut\par\vskip-25pt
+                \noindent\vrule height 0.4pt depth 0pt width 11pc
+                \par\vskip1pt
+                {\footnotesize(directeur de recherche)}}%
+            \vfil
+
+
+                %Obligatoire
+            %\lignemembre\membre{\@membrejury}\titre{membre du jury}
+            \vtop{\centering
+		\centerline{\@membrejury}
+                \strut\par\vskip-25pt
+                \noindent\vrule height 0.4pt depth 0pt width 11pc
+                \par\vskip1pt
+                {\footnotesize(membre du jury)}}%
+            \vfil
+
+            %
+            %\ifx\@membresjury\empty
+                \par
+                \vskip0pt plus .33fil
+            %\fi
+            %\ifx\@plusmembresjury\empty
+                \par
+                \vskip0pt plus .33fil
+            %\fi
+            %\ifx\@codirecteur\empty
+                \par
+                \vskip0pt plus .33fil
+            %\fi
+        }%fin du \vtop to 10cm
+    \endgroup
+   {{\pagestyle{empty}\ocleardoublepage}}
+} % Fin de \@maketitle
+
+
 \newenvironment*{abstract}%
   {\thispagestyle{plain}
 \addcontentsline{toc}{chapter}{Abstract}

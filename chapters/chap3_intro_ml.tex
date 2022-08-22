@@ -26,9 +26,9 @@ La notion de distance entre ces deux distributions est mesurée par la divergenc
 \begin{align}
         \nonumber
        D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x}) \KL  p_\theta (\mathbf{z} \mid \mathbf{x})) 
-       &= \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi(\mathbf{z} \mid \mathbf{x}) - \log p_\theta (\mathbf{z} \mid \mathbf{x}) \bigg]  \\
+       &= \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi(\mathbf{z} \mid \mathbf{x}) - \log p_\theta (\mathbf{z} \mid \mathbf{x}) \bigg]\, ;  \\
        \nonumber
-       &= \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi (\mathbf{z} \mid \mathbf{x}) -\log \frac{p_\theta(\mathbf{z}, \mathbf{x})}{p_\theta(\mathbf{x})} \bigg]  \\
+       &= \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log q_\phi (\mathbf{z} \mid \mathbf{x}) -\log \frac{p_\theta(\mathbf{z}, \mathbf{x})}{p_\theta(\mathbf{x})} \bigg]\, ;  \\
        \label{eq:KL}
        &= \log p_\theta (\mathbf{x}) - \underbrace{\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta(\mathbf{z}, \mathbf{x}) - \log q_\phi (\mathbf{z} \mid \mathbf{x}) \bigg]}_{\equiv \mathcal{L}_{\phi,\theta}(\mathbf{x})} \, .
 \end{align} 
@@ -75,7 +75,7 @@ Or, la liste de paramètres $\phi$ apparait dans la distribution de prélèvemen
 l'espérance mathématique $\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})}$ dans la ELBO \eqref{eq:KL}.
 Cette opération n'a pas de dérivée formelle en termes de $\phi$. 
 
-Pour résoudre ce problème, on utilise le truc de reparamétrisation \citep{Kingma2013}, 
+Pour résoudre ce problème, on utilise le truc de la reparamétrisation \citep{Kingma2013}, 
 qui consiste à exprimer la variable aléatoire latente $\mathbf{z} \sim q_\phi (\mathbf{z} \mid \mathbf{x})$ 
 comme la transformation différentiable et inversible d'une variable aléatoire auxiliaire $\boldsymbol{\epsilon}$.
 On considère le cas où $q_\phi(\mathbf{z} \mid \mathbf{x})$ et $p(\boldsymbol{ \epsilon})$ 
@@ -102,7 +102,7 @@ De plus, $\phi$ décrit maintenant une fonction générique dont le rôle est d'
 paramètres de la distribution $q_\phi(\mathbf{z} \mid \mathbf{x})$
 \begin{equation}
         \begin{aligned}
-                f_\phi: \mathbb{R}^{m} &\rightarrow \mathbb{R}^{h} \times \mathbb{R}^{h}\\ \mathbf{x} &\mapsto (\boldsymbol{\mu},\, \log \boldsymbol{\sigma}^{2})
+                f_\phi: \mathbb{R}^{m} &\rightarrow \mathbb{R}^{h} \times \mathbb{R}^{h}\\ \mathbf{x} &\mapsto (\boldsymbol{\mu},\, \log \boldsymbol{\sigma}^{2})\, .
         \end{aligned}
 \end{equation} 
 En pratique, on peut construire une approximation de 
@@ -124,13 +124,13 @@ Pour déterminer la forme fonctionnelle de la divergence KL obtenue au second te
 on stipule a priori que la distribution marginale des variables latentes 
 devrait correspondre à une distribution normale isotropique
 \begin{equation}\label{eq:latent distribution}
-        p_{\theta}(\mathbf{z}) = \mathcal{N}(0, \bbone)
+        p_{\theta}(\mathbf{z}) = \mathcal{N}(0, \bbone)\, .
 \end{equation}
 La KL admet alors une solution fermée étant donné les familles paramétriques stipulées 
 pour $p_\theta(\mathbf{z})$ \eqref{eq:latent distribution} et $q_\phi(\mathbf{z} \mid \mathbf{x})$ \eqref{eq:q phi}
 \begin{equation}\label{eq:final KL}
         -D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z})) =
-        \frac{1}{2}\sum_{j=1}^{h} (1 + [\log \boldsymbol{ \sigma}_\phi^{2} ]_j - [\boldsymbol{ \mu}_\phi ]_j - [\boldsymbol{ \sigma}_\phi^{2} ]_j)
+        \frac{1}{2}\sum_{j=1}^{h} (1 + [\log \boldsymbol{ \sigma}_\phi^{2} ]_j - [\boldsymbol{ \mu}_\phi ]_j - [\boldsymbol{ \sigma}_\phi^{2} ]_j)\, .
 \end{equation} 
 Une dérivation de ce terme est donnée dans l'annexe B de \citet{Kingma2013}. 
 %Cette solution se dérive directement par rapport à $\phi$. 
@@ -153,7 +153,7 @@ de sorte que
         \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[
                 \log p_\theta(\mathbf{x} \mid \mathbf{z})
         \bigg] 
-        = -\frac{1}{L}\sum_{i=1}^{L} \lVert \mathbf{x} - \hat{\mathbf{x}}^{(i)} \rVert_2^{2}
+        = -\frac{1}{L}\sum_{i=1}^{L} \lVert \mathbf{x} - \hat{\mathbf{x}}^{(i)} \rVert_2^{2}\, .
 \end{equation} 
 
 \subsection{Principe du goulot d'information}
@@ -200,15 +200,16 @@ machine par \citet{Goldfield2020} et le manuel de référence sur la théorie de
         \caption{VAE comme un système de transmission d'information.}
         \label{fig:info VAE}
 \end{figure}
+
 L'objectif d'un auto-encoder est de construire un code $Z$ d'une longueur minimale qui capture un maximum d'information contenue dans un message $X$. 
-Formellement, on utilise l'information mutuelle de Shannon pour mesurer l'information capturée par $Z$ à propos de $X$
+Formellement, on utilise l'information mutuelle de Shannon pour mesurer l'information capturée par $Z$ à propos de $X$ (et vice-versa)
 \begin{equation}\label{eq:ShannonInfo}
-        I(Z ; X) = D_{\mathrm{KL}}\left(p(\mathbf{x}, \mathbf{z}) \KL p(\mathbf{x}) p(\mathbf{z})\right) %= \mathbb{E}_{p(x,z)} \bigg[\log \frac{p(x,z)}{p(x) p(z)}\bigg] %= \sum_{x \in \mathcal{X}} \sum_{z \in \mathcal{Z}} p(x, z) \log \frac{p(x, z)}{p(x) p(z)}.
+        I(Z ; X) = D_{\mathrm{KL}}\left(p(\mathbf{x}, \mathbf{z}) \KL p(\mathbf{x}) p(\mathbf{z})\right)\, . %= \mathbb{E}_{p(x,z)} \bigg[\log \frac{p(x,z)}{p(x) p(z)}\bigg] %= \sum_{x \in \mathcal{X}} \sum_{z \in \mathcal{Z}} p(x, z) \log \frac{p(x, z)}{p(x) p(z)}.
 \end{equation} 
 Il est utile de décomposer cet objectif en termes de l'entropie du message $H(X)$ et l'entropie 
 conditionnelle de ce message étant donné le code $Z$, $H(X \mid Z)$
 \begin{equation}\label{eq:info entropy}
-       I(Z; X) = H(X) - H(X \mid Z) 
+       I(Z; X) = H(X) - H(X \mid Z) \, .
 \end{equation} 
 L'entropie est une mesure de l'incertitude dans une variable aléatoire
 \begin{equation}\label{eq:entropy}
@@ -235,7 +236,7 @@ le maximum d'information possible à propos du message. On introduit l'objectif 
 \end{equation} 
 La contrainte $I(Z; Y) \leq \alpha$ impose à l'auto-encodeur %$p_{\phi,\theta}(\hat{X} \mid X)$
 une limite sur l'information mutuelle entre le code 
-utilisé pour représenter $X$ et l'identité $Y=i$ de chaque exemple d'un ensemble des données qu'on veut modéliser $\mathcal{D} = \{\mathbf{x}_i \}_{i=1}^{N}$.
+utilisé pour représenter $X$ et l'identité $Y=i$ de chaque exemple d'un ensemble des données qu'on veut modéliser $\mathcal{D} = \{\mathbf{x}^{(i)} \}_{i=1}^{N}$.
 Il s'avère que l'objectif de comprimer l'information est intimement lié à l'objectif d'obtenir un sommaire informatif, c.-à-d. qu'un 
 code d'une complexité de \citet{Kolmogorov1965} minimale décrit la source d'information de la manière la plus informative possible. Cette connexion 
 remarquable est une application concrète du principe du rasoir d'Occam: l'explication adéquate la plus simple est la meilleure explication.
@@ -247,7 +248,7 @@ On assume d'abord la chaîne de Markov $Y \rightarrow X \rightarrow Z$ pour les 
 aléatoires représentées dans la figure \ref{fig:info VAE}. La chaîne de Markov 
 induit la factorisation de la probabilité jointe
 \begin{equation}\label{eq:factorisation}
-       p(X, Y, Z) = p(X \mid Z) p(Y \mid X) p(X) 
+       p(X, Y, Z) = p(X \mid Z) p(Y \mid X) p(X)\, . 
 \end{equation} 
 où $p(X \mid Z,\, Y) = p(X \mid Z)$ suit du fait que $Z$ et $Y$ sont des variables conditionnellement indépendantes étant donné $X$.
 On introduit ensuite un modèle pour l'encodeur,
@@ -262,7 +263,7 @@ suit que
                 \implies I(Z;\, X)&\geq \mathbb{E}_{p(\mathbf{x})}\mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[\log p_\theta (\mathbf{x} \mid \mathbf{z})\bigg]\, .
 \end{align}
 À la dernière ligne, on a éliminé l'entropie du message $H(X)$, puisque c'est une constante strictement positive qui ne dépend pas de $\phi$.
-On a aussi introduit l'approximation variationnelle $p_\theta (\mathbf{x} \mid \mathbf{z}) \approx q_\phi (\mathbf{x} \mid \mathbf{z})$ 
+On a aussi introduit l'approximation variationnelle $$p_\theta (\mathbf{x} \mid \mathbf{z}) \approx q_\phi (\mathbf{x} \mid \mathbf{z})$$ 
 pour approximer la distribution a posteriori de l'encodeur (soit le décodeur). Cette approximation est valide dans le contexte où 
 on cherche une limite inférieure pour $I(Z; X)$, puisque la divergence KL entre ces deux distributions est strictement positive.
 Ensuite, on cherche une borne supérieure au terme de compression $I(Z; Y)$. 
@@ -291,7 +292,7 @@ avec la ELBO \eqref{eq:final elbo}
         -  \beta  \mathbb{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})} \bigg[ 
                 \log q_\phi(\mathbf{z} \mid \mathbf{x})        
                 -\log p_\theta(\mathbf{z})
-                \bigg]
+                \bigg]\, .
 \end{equation} 
 On note qu'on a laissé tomber la constante $\alpha$, car elle ne dépend pas des paramètres $\phi$ et $\theta$, et généralement le paramètre $\beta$ 
 n'est pas optimisé directement. $\beta$ est considéré comme un hyperparamètre. 
@@ -443,7 +444,7 @@ en absorbant le gradient de la distribution a priori dans une fonction $g_{\varp
         \hat{\mathbf{x}}^{(t)} + \alpha \big( \grad_{\hat{\mathbf{x}}^{(t)}}\log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}) 
         +  \grad_{\hat{\mathbf{x}}^{(t)}}\log p_\theta(\hat{\mathbf{x}}^{(t)})\big);\\
         \label{eq:rim putzky}
-        \implies \hat{\mathbf{x}}^{(t+1)} &= \hat{\mathbf{x}} + g_{\varphi^{(t)}}\big(\hat{\mathbf{x}}^{(t)},\, \grad_{\hat{\mathbf{x}}^{(t)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)})\big)
+        \implies \hat{\mathbf{x}}^{(t+1)} &= \hat{\mathbf{x}} + g_{\varphi^{(t)}}\big(\hat{\mathbf{x}}^{(t)},\, \grad_{\hat{\mathbf{x}}^{(t)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)})\big)\, ,
 \end{align}
 où $g_{\varphi^{(t)}}: \mathcal{X}^{2} \rightarrow \mathcal{X}$ est le modèle du gradient de la distribution 
 a posteriori. 
@@ -500,8 +501,11 @@ séparée, on peut réutiliser les poids du réseau de neurones $\varphi$ à cha
 qui réduit considérablement la complexité du problème d'apprentissage.
 
 
+
 \subsection{Méta-apprentissage par rétropropagation de gradients}
-%
+
+Cette sous-section s'intéresse finalement au problème d'apprentissage d'une machine à inférence récurentielle $g_\varphi$, 
+et en particulier comment ce problème tombe dans le catégorie de méta-apprentissage.
 Le méta-apprentissage est un sujet de recherche qui se concentre sur la construction de règles d'apprentissage qui permettent 
 d'accélérer l'apprentissage de fonctions pour certaines tâches spécifiques. Ce double aspect d'apprentissage, soit d'apprendre à mieux 
 apprendre, est précisément ce qui est sous-entendu par le terme méta-apprentissage. Pour une revue du sujet, le lecteur peut consulter 
@@ -610,14 +614,25 @@ La fonction de vraisemblance nous permet d'intégrer nos connaissances sur la na
 p. ex. les équations \eqref{eq:alpha adim} et \eqref{eq:lens equation adim} 
 pour les lentilles gravitationnelles, directement dans le problème d'apprentissage.
 De cette façon, l'objectif de méta-apprentissage pour les paramètres $\varphi$ est d'encoder seulement 
-les connaissances manquantes aux problèmes, soit $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x})$.
+les connaissances manquantes aux problèmes, soit $\grad_{\mathbf{x}}\log p_\theta(\mathbf{x})$, 
+ou tout autre fonction de régularisation informative au problème de reconstruction.
+%, ou tout autre fonction 
+%qui régularise le problème de maximiser la vraisemblance.
 
-%Puisque les machines à inférences récurentielles apprennent par méta-apprentissage, elles sont en mesure de généraliser beaucoup mieux qu'une 
-%fonction apprise par régression. En effet, le problème d'apprentissage, soit la relation \eqref{eq:rim putzky}, 
-%est transférable à la classe de problèmes pour laquelle 
-%les biais inductifs appris sont informatifs. Par exemple, \citet{Morningstar2019} montrent qu'une machine à récurentielles 
-%entraîné à reconstruire des images de galaxies fortement lentillées est en mesure reconstruire l'image d'un portion de 
-%paragraphe, ce qui n'a rien à voir a priori avec des images de galaxies. 
-%D'un autre côté, une fonction inverse $f_\theta: \mathcal{Y} \rightarrow \mathcal{X}$, apprise par régression,
-%est sujette aux problèmes liés à l'extrapolation mentionnés plus haut, et ne serait pas en mesure d'extrapoler en 
-%dehors de la variété implicitement définit par $\mathcal{D}$.
+Puisque les machines à inférences récurentielles apprennent par méta-apprentissage, elles sont en mesure de généraliser beaucoup mieux qu'une 
+fonction apprise par régression. En effet, le problème d'apprentissage, soit la relation \eqref{eq:rim putzky}, 
+est transférable à la classe de problèmes pour laquelle 
+les biais inductifs appris sont informatifs. 
+Par exemple, \citet{Morningstar2019} ont découverts qu'une machine à inférence récurentielle 
+entraînée à reconstruire des images de galaxies fortement lentillées est en mesure de reconstruire l'image d'une portion de 
+paragraphe fortement lentillée, ce qui n'a rien à voir a priori avec des images de galaxies. 
+Ce fait peut sembler contre-intuitif à première vue. 
+Si la machine à inférence récurentielle apprenait simplement 
+une distribution a priori, alors l'image d'un paragraphe ne pourrait pas être reconstruite par maximisation de la 
+distribution a posteriori. On doit donc comprendre que les biais inductifs appris par la machine à inférence 
+récurentielle ne sont pas simplement ceux qui permettent de reconstruire les exemples de l'ensemble d'entraînement. 
+Plutôt, une machine à inférence récurentielle apprend les biais inductifs transférables entre différents exemples 
+de problème présentés en entraînement, soit précisément ce qui permet à ces machines de généraliser au-delà 
+de leur ensemble d'entraînement.
+
+
