@@ -75,7 +75,6 @@
 \department{Département de physique}
 \gradyear{2022}
 
-
 \allowdisplaybreaks
 \begin{document}
 % Add items to glossary without displaying them
@@ -189,13 +188,15 @@
   \input{chapters/censai}
 	\selectlanguage{french}
   \input{chapters/conclusion}
-	\selectlanguage{english}
+        %\selectlanguage{english}
   {\scriptsize
     \bibliography{intro_bib,censai_bib}
   }
   \appendix
   \input{chapters/annexe_planck}
+  \selectlanguage{english}
   \input{chapters/censai_appendices}
+\selectlanguage{french}
   \input{chapters/annexe_gru}
   \input{chapters/annexe_congres}
 \end{document}

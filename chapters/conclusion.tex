@@ -14,9 +14,10 @@ en encodant des biais inductifs dans les poids d'un réseau de neurones convolut
 Cette approche nous permet de préserver l'information à différentes échelles spatiales et de contrôler indépendamment 
 la reconstruction à ces différentes échelles. Pour le problème inverse étudié dans ce mémoire, cette propriété s'avère cruciale. 
 Finalement, pour stabiliser l'entraînement du modèle $g_\varphi$, nous avons trouvé qu'ajouter l'observation 
-en entrée au modèle nous permettait d'inclure l'inférence de la valeur initiale dans la relation de récurrence. Étant 
-donné le cadre théorique développé en introduction, j'interprète que ce changement permet de mieux contrôler la constante de
-Lipschitz de la machine à inférence récurentielle.
+en entrée au modèle nous permettait d'inclure l'inférence de la valeur initiale dans la relation de récurrence. 
+%Étant 
+%donné le cadre théorique développé en introduction, j'interprète que ce changement permet de mieux contrôler la constante de
+%Lipschitz de la machine à inférence récurentielle.
 
 Ce travail est à la fois pertinent pour les objectifs scientifiques mentionnés en introduction, soit la recherche et l'étude 
 de halos de matière noire froide et l'étude des galaxies jeunes par l'effet de grossissement des lentilles gravitationnelles, 
@@ -26,19 +27,19 @@ d'améliorer la méthode pour atteindre la résolution de télescopes comme le t
 géant européen. Ayant démontrer que notre approche peut reconstruire un large ensemble de lentilles 
 gravitationnelles simulées dans le chapitre \ref{chap:censai}, l'étape suivante pour atteindre cet objectif consiste 
 à appliquer notre 
-méthode à un ensemble de données provenant du téléscope spatial Hubble. En particulier,
-le fer à cheval cosmique, montrée à la figure \ref{fig:sdssj1148}, est un exemple 
+méthode à un ensemble de données provenant du téléscope spatial Hubble. 
+Le fer à cheval cosmique, montrée à la figure \ref{fig:sdssj1148}, est un exemple 
 particulièrement intéressant pour ce test étant donné les difficultés inhérentes a modéliser 
 cette lentilles par les méthodes traditionnelles \citep{James2018,Schuldt2019,Cheng2019}.
 
 %Des tests récents de nos méthodes montrent que 
-Notre tentative récente de modéliser ce système, montrée à la figure \ref{fig:horseshoe},indique  
-déjà des résultats prometteurs. L'image en arrière de la protogalaxie reconstruite avec notre méthode 
-reproduit les 4 régions brillantes avec un taux de formation d'étoile très élevées identifiées par \citet{James2018}. 
+Notre tentative récente de modéliser ce système, montrée à la figure \ref{fig:horseshoe}, indique  
+déjà des résultats prometteurs. L'image de la protogalaxie en arrière-plan reconstruite avec la machine à inférence 
+récurentielle possède les même 4 régions brillantes avec un taux de formation d'étoile très élevées identifiées par \citet{James2018}. 
 Avec l'effet de lentille, on est en mesure d'imager cette protogalaxie avec une résolution deux fois meilleure que la 
-résolution native de Hubble. De plus, la distribution de masse obtenue nous indique déjà que certaines asymétries importantes, 
+résolution du téléscope Hubble. De plus, la distribution de masse obtenue nous indique déjà que certaines asymétries importantes, 
 au delà des perturbations linéaires généralement admises autours d'un modèle elliptique,
-sont probablement nécessaire pour accomplir une reconstruction statistiquement significative.
+sont probablement nécessaires pour accomplir une reconstruction statistiquement significative.
 
 Mon second objectif de recherche est de développer un cadre statistique cohérent autour de méthodes 
 d'inférences aussi puissantes, c.-à-d. être en mesure de modéliser correctement les incertitudes aléatoriques et épistémiques 
