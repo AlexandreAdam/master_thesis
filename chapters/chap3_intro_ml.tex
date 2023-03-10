@@ -6,7 +6,7 @@
 Les auto-encodeurs variationnels (VAE) ont été introduits par \citet{Kingma2013} comme une approche 
 pour inférer approximativement les variables latentes (ou cachées) qui contrôlent un certain processus génératif. 
 Leur utilité est particulièrement marquée lorsque ce processus génératif est défini implicitement par un échantillon de données, 
-soit un cas où la forme fonctionnelle de la distribution n'est pas connue a priori.
+soit un cas où la forme fonctionnelle de la distribution n'est pas connue \textit{a priori}.
 Dans cette section, j'introduis 
 les concepts principaux reliés à ce type de modélisation. 
 Le lecteur peut aussi se référer au livre blanc de \citet{Kingma2019}.
@@ -20,7 +20,7 @@ Déterminer $p_\theta$ directement est généralement difficile, voir impossible
 ($\mathrm{dim(\mathbf{x}}) \gtrsim 10^{4}$ pour des images). 
 Pour contourner ce problème, on introduit une distribution variationnelle, $q_\phi(\mathbf{z} \mid \mathbf{x})$, dont le rôle est 
 d'inférer la variable latente $\mathbf{z}$ associée à $\mathbf{x} \sim p_\theta(\mathbf{x} \mid \mathbf{z})$. 
-En d'autres mots, $q_\phi(\mathbf{z} \mid \mathbf{x})$ est une approximation variationnelle de la distribution a posteriori $p_\theta(\mathbf{z} \mid \mathbf{x})$.
+En d'autres mots, $q_\phi(\mathbf{z} \mid \mathbf{x})$ est une approximation variationnelle de la distribution \textit{a posteriori} $p_\theta(\mathbf{z} \mid \mathbf{x})$.
 La notion de distance entre ces deux distributions est mesurée par la divergence de Kullback-Leibler $D_{\mathrm{KL}}(\cdot \KL \cdot) \geq 0$: 
 \begin{align}
         \nonumber
@@ -33,7 +33,7 @@ La notion de distance entre ces deux distributions est mesurée par la divergenc
 \end{align} 
 
 On remarque par cette manipulation que la distance $D_{\mathrm{KL}}$, en plus de mesurer la distance entre 
-les deux distributions a posteriori (par définition), mesure aussi la différence entre le terme 
+les deux distributions \textit{a posteriori} (par définition), mesure aussi la différence entre le terme 
 $\mathcal{L}_{\phi,\theta}(\mathbf{x})$, qu'on nomme limite inférieure sur l'évidence (de l'anglais 
 \textit{evidence lower bound}: ELBO), et la distribution marginale qu'on cherche à modéliser, $p_\theta(\mathbf{x})$. 
 L'objectif d'un modèle VAE est de maximiser la ELBO, $\mathcal{L_{\phi,\theta}}$. 
@@ -120,7 +120,7 @@ divergence KL
         }_{\equiv -D_{\mathrm{KL}}(q_\phi(\mathbf{z} \mid \mathbf{x})\, \KL\, p_\theta(\mathbf{z}))}\, .
 \end{align} 
 Pour déterminer la forme fonctionnelle de la divergence KL obtenue au second terme du membre droit de l'équation \eqref{eq:final elbo}, 
-on stipule a priori que la distribution marginale des variables latentes 
+Ton stipule \textit{a priori} que la distribution marginale des variables latentes 
 devrait correspondre à une distribution normale isotropique
 \begin{equation}\label{eq:latent distribution}
         p_{\theta}(\mathbf{z}) = \mathcal{N}(0, \bbone)\, .
@@ -243,7 +243,7 @@ remarquable est une application concrète du principe du rasoir d'Occam: l'expli
 Dans ce qui suit, je m'applique à redériver l'objectif d'un auto-encodeur variationnel suivant les approximations 
 proposées par \citet{Alemi2017}. Puis, je termine avec une courte interprétation des VAE sous la lumière du principe du goulot d'information.
 On commence par construire une limite variationnelle inférieure sur $I(Z; X)$. 
-On assume d'abord la chaîne de Markov $Y \rightarrow X \rightarrow Z$ pour les variables 
+On suppose d'abord la chaîne de Markov $Y \rightarrow X \rightarrow Z$ pour les variables 
 aléatoires représentées dans la figure \ref{fig:info VAE}. La chaîne de Markov 
 induit la factorisation de la probabilité jointe
 \begin{equation}\label{eq:factorisation}
@@ -263,7 +263,7 @@ suit que
 \end{align}
 À la dernière ligne, on a éliminé l'entropie du message $H(X)$, puisque c'est une constante strictement positive qui ne dépend pas de $\phi$.
 On a aussi introduit l'approximation variationnelle $$p_\theta (\mathbf{x} \mid \mathbf{z}) \approx q_\phi (\mathbf{x} \mid \mathbf{z})$$ 
-pour approximer la distribution a posteriori de l'encodeur (soit le décodeur). Cette approximation est valide dans le contexte où 
+pour approximer la distribution \textit{a posteriori} de l'encodeur (soit le décodeur). Cette approximation est valide dans le contexte où 
 on cherche une limite inférieure pour $I(Z; X)$, puisque la divergence KL entre ces deux distributions est strictement positive.
 Ensuite, on cherche une borne supérieure au terme de compression $I(Z; Y)$. 
 Pour ce qui suit, on remplace $p(Y=i)$ par $\mathbf{x}^{(i)} \sim \mathcal{D}$ pour illustrer avec plus de clarté 
@@ -293,21 +293,22 @@ avec la ELBO \eqref{eq:final elbo}
                 -\log p_\theta(\mathbf{z})
                 \bigg]\, .
 \end{equation} 
-On note qu'on a laissé tomber la constante $\alpha$, car elle ne dépend pas des paramètres $\phi$ et $\theta$, et généralement le paramètre $\beta$ 
-n'est pas optimisé directement. $\beta$ est considéré comme un hyperparamètre. 
-Je note que l'objectif \eqref{eq:beta VAE} a fait une première apparition dans le travail introduisant les $\beta$-VAE par \citet{Higgins2017}, 
-suivant des motivations complètement différentes de celles qu'on a suivies ici. La dérivation accomplie ici 
-montre clairement que la ELBO, $\mathcal{L}_{\phi,\theta,\beta}(\mathbf{x})$, est une limite inférieure 
+On note qu'on a laissé tomber la constante $\alpha$, car elle ne dépend pas des paramètres $\phi$ et $\theta$. 
+Généralement, le paramètre $\beta$ n'est pas optimisé directement, il est plutôt considéré comme un hyperparamètre. 
+Je note de plus que l'objectif \eqref{eq:beta VAE} a fait une première apparition dans le travail introduisant les $\beta$-VAE par \citet{Higgins2017}, 
+suivant des motivations complètement différentes de celles qu'on a suivies ici. 
+
+La dérivation accomplie dans cette sous-section montre clairement que la ELBO, $\mathcal{L}_{\phi,\theta,\beta}(\mathbf{x})$, est une limite inférieure 
 sur $I(Z; X) - \beta I(Z; Y)$, soit l'objectif de maximiser l'information transmise par un auto-encodeur, avec une 
 contrainte sur la complexité du code $Z$. En particulier, cette dérivation illumine le choix de la marginale $p_\theta(\mathbf{z})$ 
 comme étant une approximation variationnelle de la marginale de l'encodeur $q_\phi(\mathbf{z})$, contrairement à la dérivation 
 montrée plus haut où $p_\theta(\mathbf{z})$ apparaît comme un objectif arbitraire permettant d'améliorer l'aspect 
-génératif du décodeur.
+génératif du décodeur. 
 
-La dérivation accomplie dans cette sous-section commence d'un point de vue complètement différent 
+La dérivation commence d'un point de vue complètement différent 
 de \citet{Kingma2013}. On 
 a supposé que le modèle génératif $p_\theta(\mathbf{x} \mid \mathbf{z})$ est une approximation variationnelle de 
-la distribution a posteriori du modèle 
+la distribution \textit{a posteriori} du modèle 
 d'inférence $q_\phi(\mathbf{x} \mid \mathbf{z})$. L'approche présentée par \citet{Kingma2013} est exactement l'inverse.
 De plus, le terme de régularisation a maintenant une interprétation beaucoup plus riche, avec un paramètre 
 $\beta$ qui contrôle le niveau de compression de l'information désirée et qui s'avère à contrôler plus ou moins 
@@ -323,7 +324,7 @@ au travail de \citet{Alemi2018}.
 \subsection{Formalisme bayésien des problèmes inverses}
 
 Les machines à inférence récurentielle (RIM) ont été introduites par \citet{Putzky2017} pour résoudre des problèmes 
-inverses pour lesquels le terme de régularisation est nécessaire, mais inconnu a priori et/ou difficile à 
+inverses pour lesquels le terme de régularisation est nécessaire, mais inconnu \textit{a priori} et/ou difficile à 
 construire, voir même calculer. Dans cette section, j'introduis le formalisme bayésien des problèmes inverses sur lequel 
 ce modèle repose, puis j'introduis l'algorithme d'inférence et les concepts d'apprentissage machine qui motivent 
 l'utilisation d'une RIM pour des problèmes inverses mal posés et sous-déterminés.
@@ -370,7 +371,7 @@ Pour un problème mal posé,
 %, ce qui est le cas pour le problème d'inférence des paramètres d'une lentille 
 %gravitationnelle de type galaxie-galaxie ou la reconstruction d'image dans le contexte de l'interférométrie  
 %par masque irrégulier, 
-on assume a priori que la première condition de Hadamard \ref{hadamard:1} est respectée, c.-à-d. qu'on assume 
+on suppose \textit{a priori} que la première condition de Hadamard \ref{hadamard:1} est respectée, c.-à-d. qu'on suppose 
 que les quantités observées ou mesurées sont causées par un phénomène unique (solution physique). 
 Toutefois, comme les problèmes qui nous intéressent sont sous-déterminés, 
 c.-à-d.\ que $\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) > \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$,
@@ -378,11 +379,11 @@ la seconde condition de Hadamard \ref{hadamard:2} n'est pas respectée; la fonct
 ne peut pas distinguer la solution physique du nombre infini de solutions non physiques au problème \eqref{eq:likelihood max}.
 
 La condition d'unicité de la solution est résolue par la construction d'une
-mesure de probabilité a priori sur l'espace des paramètres d'intérêt 
+mesure de probabilité \textit{a priori} sur l'espace des paramètres d'intérêt 
 $p_\theta: \mathcal{X} \rightarrow \mathbb{R}, \,\, \mathrm{t.q.}\,\, \int_{\mathcal{X}} p_\theta(\mathbf{x}) d\mathbf{x} = 1$,
 tel que les solutions non physiques sont exclues de la région de haute densité de cette distribution.
 On peut alors modifier le problème \eqref{eq:likelihood max} en introduisant cette distribution 
-a priori comme un terme de régularisation de la vraisemblance
+\textit{a priori} comme un terme de régularisation de la vraisemblance
 \begin{equation}\label{eq:MAP intro}
         \hat{\mathbf{x}}_{\mathrm{MAP}} = \underset{\mathbf{x} \in \mathcal{X}}{\mathrm{argmax}}\, \log p(\mathbf{y} \mid \mathbf{x}) + \log p_\theta(\mathbf{x})\, .
 \end{equation} 
@@ -394,8 +395,8 @@ tel que définie par le théorème de Bayes
 Le dénominateur est une constante qu'on nomme l'évidence bayesienne. 
 Pour les applications qui nous intéressent, cette constante n'est pas calculée, 
 car elle n'est pas nécessaire  
-pour la recherche d'un maximum de la distribution a posteriori ou 
-la comparaison de solutions par le ratio de la fonction de vraisemblance (ou de la distribution a posteriori).
+pour la recherche d'un maximum de la distribution \textit{a posteriori} ou 
+la comparaison de solutions par le ratio de la fonction de vraisemblance (ou de la distribution \textit{a posteriori}).
 
 On note que la stratégie la plus commune pour résoudre les problèmes inverses qui nous intéressent est plutôt de 
 choisir judicieusement l'espace des solutions $\mathcal{X}$ tel que $\mathrm{dim}_{\mathbb{R}}(\mathcal{X}) \leq \mathrm{dim}_{\mathbb{R}}(\mathcal{Y})$. 
@@ -418,7 +419,7 @@ où l'espace $\mathcal{X}$ est construit de manière presque agnostique à la so
 physique recherchée (p. ex. une grille de pixels pour modéliser une distribution de masse), 
 de manière à contenir toutes, ou au moins la plupart, des solutions physiques. Une telle approche a 
 le potentiel de produire des résultats surprenants ou intéressants, puisque l'exploration de l'espace des solutions physiques 
-peut être ajustée, en principe, via la distribution a priori, $p_\theta(\mathbf{x})$, selon la complexité de l'observation.
+peut être ajustée, en principe, via la distribution \textit{a prior}i, $p_\theta(\mathbf{x})$, selon la complexité de l'observation.
 
 \subsection{La relation de récurrence}
 Pour résoudre l'équation différentielle ordinaire sous-entendue par le problème \eqref{eq:MAP intro}, 
@@ -437,7 +438,7 @@ satisfait la condition de Lipschitz dans la région de $\mathcal{X}$ explorée p
 ou encore si la norme de la dérivée seconde de $\log p_\theta(\mathbf{x} \mid \mathbf{y})$ est bornée dans cette région.
 
 \citet{Putzky2017} observent qu'on peut réécrire \eqref{eq:map recurrence} en utilisant le théorème de Bayes et 
-en absorbant le gradient de la distribution a priori dans une fonction $g_{\varphi^{(t)}}$
+en absorbant le gradient de la distribution \textit{a priori} dans une fonction $g_{\varphi^{(t)}}$
 \begin{align}
         \hat{\mathbf{x}}^{(t+1)} &= 
         \hat{\mathbf{x}}^{(t)} + \alpha \big( \grad_{\hat{\mathbf{x}}^{(t)}}\log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)}) 
@@ -446,15 +447,15 @@ en absorbant le gradient de la distribution a priori dans une fonction $g_{\varp
         \implies \hat{\mathbf{x}}^{(t+1)} &= \hat{\mathbf{x}} + g_{\varphi^{(t)}}\big(\hat{\mathbf{x}}^{(t)},\, \grad_{\hat{\mathbf{x}}^{(t)}} \log p(\mathbf{y} \mid \hat{\mathbf{x}}^{(t)})\big)\, ,
 \end{align}
 où $g_{\varphi^{(t)}}: \mathcal{X}^{2} \rightarrow \mathcal{X}$ est le modèle du gradient de la distribution 
-a posteriori. 
+\textit{a posteriori}. 
 On remarque que la relation de récurrence \eqref{eq:map recurrence} est un cas spécial de la relation \eqref{eq:rim putzky}, 
-soit le cas où on a un modèle explicite pour la distribution a priori, ou son gradient $\grad_{\mathbf{x}} \log p_\theta(\mathbf{x})$,
+soit le cas où on a un modèle explicite pour la distribution \textit{a prior}i, ou son gradient $\grad_{\mathbf{x}} \log p_\theta(\mathbf{x})$,
 et le taux d'apprentissage $\alpha$. 
 Dans la relation \eqref{eq:rim putzky}, les paramètres $\alpha$ et $\theta$ sont absorbés dans les paramètres d'inférence $\varphi^{(t)}$, ce qui nous donne 
-une plus grande liberté pour modéliser la distribution a priori en utilisant le théorème d'approximation universelle \citep{Cybenko1989,Hornik1991}. 
+une plus grande liberté pour modéliser la distribution \textit{a priori} en utilisant le théorème d'approximation universelle \citep{Cybenko1989,Hornik1991}. 
 Selon ce nouveau point de vue, 
-le problème de modéliser la distribution a priori, ou plus directement le gradient de la distribution a priori, 
-est équivalent à construire un modèle pour le gradient de la distribution a posteriori dans une relation 
+le problème de modéliser la distribution \textit{a priori,} ou plus directement le gradient de la distribution \textit{a priori,} 
+est équivalent à construire un modèle pour le gradient de la distribution \textit{a posteriori} dans une relation 
 de récurrence.
 
 Pour le problème de reconstruction d'image, les modèles neuronaux convolutifs avec une architecture de sablier (auto-encodeur) ou 
@@ -504,14 +505,14 @@ qui réduit considérablement la complexité du problème d'apprentissage.
 \subsection{Méta-apprentissage par rétropropagation de gradients}
 
 Cette sous-section s'intéresse finalement au problème d'apprentissage d'une machine à inférence récurentielle $g_\varphi$, 
-et en particulier comment ce problème tombe dans le catégorie de méta-apprentissage.
+et en particulier comment ce problème se situe dans le catégorie de méta-apprentissage.
 Le méta-apprentissage est un sujet de recherche qui se concentre sur la construction de règles d'apprentissage qui permettent 
 d'accélérer l'apprentissage de fonctions pour certaines tâches spécifiques. Ce double aspect d'apprentissage, soit d'apprendre à mieux 
 apprendre, est précisément ce qui est sous-entendu par le terme méta-apprentissage. Pour une revue du sujet, le lecteur peut consulter 
 la revue par \citet{Hospedales2020}. Cette sous-section se veut une introduction au méta-apprentissage basé sur l'optimisation,
 soit l'apprentissage profond de biais inductifs par rétropropagation de gradients.
 
-Pour un problème de méta-apprentissage, l'ensemble des données d'entraînement est légèrement différent d'une tâche d'interpolation ou de classification. 
+Pour un problème de méta-apprentissage, l'ensemble des données d'entraînement est légèrement différent d'une tâche de régression ou de classification. 
 Considérons un ensemble d'entraînement $\mathcal{D} = \{\mathbf{x}^{(i)},\,\mathbf{y}^{(i)}\}_{i=1}^{N}$, 
 construit à partir d'exemples dans le domaine $\mathcal{X}$ et l'image $\mathcal{Y}$, implicitement connectés par une fonction qu'on veut reconstruire ou 
 approximer. Dans ce contexte, l'objectif est généralement d'apprendre une fonction $f_\theta: \mathcal{X} \rightarrow \mathcal{Y}$ 
@@ -558,7 +559,7 @@ le théorème NFL pour l'apprentissage supervisé \citep{Wolpert1992,Wolpert1996
 algorithmes d'apprentissage %, des fonctions de l'ensemble des données $\mathcal{D}$ vers une hypothèse $f_{\theta^{\star}}$, 
 sont équivalents en termes du risque moyen encouru sur l'erreur de généralisation. 
 Des biais inductifs sont nécessaires pour déterminer uniquement une hypothèse universelle, 
-ou du moins une hypothèse qui satisfait certains critères déterminés a priori.
+ou du moins une hypothèse qui satisfait certains critères déterminés \textit{a priori.}
 
 Dans le contexte du méta-apprentissage, la généralisation réfère plutôt au concept de transfert d'apprentissage, c.-à-d. le transfert des connaissances 
 et le transfert de la structure du problème vers des tâches d'essais. 
@@ -596,7 +597,7 @@ soit la classe des algorithmes pouvant être représentés par les machines de T
 
 La contribution du travail de \citet{Putzky2017} est d'appliquer ces méthodes pour les problèmes inverses, spécifiquement les 
 problèmes inverses pour la reconstruction d'images. Dans ce contexte, la notion des biais inductifs est 
-équivalente à celle d'une distribution a priori $p_\theta(\mathbf{x})$ sur l'espace 
+équivalente à celle d'une distribution \textit{a priori} $p_\theta(\mathbf{x})$ sur l'espace 
 des hypothèses. Le problème de méta-apprentissage devient
 \begin{equation}\label{eq:loss intro}
         \begin{aligned}
@@ -624,11 +625,9 @@ est transférable à la classe de problèmes pour laquelle
 les biais inductifs appris sont informatifs. 
 Par exemple, \citet{Morningstar2019} ont découverts qu'une machine à inférence récurentielle 
 entraînée à reconstruire des images de galaxies fortement lentillées est en mesure de reconstruire l'image d'une portion de 
-paragraphe fortement lentillée, ce qui n'a rien à voir a priori avec des images de galaxies. 
+paragraphe fortement lentillée, ce qui n'a rien à voir \textit{a priori} avec des images de galaxies. 
 Ce fait peut sembler contre-intuitif à première vue. 
-Si la machine à inférence récurentielle apprenait simplement 
-une distribution a priori, alors l'image d'un paragraphe ne pourrait pas être reconstruite par maximisation de la 
-distribution a posteriori. On doit donc comprendre que les biais inductifs appris par la machine à inférence 
+On suppose toutefois que les biais inductifs appris par la machine à inférence 
 récurentielle ne sont pas simplement ceux qui permettent de reconstruire les exemples de l'ensemble d'entraînement. 
 Plutôt, une machine à inférence récurentielle apprend les biais inductifs transférables entre différents exemples 
 de problème présentés en entraînement, soit précisément ce qui permet à ces machines de généraliser au-delà 

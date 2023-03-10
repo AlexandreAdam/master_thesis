@@ -56,7 +56,7 @@ On peut ensuite utiliser la définition d'une loi conditionnelle
 \end{equation} 
 pour exprimer l'évidence, $p(y)$, en fonction de la vraisemblance et de la loi \textit{a priori} 
 \begin{equation}
-        p(x \mid y) = \frac{p(y \mid x) p(x)}{\int_\mathcal{X} dx\, p(y \mid x) p(x)} \, .
+        p(y) = \int_\mathcal{X} dx\, p(y \mid x) p(x)\, .
 \end{equation} 
 Supposons maintenant qu'on observe un certain nombre de tirages au sorts supplémentaires
 \begin{equation*}
@@ -95,7 +95,7 @@ Le lecteur comprendra qu'on aura simplement changé de point de vue.
 \section{Un exemple d'apprentissage machine: la régression}\label{sec:app classique}
 
 L'apprentissage machine est un concept assez général qui décrit le processus d'extraire l'information contenue 
-dans un ensemble de données $\mathcal{D} = \{y_i\}_{i=1}^{N}$, soit un ensemble d'observations provenant d'une source ou d'un processus 
+dans un ensemble de données $\mathcal{D} = \{\mathbf{y}^{(i)}\}_{i=1}^{N}$, soit un ensemble d'observations provenant d'une source ou d'un processus 
 physique quelconque. Le terme \textit{information} est utilisé de façon très vague ici. Ce terme est formellement défini dans la théorie 
 de l'information de \citet{Shannon1948} comme étant le nombre minimal de \textit{bits} pour décrire une observation $y_i$, ou encore 
 l'ensemble de données $\mathcal{D}$. Cette quantité est intimement liée avec l'entropie. Une discussion plus détaillée est 
@@ -110,18 +110,19 @@ Il y a quatre ingrédients essentiels à l'apprentissage machine, soit
 \end{enumerate}
 Dans cette section, je décris chacun de ces ingrédients dans le contexte d'une tâche de régression.
 La régression est une tâche d'apprentissage machine qui consiste à entraîner un modèle, $f_{\theta}$, sur un ensemble de données augmenté pour la régression, soit 
-$\mathcal{D} = \{(x_i, y_i)\}_{i=1}^N$. Chaque exemple dans l'ensemble de données est constitué d'un paramètre physique, $x$, et d'une observation, $y$. 
+$\mathcal{D} = \{(\mathbf{x}^{(i)}, \mathbf{y}^{(i)})\}_{i=1}^N$. 
+Chaque exemple dans l'ensemble de données est constitué d'un vecteur de paramètres physiques, $\mathbf{x}$, et d'une observation, $\mathbf{y}$. 
 On suppose toujours que les exemples de l'ensemble de données sont générés de façon identique et indépendante par la combinaison 
 d'une loi \textit{a priori} sur les paramètres physiques et une loi de vraisemblance pour les observations
 \begin{equation}
-                x \sim p(x),  \hspace{1cm} y\ \sim p_\theta(y \mid x) \, . 
+                \mathbf{x} \sim p(\mathbf{x}),  \hspace{1cm} \mathbf{y}\ \sim p_\theta(\mathbf{y} \mid \mathbf{x}) \, . 
 \end{equation}
-Dans le texte, on utilisera le terme \textit{modèle physique} pour faire référence à $p_\theta(y \mid x)$, puisque cette loi de probabilité relie les paramètres physiques, $x$, 
-avec les observations, $y$. Elle encodera donc tous les processus physiques en jeu pour un problème d'inférence donné.
+Dans le texte, on utilisera le terme \textit{modèle physique} pour faire référence à $p_\theta(\mathbf{y} \mid \mathbf{x})$, puisque cette loi de probabilité relie les paramètres physiques
+avec les observations. Elle encodera donc tous les processus physiques en jeu pour un problème d'inférence donné.
 On notera de plus que l'ensemble des points de données n'a pas besoin d'être un nombre fini. Dans le cas où $N \rightarrow  \infty$, alors 
-$\mathcal{D}$ est explicitement décrit par la loi \textit{a priori}, $p(x)$, et le modèle physique $p_\theta(y \mid x)$. 
-Dans ce cas, on dira que la loi générative $(x, y) \sim p(x, y)$ est explicite. 
-Dans le cas où $\mathcal{D}$ est un nuage de points avec $N < \infty$, alors on dira que le processus génératif est implicite. 
+$\mathcal{D}$ est explicitement décrit par la loi \textit{a priori}, $p(\mathbf{x})$, et le modèle physique $p_\theta(\mathbf{y} \mid \mathbf{x})$. 
+Dans ce cas, on dira que la loi générative $(\mathbf{x}, \mathbf{y}) \sim p(\mathbf{x}, \mathbf{y})$ est explicite. 
+Dans le cas où $\mathcal{D}$ est un nuage de points ($N < \infty$), alors on dira que le processus génératif est implicite. 
 
 Pour se fixer les idées, on considère l'exemple  
 \begin{equation}\label{eq:loi generative}
@@ -142,7 +143,7 @@ avec une amplitude de bruit $\sigma=1$. Ce problème est illustré à la figure 
 
 Le second ingrédient au problème d'apprentissage machine est la famille des modèles, ou l'ensemble des hypothèses, $\mathcal{H}$. 
 Il serait tentant de choisir le modèle $f_\theta = \theta_1 x^{5} + \theta_2 x$, soit un modèle avec la même forme que la solution 
-$f_{\theta^{\star}}$. Toutefois, on ne peut pas assumer que la forme du modèle sera connue \textit{a priori}, 
+$f_{\theta^{\star}}$. Toutefois, on ne peut pas supposer que la forme du modèle sera connue \textit{a priori}, 
 ou qu'elle peut facilement être devinée. La sélection du modèle sera abordée en détail dans la section \ref{sec:selection modele}, 
 puisque ce sujet mérite une discussion à part entière.
 Pour l'instant, on va simplement faire le choix le plus simple en assumant que la forme de 
@@ -176,9 +177,9 @@ puisqu'on suppose que $\theta$ et $x$ sont deux variables aléatoires indépenda
 la distribution \textit{a priori} sur les paramètres physiques. Si c'est le cas, alors le choix du modèle doit être révisé.
 On trouve finalement l'objectif d'entraîenement
 \begin{equation}
-        \hat{\theta} = \underset{f_\theta \in \mathcal{H}}{\mathrm{arg\, min}}\, -\prod_{i=1}^{N}\log p_\theta(y_i \mid x_i) - \log p(\theta) + C(\mathcal{D})\, ,
+        \hat{\theta} = \underset{f_\theta \in \mathcal{H}}{\mathrm{arg\, min}}\, -\log \prod_{i=1}^{N}p_\theta(y_i \mid x_i) - \log p(\theta) + C(\mathcal{D})\, ,
 \end{equation} 
-où $-\prod_{i=1}^N\log p(x_i)$ est absorbé dans $C(\mathcal{D})$. On est maintenant en mesure de dériver la forme exacte de la fonction objective pour le problème 
+où $-\log \prod_{i=1}^N p(x_i)$ est absorbé dans $C(\mathcal{D})$. On est maintenant en mesure de dériver la forme exacte de la fonction objective pour le problème 
 posé dans cette section. Avec la supposition que le modèle physique est une loi normale, on a que
 \begin{equation}
        \log \prod_{i=1}^{N}p_\theta(y_i \mid x_i) = -\frac{1}{2}\sum_{i=1}^{N}\frac{(y_i - f_\theta(x_i))^2}{\sigma^2} - \frac{N}{2}\log(2\pi \sigma^2)\, ,
@@ -265,11 +266,9 @@ On doit donc considérer des modèles plus complexes que le simple modèle liné
 
 Pour ce faire, on considère trois directions principales. 
 La première méthode, déjà mentionnée dans la section précédente, est de construire une fonction avec la bonne forme \textit{a priori} via l'intuition.  
-%ou possiblement plusieurs décennies de recherche pour les problèmes plus complexe. 
 On ne considéra pas plus longtemps cette approche, puisqu'elle est impraticable dans les cas les plus généraux comme les problèmes à haute dimensions où l'intuition humaine échoue complètement.
 La seconde approche, et probablement l'approche la plus intuitive considérant la façon dont le sujet a été introduit jusqu'à maintenant, est de considérer une série de puissances entières positives.
-Puisque c'est une approche importante en apprentissage machine, il vaut la peine de dire quelques mots sur celle-ci avant de poursuivre vers la troisième 
-et dernière approche possible. 
+Puisque c'est une approche importante en apprentissage machine, il vaut la peine de dire quelques mots sur celle-ci avant de poursuivre vers la troisième approche considérée dans cette introduction. 
 
 \subsection{Compromis entre le biais et la variance}
 Lorsque $x \in \mathbb{R}$, la série entière prend la forme très simple
@@ -281,7 +280,8 @@ Le modèle \eqref{eq:power law} est une fonction linéaire en termes des paramè
 Dans la limite où $P \rightarrow \infty$, ce modèle 
 peut représenter l'ensemble des fonctions analytiques incluant les polynômes, $e^x$, les fonctions trigonométriques, hyperboliques, etc. 
 
-Pour ce cas spécial, on peut explorer comment la complexité du modèle \eqref{eq:power law} influence le problème d'apprentissage. Strictement dans le contexte de l'ajustement 
+Avec l'hypothèse \eqref{eq:power law}, on peut explorer comment la complexité du modèle influence le problème d'apprentissage. 
+Strictement dans le contexte de l'ajustement 
 d'un polynôme $f_\theta: \mathbb{R} \rightarrow \mathbb{R}$ de degré $P < \infty$, la complexité du modèle peut être quantifiée par $P$, soit le nombre de termes dans 
 la série entière. En répétant l'exercice de la section précédente plusieurs fois pour des modèles d'une complexité grandissante,
 on peut obtenir des statistiques sur l'erreur de généralisation en fonction de $P$, ce qui est illustré à la figure \ref{fig:bias_variance}.
@@ -361,7 +361,7 @@ $f_\theta : \mathbb{R}^2 \rightarrow \mathbb{R}$. Dans ce cas, la série entièr
 Contrairement à la section précédente, on doit introduire un tenseur de rang $p$ pour le $p^{\text{ième}}$ terme dans la série entière, 
 soit $2^p$ nouveaux paramètres qui doivent être ajustés. Dans le cas général $f_\theta: \mathbb{R}^n \rightarrow \mathbb{R}^m$,
 on doit plutôt introduire $n^pm$ nouveaux paramètres pour chaque terme ajouté dans la série. 
-La complexité du modèle augmente de façon exponentielle en fonction de du degré du modèle $P$.
+La complexité du modèle augmente de façon exponentielle en fonction du degré $P$ du modèle.
 Ce comportement est radicalement différent du cas présenté à la section précédente, où la complexité du modèle augmentait de façon linéaire en fonction de $P$. 
 Dû à ce fait, une série entière n'est pas une approche valide pour construire des modèles complexes en haute dimension; 
 le nombre de paramètres qu'on doit introduire devient rapidement intraitable.
@@ -399,13 +399,12 @@ qui correspondent à $f_{\theta^{\star}} = 1$. Le panneau gauche de la figure \r
 \begin{equation}\label{eq:sol1}
         f_{\hat{\theta}}(x_1, x_2) = \begin{bmatrix}0 & 1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = x_2\, 
 \end{equation}
-pour illustrer cet argument. 
-Ce fait est saillant dans le panneau gauche de la figure \ref{fig:xor}, où on montre comment le plan $f_{\hat{\theta}}(x_1, x_2) = \frac{1}{2}$ (ligne pointillée blanche) 
+pour illustrer cet argument, où on montre comment le plan $f_{\hat{\theta}}(x_1, x_2) = \frac{1}{2}$ (ligne pointillée blanche) 
 n'est pas en mesure de séparer les 4 contraintes linéairement.
 De plus, aucune rotation ou translation (et en général aucune transformation affine) de ce modèle 
 ne peut séparer les points $0$ et $1$ linéairement. 
-Ainsi, ce modèle est optimal, mais pas unique, en termes du nombre de contraintes retrouvées. On conclut que l'ensemble des modèles linéaires ne contient pas 
-la fonction XOR.
+Au mieux, on pourrait retrouver 3 contraintes avec le modèle $f_{\hat{\theta}} = x_1 - x_2$. Toutefois, on ne peut pas retrouver 
+les 4 contraintes puisque l'ensemble des modèles linéaires ne contient pas la fonction XOR.
 %On notera que le modèle n'est pas optimal en termes de l'erreur moyenne quadratique puisque $f_\theta(x_1, x_2) = \frac{1}{2}$ possède une erreur inférieure (et optimale), 
 %bien que ce dernier ne recouvre aucune contrainte. 
 
@@ -501,15 +500,16 @@ $\mathbf{b} \in \mathbb{R}^{m}$, un vecteur de biais (de l'anglais \textit{bias}
 Dans cette expression, il est sous-entendu que la fonction 
 d'activation, $\sigma$, s'applique identiquement sur les $m$ éléments du vecteur $\mathbf{W} \mathbf{z} + \mathbf{b}$. 
 
-Séparées, la transformation affine et la fonction d'activation ne sont pas en mesure de résoudre des problèmes comme XOR. En effet, 
+Individuellement, 
+la transformation affine et la fonction d'activation ne sont pas en mesure de résoudre des problèmes comme XOR. En effet, 
 une transformation affine préserve les lignes parallèles d'un espace vectoriel, de sorte 
 qu'un ensemble de points qui n'est pas linéairement séparable le restera après une transformation affine. 
 D'un autre côté, comme une fonction d'activation agit directement sur les coordonnées, ce type de fonction n'est 
 pas en mesure de construire une quantité caractéristique qui mélange les coordonnées 
-comme celle trouvée à la section précédente, $h = (x_1 - x_2)^{2}$. 
+comme celle trouvée à la section précédente. 
 
 C'est l'application combinée de ces deux ingrédients qui permet minimalement de résoudre un problème comme XOR. Par exemple, 
-considérons la fonction d'activation traditionnelle $\mathrm{ReLU}$ (inspiré des neurones biologiques)
+considérons la fonction d'activation traditionnelle $\mathrm{ReLU}$ (inspirée des neurones biologiques)
 \begin{equation}
         \mathrm{ReLU}(x) = 
         \begin{cases}
@@ -519,11 +519,11 @@ considérons la fonction d'activation traditionnelle $\mathrm{ReLU}$ (inspiré d
         =
         \max(0, x), \hspace{1cm} x \in \mathbb{R}
 \end{equation}
-Pour résoudre le problème XOR, on introduit une seule couche cachée dans le réseau de neurones
+Pour résoudre le problème XOR, on introduit une seule couche cachée, $f_\theta^{(1)}$, dans le réseau de neurones
 \begin{equation}
-        f_\theta = \mathbf{w}(f^{(1)}_\theta(\mathbf{x})) + \mathbf{b}\, .
+        f_\theta = \mathbf{W}(f^{(1)}_\theta(\mathbf{x})) + \mathbf{b}\, .
 \end{equation} 
-La dernière couche du réseau est une transformation affine, puisqu'on s'attend à ce que la couche cachée $f^{(1)}_\theta$ puisse 
+La dernière couche du réseau est une transformation affine seulement puisqu'on s'attend à ce que la couche cachée $f^{(1)}_\theta$ puisse 
 construire un espace caractéristique qui sépare linéairement les contraintes du problème. Il s'avère que cette construction 
 admet la solution suivante
 \begin{equation}\label{eq:sol2}
@@ -608,13 +608,14 @@ considérablement en fonction de la dimension de l'espace, et atteint $p = 1$ lo
 Pour le problème XOR, on a trouvé que $D=2$ admettait une solution. 
 %En général, le théorème de Cover est une limite supérieure sur la dimensionnalité de l'espace caractéristique, 
 %et garantit qu'un réseau de neurones à une couche peut résoudre un problème de classification binaire arbitrairement complexe. 
-Il est assez rare que cette limite supérieure soit 
+Il est assez rare que la limite supérieure $D \geq N -1 $ soit 
 atteinte puisque les données réelles tendent à se regrouper sur des variétés de basses dimensions. 
-Par contre, spécifier une couche cachée suffisamment large peut devenir rapidement intraitable dans certaines situations, 
+Néanmoins, spécifier une couche cachée suffisamment large peut devenir rapidement intraitable dans certaines situations, 
 particulièrement en hautes dimensions. C'est un problème similaire à celui rencontré à la section précédente avec la série entière. 
-La prochaine section introduira certaines stratégies pour contourner ce problème.
+La prochaine section introduira une stratégie générale pour contourner ce problème, ainsi qu'une application spécifique aux réseaux de neuronnes 
+convolutifs utilisés pour le traitement d'images.
 
-Finalement, on doit mentionner que les réseaux de neurones 
+Avant de poursuivre, on doit mentionner que les réseaux de neurones 
 ne sont pas des fonctions linéaires en fonction de leurs paramètres (contrairement à la série entière). 
 Ainsi, l'apprentissage profond introduit un problème d'optimisation non linéaire, soit un problème avec 
 potentiellement plusieurs minimas secondaires et une géométrie non triviale.
@@ -623,9 +624,9 @@ sont largement équipés pour résoudre ce genre de problème grâce à l'introd
 des algorithmes de descente de gradient stochastiques. Voir le livre de référence de \citet{Goodfellow2016} 
 pour une discussion plus détaillée de ce sujet.
 
-Je termine finalement ce chapitre avec une très courte introduction sur les réseaux neuronaux convolutifs. Ces réseaux sont utilisés 
-extensivement dans les deux prochains chapitres étant donné que le problème étudié dans ce mémoire nécessite l'introduction de réseaux 
-spécialisés pour le traitement d'image. 
+%Je termine finalement ce chapitre avec une très courte introduction sur les réseaux neuronaux convolutifs. Ces réseaux sont utilisés 
+%extensivement dans les deux prochains chapitres étant donné que le problème étudié dans ce mémoire nécessite l'introduction de réseaux 
+%spécialisés pour le traitement d'image. 
 
 \section{Les réseaux de neurones convolutifs}\label{sec:cnn}
 Le traitement d'image pose un problème sérieux à l'apprentissage machine en raison de la dimensionalité du problème. 
@@ -653,7 +654,8 @@ et un vecteur $\mathbf{x} \in \mathbb{R}^{n}$
         (\mathbf{W} * \mathbf{x})_j = \sum_{i = 0}^{m-1} \mathbf{W}_i\, \mathbf{x}_{j - i}
 \end{equation} 
 L'effet d'une translation sur le vecteur $\mathbf{x}$ est de modifier l'ordre des indices. On note $T_{w}$ une translation 
-qui déplace les indices de la façon suivante $T_w\mathbf{x}_{j} = \mathbf{x}_{j+w}$. Il est sous-entendu que les indices sont définis $\mathrm{mod}\, n$. 
+qui déplace les indices de la façon suivante: $T_w\mathbf{x}_{j} = \mathbf{x}_{j+w}$. 
+Il est sous-entendu que les indices du vecteur $\mathbf{x}$ sont définis $\mathrm{mod}\, n$. 
 On peut alors montrer que la convolution \eqref{eq:conv} est une opération équivariante sous l'effet d'une translation 
 \begin{equation}
         (\mathbf{W} *(T_w\mathbf{x}))_j = \sum_{i = 0}^{m-1} \mathbf{W}_i\, \mathbf{x}_{j + w - i} = (\mathbf{W} * \mathbf{x})_{j + w} = T_w(\mathbf{W} * \mathbf{x})_{j}
@@ -671,8 +673,8 @@ On considère une convolution sur les dimensions spatiales seulement ($H$ et $L$
 \end{equation} 
 Les dimensions spatiales du noyau sont généralement choisis tels que $h \ll H$ et $\ell \ll L$ 
 puisque l'information pertinente est locale pour les tâches de traitement d'images typiques. Par 
-exemple, taille du noyau $h = \ell = 3 $ est choix commun même lorsque la taille d'une image atteint $H \times L \gtrsim 10^4$. L'expressivité d'un réseau de neurones 
-convolutifs \citep{LeCun1995} dépend principalement du nombre de canaux utilisés pour l'espace caractéristique 
+exemple, la taille du noyau $h = \ell = 3 $ est choix commun même lorsque la taille d'une image atteint $H \times L \gtrsim 10^4$. 
+L'expressivité d'un réseau de neurones convolutifs \citep{LeCun1995} dépend principalement du nombre de canaux utilisés pour l'espace caractéristique 
 et de la profondeur du réseau \citep{Krizhevsky2012}.
 
 Ceci complète donc cette introduction à l'apprentissage machine. Comme l'architecture des réseaux 

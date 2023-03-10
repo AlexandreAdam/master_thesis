@@ -194,14 +194,13 @@ Also, the loss $\mathcal{L}_\varphi$ must be computed in the $\Xi$ space in orde
 to avoid gradient vanishing problems when $\Psi$ is a non-linear mapping, which 
 happens if the non-linear link function is applied in an 
 operation recorded for backpropagation through time (BPTT). 
-
-
 For the convergence, we use an exponential link function with base $10$: 
 $\boldsymbol{\hat{\kappa}} = \Psi(\boldsymbol{\xi}) = 10^{\boldsymbol{\xi}}$. 
 This $\Psi$ encodes the non-negativity of the convergence. Furthermore, 
 it is a power transformation that leaves the linked 
 pixel values $\boldsymbol{\xi}_i$ normally distributed, thus improving the 
 learning through the non-linearities in the neural network.
+
 The pixel weights $\mathbf{w}_i$ in the loss function \eqref{eq:Loss}
 are chosen to encode the fact that the pixel with critical mass density ($\boldsymbol{\kappa}_i > 1$) 
 have a stronger effect on the lensing configuration than other pixels. 
@@ -213,7 +212,7 @@ encode this knowledge in the loss function and improved both the empirical
 risk and the goodness of fit of the baseline model on early test runs.
 
 For the source, we found that we do not need a link function 
---- its performance is generally better compared to other link function we tried like sigmoid and 
+--- the identity is generally better compared to other link function we tried like sigmoid and 
 power transforms --- and we found that the pixel weights can be taken to 
 be uniform, i.e. $\mathbf{w}_i = \frac{1}{M}$.
 
