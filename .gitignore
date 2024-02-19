@@ -279,3 +279,5 @@ TSWLatexianTemp*
 *.syg
 *.slg
 *.syi
+
+*.ipnyb_checkpoints/*
